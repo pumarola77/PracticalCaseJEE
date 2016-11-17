@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="con" path="org.eclipse.jst.server.core.container/org.jboss.ide.eclipse.as.core.server.runtime.runtimeTarget/WildFly 10.x Runtime"/>
+	<classpathentry kind="lib" path="Libraries/jbossws-api.jar"/>
+	<classpathentry kind="lib" path="Libraries/json-simple-1.1.1.jar"/>
+	<classpathentry kind="lib" path="Libraries/postgresql-9.2-1002.jdbc4.jar"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>
