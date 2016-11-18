@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core" xmlns:h="http://java.sun.com/jsf/html">
+
+<body>
+	<h:form>
+	<table>
+		<tr>
+			<td>
+				Nif:
+			</td>
+			<td>
+				<h:inputText required="true" value="#{AddUser.nif}"/>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				Name:
+			</td>
+			<td>
+				<h:inputText required="true" value="#{AddUser.name}"/>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				Surname:
+			</td>
+			<td>
+				<h:inputText required="true" value="#{AddUser.surname}"/>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				Phone:
+			</td>
+			<td>
+				<h:inputText required="true" value="#{AddUser.phone}"/>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				Password:
+			</td>
+			<td>
+				<h:inputSecret required="true" value="#{AddUser.password}"/>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				Email:
+			</td>
+			<td>
+				<h:inputText required="true" value="#{AddUser.email}"/>
+			</td>
+		</tr>
+		<tr>
+		<td><h:commandButton value="Registrar Usuari" action="#{AddUser.addUsr}" /></td>
+		</tr>
+	</table>
+	</h:form>
+</body>
+</html>
