@@ -42,6 +42,7 @@ public class UserJPA implements Serializable {
 	/**
 	 *  Mètodes get/set dels camps de la base de dades
 	 */
+	@Id
 	public String getNif() {
 		return nif;
 	}
