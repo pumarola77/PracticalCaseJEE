@@ -1,7 +1,3 @@
-/*
- * Copyright FUOC.  All rights reserved.
- * @author Manel Perez Clot, 2016
- */
 package jpa;
 import java.io.Serializable;
 
