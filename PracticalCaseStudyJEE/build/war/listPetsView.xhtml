@@ -10,6 +10,8 @@
 		<h:commandLink action="#{pets.previousScreen}" value="Previous" />
 		<h:outputText value="   " />
 		<h:commandLink action="#{pets.nextScreen}" value="Next" />		
+	  </h:form>
+	  <h:form align="left" >	
 		<h:dataTable value="#{pets.petListView}" var="item" bgcolor="#F1F1F1" border="10" first="0" width="100%" frame="hsides" rules="all"  >
  			<f:facet name="header">			
   			<h:outputText align="center" value="List pets: #{pets.category}" />		

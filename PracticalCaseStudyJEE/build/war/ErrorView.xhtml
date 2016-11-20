@@ -1,0 +1,50 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core">
+<h1>Error View personalitzada</h1>
+
+<br />
+<table border="1">
+<tr>
+	<td>
+		Codi del error:
+	</td>
+	<td>
+		<h:outputText value="#{ErrorBean.statusCode}"/>		
+	</td>
+</tr>
+<tr>
+	<td>
+		Descripcio del error:
+	</td>
+	<td>
+		<h:outputText value="#{ErrorBean.message}"/>	
+	</td>
+</tr>
+<tr>
+	<td>
+		Tipus de la excepcio:
+	</td>
+	<td>
+		<h:outputText value="#{ErrorBean.exceptionType}"/>	
+	</td>
+</tr>
+<tr>
+	<td>
+		Classe de la exepcio:
+	</td>
+	<td>
+		<h:outputText value="#{ErrorBean.exception}"/>	
+	</td>
+</tr>
+<tr>
+	<td>
+		URI:
+	</td>
+	<td>
+		<h:outputText value="#{ErrorBean.requestURI}"/>	
+	</td>
+</tr>
+</table>
+</html>
