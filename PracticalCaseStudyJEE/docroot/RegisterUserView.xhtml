@@ -12,7 +12,7 @@
 				Nif:
 			</td>
 			<td>
-				<h:inputText required="true" value="#{AddUser.nif}"/>
+				<h:inputText label="Nif" required="true" value="#{AddUser.nif}"/>
 			</td>
 		</tr>
 		<tr>
@@ -20,7 +20,7 @@
 				Name:
 			</td>
 			<td>
-				<h:inputText required="true" value="#{AddUser.name}"/>
+				<h:inputText label="Name" required="true" value="#{AddUser.name}"/>
 			</td>
 		</tr>
 		<tr>
@@ -28,7 +28,7 @@
 				Surname:
 			</td>
 			<td>
-				<h:inputText required="true" value="#{AddUser.surname}"/>
+				<h:inputText label="Surname" required="true" value="#{AddUser.surname}"/>
 			</td>
 		</tr>
 		<tr>
@@ -36,7 +36,7 @@
 				Phone:
 			</td>
 			<td>
-				<h:inputText required="true" value="#{AddUser.phone}"/>
+				<h:inputText label="Phone" required="true" value="#{AddUser.phone}"/>
 			</td>
 		</tr>
 		<tr>
@@ -44,7 +44,7 @@
 				Password:
 			</td>
 			<td>
-				<h:inputSecret required="true" value="#{AddUser.password}"/>
+				<h:inputSecret label="Password" required="true" value="#{AddUser.password}"/>
 			</td>
 		</tr>
 		<tr>
@@ -52,11 +52,21 @@
 				Email:
 			</td>
 			<td>
-				<h:inputText required="true" value="#{AddUser.email}"/>
+				<h:inputText label="Email" required="true" value="#{AddUser.email}"/>
 			</td>
 		</tr>
 		<tr>
-		<td><h:commandButton value="Registrar Usuari" action="#{AddUser.addUsr}" /></td>
+		<td><h:commandButton id="BotoRegistre" value="Registrar Usuari" action="#{AddUser.addUsr}" /></td>
+		</tr>
+		<tr>
+			<td>
+				<h:message for="BotoRegistre"/>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<h:outputText value="#{AddUser.errorFormulari}" style="color:red"/>
+			</td>
 		</tr>
 	</table>
 	</h:form>

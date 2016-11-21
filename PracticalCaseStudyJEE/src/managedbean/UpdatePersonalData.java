@@ -1,19 +1,21 @@
 package managedbean;
+
 import java.io.Serializable;
-import java.util.*;
+import java.util.Properties;
+
 import javax.ejb.EJB;
-import javax.faces.bean.*;
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.SessionScoped;
 import javax.naming.Context;
 import javax.naming.InitialContext;
 
 import ejb.UserFacadeRemote;
-//import ejb.UserFacade;
 
-@ManagedBean(name = "AddUser")
+@ManagedBean(name = "UpdateUser")
 @SessionScoped
-public class RegisterUser implements Serializable{
+public class UpdatePersonalData implements Serializable {
 
-	private static final long serialVersionUID = 1L;
+private static final long serialVersionUID = 1L;
 	
 	protected String nif;
 	protected String name;
@@ -32,8 +34,7 @@ public class RegisterUser implements Serializable{
 	private UserFacade userLocalFacade;
 	*/
 	
-	public RegisterUser()
-	{
+	public UpdatePersonalData() {
 		nif = "";
 		name = "";
 		surname = "";
@@ -44,7 +45,6 @@ public class RegisterUser implements Serializable{
 	}
 	
 	/*Definim els getters i setters per a que desde les pagines JSP es pugui accedir als atributs idioma i nivell*/
-
 	public String getNif()
 	{
 		return nif;
@@ -115,7 +115,15 @@ public class RegisterUser implements Serializable{
 		this.errorFormulari = errorFormulari;
 	}
 	
-	/*Metode per registrar un usuari al sistema*/
+	public String updateUsr() throws Exception
+	{
+		
+		
+		return null;
+	}
+	
+	/*
+	 * /*Metode per registrar un usuari al sistema
 	public String addUsr() throws Exception
 	{		
 		//Tenim que cridar als setters aixi perque sino al fer click al boto de la pagina JSP no s'actualitzen els valors d'aquest objecte
@@ -133,7 +141,7 @@ public class RegisterUser implements Serializable{
 		success = userRemote.registerUser(getNif(), getName(), getSurname(), getPhone(), getPassword(), getEmail());
 		
 		/*Si el registre de l'usuari no es pot realitzar es perque el DNI ja esta introduit a la base de dades, per tant es mostra error*/
-		if (success==false)
+		/*if (success==false)
 		{
 			errorFormulari = "ERROR: L'usuari amb nif: "+getNif()+" ja existeix al sistema";
 			return "RegisterUserView.xhtml"; //Es retorna el nom de la vista a la que volem que ens redirigim, en aquest cas la mateixa			
@@ -142,5 +150,7 @@ public class RegisterUser implements Serializable{
 		{	
 			return "Login.xhtml"; //Si la introducció de l'usuari es correcta es retorna la vista Login.xhtml per a que automaticament es redireccioni cap alla
 		}
-	}
+	} 
+	 */
+
 }
