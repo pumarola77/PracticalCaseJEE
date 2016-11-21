@@ -21,9 +21,20 @@ public class UserFacadeBean implements UserFacadeRemote, UserFacade{
 		private EntityManager entman;
 
 		@Override
-		public void registerUser(String nif, String name, String surname, String phone, String password, String email) 
+		public boolean registerUser(String nif, String name, String surname, String phone, String password, String email) 
 		{
-			entman.persist(new UserJPA(nif, name, surname, phone, password, email));
+			/*Si l'usuari identificat per nif no existeix a la base de dades es crea i es retorna true conforme ha funcionat correctament*/
+			if (entman.find(UserJPA.class, nif) == null )
+			{
+				entman.persist(new UserJPA(nif, name, surname, phone, password, email));
+				return true;
+			}
+			/*Si l'usuari ja existeix es retorna false ja que es considera que es un error*/
+			else 
+			{
+				return false;
+			}
+			
 		}
 	
 		

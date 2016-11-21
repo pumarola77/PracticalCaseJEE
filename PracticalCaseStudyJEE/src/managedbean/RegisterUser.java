@@ -22,6 +22,9 @@ public class RegisterUser implements Serializable{
 	protected String password;
 	protected String email;
 	
+	private boolean success; //Aquest parametre serveix per controlar si el formulari de registre conte errors en les dades introduides
+	protected String errorFormulari; //Aquest parametre serveix per mostrar un error a la propia pàgina del formulari
+	
 	@EJB
 	private UserFacadeRemote userRemote;
 	/*
@@ -37,6 +40,7 @@ public class RegisterUser implements Serializable{
 		phone = "";
 		password = "";
 		email = "";
+		errorFormulari="";
 	}
 	
 	/*Definim els getters i setters per a que desde les pagines JSP es pugui accedir als atributs idioma i nivell*/
@@ -101,9 +105,19 @@ public class RegisterUser implements Serializable{
 		this.email = email;
 	}
 	
+	public String getErrorFormulari(){
+		
+		return errorFormulari;
+	}
+	
+	public void setErrorFormulari (String errorFormulari){
+		
+		this.errorFormulari = errorFormulari;
+	}
+	
 	/*Metode per registrar un usuari al sistema*/
-	public void addUsr() throws Exception
-	{
+	public String addUsr() throws Exception
+	{		
 		//Tenim que cridar als setters aixi perque sino al fer click al boto de la pagina JSP no s'actualitzen els valors d'aquest objecte
 		setNif(nif);
 		setName(name);
@@ -111,12 +125,22 @@ public class RegisterUser implements Serializable{
 		setPhone(phone);
 		setPassword(password);
 		setEmail(email);
-		
 		//userLocalFacade.registerUser(getNif(), getName(), getSurname(), getPhone(), getPassword(), getEmail());
 		
 		Properties props = System.getProperties();
 		Context ctx = new InitialContext(props);
 		userRemote = (UserFacadeRemote) ctx.lookup("java:app/PracticalCaseStudyJEE.jar/UserFacadeBean!ejb.UserFacadeRemote");
-		userRemote.registerUser(getNif(), getName(), getSurname(), getPhone(), getPassword(), getEmail());
+		success = userRemote.registerUser(getNif(), getName(), getSurname(), getPhone(), getPassword(), getEmail());
+		
+		/*Si el registre de l'usuari no es pot realitzar es perque el DNI ja esta introduit a la base de dades, per tant es mostra error*/
+		if (success==false)
+		{
+			errorFormulari = "ERROR: L'usuari amb nif: "+getNif()+" ja existeix al sistema";
+			return "RegisterUserView.xhtml"; //Es retorna el nom de la vista a la que volem que ens redirigim, en aquest cas la mateixa			
+		}
+		else
+		{	
+			return "Login.xhtml"; //Si la introducció de l'usuari es correcta es retorna la vista Login.xhtml per a que automaticament es redireccioni cap alla
+		}
 	}
 }
