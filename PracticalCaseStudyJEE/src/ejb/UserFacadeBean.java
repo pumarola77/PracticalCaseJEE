@@ -36,6 +36,26 @@ public class UserFacadeBean implements UserFacadeRemote, UserFacade{
 			}
 			
 		}
+
+		@Override
+		public void updatePersonalData(String nif, String name, String surname, String phone, String password,
+				String email) {
+			//Iniciar transaccio
+			entman.getTransaction().begin();
+			//Buscar registre a actualitzar
+			UserJPA user = entman.find(UserJPA.class, nif);
+			//Actualitzar dades amb els parameteres d'entrada
+			user.setNif(nif);
+			user.setName(name);
+			user.setSurname(surname);
+			user.setPhone(phone);
+			user.setPassword(password);
+			user.setEmail(email);
+			//Pujem el registre al UserJPA
+			entman.getTransaction().commit();
+			//Finalitzem la transaccio
+			entman.close();
+		}
 	
 		
 	
