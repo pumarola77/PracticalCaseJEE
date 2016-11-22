@@ -20,21 +20,32 @@ public class UserFacadeBean implements UserFacadeRemote, UserFacade{
 		@PersistenceContext(unitName="PracticalCase") 
 		private EntityManager entman;
 
+		
+		/*
+		 *Retorn: 
+		 *	0 - Usuari creat correctament
+		 *  1 - Error: Ja existeix un usuari amb el DNI indicat
+		 *  2 - Error: Ja existeix un usuari amb el email indicat
+		 */
 		@Override
-		public boolean registerUser(String nif, String name, String surname, String phone, String password, String email) 
-		{
-			/*Si l'usuari identificat per nif no existeix a la base de dades es crea i es retorna true conforme ha funcionat correctament*/
-			if (entman.find(UserJPA.class, nif) == null )
+		public int registerUser(String nif, String name, String surname, String phone, String password, String email) 
+		{			
+			Query queryEmail = entman.createQuery("FROM UserJPA b WHERE b.email = :email").setParameter("email", email);
+			Query queryNif = entman.createQuery("FROM UserJPA b WHERE b.nif = :nif").setParameter("nif", nif);
+			
+			if (!queryNif.getResultList().isEmpty())
+			{
+				return 1;				
+			}
+			else if (!queryEmail.getResultList().isEmpty())
+			{
+				return 2;
+			}
+			else
 			{
 				entman.persist(new UserJPA(nif, name, surname, phone, password, email));
-				return true;
+				return 0;
 			}
-			/*Si l'usuari ja existeix es retorna false ja que es considera que es un error*/
-			else 
-			{
-				return false;
-			}
-			
 		}
 
 		@Override

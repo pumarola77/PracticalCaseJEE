@@ -6,7 +6,7 @@ public interface UserFacade {
 	/*
 	 Metodes invocats localment
    */
-	public boolean registerUser(String nif, String name , String surname , String phone, String password , String email);
+	public int registerUser(String nif, String name , String surname , String phone, String password , String email);
 	public boolean updatePersonalData(String nif, String name , String surname , String phone, String password , String email);
 	public boolean login(String email,String password);
 	public boolean logout();
