@@ -23,6 +23,7 @@ public class Login implements Serializable {
 	
 	//Serveix per controlar si l'usuari el password son correctes.
 	private boolean success;
+	protected String errorPassword; //Serveix per mostrar error en pantalla
 	
 	@EJB
 	private UserFacadeRemote userRemote;
@@ -49,6 +50,15 @@ public class Login implements Serializable {
 	public void setPassword(String password) {
 		this.password = password;
 	}
+	
+	public String getErrorPassword() {
+		return errorPassword;
+	}
+	
+	public void setErrorPassword(String errorPassword) {
+		this.errorPassword = errorPassword;
+	}
+	
 		
 	/* Metode per Verificar el Login Usuari */
 	public String login(String email, String pwd) {
@@ -56,15 +66,28 @@ public class Login implements Serializable {
 			Properties props = System.getProperties();
 			Context ctx = new InitialContext(props);
 						
+			if ( email.isEmpty()) {
+				errorPassword = "Falta Indicar Codi Acces";
+				return "Login";
+			}
+			
+			if ( pwd.isEmpty()) {
+				errorPassword = "Falta Indicar Clau Acces";
+				return "Login";				
+			}
+			
 			userRemote = (UserFacadeRemote) ctx.lookup("java:app/PracticalCaseStudyJEE.jar/UserFacadeBean!ejb.UserFacadeRemote");
 			success = userRemote.login(email, pwd);
 						
 			if ( success ) {
 				// Hauria Entrar a un Menu Per seleccionar les 
 				// opcions disponibles del programa.
+				errorPassword = "";
 				return "Login";
 			} else {
-				return "RegisterView";
+				
+				errorPassword = "Usuari No existeix o passowrd incorrecte";
+				return "Login"; 				
 			}
 			
 		} catch(Exception e) {

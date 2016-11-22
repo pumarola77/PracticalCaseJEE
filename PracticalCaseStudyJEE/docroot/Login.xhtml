@@ -5,21 +5,22 @@
 
 <h:head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-	<title>Lang4all - Entry</title>
+	<title>Login - Lang4all</title>
 </h:head>
 
 <h:body>
 	<h:form>
 		<h:panelGrid columns="2" bgcolor="#EFF5FA">
-			<h:outputLabel value="User:"/>
-			<h:inputText value="#{Login.email}"/>
-			<h:outputLabel value="Password"/>
-			<h:inputSecret value="#{Login.password}" redisplay="true"/>		
+		    <h:outputLabel value="Email"></h:outputLabel>
+			<h:inputText id="email" value="#{Login.email}"/>
+			<h:outputLabel value="Password"></h:outputLabel>			
+			<h:inputSecret id="password" label="#{msgs.password}" value="#{Login.password}" redisplay="true"/>	
 		</h:panelGrid>
 		<h:commandButton value="Login" 
 			action="#{Login.login(Login.email,Login.password)}"/>
 		<h:commandLink value="Register" action="#{AddUser.mainWindow()}"></h:commandLink>
 	</h:form>
+	<h:outputText value="#{Login.errorPassword}" style="color:red"></h:outputText>
 </h:body>
 
 </html>
