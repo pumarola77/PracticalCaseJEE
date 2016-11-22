@@ -7,7 +7,7 @@ import javax.persistence.*;
  * Classe JPA UserJPA
  */
 @Entity
-@Table(name="practicalcase.user")
+@Table(name="practicalcase.user",  uniqueConstraints={@UniqueConstraint(columnNames={"email"})})
 public class UserJPA implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -36,7 +36,7 @@ public class UserJPA implements Serializable {
 	}
 
 	/**
-	 *  Mètodes get/set dels camps de la base de dades
+	 *  MÃ¨todes get/set dels camps de la base de dades
 	 */
 	@Id
 	public String getNif() {
