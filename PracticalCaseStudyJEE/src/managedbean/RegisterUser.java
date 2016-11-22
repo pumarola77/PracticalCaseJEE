@@ -1,3 +1,4 @@
+
 package managedbean;
 import java.io.Serializable;
 import java.util.*;
@@ -113,6 +114,11 @@ public class RegisterUser implements Serializable{
 	public void setErrorFormulari (String errorFormulari){
 		
 		this.errorFormulari = errorFormulari;
+	}
+	
+	//Retorna la vista principal
+	public String mainWindow() {
+		return "RegisterUserView";
 	}
 	
 	/*Metode per registrar un usuari al sistema*/

@@ -6,7 +6,7 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.PersistenceException;
-
+import javax.persistence.Query;
 
 import ejb.UserFacadeRemote;
 import ejb.UserFacade;
@@ -66,7 +66,32 @@ public class UserFacadeBean implements UserFacadeRemote, UserFacade{
 			}
 
 		}
-	
 		
+		@Override
+		public boolean login(String email, String pwd) {						
+			try {
+											
+				Query query = entman.createQuery("FROM UserJPA b WHERE b.email = :email and b.password = :pwd");
+				query.setParameter("email", email);
+				query.setParameter("pwd", pwd);
+												
+				// Si usuari i el pwd existeix retorna true sino false
+				if ( !query.getResultList().isEmpty()  ||  query.getResultList().size() > 0 ) {
+					return true;
+				} else {
+					return false;
+				}
+				
+			} catch(PersistenceException e) {
+				
+			}
+				
+			return false;
+		}
+	
+		@Override
+		public boolean logout() {
+			return false;
+		}
 	
 }

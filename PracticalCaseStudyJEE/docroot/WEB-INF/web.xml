@@ -38,6 +38,7 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
     </welcome-file-list>
 
 	<error-page>
+		<exception-type>java.lang.Exception</exception-type>
 		<location>/ErrorView.xhtml</location>
 	</error-page>
 </web-app>
