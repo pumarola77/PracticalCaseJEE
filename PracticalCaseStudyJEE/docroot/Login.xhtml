@@ -11,9 +11,9 @@
 <h:body>
 	<h:form>
 		<h:panelGrid columns="2" bgcolor="#EFF5FA">
-		    <h:outputLabel value="#{msgs.email}"></h:outputLabel>
+		    <h:outputLabel value="#{msgs.email}"/>
 			<h:inputText id="email" value="#{Login.email}"/>
-			<h:outputLabel value="#{msgs.password}"></h:outputLabel>			
+			<h:outputLabel value="#{msgs.password}"/>			
 			<h:inputSecret id="password" value="#{Login.password}" redisplay="true"/>	
 		</h:panelGrid>
 		<h:commandButton value="#{msgs.login}" 
