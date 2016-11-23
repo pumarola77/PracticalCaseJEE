@@ -1,10 +1,8 @@
 package managedbean;
 
-import java.io.Serializable;
-
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.SessionScoped;
+import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
 
 import java.util.Properties;
@@ -15,16 +13,14 @@ import javax.naming.InitialContext;
 import ejb.UserFacadeRemote;
 
 @ManagedBean(name = "Login")
-@SessionScoped
-public class Login implements Serializable {
-
-	private static final long serialVersionUID = 1L;
+@RequestScoped
+public class Login {
 	
 	protected String email;
 	protected String password;
 	
 	//Serveix per controlar si l'usuari el password son correctes.
-	private boolean success;
+	private String nif;
 	protected String errorPassword; //Serveix per mostrar error en pantalla
 	
 	@EJB
@@ -67,6 +63,7 @@ public class Login implements Serializable {
 		try {
 			Properties props = System.getProperties();
 			Context ctx = new InitialContext(props);
+			FacesContext context = FacesContext.getCurrentInstance();
 						
 			if ( email.isEmpty()) {
 				errorPassword = "Falta Indicar Codi Acces";
@@ -79,16 +76,21 @@ public class Login implements Serializable {
 			}
 			
 			userRemote = (UserFacadeRemote) ctx.lookup("java:app/PracticalCaseStudyJEE.jar/UserFacadeBean!ejb.UserFacadeRemote");
-			success = userRemote.login(email, pwd);
+			nif = userRemote.login(email, pwd);
 						
-			if ( success ) {
-				FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("email", email);
-				// Hauria Entrar a un Menu Per seleccionar les 
-				// opcions disponibles del programa.
+			//haure de capturar el nif per poder-lo passar com a variable de sessio
+									
+			if ( !nif.equals("NOVALID") ) {
+				
+				//Buscar el nif corresponent al nif del registre seleccionat
+				
+				context.getExternalContext().getSessionMap().put("nif", nif);
 				errorPassword = "";
+				
+				// Hauria de Retornar la vista per entrar al menu
 				return "Login";
 			} else {
-				FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
+				context.getExternalContext().invalidateSession();
 				errorPassword = "Usuari No existeix o passowrd incorrecte";
 				return "Login"; 				
 			}
@@ -97,6 +99,11 @@ public class Login implements Serializable {
 			return "ErrorView";
 		}
 
+	}
+	
+	public String logout() {
+		FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
+		return "Login";
 	}
 	
 }

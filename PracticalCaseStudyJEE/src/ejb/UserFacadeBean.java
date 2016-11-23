@@ -79,25 +79,32 @@ public class UserFacadeBean implements UserFacadeRemote, UserFacade{
 		}
 		
 		@Override
-		public boolean login(String email, String pwd) {						
+		public String login(String email, String pwd) {						
 			try {
-											
+												
 				Query query = entman.createQuery("FROM UserJPA b WHERE b.email = :email and b.password = :pwd");
 				query.setParameter("email", email);
 				query.setParameter("pwd", pwd);
-												
+									
+				@SuppressWarnings("unchecked")
+				Collection<UserJPA> users = query.getResultList();
+				
 				// Si usuari i el pwd existeix retorna true sino false
-				if ( !query.getResultList().isEmpty()  ||  query.getResultList().size() > 0 ) {
-					return true;
+				if ( !users.isEmpty()  ||  users.size() > 0 ) {
+					
+					Iterator<UserJPA> iter = users.iterator();
+					UserJPA element = (UserJPA) iter.next();
+					
+					return element.getNif();
 				} else {
-					return false;
+					return "NOVALID";
 				}
 				
 			} catch(PersistenceException e) {
 				
 			}
 				
-			return false;
+			return "NOVALID";
 		}
 	
 		@Override
