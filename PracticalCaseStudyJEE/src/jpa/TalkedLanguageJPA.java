@@ -1,0 +1,62 @@
+package jpa;
+
+import java.io.Serializable;
+import javax.persistence.*;
+
+/**
+ * Classe JPA TalkedLanguage
+ */
+
+@Entity
+@Table(name="practicalcase.talkedlanguage")
+public class TalkedLanguageJPA implements Serializable{
+
+	private static final long serialVersionUID = 1L;
+	
+	private String language;
+	private String level;
+	private String description;
+	
+	/**
+	 * Constructor
+	 */
+	public TalkedLanguageJPA() {
+		super();
+	}
+	
+	public TalkedLanguageJPA(String language, String level, String description) {
+		this.language = language;
+		this.level = level;
+		this.description = description;
+	}
+	
+	/**
+	 * Getters i setters dels camps de la base de dades
+	 */
+	@Id
+	public String getLanguage() {
+		return language;
+	}
+
+	public void setLanguage(String language) {
+		this.language = language;
+	}
+
+	public String getLevel() {
+		return level;
+	}
+
+	public void setLevel(String level) {
+		this.level = level;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+	
+	
+}
