@@ -5,6 +5,8 @@ import java.io.Serializable;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
+
 import java.util.Properties;
 
 import javax.naming.Context;
@@ -80,12 +82,13 @@ public class Login implements Serializable {
 			success = userRemote.login(email, pwd);
 						
 			if ( success ) {
+				FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("email", email);
 				// Hauria Entrar a un Menu Per seleccionar les 
 				// opcions disponibles del programa.
 				errorPassword = "";
 				return "Login";
 			} else {
-				
+				FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
 				errorPassword = "Usuari No existeix o passowrd incorrecte";
 				return "Login"; 				
 			}
