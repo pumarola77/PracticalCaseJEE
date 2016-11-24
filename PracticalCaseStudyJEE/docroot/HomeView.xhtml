@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"	xmlns:h="http://java.sun.com/jsf/html">
+<body>
+	<h1>HOME</h1>
+	<br />
+	<ul>
+		<li>
+			<h:link	value="Actualitzar dades del usuari (UpdatePersonalData)" outcome="RegisterUserView">
+				<!--ESPECIFICO AQUEST PARAMETRE NIF PERO CREC QUE NO HAURIA DE FER FALTA -->
+				<!-- Ja que aixi si no m'equivoco l'estem passant a traves del GET -->
+				<f:param name="nif" value="#nif" />
+			</h:link>
+		</li>
+		<li>
+			<h:link value="Llista de TalkedLanguage" outcome="TalkedLanguageListView">
+				<!--ESPECIFICO AQUEST PARAMETRE NIF PERO CREC QUE NO HAURIA DE FER FALTA -->
+				<!-- Ja que aixi si no m'equivoco l'estem passant a traves del GET -->
+				<f:param name="nif" value="#nif" />
+			</h:link>
+		</li>
+		<li>
+			<h:link value="Llista de LanguageToTalk" outcome="LanguageToTalkListView">
+				<!--ESPECIFICO AQUEST PARAMETRE NIF PERO CREC QUE NO HAURIA DE FER FALTA -->
+				<!-- Ja que aixi si no m'equivoco l'estem passant a traves del GET -->
+				<f:param name="nif" value="#nif" />
+			</h:link>
+		</li>
+		<li>
+			<h:link value="Llista de MyTalkAppointments" outcome="MyTalkAppointmentListView">
+				<!--ESPECIFICO AQUEST PARAMETRE NIF PERO CREC QUE NO HAURIA DE FER FALTA -->
+				<!-- Ja que aixi si no m'equivoco l'estem passant a traves del GET -->
+				<f:param name="nif" value="#nif" />
+			</h:link>
+		</li>
+		<li>
+			<h:link value="Llista de TalkAppointments" outcome="TalkAppointmentListView">
+				<!--ESPECIFICO AQUEST PARAMETRE NIF PERO CREC QUE NO HAURIA DE FER FALTA -->
+				<!-- Ja que aixi si no m'equivoco l'estem passant a traves del GET -->
+				<f:param name="nif" value="#nif" />
+			</h:link>
+		</li>
+	</ul>
+</body>
+</html>
+
