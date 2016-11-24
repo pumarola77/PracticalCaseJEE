@@ -49,6 +49,10 @@ public class UserFacadeBean implements UserFacadeRemote, UserFacade{
 			}
 		}
 
+		/*
+		 * retorna true: A trobat l'usuari i li ha actualitzat les dades
+		 * retorna false: No a trobat l'usuari
+		 */
 		@Override
 		public boolean updatePersonalData(String nif, String name, String surname, String phone, String password,
 				String email) {
@@ -76,7 +80,22 @@ public class UserFacadeBean implements UserFacadeRemote, UserFacade{
 			else{
 				return false;
 			}
-
+		}
+		
+		/*
+		 * Retorna l'user trobat en la bbdd. El busca a partir del nif
+		 */
+		@Override
+		public UserJPA findUser(String nif){
+			
+			//Iniciar transaccio
+			entman.getTransaction().begin();
+			//Buscar registre a actualitzar
+			UserJPA user = entman.find(UserJPA.class, nif);
+			//Finalitzem la transaccio
+			entman.close();
+			
+			return user;
 		}
 		
 		@Override
