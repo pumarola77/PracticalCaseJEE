@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core" xmlns:h="http://java.sun.com/jsf/html">
+
+<h:head>
+	<ui:param name="n" value="#{nif}" />
+	#{ListTalkedLang.setNif(n)}
+</h:head>
+  <h:body>
+  	<h:form>  		
+  		<h:dataTable value="#{ListTalkedLang.languageList}" var="item" bgcolor="#F1F1F1" border="10" first="0" width="50%" frame="hsides" rules="all"  >
+ 			<f:facet name="header">			
+  				<h:outputText align="center" value="Llista d'idiomes de l'usuari #{ListTalkedLang.nif}" />		
+  			</f:facet> 
+ 			<h:column>
+   				<f:facet name="header">
+   					<h:outputText value="idioma" />
+   				</f:facet> 
+   				<p align="center"><h:outputText value="#{item.language}" /></p>
+ 			</h:column>
+ 			<h:column>
+   				<f:facet name="header">
+   					<h:outputText value="nivell"/>
+   				</f:facet> 
+     			<p align="center"><h:outputText value="#{item.level}" /></p>
+ 			</h:column>
+ 			<h:column>
+   				<f:facet name="header">
+   					<h:outputText value="descripció"/>
+   				</f:facet> 
+     			<p align="center"><h:outputText value="#{item.description}" /></p>
+ 			</h:column>
+ 			<h:column>			
+					<p align="center"><h:commandButton value="Eliminar" action="#{DelLang.delTL(item)}" /></p>		
+ 			</h:column>
+ 		</h:dataTable>
+ 		<h:commandButton value="Afegir Idioma" action="AddTalkedLanguageView.xhtml" />
+  	</h:form>
+  </h:body>
+</html>

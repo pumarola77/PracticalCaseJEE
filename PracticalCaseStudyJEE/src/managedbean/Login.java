@@ -88,7 +88,7 @@ public class Login {
 				errorPassword = "";
 				
 				// Hauria de Retornar la vista per entrar al menu
-				return "Login";
+				return "HomeView";
 			} else {
 				context.getExternalContext().invalidateSession();
 				errorPassword = "Usuari No existeix o passowrd incorrecte";

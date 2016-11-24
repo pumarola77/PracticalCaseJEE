@@ -10,6 +10,7 @@ import javax.persistence.Query;
 
 import ejb.UserFacadeRemote;
 import ejb.UserFacade;
+import jpa.TalkedLanguageJPA;
 import jpa.UserJPA;
 
 //@Stateless: Indiquem que es tracta de un EJB Session sense estat.
@@ -110,6 +111,13 @@ public class UserFacadeBean implements UserFacadeRemote, UserFacade{
 		@Override
 		public boolean logout() {
 			return false;
+		}
+
+		@Override
+		public Collection<TalkedLanguageJPA> listAllTalkedLanguages(String nif) {
+			@SuppressWarnings("unchecked")
+			Collection<TalkedLanguageJPA> allLanguages = entman.createQuery("FROM TalkedLanguageJPA a WHERE a.nif = :nif").setParameter("nif",nif).getResultList();
+			return allLanguages;
 		}
 	
 }
