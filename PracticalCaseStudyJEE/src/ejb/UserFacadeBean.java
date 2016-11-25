@@ -78,8 +78,10 @@ public class UserFacadeBean implements UserFacadeRemote, UserFacade{
 		 * Retorna l'user trobat en la bbdd. El busca a partir del nif
 		 */
 		@Override
-		public UserJPA findUser(String nif)throws PersistenceException {
-			UserJPA user = null;
+		public UserJPA findUser(String nif)/*throws PersistenceException */{
+			return entman.find(UserJPA.class, nif);
+			
+			/*UserJPA user = null;
 			try
 			{
 				@SuppressWarnings("unchecked")
@@ -92,7 +94,7 @@ public class UserFacadeBean implements UserFacadeRemote, UserFacade{
 			}catch (PersistenceException e) {
 				
 			} 
-		    return user;
+		    return user;*/
 		}	
 		
 		
@@ -133,7 +135,7 @@ public class UserFacadeBean implements UserFacadeRemote, UserFacade{
 		@Override
 		public Collection<TalkedLanguageJPA> listAllTalkedLanguages(String nif) {
 			@SuppressWarnings("unchecked")
-			Collection<TalkedLanguageJPA> allLanguages = entman.createQuery("FROM TalkedLanguageJPA a WHERE a.nif = :nif").setParameter("nif",nif).getResultList();
+			Collection<TalkedLanguageJPA> allLanguages = entman.createQuery("FROM TalkedLanguageJPA a WHERE a.user.nif = :nif").setParameter("nif",nif).getResultList();
 			return allLanguages;
 		}
 	

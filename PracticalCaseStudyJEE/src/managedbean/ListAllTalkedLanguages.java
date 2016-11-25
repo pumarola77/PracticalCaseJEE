@@ -51,7 +51,5 @@ public class ListAllTalkedLanguages implements Serializable{
 	public String getNif(){
 		return nif;
 	}
-	
-	
 
 }

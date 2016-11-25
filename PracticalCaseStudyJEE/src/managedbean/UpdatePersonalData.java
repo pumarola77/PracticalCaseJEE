@@ -14,7 +14,7 @@ import ejb.CatalogFacadeRemote;
 import ejb.UserFacadeRemote;
 import jpa.PetJPA;
 import jpa.UserJPA;
-
+import javax.annotation.PostConstruct;
 @ManagedBean(name = "UpdateUser")
 @SessionScoped
 public class UpdatePersonalData implements Serializable {
@@ -30,7 +30,7 @@ private static final long serialVersionUID = 1L;
 	
 	private boolean success; //Aquest parametre serveix per controlar si el formulari de registre conte errors en les dades introduides
 	protected String errorFormulari; //Aquest parametre serveix per mostrar un error a la propia pàgina del formulari
-	protected UserJPA findUser; //Ens serveix per trobar l'user de la sessio
+	private UserJPA findUser; //Ens serveix per trobar l'user de la sessio
 	@EJB
 	private UserFacadeRemote userRemote;
 	/*
@@ -39,13 +39,19 @@ private static final long serialVersionUID = 1L;
 	*/
 	
 	public UpdatePersonalData() throws Exception { 
-		nif = "";
+	/*	nif = "";
 		name = "";
 		surname = "";
 		phone = "";
 		password = "";
 		email = "";
-		setFindUser();
+		setFindUser();*/
+		Properties props = System.getProperties();
+		Context ctx = new InitialContext(props);
+		userRemote = (UserFacadeRemote) ctx.lookup("java:app/PracticalCaseStudyJEE.jar/UserFacadeBean!ejb.UserFacadeRemote");
+	/*	findUser = (UserJPA) userRemote.findUser(nif);*/
+
+		
 	}
 	
 	
@@ -120,14 +126,14 @@ private static final long serialVersionUID = 1L;
 		this.errorFormulari = errorFormulari;
 	}
 	
-	public UserJPA getFindUser(){
+	/*public UserJPA getFindUser(){
 		return findUser;
-	}
+	}*/
 	
 	public void setFindUser() throws Exception {
-		Properties props = System.getProperties();
+		/*Properties props = System.getProperties();
 		Context ctx = new InitialContext(props);
-		userRemote = (UserFacadeRemote) ctx.lookup("java:app/PracticalCaseStudyJEE.jar/UserFacadeBean!ejb.UserFacadeRemote");
+		userRemote = (UserFacadeRemote) ctx.lookup("java:app/PracticalCaseStudyJEE.jar/UserFacadeBean!ejb.UserFacadeRemote");*/
 		findUser = (UserJPA) userRemote.findUser(nif);
 
 		setName(findUser.getName());
