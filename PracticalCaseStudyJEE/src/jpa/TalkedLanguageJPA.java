@@ -16,6 +16,7 @@ public class TalkedLanguageJPA implements Serializable{
 	private String language;
 	private String level;
 	private String description;
+	private UserJPA user;
 	
 	/**
 	 * Constructor
@@ -58,5 +59,19 @@ public class TalkedLanguageJPA implements Serializable{
 		this.description = description;
 	}
 	
+	/*
+	 * Methods get/set persistent relationships
+	 * JoinColumn fa referencia a la columna amb la qual realitzem el join.
+	 */
+	@ManyToOne
+	@JoinColumn (name="nif")
+	public UserJPA getUser() {
+		return user;
+	}
+	
+	public void setUser(UserJPA user) {
+		this.user = user;
+	}
+		
 	
 }

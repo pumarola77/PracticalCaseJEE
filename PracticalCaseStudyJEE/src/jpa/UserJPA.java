@@ -1,5 +1,6 @@
 package jpa;
 import java.io.Serializable;
+import java.util.Collection;
 
 import javax.persistence.*;
 
@@ -18,6 +19,8 @@ public class UserJPA implements Serializable {
 	private String phone;
 	private String password;
 	private String email;
+	
+	private Collection<TalkedLanguageJPA> talkedLanguages;
 	
 	/**
 	 * Constructors
@@ -75,4 +78,19 @@ public class UserJPA implements Serializable {
 	public  void setEmail(String email) {
 		this.email = email;
 	}
+	
+	/* 
+	 * Metodes get/set persistence relationships 
+	 * */
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER )
+	@JoinColumn(name = "nif")
+	public Collection<TalkedLanguageJPA> getTalkedLanguageByUser() {
+		return talkedLanguages;
+	}
+	
+	public void setTalkedLanguageByUser(Collection<TalkedLanguageJPA> talkedlanguages) {
+		this.talkedLanguages = talkedlanguages;
+	}
+	
+	
 }
