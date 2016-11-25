@@ -10,6 +10,7 @@ import javax.persistence.Query;
 
 import ejb.UserFacadeRemote;
 import ejb.UserFacade;
+import jpa.PetJPA;
 import jpa.TalkedLanguageJPA;
 import jpa.UserJPA;
 
@@ -54,49 +55,46 @@ public class UserFacadeBean implements UserFacadeRemote, UserFacade{
 		 * retorna false: No a trobat l'usuari
 		 */
 		@Override
-		public boolean updatePersonalData(String nif, String name, String surname, String phone, String password,
-				String email) {
-			
-			//Iniciar transaccio
-			entman.getTransaction().begin();
-			//Buscar registre a actualitzar
-			UserJPA user = entman.find(UserJPA.class, nif);
-			//Si l'usuari existeix, actualitzem les seves dades i retornem true
-			if(user != null){
-				//Actualitzar dades amb els parameteres d'entrada
-				user.setNif(nif);
-				user.setName(name);
-				user.setSurname(surname);
-				user.setPhone(phone);
-				user.setPassword(password);
-				user.setEmail(email);
-				//Pujem el registre al UserJPA
-				entman.getTransaction().commit();
-				//Finalitzem la transaccio
-				entman.close();
-				return true;
+		public boolean updatePersonalData(String nif, String name, String surname, String phone, String password, String email) 
+		{
+			Query queryNif = entman.createQuery("FROM UserJPA b WHERE b.nif = :nif").setParameter("nif", nif);
+			if (!queryNif.getResultList().isEmpty())
+			{
+				//entman.createQuery("UPDATE UserJPA b SET b.nif = :nif, b.name = :name, b.surname = :surname: b.phone = :phone, b.password = :password, b.email = :email").setParameter("nif", nif).setParameter("name", name).setParameter("surname", surname).setParameter("phone", phone).setParameter("password", password).setParameter("email", email);
+				entman.createQuery("UPDATE UserJPA u SET u.name = :name WHERE u.nif = :nif").setParameter("nif", nif).setParameter("name", name);
+				entman.createQuery("UPDATE UserJPA u SET u.surname = :surname WHERE u.nif = :nif").setParameter("nif", nif).setParameter("surname", surname);
+				entman.createQuery("UPDATE UserJPA u SET u.phone = :phone WHERE u.nif = :nif").setParameter("nif", nif).setParameter("phone", phone);
+				entman.createQuery("UPDATE UserJPA u SET u.password = :password WHERE u.nif = :nif").setParameter("nif", nif).setParameter("password", password);
+				entman.createQuery("UPDATE UserJPA u SET u.email = :email WHERE u.nif = :nif").setParameter("nif", nif).setParameter("email", email);
+				return true;				
 			}
-			//Si l'usuari no existeix retornem false
-			else{
+			else
+			{
 				return false;
 			}
-		}
+		}	
 		
 		/*
 		 * Retorna l'user trobat en la bbdd. El busca a partir del nif
 		 */
 		@Override
-		public UserJPA findUser(String nif){
-			
-			//Iniciar transaccio
-			entman.getTransaction().begin();
-			//Buscar registre a actualitzar
-			UserJPA user = entman.find(UserJPA.class, nif);
-			//Finalitzem la transaccio
-			entman.close();
-			
-			return user;
-		}
+		public UserJPA findUser(String nif)throws PersistenceException {
+			UserJPA user = null;
+			try
+			{
+				@SuppressWarnings("unchecked")
+				Collection<UserJPA> users = entman.createQuery("FROM UserJPA b WHERE b.nif = :nif").setParameter("nif",nif).getResultList();
+				if (!users.isEmpty() || users.size()==1)
+				{
+					Iterator<UserJPA> iter =users.iterator();
+					user = (UserJPA) iter.next();				
+				}
+			}catch (PersistenceException e) {
+				
+			} 
+		    return user;
+		}	
+		
 		
 		@Override
 		public String login(String email, String pwd) {						

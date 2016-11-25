@@ -10,73 +10,6 @@
 </h:head>
 	<body>
 		<h:panelGroup rendered="#{empty user}">
-			<h:form>
-			<table>
-				<tr>
-					<td>
-						Nif:
-					</td>
-					<td>
-						<h:inputText label="Nif" required="true" value="#{AddUser.nif}"/>
-					</td>
-				</tr>
-				<tr>
-					<td>
-						Name:
-					</td>
-					<td>
-						<h:inputText label="Name" required="true" value="#{AddUser.name}"/>
-					</td>
-				</tr>
-				<tr>
-					<td>
-						Surname:
-					</td>
-					<td>
-						<h:inputText label="Surname" required="true" value="#{AddUser.surname}"/>
-					</td>
-				</tr>
-				<tr>
-					<td>
-						Phone:
-					</td>
-					<td>
-						<h:inputText label="Phone" required="true" value="#{AddUser.phone}"/>
-					</td>
-				</tr>
-				<tr>
-					<td>
-						Password:
-					</td>
-					<td>
-						<h:inputSecret label="Password" required="true" value="#{AddUser.password}"/>
-					</td>
-				</tr>
-				<tr>
-					<td>
-						Email:
-					</td>
-					<td>
-						<h:inputText label="Email" required="true" value="#{AddUser.email}"/>
-					</td>
-				</tr>
-				<tr>
-				<td><h:commandButton id="BotoRegistre" value="Registrar Usuari" action="#{AddUser.addUsr}" /></td>
-				</tr>
-				<tr>
-					<td>
-						<h:message for="BotoRegistre"/>
-					</td>
-				</tr>
-				<tr>
-					<td>
-						<h:outputText value="#{AddUser.errorFormulari}" style="color:red"/>
-					</td>
-				</tr>
-			</table>
-			</h:form>
-		</h:panelGroup>
-		<h:panelGroup rendered="#{not empty user}">
 	 		<h:form>
 			<table>
 				<tr>
@@ -84,7 +17,7 @@
 						Nif:
 					</td>
 					<td>
-						<h:inputText label="Nif" required="true" value="#{UpdateUser.nif}"/>
+						<h:inputText label="Nif" required="true" readonly="true" value="#{UpdateUser.nif}"/>
 					</td>
 				</tr>
 				<tr>
@@ -116,7 +49,7 @@
 						Password:
 					</td>
 					<td>
-						<h:inputSecret label="Password" required="true" value="#{UpdateUser.password}"/>
+						<h:inputText label="Password" required="true" value="#{UpdateUser.password}"/>
 					</td>
 				</tr>
 				<tr>

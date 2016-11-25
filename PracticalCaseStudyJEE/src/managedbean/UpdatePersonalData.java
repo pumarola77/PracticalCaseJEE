@@ -12,6 +12,7 @@ import javax.naming.InitialContext;
 
 import ejb.CatalogFacadeRemote;
 import ejb.UserFacadeRemote;
+import jpa.PetJPA;
 import jpa.UserJPA;
 
 @ManagedBean(name = "UpdateUser")
@@ -37,9 +38,14 @@ private static final long serialVersionUID = 1L;
 	private UserFacade userLocalFacade;
 	*/
 	
-	public UpdatePersonalData() throws Exception {
-		nif = (String)FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("nif");
-		setFindUser(nif);
+	public UpdatePersonalData() throws Exception { 
+		nif = "";
+		name = "";
+		surname = "";
+		phone = "";
+		password = "";
+		email = "";
+		setFindUser();
 	}
 	
 	
@@ -118,11 +124,17 @@ private static final long serialVersionUID = 1L;
 		return findUser;
 	}
 	
-	public void setFindUser(String nif) throws Exception {
+	public void setFindUser() throws Exception {
 		Properties props = System.getProperties();
 		Context ctx = new InitialContext(props);
 		userRemote = (UserFacadeRemote) ctx.lookup("java:app/PracticalCaseStudyJEE.jar/UserFacadeBean!ejb.UserFacadeRemote");
 		findUser = (UserJPA) userRemote.findUser(nif);
+
+		setName(findUser.getName());
+		setSurname(findUser.getSurname());
+		setPhone(findUser.getPhone());
+		setPassword(findUser.getPassword());
+		setEmail(findUser.getEmail());
 	}
 	
 	public String updateUsr() throws Exception
@@ -137,7 +149,7 @@ private static final long serialVersionUID = 1L;
 		setEmail(email);
 		
 		//userLocalFacade.updatePersonalData(getNif(), getName(), getSurname(), getPhone(), getPassword(), getEmail());
-		Properties props = System.getProperties();
+		/*Properties props = System.getProperties();
 		Context ctx = new InitialContext(props);
 		userRemote = (UserFacadeRemote) ctx.lookup("java:app/PracticalCaseStudyJEE.jar/UserFacadeBean!ejb.UserFacadeRemote");
 		success = userRemote.updatePersonalData(getNif(), getName(), getSurname(), getPhone(), getPassword(), getEmail());
@@ -150,8 +162,8 @@ private static final long serialVersionUID = 1L;
 			//Esta actualitzant el NIF i no existeix a la bbdd
 			errorFormulari = "ERROR: L'usuari amb nif: "+getNif()+" NO existeix al sistema";
 			return "RegisterUserView.xhtml";
-		}
-
+		}*/
+return "Login.xhtml";
 	}
 	
 }
