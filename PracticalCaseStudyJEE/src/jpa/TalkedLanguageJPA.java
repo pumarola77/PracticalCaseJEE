@@ -13,7 +13,7 @@ public class TalkedLanguageJPA implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 	
-	private int    id;
+	private String id;
 	private String language;
 	private String level;
 	private String description;
@@ -26,7 +26,7 @@ public class TalkedLanguageJPA implements Serializable{
 		super();
 	}
 	
-	public TalkedLanguageJPA(Integer id , String language, String level, String description) {
+	public TalkedLanguageJPA(String id , String language, String level, String description) {
 		this.id = id;
 		this.language = language;
 		this.level = level;
@@ -37,11 +37,11 @@ public class TalkedLanguageJPA implements Serializable{
 	 * Getters i setters dels camps de la base de dades
 	 */
 	@Id
-	public int getId() {
+	public String getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 		
