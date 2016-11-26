@@ -13,10 +13,18 @@ public class TalkedLanguageJPA implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 	
+	@Column(name = "id")
 	private String id;
+	
+	@Column(name = "language")
 	private String language;
+	
+	@Column(name = "level")
 	private String level;
+	
+	@Column(name = "description")
 	private String description;
+	
 	private UserJPA user;
 	
 	/**

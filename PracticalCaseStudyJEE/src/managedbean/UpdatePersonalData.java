@@ -39,19 +39,18 @@ private static final long serialVersionUID = 1L;
 	*/
 	
 	public UpdatePersonalData() throws Exception { 
-	/*	nif = "";
-		name = "";
-		surname = "";
-		phone = "";
-		password = "";
-		email = "";
-		setFindUser();*/
-		Properties props = System.getProperties();
-		Context ctx = new InitialContext(props);
-		userRemote = (UserFacadeRemote) ctx.lookup("java:app/PracticalCaseStudyJEE.jar/UserFacadeBean!ejb.UserFacadeRemote");
-	/*	findUser = (UserJPA) userRemote.findUser(nif);*/
-
-		
+		/*	nif = "";
+			name = "";
+			surname = "";
+			phone = "";
+			password = "";
+			email = "";
+			setFindUser();*/
+		/*	Properties props = System.getProperties();
+			Context ctx = new InitialContext(props);
+			userRemote = (UserFacadeRemote) ctx.lookup("java:app/PracticalCaseStudyJEE.jar/UserFacadeBean!ejb.UserFacadeRemote");
+		 */
+		/*	findUser = (UserJPA) userRemote.findUser(nif);*/
 	}
 	
 	
@@ -143,16 +142,31 @@ private static final long serialVersionUID = 1L;
 		setEmail(findUser.getEmail());
 	}
 	
-	public String updateUsr() throws Exception
+	public String updateUsr(String nif, String name , String surname, String phone, String password , String email) throws Exception
 	{
+		try {
+			
+			Properties props = System.getProperties();
+			Context ctx = new InitialContext(props);
+			
+			userRemote = (UserFacadeRemote) ctx.lookup("java:app/PracticalCaseStudyJEE.jar/UserFacadeBean!ejb.UserFacadeRemote");
+			userRemote.updatePersonalData(nif, name, surname, phone, password, email);
+			
+		} catch (Exception e) {
+			return "ErrorView";
+		}
+		
+		return "Login.xhtml";
 		
 		//Tenim que cridar als setters aixi perque sino al fer click al boto de la pagina JSP no s'actualitzen els valors d'aquest objecte
+		/*
 		setNif(nif);
 		setName(name);
 		setSurname(surname);
 		setPhone(phone);
 		setPassword(password);
 		setEmail(email);
+		*/
 		
 		//userLocalFacade.updatePersonalData(getNif(), getName(), getSurname(), getPhone(), getPassword(), getEmail());
 		/*Properties props = System.getProperties();
@@ -169,7 +183,8 @@ private static final long serialVersionUID = 1L;
 			errorFormulari = "ERROR: L'usuari amb nif: "+getNif()+" NO existeix al sistema";
 			return "RegisterUserView.xhtml";
 		}*/
-return "Login.xhtml";
+		
+		//return "Login.xhtml";
 	}
 	
 }

@@ -57,6 +57,20 @@ public class UserFacadeBean implements UserFacadeRemote, UserFacade{
 		@Override
 		public boolean updatePersonalData(String nif, String name, String surname, String phone, String password, String email) 
 		{
+			
+			UserJPA user = entman.find(UserJPA.class, nif);
+			user.setNif(nif);
+			user.setName(name);
+			user.setSurname(surname);
+			user.setPhone(phone);
+			user.setPassword(password);
+			user.setEmail(email);
+			
+			entman.persist(user);
+			return true;
+			
+			
+			/*
 			Query queryNif = entman.createQuery("FROM UserJPA b WHERE b.nif = :nif").setParameter("nif", nif);
 			if (!queryNif.getResultList().isEmpty())
 			{
@@ -71,30 +85,17 @@ public class UserFacadeBean implements UserFacadeRemote, UserFacade{
 			else
 			{
 				return false;
-			}
+			}*/
+			
+			/*return false;*/
 		}	
 		
 		/*
 		 * Retorna l'user trobat en la bbdd. El busca a partir del nif
 		 */
 		@Override
-		public UserJPA findUser(String nif)/*throws PersistenceException */{
+		public UserJPA findUser(String nif) {
 			return entman.find(UserJPA.class, nif);
-			
-			/*UserJPA user = null;
-			try
-			{
-				@SuppressWarnings("unchecked")
-				Collection<UserJPA> users = entman.createQuery("FROM UserJPA b WHERE b.nif = :nif").setParameter("nif",nif).getResultList();
-				if (!users.isEmpty() || users.size()==1)
-				{
-					Iterator<UserJPA> iter =users.iterator();
-					user = (UserJPA) iter.next();				
-				}
-			}catch (PersistenceException e) {
-				
-			} 
-		    return user;*/
 		}	
 		
 		

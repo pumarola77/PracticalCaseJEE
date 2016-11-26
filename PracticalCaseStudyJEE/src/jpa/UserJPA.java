@@ -13,11 +13,22 @@ public class UserJPA implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
+	@Column(name="nif")
 	private String nif;
+	
+	@Column(name="name")
 	private String name;
+	
+	@Column(name="surname")
 	private String surname;
+	
+	@Column(name="phone")
 	private String phone;
+	
+	@Column(name="password")
 	private String password;
+	
+	@Column(name="email")
 	private String email;
 	
 	private Collection<TalkedLanguageJPA> talkedLanguages;
