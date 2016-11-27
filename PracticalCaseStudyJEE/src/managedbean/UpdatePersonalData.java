@@ -137,7 +137,7 @@ private static final long serialVersionUID = 1L;
 			return "ErrorView";
 		}
 		
-		return "Login.xhtml";
+		return "HomeView";
 		
 	}
 	
