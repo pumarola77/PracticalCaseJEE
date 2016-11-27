@@ -27,8 +27,7 @@ private static final long serialVersionUID = 1L;
 	protected String phone;
 	protected String password;
 	protected String email;
-	
-	private boolean success; //Aquest parametre serveix per controlar si el formulari de registre conte errors en les dades introduides
+		
 	protected String errorFormulari; //Aquest parametre serveix per mostrar un error a la propia pàgina del formulari
 	private UserJPA findUser; //Ens serveix per trobar l'user de la sessio
 	@EJB
@@ -40,6 +39,9 @@ private static final long serialVersionUID = 1L;
 	
 	public UpdatePersonalData() throws Exception { 
 
+		Properties props = System.getProperties();
+		Context ctx = new InitialContext(props);
+		userRemote = (UserFacadeRemote) ctx.lookup("java:app/PracticalCaseStudyJEE.jar/UserFacadeBean!ejb.UserFacadeRemote");
 	}
 	
 	
@@ -129,10 +131,6 @@ private static final long serialVersionUID = 1L;
 	{
 		try {
 			
-			Properties props = System.getProperties();
-			Context ctx = new InitialContext(props);
-			
-			userRemote = (UserFacadeRemote) ctx.lookup("java:app/PracticalCaseStudyJEE.jar/UserFacadeBean!ejb.UserFacadeRemote");
 			userRemote.updatePersonalData(nif, name, surname, phone, password, email);
 			
 		} catch (Exception e) {
@@ -140,6 +138,7 @@ private static final long serialVersionUID = 1L;
 		}
 		
 		return "Login.xhtml";
+		
 	}
 	
 }
