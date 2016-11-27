@@ -8,13 +8,10 @@ import javax.persistence.*;
  */
 
 @Entity
-@Table(name="practicalcase.talkedlanguage")
+@Table(name="practicalcase.talkedlanguage",  uniqueConstraints={@UniqueConstraint(columnNames = {"nif", "language"})})
 public class TalkedLanguageJPA implements Serializable{
 
 	private static final long serialVersionUID = 1L;
-
-	@Column(name = "id")
-	private int id;
 
 	@Column(name = "language")
 	private String language;
@@ -34,8 +31,7 @@ public class TalkedLanguageJPA implements Serializable{
 		super();
 	}
 
-	public TalkedLanguageJPA(int id , String language, String level, String description) {
-		this.id = id;
+	public TalkedLanguageJPA(String language, String level, String description) {
 		this.language = language;
 		this.level = level;
 		this.description = description;
@@ -44,15 +40,8 @@ public class TalkedLanguageJPA implements Serializable{
 	/**
 	 * Getters i setters dels camps de la base de dades
 	 */
+
 	@Id
-	public int getId() {
-		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
-	}
-
 	public String getLanguage() {
 		return language;
 	}
@@ -81,6 +70,7 @@ public class TalkedLanguageJPA implements Serializable{
 	 * Methods get/set persistent relationships
 	 * JoinColumn fa referencia a la columna amb la qual realitzem el join.
 	 */
+	@Id
 	@ManyToOne
 	@JoinColumn (name="nif")
 	public UserJPA getUser() {

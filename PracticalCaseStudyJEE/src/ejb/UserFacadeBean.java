@@ -136,14 +136,7 @@ public class UserFacadeBean implements UserFacadeRemote, UserFacade{
 			}
 			else
 			{
-				String strId = String.valueOf(entman.createQuery("SELECT MAX(t.id) FROM TalkedLanguageJPA t").getSingleResult());
-				int MaxId = 0;
-				if (strId != null)
-				{ 
-					// De moment faig el autonumeric per codi. Fins que decidim si fer-lo a la JPA.
-					MaxId = Integer.parseInt(strId) + 1;
-				}
-				TalkedLanguageJPA talkedLanguage = new TalkedLanguageJPA(MaxId, language, level, description); 
+				TalkedLanguageJPA talkedLanguage = new TalkedLanguageJPA(language, level, description); 
 				talkedLanguage.setUser(entman.find(UserJPA.class, nif));
 				entman.persist(talkedLanguage);
 			}
