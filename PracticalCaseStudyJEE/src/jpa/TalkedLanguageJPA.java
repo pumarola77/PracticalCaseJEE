@@ -12,47 +12,47 @@ import javax.persistence.*;
 public class TalkedLanguageJPA implements Serializable{
 
 	private static final long serialVersionUID = 1L;
-	
+
 	@Column(name = "id")
-	private String id;
-	
+	private int id;
+
 	@Column(name = "language")
 	private String language;
-	
+
 	@Column(name = "level")
 	private String level;
-	
+
 	@Column(name = "description")
 	private String description;
-	
+
 	private UserJPA user;
-	
+
 	/**
 	 * Constructor
 	 */
 	public TalkedLanguageJPA() {
 		super();
 	}
-	
-	public TalkedLanguageJPA(String id , String language, String level, String description) {
+
+	public TalkedLanguageJPA(int id , String language, String level, String description) {
 		this.id = id;
 		this.language = language;
 		this.level = level;
 		this.description = description;
 	}
-	
+
 	/**
 	 * Getters i setters dels camps de la base de dades
 	 */
 	@Id
-	public String getId() {
+	public int getId() {
 		return id;
 	}
 
-	public void setId(String id) {
+	public void setId(int id) {
 		this.id = id;
 	}
-		
+
 	public String getLanguage() {
 		return language;
 	}
@@ -76,7 +76,7 @@ public class TalkedLanguageJPA implements Serializable{
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	
+
 	/*
 	 * Methods get/set persistent relationships
 	 * JoinColumn fa referencia a la columna amb la qual realitzem el join.
@@ -86,9 +86,9 @@ public class TalkedLanguageJPA implements Serializable{
 	public UserJPA getUser() {
 		return user;
 	}
-	
+
 	public void setUser(UserJPA user) {
 		this.user = user;
 	}
-	
+
 }

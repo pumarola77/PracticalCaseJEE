@@ -33,10 +33,10 @@
      			<p align="center"><h:outputText value="#{item.description}" /></p>
  			</h:column>
  			<h:column>			
-					<p align="center"><h:commandButton value="Eliminar" action="#{DelLang.delTL(item)}" /></p>		
+					<p align="center"><h:commandButton value="Eliminar" action="#{talkedlanguagedelete.deleteTalkedLanguage(ListTalkedLang.nif, item.language)}" /></p>		
  			</h:column>
  		</h:dataTable>
- 		<h:commandButton value="Afegir Idioma" action="AddTalkedLanguageView.xhtml" />
+ 		<h:commandButton value="Afegir Idioma" action="addTalkedLanguageView.xhtml" />
   	</h:form>
   </h:body>
 </html>
