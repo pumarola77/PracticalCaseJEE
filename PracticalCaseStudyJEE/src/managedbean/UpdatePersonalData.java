@@ -39,18 +39,7 @@ private static final long serialVersionUID = 1L;
 	*/
 	
 	public UpdatePersonalData() throws Exception { 
-		/*	nif = "";
-			name = "";
-			surname = "";
-			phone = "";
-			password = "";
-			email = "";
-			setFindUser();*/
-		/*	Properties props = System.getProperties();
-			Context ctx = new InitialContext(props);
-			userRemote = (UserFacadeRemote) ctx.lookup("java:app/PracticalCaseStudyJEE.jar/UserFacadeBean!ejb.UserFacadeRemote");
-		 */
-		/*	findUser = (UserJPA) userRemote.findUser(nif);*/
+
 	}
 	
 	
@@ -125,14 +114,8 @@ private static final long serialVersionUID = 1L;
 		this.errorFormulari = errorFormulari;
 	}
 	
-	/*public UserJPA getFindUser(){
-		return findUser;
-	}*/
-	
 	public void setFindUser() throws Exception {
-		/*Properties props = System.getProperties();
-		Context ctx = new InitialContext(props);
-		userRemote = (UserFacadeRemote) ctx.lookup("java:app/PracticalCaseStudyJEE.jar/UserFacadeBean!ejb.UserFacadeRemote");*/
+		
 		findUser = (UserJPA) userRemote.findUser(nif);
 
 		setName(findUser.getName());
@@ -157,34 +140,6 @@ private static final long serialVersionUID = 1L;
 		}
 		
 		return "Login.xhtml";
-		
-		//Tenim que cridar als setters aixi perque sino al fer click al boto de la pagina JSP no s'actualitzen els valors d'aquest objecte
-		/*
-		setNif(nif);
-		setName(name);
-		setSurname(surname);
-		setPhone(phone);
-		setPassword(password);
-		setEmail(email);
-		*/
-		
-		//userLocalFacade.updatePersonalData(getNif(), getName(), getSurname(), getPhone(), getPassword(), getEmail());
-		/*Properties props = System.getProperties();
-		Context ctx = new InitialContext(props);
-		userRemote = (UserFacadeRemote) ctx.lookup("java:app/PracticalCaseStudyJEE.jar/UserFacadeBean!ejb.UserFacadeRemote");
-		success = userRemote.updatePersonalData(getNif(), getName(), getSurname(), getPhone(), getPassword(), getEmail());
-		
-		if(success){
-			//S'ha pogut actualitzar les dades. Tornem a fer el Login?
-			return "Login.xhtml";
-		}
-		else{
-			//Esta actualitzant el NIF i no existeix a la bbdd
-			errorFormulari = "ERROR: L'usuari amb nif: "+getNif()+" NO existeix al sistema";
-			return "RegisterUserView.xhtml";
-		}*/
-		
-		//return "Login.xhtml";
 	}
 	
 }

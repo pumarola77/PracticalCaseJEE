@@ -1,15 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:f="http://java.sun.com/jsf/core" xmlns:h="http://java.sun.com/jsf/html">
-
 <h:head>
 	<ui:param name="n" value="#{nif}" />
 	#{UpdateUser.setNif(n)}
 </h:head>
 	<body>
-		<h:panelGroup rendered="#{empty user}">
+		<h:panelGroup rendered="#{empty nif}">
 			<h:form>
 			<table>
 				<tr>
@@ -76,7 +74,8 @@
 			</table>
 			</h:form>
 		</h:panelGroup>
-		<h:panelGroup rendered="#{not empty user}">
+		<h:panelGroup rendered="#{not empty nif}">
+			#{UpdateUser.setFindUser()}
 	 		<h:form>
 			<table>
 				<tr>
@@ -84,7 +83,7 @@
 						Nif:
 					</td>
 					<td>
-						<h:inputText label="Nif" required="true" value="#{UpdateUser.nif}"/>
+						<h:inputText label="Nif" required="true" readonly="true" value="#{UpdateUser.nif}"/>
 					</td>
 				</tr>
 				<tr>
@@ -116,7 +115,7 @@
 						Password:
 					</td>
 					<td>
-						<h:inputSecret label="Password" required="true" value="#{UpdateUser.password}"/>
+						<h:inputText label="Password" required="true" value="#{UpdateUser.password}"/>
 					</td>
 				</tr>
 				<tr>
@@ -128,7 +127,7 @@
 					</td>
 				</tr>
 				<tr>
-				<td><h:commandButton id="BotoUpdate" value="Actualitzar dades" action="#{UpdateUser.updateUsr}" /></td>
+				<td><h:commandButton id="BotoUpdate" value="Actualitzar dades" action="#{UpdateUser.updateUsr(UpdateUser.nif,UpdateUser.name,UpdateUser.surname,UpdateUser.phone,UpdateUser.password,UpdateUser.email)}" /></td>
 				</tr>
 				<tr>
 					<td>

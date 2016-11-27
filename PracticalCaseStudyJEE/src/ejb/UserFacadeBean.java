@@ -68,26 +68,6 @@ public class UserFacadeBean implements UserFacadeRemote, UserFacade{
 
 		entman.persist(user);
 		return true;
-
-
-		/*
-			Query queryNif = entman.createQuery("FROM UserJPA b WHERE b.nif = :nif").setParameter("nif", nif);
-			if (!queryNif.getResultList().isEmpty())
-			{
-				//entman.createQuery("UPDATE UserJPA b SET b.nif = :nif, b.name = :name, b.surname = :surname: b.phone = :phone, b.password = :password, b.email = :email").setParameter("nif", nif).setParameter("name", name).setParameter("surname", surname).setParameter("phone", phone).setParameter("password", password).setParameter("email", email);
-				entman.createQuery("UPDATE UserJPA u SET u.name = :name WHERE u.nif = :nif").setParameter("nif", nif).setParameter("name", name);
-				entman.createQuery("UPDATE UserJPA u SET u.surname = :surname WHERE u.nif = :nif").setParameter("nif", nif).setParameter("surname", surname);
-				entman.createQuery("UPDATE UserJPA u SET u.phone = :phone WHERE u.nif = :nif").setParameter("nif", nif).setParameter("phone", phone);
-				entman.createQuery("UPDATE UserJPA u SET u.password = :password WHERE u.nif = :nif").setParameter("nif", nif).setParameter("password", password);
-				entman.createQuery("UPDATE UserJPA u SET u.email = :email WHERE u.nif = :nif").setParameter("nif", nif).setParameter("email", email);
-				return true;				
-			}
-			else
-			{
-				return false;
-			}*/
-
-		/*return false;*/
 	}	
 
 	/*
