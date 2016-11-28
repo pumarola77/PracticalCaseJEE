@@ -24,17 +24,17 @@ public class ListAllTalkedLanguages implements Serializable{
 	@EJB
 	private UserFacadeRemote userRemote;
 	
-	public ListAllTalkedLanguages() throws Exception
+	public ListAllTalkedLanguages() 
 	{
 		nif ="";
+	}
+	
+	public Collection<TalkedLanguageJPA> getLanguageList() throws Exception
+	{
+		//languageList = userLocalFacade.listAllTalkedLanguages("00000000X");
 		Properties props = System.getProperties();
 		Context ctx = new InitialContext(props);
 		userRemote = (UserFacadeRemote) ctx.lookup("java:app/PracticalCaseStudyJEE.jar/UserFacadeBean!ejb.UserFacadeRemote");
-	}
-	
-	public Collection<TalkedLanguageJPA> getLanguageList()
-	{
-		//languageList = userLocalFacade.listAllTalkedLanguages("00000000X");
 		languageList = userRemote.listAllTalkedLanguages(getNif());
 		return languageList;
 	}
