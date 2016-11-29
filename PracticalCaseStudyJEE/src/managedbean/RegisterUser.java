@@ -122,8 +122,9 @@ public class RegisterUser implements Serializable{
 	}
 	
 	/*Metode per registrar un usuari al sistema*/
-	public String addUsr() throws Exception
+	public String addUsr(String nif, String name, String surname, String phone, String password, String email) throws Exception	
 	{		
+		/* DESACTIVAT ELS VALORS ES PASSEN DES DEL FACELET -> VISTA
 		//Tenim que cridar als setters aixi perque sino al fer click al boto de la pagina JSP no s'actualitzen els valors d'aquest objecte
 		setNif(nif);
 		setName(name);
@@ -132,11 +133,13 @@ public class RegisterUser implements Serializable{
 		setPassword(password);
 		setEmail(email);
 		//userLocalFacade.registerUser(getNif(), getName(), getSurname(), getPhone(), getPassword(), getEmail());
+		*/
 		
 		Properties props = System.getProperties();
 		Context ctx = new InitialContext(props);
 		userRemote = (UserFacadeRemote) ctx.lookup("java:app/PracticalCaseStudyJEE.jar/UserFacadeBean!ejb.UserFacadeRemote");
-		success = userRemote.registerUser(getNif(), getName(), getSurname(), getPhone(), getPassword(), getEmail());
+		//success = userRemote.registerUser(getNif(), getName(), getSurname(), getPhone(), getPassword(), getEmail());
+		success = userRemote.registerUser(nif, name, surname, phone, password, email);
 		
 		/*Si el registre de l'usuari no es pot realitzar es perque el DNI o l'email ja esta introduit a la base de dades, per tant es mostra error*/
 		if (success==1) /*El codi d'error 1 indica que el dni ja existeix a la base de dades*/

@@ -18,7 +18,7 @@ public class ListAllTalkedLanguages implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 
-	protected String nif;
+	private String nif; // Havia protected
 	protected Collection<TalkedLanguageJPA> languageList;
 	
 	@EJB
@@ -26,7 +26,7 @@ public class ListAllTalkedLanguages implements Serializable{
 	
 	public ListAllTalkedLanguages() 
 	{
-		nif ="";
+		this.setNif(FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("nif").toString());
 	}
 	
 	public Collection<TalkedLanguageJPA> getLanguageList() throws Exception
@@ -35,7 +35,8 @@ public class ListAllTalkedLanguages implements Serializable{
 		Properties props = System.getProperties();
 		Context ctx = new InitialContext(props);
 		userRemote = (UserFacadeRemote) ctx.lookup("java:app/PracticalCaseStudyJEE.jar/UserFacadeBean!ejb.UserFacadeRemote");
-		languageList = userRemote.listAllTalkedLanguages(getNif());
+		
+		languageList = userRemote.listAllTalkedLanguages(this.getNif());
 		return languageList;
 	}
 	

@@ -12,15 +12,15 @@
 	<h:form>
 		<h:panelGrid columns="2" bgcolor="#EFF5FA">
 		    <h:outputLabel value="Email"/>
-			<h:inputText id="email" value="#{Login.email}"/>
+			<h:inputText id="email" value="#{LoginBean.email}"/>
 			<h:outputLabel value="Password"/>			
-			<h:inputSecret id="password" value="#{Login.password}" redisplay="true"/>	
+			<h:inputSecret id="password" value="#{LoginBean.password}" redisplay="true"/>	
 		</h:panelGrid>
 		<h:commandButton value="Login" 
-			action="#{Login.login(Login.email,Login.password)}"/>
+			action="#{LoginBean.validarUsuari(LoginBean.email,LoginBean.password)}"/>
 		<h:commandLink value="Registre" action="#{AddUser.mainWindow()}"></h:commandLink>
 	</h:form>
-	<h:outputText value="#{Login.errorPassword}" style="color:red"></h:outputText>
+	<h:outputText value="#{LoginBean.errorPassword}" style="color:red"></h:outputText>
 </h:body>
 
 </html>

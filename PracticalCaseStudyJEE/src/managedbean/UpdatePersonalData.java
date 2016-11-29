@@ -42,6 +42,13 @@ private static final long serialVersionUID = 1L;
 		Properties props = System.getProperties();
 		Context ctx = new InitialContext(props);
 		userRemote = (UserFacadeRemote) ctx.lookup("java:app/PracticalCaseStudyJEE.jar/UserFacadeBean!ejb.UserFacadeRemote");
+		
+		if ( FacesContext.getCurrentInstance().getExternalContext().getSessionMap().containsKey("nif") == true) {
+			this.setNif(FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("nif").toString());
+									
+			//Actualita getters / setters
+			setFindUser();
+		}
 	}
 	
 	
@@ -118,13 +125,13 @@ private static final long serialVersionUID = 1L;
 	
 	public void setFindUser() throws Exception {
 		
-		findUser = (UserJPA) userRemote.findUser(nif);
+		findUser = (UserJPA) userRemote.findUser(this.nif);
 
-		setName(findUser.getName());
-		setSurname(findUser.getSurname());
-		setPhone(findUser.getPhone());
-		setPassword(findUser.getPassword());
-		setEmail(findUser.getEmail());
+		this.setName(findUser.getName());
+		this.setSurname(findUser.getSurname());
+		this.setPhone(findUser.getPhone());
+		this.setPassword(findUser.getPassword());
+		this.setEmail(findUser.getEmail());
 	}
 	
 	public String updateUsr(String nif, String name , String surname, String phone, String password , String email) throws Exception

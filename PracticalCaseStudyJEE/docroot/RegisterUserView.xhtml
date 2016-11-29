@@ -3,11 +3,10 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:f="http://java.sun.com/jsf/core" xmlns:h="http://java.sun.com/jsf/html">
 <h:head>
-	<ui:param name="n" value="#{nif}" />
-	#{UpdateUser.setNif(n)}
+
 </h:head>
 	<body>
-		<h:panelGroup rendered="#{empty nif}">
+		<h:panelGroup rendered="#{empty AddUser.nif and empty UpdateUser.nif}">
 			<h:form>
 			<table>
 				<tr>
@@ -59,7 +58,10 @@
 					</td>
 				</tr>
 				<tr>
-				<td><h:commandButton id="BotoRegistre" value="Registrar Usuari" action="#{AddUser.addUsr}" /></td>
+				<td>
+				<h:commandButton id="BotoRegistre" value="Registrar Usuari" action="#{AddUser.addUsr(AddUser.nif,AddUser.name,AddUser.surname,AddUser.phone,AddUser.password,AddUser.email)}" />
+				<h:commandButton id="Logout" value="Logout" action="#{LoginBean.logout()}" />
+				</td>
 				</tr>
 				<tr>
 					<td>
@@ -74,13 +76,13 @@
 			</table>
 			</h:form>
 		</h:panelGroup>
-		<h:panelGroup rendered="#{not empty nif}">
-			#{UpdateUser.setFindUser()}
+		<h:panelGroup rendered="#{not empty UpdateUser.nif}">
+			
 	 		<h:form>
 			<table>
 				<tr>
 					<td>
-						Nif:
+						Nif (Update):
 					</td>
 					<td>
 						<h:inputText label="Nif" required="true" readonly="true" value="#{UpdateUser.nif}"/>

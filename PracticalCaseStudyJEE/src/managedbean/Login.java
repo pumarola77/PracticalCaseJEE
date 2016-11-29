@@ -12,7 +12,7 @@ import javax.naming.InitialContext;
 
 import ejb.UserFacadeRemote;
 
-@ManagedBean(name = "Login")
+@ManagedBean(name = "LoginBean")
 @RequestScoped
 public class Login {
 	
@@ -27,9 +27,11 @@ public class Login {
 	private UserFacadeRemote userRemote;
 	
 	//Constructor MBean
-	//public Login() {
-		
-	//}
+	public Login() {	
+		//Refresca les variables de Sessio
+		FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
+		FacesContext.getCurrentInstance().getExternalContext().getInitParameterMap();
+	}
 	
 	
 	/* Definicio dels getter i Setters */
@@ -57,9 +59,17 @@ public class Login {
 		this.errorPassword = errorPassword;
 	}
 	
-		
+	// Get / Setter del Nif
+	public String getNif() {
+		return nif;
+	}
+	
+	public void setNif(String nif) {
+		this.nif = nif;
+	}	
+	
 	/* Metode per Verificar el Login Usuari */
-	public String login(String email, String pwd) {
+	public String validarUsuari(String email, String pwd) {
 		try {
 			Properties props = System.getProperties();
 			Context ctx = new InitialContext(props);
@@ -85,12 +95,14 @@ public class Login {
 				//Buscar el nif corresponent al nif del registre seleccionat
 				
 				context.getExternalContext().getSessionMap().put("nif", nif);
+				this.setNif(nif);
 				errorPassword = "";
 				
 				// Hauria de Retornar la vista per entrar al menu
 				return "HomeView";
 			} else {
 				context.getExternalContext().invalidateSession();
+				FacesContext.getCurrentInstance().getExternalContext().getInitParameterMap();
 				errorPassword = "Usuari No existeix o passowrd incorrecte";
 				return "Login"; 				
 			}
@@ -103,6 +115,7 @@ public class Login {
 	
 	public String logout() {
 		FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
+		FacesContext.getCurrentInstance().getExternalContext().getInitParameterMap();
 		return "Login";
 	}
 	
