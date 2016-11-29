@@ -6,6 +6,11 @@
 <body>
 	<h1>HOME</h1>
 	<br />
+	
+	<h:form>
+		<h:commandButton id="Logout" value="Logout" action="#{LoginBean.logout()}" />
+	</h:form>
+	
 	<ul>
 		<li>
 			<h:link	value="Actualitzar dades del usuari (UpdatePersonalData)" outcome="RegisterUserView">

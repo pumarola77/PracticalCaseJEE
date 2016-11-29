@@ -60,7 +60,7 @@
 				<tr>
 				<td>
 				<h:commandButton id="BotoRegistre" value="Registrar Usuari" action="#{AddUser.addUsr(AddUser.nif,AddUser.name,AddUser.surname,AddUser.phone,AddUser.password,AddUser.email)}" />
-				<h:commandButton id="Logout" value="Logout" action="#{LoginBean.logout()}" />
+				<h:commandButton id="Logout" value="Logout" action="#{LoginBean.logout()}" immediate="true" />
 				</td>
 				</tr>
 				<tr>
@@ -130,6 +130,7 @@
 				</tr>
 				<tr>
 				<td><h:commandButton id="BotoUpdate" value="Actualitzar dades" action="#{UpdateUser.updateUsr(UpdateUser.nif,UpdateUser.name,UpdateUser.surname,UpdateUser.phone,UpdateUser.password,UpdateUser.email)}" /></td>
+				<td><h:commandButton id="Home" value="Home ( Principal )" action="#{UpdateUser.Home}" immediate="true"/></td>
 				</tr>
 				<tr>
 					<td>

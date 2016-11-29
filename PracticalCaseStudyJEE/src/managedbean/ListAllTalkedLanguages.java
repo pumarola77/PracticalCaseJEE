@@ -26,11 +26,13 @@ public class ListAllTalkedLanguages implements Serializable{
 	
 	public ListAllTalkedLanguages() 
 	{
-		this.setNif(FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("nif").toString());
 	}
 	
 	public Collection<TalkedLanguageJPA> getLanguageList() throws Exception
 	{
+		
+		this.setNif(FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("nif").toString());	
+		
 		//languageList = userLocalFacade.listAllTalkedLanguages("00000000X");
 		Properties props = System.getProperties();
 		Context ctx = new InitialContext(props);

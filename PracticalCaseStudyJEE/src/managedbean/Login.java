@@ -74,7 +74,9 @@ public class Login {
 			Properties props = System.getProperties();
 			Context ctx = new InitialContext(props);
 			FacesContext context = FacesContext.getCurrentInstance();
-						
+				
+			/* Es controla a la vista */
+			/*
 			if ( email.isEmpty()) {
 				errorPassword = "Falta Indicar Codi Acces";
 				return "Login";
@@ -84,6 +86,7 @@ public class Login {
 				errorPassword = "Falta Indicar Clau Acces";
 				return "Login";				
 			}
+			*/
 			
 			userRemote = (UserFacadeRemote) ctx.lookup("java:app/PracticalCaseStudyJEE.jar/UserFacadeBean!ejb.UserFacadeRemote");
 			nif = userRemote.login(email, pwd);

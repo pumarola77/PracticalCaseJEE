@@ -51,6 +51,9 @@ private static final long serialVersionUID = 1L;
 		}
 	}
 	
+	public String Home() {
+		return "HomeView";
+	}
 	
 	/*Definim els getters i setters per a que desde les pagines JSP es pugui accedir als atributs idioma i nivell*/
 	public String getNif()
