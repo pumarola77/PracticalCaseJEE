@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html">
+
+<h:body>
+	<h:form id="userForm">
+		<div align="center">
+			<table border="1" width="50%" id="table1">
+				<tr>
+					<td>
+						<p align="right" /> <i><b><font size="4" face="Century">NIF:</font></b></i>
+					</td>
+					<td>
+						<p align="left" />&nbsp;<h:inputText id="nif"
+							value="#{ListLanguageToTalk.nif}" />
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<p align="right" /> <i><b><font size="4" face="Century">Language:</font></b></i>
+					</td>
+					<td>
+						<p align="left" />&nbsp;<h:inputText id="language" value="" />
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<p align="right" /> <i><b><font size="4" face="Century">Level:</font></b></i>
+					</td>
+					<td>
+						<p align="left" />&nbsp;<h:inputText id="level" value="" />
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<p align="right" /> <i><b><font size="4" face="Century">Description:</font></b></i>
+					</td>
+					<td>
+						<p align="left" />&nbsp;<h:inputText id="description" value="" />
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<p align="right" /> <i><b><font size="4" face="Century">Accept
+									Pay:</font></b></i>
+					</td>
+					<td>
+						<p align="left" />&nbsp;<h:selectBooleanCheckbox id="acceptPay"
+							value="acceptPay" />
+					</td>
+				</tr>
+				<tr>
+					<td colspan="2">
+						<p align="center">
+							<h:commandButton value="Confirm" immediate="true"
+								action="#{languagetotalkadd.addLanguageToTalk}" />
+						</p>
+					</td>
+				</tr>
+			</table>
+		</div>
+		<p align="center">
+			<h:commandLink value="Return" immediate="true"
+				action="LanguagesToTalkListView" />
+		</p>
+	</h:form>
+</h:body>
+</html>
