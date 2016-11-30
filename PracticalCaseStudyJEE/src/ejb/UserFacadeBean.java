@@ -209,4 +209,15 @@ public class UserFacadeBean implements UserFacadeRemote, UserFacade{
 		} 
 	}
 
+	/*
+	 * Metode que llista els llenguatges que vol parlar un usuari en concret
+	 * */
+	@Override
+	public Collection<LanguageToTalkJPA> listAllLanguagesToTalk(String nif) 
+	{
+		@SuppressWarnings("unchecked")
+		Collection<LanguageToTalkJPA> allLanguagesToTalk = entman.createQuery("FROM LanguageToTalkJPA a WHERE a.user.nif = :nif").setParameter("nif",nif).getResultList();
+		return allLanguagesToTalk;
+	}
+
 }

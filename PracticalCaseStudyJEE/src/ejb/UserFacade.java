@@ -7,6 +7,8 @@ import jpa.TalkedLanguageJPA;
 
 import jpa.UserJPA;
 
+import jpa.LanguageToTalkJPA;
+
 @Local
 public interface UserFacade {
 	/*
@@ -22,4 +24,5 @@ public interface UserFacade {
 	public void deleteTalkedLanguage(String nif, String language);
 	public void addLanguageToTalk(String nif, String language, String level, String description, boolean acceptPay);
 	public void deleteLanguageToTalk(String nif, String language);
+	public Collection<LanguageToTalkJPA> listAllLanguagesToTalk(String nif);
 }

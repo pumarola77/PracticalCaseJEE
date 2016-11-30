@@ -13,14 +13,14 @@
   		</h:link>
   	</h:form>
   	<h:form>	
-		<h:commandLink action="#{ListTalkedLang.previousScreen}" value="Anterior" />
+		<h:commandLink action="#{ListLangToTalk.previousScreen}" value="Anterior" />
 		<h:outputText value="   " />
-		<h:commandLink action="#{ListTalkedLang.nextScreen}" value="Següent" />		
+		<h:commandLink action="#{ListLangToTalk.nextScreen}" value="Següent" />		
 	</h:form>
   	<h:form>  		
-  		<h:dataTable value="#{ListTalkedLang.languageListView}" var="item" bgcolor="#F1F1F1" border="10" first="0" width="50%" frame="hsides" rules="all"  >
+  		<h:dataTable value="#{ListLangToTalk.languageToTalkListView}" var="item" bgcolor="#F1F1F1" border="10" first="0" width="50%" frame="hsides" rules="all"  >
  			<f:facet name="header">			
-  				<h:outputText align="center" value="Llista d'idiomes de l'usuari #{ListTalkedLang.nif}" />		
+  				<h:outputText align="center" value="Llista d'idiomes de l'usuari #{ListLangToTalk.nif}" />		
   			</f:facet> 
  			<h:column>
    				<f:facet name="header">
@@ -40,11 +40,18 @@
    				</f:facet> 
      			<p align="center"><h:outputText value="#{item.description}" /></p>
  			</h:column>
+ 			<h:column>
+   				<f:facet name="header">
+   					<h:outputText value="Acceptació de pagament"/>
+   				</f:facet> 
+     			<p align="center"><h:outputText value="#{item.acceptPay==true? 'Si' : 'No'}" /></p>
+ 			</h:column>
+
  			<h:column>			
-					<p align="center"><h:commandButton value="Eliminar" action="#{talkedlanguagedelete.deleteTalkedLanguage(ListTalkedLang.nif, item.language)}" /></p>		
+					<p align="center"><h:commandButton value="Eliminar" action="#{languagetotalkdelete.deleteLanguageToTalk(ListLangToTalk.nif, item.language)}" /></p>		
  			</h:column>
  		</h:dataTable>
- 		<h:commandButton value="Afegir Idioma" action="addTalkedLanguageView.xhtml" />
+ 		<h:commandButton value="Afegir Idioma" action="addLanguageToTalkView.xhtml" />
   	</h:form>
   </h:body>
 </html>

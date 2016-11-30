@@ -9,23 +9,23 @@ import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.faces.context.FacesContext;
 import ejb.UserFacadeRemote;
-import jpa.PetJPA;
 //import ejb.UserFacade;
+import jpa.LanguageToTalkJPA;
 import jpa.TalkedLanguageJPA;
 
-@ManagedBean(name = "ListTalkedLang")
+@ManagedBean(name = "ListLangToTalk")
 @SessionScoped
-public class ListAllTalkedLanguages implements Serializable{
+public class ListAllLanguagesToTalk implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 
-	private String nif; // Havia protected
+	private String nif; 
 	
-	/*Aquesta variable contindra el llistat complert de llenguatges de l'usuari*/
-	private Collection<TalkedLanguageJPA> languageFullList;
+	/*Aquesta variable contindra el llistat complert de llenguatges que vol parlarl'usuari*/
+	private Collection<LanguageToTalkJPA> languageToTalkFullList;
 	
 	/*Aquesta variable contindra els 10 idiomes o menys que es mostren actualment per pantalla*/
-	protected Collection<TalkedLanguageJPA> languageListView;
+	protected Collection<LanguageToTalkJPA> languageToTalkListView;
 	
 	/*Aquesta variable fa de contador per saber quin punt de la llista d'idiomes esta veient l'usuari*/
 	private int screen;
@@ -33,13 +33,12 @@ public class ListAllTalkedLanguages implements Serializable{
 	@EJB
 	private UserFacadeRemote userRemote;
 	
-	public ListAllTalkedLanguages() 
+	public ListAllLanguagesToTalk()
 	{
 		screen=0;
 	}
 	
-	/*Aquest metode s'utilitza per carregar el llistat complert d'idiomes de l'usuari*/
-	private void loadLanguageList() throws Exception
+	private void loadLanguageToTalkList() throws Exception
 	{
 		
 		this.setNif(FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("nif").toString());	
@@ -49,36 +48,36 @@ public class ListAllTalkedLanguages implements Serializable{
 		Context ctx = new InitialContext(props);
 		userRemote = (UserFacadeRemote) ctx.lookup("java:app/PracticalCaseStudyJEE.jar/UserFacadeBean!ejb.UserFacadeRemote");
 		
-		languageFullList = userRemote.listAllTalkedLanguages(this.getNif());
+		languageToTalkFullList = userRemote.listAllLanguagesToTalk(this.getNif());
 		
 	}
 	
 	/*Aquest metode es el que s'accedeix desde la vista i s'utilitza per carregar el llistat d'idiomes reduit que s'ha de mostrar*/
-	public Collection<TalkedLanguageJPA> getLanguageListView() throws Exception{
+	public Collection<LanguageToTalkJPA> getLanguageToTalkListView() throws Exception{
 		
 		int n=0;
-		this.loadLanguageList();
+		this.loadLanguageToTalkList();
 		
-		languageListView = new ArrayList<TalkedLanguageJPA>();
+		languageToTalkListView = new ArrayList<LanguageToTalkJPA>();
 		
-		Iterator<TalkedLanguageJPA> iter = languageFullList.iterator();
+		Iterator<LanguageToTalkJPA> iter = languageToTalkFullList.iterator();
 		
 		while(iter.hasNext())
 		{
-			TalkedLanguageJPA aux = (TalkedLanguageJPA) iter.next();
+			LanguageToTalkJPA aux = (LanguageToTalkJPA) iter.next();
 			
 			if (n>= screen*10 && n< (screen*10+10))
 			{
-				this.languageListView.add(aux);
+				this.languageToTalkListView.add(aux);
 			}
 			n=n+1;
 		}
-		return languageListView;
+		return languageToTalkListView;
 	}
 	
 	public void nextScreen()
 	{
-		if (((screen+1)*10 < languageFullList.size()))
+		if (((screen+1)*10 < languageToTalkFullList.size()))
 		{
 			screen +=1;
 		}
