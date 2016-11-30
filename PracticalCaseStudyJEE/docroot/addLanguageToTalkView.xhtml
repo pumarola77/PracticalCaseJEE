@@ -21,7 +21,7 @@
 				</tr>
 				<tr>
 					<td>
-						<p align="right" /> <i><b><font size="4" face="Century">Language:</font></b></i>
+						<p align="right" /> <i><b><font size="4" face="Century">Idioma:</font></b></i>
 					</td>
 					<td>
 						<p align="left" />&nbsp;<h:inputText id="language" value="" />
@@ -29,15 +29,19 @@
 				</tr>
 				<tr>
 					<td>
-						<p align="right" /> <i><b><font size="4" face="Century">Level:</font></b></i>
+						<p align="right" /> <i><b><font size="4" face="Century">Nivell:</font></b></i>
 					</td>
 					<td>
-						<p align="left" />&nbsp;<h:inputText id="level" value="" />
+						<p align="left" />&nbsp;<h:selectOneMenu id="level" value="Mitjà">
+							<f:selectItem itemValue="Alt" itemLabel="Alt" />
+							<f:selectItem itemValue="Mitjà" itemLabel="Mitjà" />
+							<f:selectItem itemValue="Baix" itemLabel="Baix" />
+						</h:selectOneMenu>
 					</td>
 				</tr>
 				<tr>
 					<td>
-						<p align="right" /> <i><b><font size="4" face="Century">Description:</font></b></i>
+						<p align="right" /> <i><b><font size="4" face="Century">Descripció:</font></b></i>
 					</td>
 					<td>
 						<p align="left" />&nbsp;<h:inputText id="description" value="" />
@@ -45,8 +49,8 @@
 				</tr>
 				<tr>
 					<td>
-						<p align="right" /> <i><b><font size="4" face="Century">Accept
-									Pay:</font></b></i>
+						<p align="right" /> <i><b><font size="4" face="Century">Accepta
+									Pagament:</font></b></i>
 					</td>
 					<td>
 						<p align="left" />&nbsp;<h:selectBooleanCheckbox id="acceptPay"
@@ -56,17 +60,16 @@
 				<tr>
 					<td colspan="2">
 						<p align="center">
-							<h:commandButton value="Confirm" immediate="true"
+							<h:commandButton value="Actualitzar dades" immediate="true"
 								action="#{languagetotalkadd.addLanguageToTalk}" />
+							&nbsp;&nbsp;
+							<h:commandButton value="Tornar a la llista" immediate="true"
+								action="LanguagesToTalkListView" />
 						</p>
 					</td>
 				</tr>
 			</table>
 		</div>
-		<p align="center">
-			<h:commandLink value="Return" immediate="true"
-				action="LanguagesToTalkListView" />
-		</p>
 	</h:form>
 </h:body>
 </html>
