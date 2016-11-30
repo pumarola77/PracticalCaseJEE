@@ -18,6 +18,12 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
 		<param-name>javax.faces.FACELETS_SKIP_COMMENTS</param-name>
 		<param-value>true</param-value>
 	</context-param>
+	
+	<context-param>
+		<description>Espais en blanc els considere null</description>
+		<param-name>javax.faces.INTERPRET_EMPTY_STRING_SUBMITTED_VALUES_AS_NULL</param-name>
+		<param-value>true</param-value>
+	</context-param>
 
 	<servlet>
 		<servlet-name>Faces Servlet</servlet-name>

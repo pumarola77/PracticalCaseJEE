@@ -10,11 +10,13 @@
 
 <h:body>
 	<h:form>
-		<h:panelGrid columns="2" bgcolor="#EFF5FA">
+		<h:panelGrid columns="3" bgcolor="#EFF5FA">
 		    <h:outputLabel value="Email"/>
-			<h:inputText id="email" value="#{LoginBean.email}" required="true"/>
+			<h:inputText id="email" value="#{LoginBean.email}" required="true" requiredMessage="Email és necessari" />
+			<h:message for="email" style="color:red"></h:message>
 			<h:outputLabel value="Password"/>			
-			<h:inputSecret id="password" value="#{LoginBean.password}" required="true" redisplay="true"/>	
+			<h:inputSecret id="password" value="#{LoginBean.password}" required="true" requiredMessage="Password és necessari" redisplay="true"/>	
+			<h:message for="password" style="color:red"></h:message>
 		</h:panelGrid>
 		<h:commandButton value="Login" 
 			action="#{LoginBean.validarUsuari(LoginBean.email,LoginBean.password)}"/>
