@@ -5,7 +5,6 @@ import java.sql.Date;
 import java.sql.Time;
 
 import javax.persistence.*;
-import javax.xml.stream.Location;
 
 
 
@@ -24,10 +23,7 @@ public class TalkAppointmentJPA implements Serializable{
 	
 	@Column(name = "descrption")
 	private String description;
-	
-	@Column(name = "location")
-	private String location;
-	
+		
 	@Column(name = "date")
 	private Date date;
 	
@@ -39,15 +35,15 @@ public class TalkAppointmentJPA implements Serializable{
 	
 	private UserJPA userPublish;
 	private UserJPA userSign;
-
+	private LocationJPA location;
+	
 	public TalkAppointmentJPA() {
 		super();
 	}
 	
-	public TalkAppointmentJPA(int id, String description, String location, Date date, Time time, TalkStatus status) {
+	public TalkAppointmentJPA(int id, String description, Date date, Time time, TalkStatus status) {
 		this.id = id;
 		this.description = description;
-		this.location = location;
 		this.date = date;
 		this.time = time;
 		this.status = status;
@@ -71,14 +67,6 @@ public class TalkAppointmentJPA implements Serializable{
 
 	public void setDescription(String description) {
 		this.description = description;
-	}
-
-	public String getLocation() {
-		return location;
-	}
-
-	public void setLocation(String location) {
-		this.location = location;
 	}
 
 	public Date getDate() {
@@ -127,6 +115,16 @@ public class TalkAppointmentJPA implements Serializable{
 
 	public void setUserSign(UserJPA userSign) {
 		this.userPublish = userSign;
+	}
+	
+	@ManyToOne
+	@JoinColumn (name="location")
+	public LocationJPA getLocation() {
+		return location;
+	}
+	
+	public void setLocation(LocationJPA location){
+		this.location = location;
 	}
 	
 }
