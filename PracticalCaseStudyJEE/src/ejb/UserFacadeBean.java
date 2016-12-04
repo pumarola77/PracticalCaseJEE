@@ -11,7 +11,6 @@ import javax.persistence.Query;
 import ejb.UserFacadeRemote;
 import ejb.UserFacade;
 import jpa.LanguageToTalkJPA;
-import jpa.PetJPA;
 import jpa.TalkedLanguageJPA;
 import jpa.UserJPA;
 
