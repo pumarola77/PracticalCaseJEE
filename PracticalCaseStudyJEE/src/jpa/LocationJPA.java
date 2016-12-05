@@ -86,4 +86,7 @@ public class LocationJPA implements Serializable {
 		this.city = city;
 	}
 
+	public String toString(){
+		return getStreet() + ", " + getNum() + " " + getCp() + " " + getCity();
+	}
 }
