@@ -12,10 +12,14 @@
 	<h:form>
 		<h:panelGrid columns="3" bgcolor="#EFF5FA">
 		    <h:outputLabel value="Email"/>
-			<h:inputText id="email" value="#{LoginBean.email}" required="true" requiredMessage="Email és necessari" />
+			<h:inputText id="email" value="#{LoginBean.email}" required="true" requiredMessage="Email és necessari">
+				<f:validator validatorId="EmailValidator"></f:validator>
+			</h:inputText>
 			<h:message for="email" style="color:red"></h:message>
 			<h:outputLabel value="Password"/>			
-			<h:inputSecret id="password" value="#{LoginBean.password}" required="true" requiredMessage="Password és necessari" redisplay="true"/>	
+			<h:inputSecret id="password" value="#{LoginBean.password}" required="true" requiredMessage="Password és necessari" redisplay="true">
+				<f:validator validatorId="PasswordValidator"></f:validator>
+			</h:inputSecret>	
 			<h:message for="password" style="color:red"></h:message>
 		</h:panelGrid>
 		<h:commandButton value="Login" 

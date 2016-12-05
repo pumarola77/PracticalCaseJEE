@@ -15,6 +15,7 @@
 					</td>
 					<td>
 						<h:inputText id="nif" label="Nif" required="true" requiredMessage="Camp Obligatori" value="#{AddUser.nif}">
+							<f:validator validatorId="NIFValidator"></f:validator>
 						</h:inputText>
 					</td>
 					<td>
@@ -26,7 +27,9 @@
 						Name:
 					</td>
 					<td>
-						<h:inputText id="name" label="Name" required="true" requiredMessage="Camp Obligatori" value="#{AddUser.name}"/>
+						<h:inputText id="name" label="Name" required="true" requiredMessage="Camp Obligatori" value="#{AddUser.name}">
+							<f:validator validatorId="ControlValorValidator"></f:validator>
+						</h:inputText>
 					</td>
 					<td>
 						<h:message for="name" style="color:red"></h:message>
@@ -37,7 +40,9 @@
 						Surname:
 					</td>
 					<td>
-						<h:inputText id="surname" label="Surname" required="true" requiredMessage="Camp Obligatori" value="#{AddUser.surname}"/>
+						<h:inputText id="surname" label="Surname" required="true" requiredMessage="Camp Obligatori" value="#{AddUser.surname}">
+							<f:validator validatorId="ControlValorValidator"></f:validator>
+						</h:inputText>
 					</td>
 					<td>
 						<h:message for="surname" style="color:red"></h:message>
@@ -48,7 +53,9 @@
 						Phone:
 					</td>
 					<td>
-						<h:inputText id="phone" label="Phone" required="true" requiredMessage="Camp Obligatori" value="#{AddUser.phone}"/>
+						<h:inputText id="phone" label="Phone" required="true" requiredMessage="Camp Obligatori" value="#{AddUser.phone}">
+							<f:validator validatorId="PhoneValidator"></f:validator>
+						</h:inputText>
 					</td>
 					<td>
 						<h:message for="phone" style="color:red"></h:message>
@@ -59,7 +66,9 @@
 						Password:
 					</td>
 					<td>
-						<h:inputSecret id="password" label="Password" required="true" requiredMessage="Camp Obligatori" value="#{AddUser.password}"/>
+						<h:inputSecret id="password" label="Password" redisplay="true" required="true" requiredMessage="Camp Obligatori" value="#{AddUser.password}">
+							<f:validator validatorId="PasswordValidator"></f:validator>
+						</h:inputSecret>
 					</td>
 					<td>
 						<h:message for="password" style="color:red"></h:message>
@@ -70,7 +79,9 @@
 						Email:
 					</td>
 					<td>
-						<h:inputText id="email" label="Email" required="true" requiredMessage="Camp Obligatori" value="#{AddUser.email}"/>
+						<h:inputText id="email" label="Email" required="true" requiredMessage="Camp Obligatori" value="#{AddUser.email}">
+							<f:validator validatorId="EmailValidator"></f:validator>
+						</h:inputText>
 					</td>
 					<td>
 						<h:message for="email" style="color:red"></h:message>
@@ -115,7 +126,9 @@
 						Name:
 					</td>
 					<td>
-						<h:inputText id="name" label="Name" required="true" requiredMessage="Camp Obligatori" value="#{UpdateUser.name}"/>
+						<h:inputText id="name" label="Name" required="true" requiredMessage="Camp Obligatori" value="#{UpdateUser.name}">
+							<f:validator validatorId="ControlValorValidator"></f:validator>
+						</h:inputText>
 					</td>
 					<td>
 						<h:message for="name" style="color:red"></h:message>
@@ -126,7 +139,9 @@
 						Surname:
 					</td>
 					<td>
-						<h:inputText id="surname" label="Surname" required="true" requiredMessage="Camp Obligatori" value="#{UpdateUser.surname}"/>
+						<h:inputText id="surname" label="Surname" required="true" requiredMessage="Camp Obligatori" value="#{UpdateUser.surname}">
+							<f:validator validatorId="ControlValorValidator"></f:validator>
+						</h:inputText>
 					</td>
 					<td>
 						<h:message for="surname" style="color:red"></h:message>
@@ -138,7 +153,9 @@
 						Phone:
 					</td>
 					<td>
-						<h:inputText id="phone" label="Phone" required="true" requiredMessage="Camp Obligatori" value="#{UpdateUser.phone}"/>
+						<h:inputText id="phone" label="Phone" required="true" requiredMessage="Camp Obligatori" value="#{UpdateUser.phone}">
+							<f:validator validatorId="PhoneValidator"></f:validator>
+						</h:inputText>
 					</td>
 					<td>
 						<h:message for="phone" style="color:red"></h:message>
@@ -150,7 +167,9 @@
 						Password:
 					</td>
 					<td>
-						<h:inputText id="password" label="Password" required="true" requiredMessage="Camp Obligatori" value="#{UpdateUser.password}"/>
+						<h:inputText id="password" label="Password" required="true" requiredMessage="Camp Obligatori" redisplay="true" value="#{UpdateUser.password}">
+							<f:validator validatorId="PasswordValidator"></f:validator>
+						</h:inputText>
 					</td>
 					<td>
 						<h:message for="password" style="color:red"></h:message>
@@ -162,7 +181,9 @@
 						Email:
 					</td>
 					<td>
-						<h:inputText id="email" label="Email" required="true" requiredMessage="Camp Obligatori" value="#{UpdateUser.email}"/>
+						<h:inputText id="email" label="Email" required="true" requiredMessage="Camp Obligatori" value="#{UpdateUser.email}">
+							<f:validator validatorId="EmailValidator"></f:validator>
+						</h:inputText>
 					</td>
 					<td>
 						<h:message for="email" style="color:red"></h:message>
