@@ -114,7 +114,7 @@ public class TalkAppointmentJPA implements Serializable{
 	}
 
 	public void setUserSign(UserJPA userSign) {
-		this.userPublish = userSign;
+		this.userSign = userSign;
 	}
 	
 	@ManyToOne

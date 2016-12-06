@@ -1,5 +1,7 @@
 package ejb;
 
+import java.util.Collection;
+
 import javax.ejb.Local;
 import javax.persistence.PersistenceException;
 
@@ -13,4 +15,5 @@ public interface TalkAppointmentFacade {
 	public TalkAppointmentJPA showTalkAppointment(int id);
 	public void registerInTalkAppointment(String nif, Integer talkid);
 	public void removeFromTalkAppointment(String nif, Integer talkid);
+	public Collection<TalkAppointmentJPA> findMyTalkAppointments(String nif, boolean isPublisher);
 }

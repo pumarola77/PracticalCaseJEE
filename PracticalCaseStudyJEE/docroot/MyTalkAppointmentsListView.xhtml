@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html">
+
+<h:head>
+</h:head>
+<h:body>
+	<h:form id="talkAppointmentForm" align="left">
+		<h:link value="HomeView ( Principal)" outcome="HomeView" />
+		<p align="right" />
+		<h:commandLink action="#{mytalkappointment.previousPublishScreen}"
+			value="Anterior" />&nbsp;
+		<h:commandLink action="#{mytalkappointment.nextPublishScreen}"
+			value="Següent" />
+		<h:dataTable value="#{mytalkappointment.myTalkAppointmentsPublishListView}"
+			var="item" bgcolor="#F1F1F1" border="10" first="0" width="100%"
+			frame="hsides" rules="all">
+			<f:facet name="header">
+				<h:outputText align="center"
+					value="Llistat de peticions de conversa creades per l'usuari #{mytalkappointment.nif}" />
+			</f:facet>
+			<h:column>
+				<f:facet name="header">
+					<h:outputText value="data" />
+				</f:facet>
+				<p align="center">
+					<h:outputText value="#{item.date}" />
+				</p>
+			</h:column>
+			<h:column>
+				<f:facet name="header">
+					<h:outputText value="descripció" />
+				</f:facet>
+				<p align="center">
+					<h:outputText value="#{item.description}" />
+				</p>
+			</h:column>
+			<h:column>
+				<f:facet name="header">
+					<h:outputText value="localització" />
+				</f:facet>
+				<p align="center">
+					<h:outputText value="#{item.location.city}, #{item.location.street} #{item.location.num}" />
+				</p>
+			</h:column>
+			<h:column>
+				<f:facet name="header">
+					<h:outputText value="estat" />
+				</f:facet>
+				<p align="center">
+					<h:outputText value="#{item.status}" />
+				</p>
+			</h:column>
+		</h:dataTable>
+
+		<p align="right" />
+		<h:commandLink action="#{mytalkappointment.previousSignScreen}"
+			value="Anterior" />&nbsp;
+		<h:commandLink action="#{mytalkappointment.nextSignScreen}"
+			value="Següent" />
+		<h:dataTable value="#{mytalkappointment.myTalkAppointmentsSignListView}"
+			var="item" bgcolor="#F1F1F1" border="10" first="0" width="100%"
+			frame="hsides" rules="all">
+			<f:facet name="header">
+				<h:outputText align="center"
+					value="Llistat de cites a les que s'ha apuntat l'usuari #{mytalkappointment.nif}" />
+			</f:facet>
+			<h:column>
+				<f:facet name="header">
+					<h:outputText value="data" />
+				</f:facet>
+				<p align="center">
+					<h:outputText value="#{item.date}" />
+				</p>
+			</h:column>
+			<h:column>
+				<f:facet name="header">
+					<h:outputText value="descripció" />
+				</f:facet>
+				<p align="center">
+					<h:outputText value="#{item.description}" />
+				</p>
+			</h:column>
+			<h:column>
+				<f:facet name="header">
+					<h:outputText value="localització" />
+				</f:facet>
+				<p align="center">
+					<h:outputText value="#{item.location.city}, #{item.location.street} #{item.location.num}" />
+				</p>
+			</h:column>
+			<h:column>
+				<f:facet name="header">
+					<h:outputText value="estat" />
+				</f:facet>
+				<p align="center">
+					<h:outputText value="#{item.status}" />
+				</p>
+			</h:column>
+		</h:dataTable>
+	</h:form>
+</h:body>
+</html>
