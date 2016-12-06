@@ -127,4 +127,7 @@ public class TalkAppointmentJPA implements Serializable{
 		this.location = location;
 	}
 	
+	public String stringLocation(){
+		return getLocation().toString();
+	}
 }

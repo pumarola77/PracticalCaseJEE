@@ -26,20 +26,9 @@ public class TalkAppointmentBean implements TalkAppointmentFacadeRemote, TalkApp
 	private UserFacade userFacade;
 
 	public TalkAppointmentJPA showTalkAppointment(int id) throws PersistenceException{
-		TalkAppointmentJPA talkapp = null;
-		try
-		{
-			@SuppressWarnings("unchecked")
-			Collection<TalkAppointmentJPA> talkapps = entman.createQuery("FROM TalkAppointmentJPA b WHERE b.id = ?1").setParameter(1, new Integer(id)).getResultList();
-			if (!talkapps.isEmpty() || talkapps.size()==1)
-			{
-				Iterator<TalkAppointmentJPA> iter =talkapps.iterator();
-				talkapp = (TalkAppointmentJPA) iter.next();				
-			}
-		}catch (PersistenceException e) {
-			System.out.println(e);
-		} 
-		return talkapp;
+
+		TalkAppointmentJPA talkApp = entman.find(TalkAppointmentJPA.class, id);
+		return talkApp;
 	}
 
 
