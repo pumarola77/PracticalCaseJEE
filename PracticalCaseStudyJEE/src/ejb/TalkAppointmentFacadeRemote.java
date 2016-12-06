@@ -1,5 +1,7 @@
 package ejb;
 
+import java.util.Collection;
+
 import javax.ejb.Remote;
 
 import jpa.TalkAppointmentJPA;
@@ -12,4 +14,5 @@ public interface TalkAppointmentFacadeRemote {
 	public TalkAppointmentJPA showTalkAppointment(int id);
 	public void registerInTalkAppointment(String nif, Integer talkid);
 	public void removeFromTalkAppointment(String nif, Integer talkid);
+	public Collection<TalkAppointmentJPA> findMyTalkAppointments(String nif, boolean isPublisher);
 }
