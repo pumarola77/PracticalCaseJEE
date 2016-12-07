@@ -19,6 +19,7 @@ public class TalkAppointmentJPA implements Serializable{
 	private static final long serialVersionUID = 1L;
 
 	@Column(name = "id")
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
 	
 	@Column(name = "descrption")
@@ -41,8 +42,7 @@ public class TalkAppointmentJPA implements Serializable{
 		super();
 	}
 	
-	public TalkAppointmentJPA(int id, String description, Date date, Time time, TalkStatus status) {
-		this.id = id;
+	public TalkAppointmentJPA(String description, Date date, Time time, TalkStatus status) {
 		this.description = description;
 		this.date = date;
 		this.time = time;
