@@ -28,12 +28,14 @@ public class TalkAppointmentAdminBean implements TalkAppointmentAdminFacadeRemot
 	@EJB
 	private UserFacade userFacade;
 		
-	public void AddTalkAppointment(String description, LocationJPA location, Date date, Time time, LanguageToTalkJPA languageToTalk){
+	public void addTalkAppointment(String description, LocationJPA location, Date date, Time time, LanguageToTalkJPA languageToTalk){
 		
 		try{
 			TalkAppointmentJPA talkApp = new TalkAppointmentJPA(description,date,time,TalkStatus.OPEN);
 			talkApp.setUserPublish(languageToTalk.getUser());
 			talkApp.setLocation(location);
+			talkApp.setUserLanguageToTalk(languageToTalk.getUser().getNif());
+			talkApp.setLanguageToTalk(languageToTalk);
 			entman.persist(talkApp);
 		} catch(PersistenceException e){
 			throw e;

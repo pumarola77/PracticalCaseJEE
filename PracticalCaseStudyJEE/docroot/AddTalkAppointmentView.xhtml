@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html">
+
+<h:body>
+	<h:form>
+  		<h:link	value="HomeView ( Principal)" outcome="HomeView">
+  		</h:link>
+  	</h:form>
+	<h:form id="talkAppForm">
+		<div align="center">
+			<table border="1" width="50%" id="table1">
+				<tr>
+					<td>
+						<p align="center" /> <i><b><font size="4" face="Century">Afegir TalkAppointment a l'usuari #{talkappointmentadd.nif}</font></b></i>
+					</td>
+				</tr>
+			  	<tr>
+					<td>
+						<p align="right" /> <i><b><font size="4" face="Century">Descripcio:</font></b></i>
+					</td>
+					<td>
+						<p align="left" />&nbsp;<h:inputText id="description" value="" />
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<p align="right" /> <i><b><font size="4" face="Century">Data(yyyy/MM/dd):</font></b></i>
+					</td>
+					<td>
+						<p align="left" />&nbsp;<h:inputText id="date" value="" />
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<p align="right" /> <i><b><font size="4" face="Century">Time(HH:mm):</font></b></i>
+					</td>
+					<td>
+						<p align="left" />&nbsp;<h:inputText id="time" value="" />
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<p align="right" /> <i><b><font size="4" face="Century">Llengua a parlar:</font></b></i>
+					</td>
+				 	<td>
+						<h:panelGrid columns="2">
+  							<h:selectOneMenu valueChangeListener="#{addtalkappointment.languageValueChanged}" value="#{addtalkappointment.language}" immediate="true">
+  								<f:selectItems value="#{addtalkappointment.languageList}" />
+  							</h:selectOneMenu>
+  						</h:panelGrid>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<p align="right" /> <i><b><font size="4" face="Century">Carrer:</font></b></i>
+					</td>
+					<td>
+						<p align="left" />&nbsp;<h:inputText id="street" value="" />
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<p align="right" /> <i><b><font size="4" face="Century">Numero:</font></b></i>
+					</td>
+					<td>
+						<p align="left" />&nbsp;<h:inputText id="num" value="" />
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<p align="right" /> <i><b><font size="4" face="Century">Codi postal:</font></b></i>
+					</td>
+					<td>
+						<p align="left" />&nbsp;<h:inputText id="cp" value="" />
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<p align="right" /> <i><b><font size="4" face="Century">Ciutat:</font></b></i>
+					</td>
+					<td>
+						<p align="left" />&nbsp;<h:inputText id="city" value="" />
+					</td>
+				</tr>
+				<tr>
+					<td colspan="2">
+						<p align="center">
+							<h:commandButton value="Afegir TalkAppointment" immediate="true"
+								action="#{talkappointmentadd.addTalkApp}" />
+						</p>
+					</td>
+				</tr>
+			</table>
+		</div>
+	</h:form>
+</h:body>
+</html>

@@ -37,6 +37,8 @@ public class TalkAppointmentJPA implements Serializable{
 	private UserJPA userPublish;
 	private UserJPA userSign;
 	private LocationJPA location;
+	private LanguageToTalkJPA languageToTalk;
+	private String userLanguageToTalk;
 	
 	public TalkAppointmentJPA() {
 		super();
@@ -130,4 +132,26 @@ public class TalkAppointmentJPA implements Serializable{
 	public String stringLocation(){
 		return getLocation().toString();
 	}
+	
+	@ManyToOne
+	@JoinColumns({
+		@JoinColumn(name="userLanguageToTalk", insertable=false, updatable=false),
+		@JoinColumn(name="languageToTalk", insertable=false, updatable=false)
+	})
+	public LanguageToTalkJPA getLanguageToTalk() {
+		return languageToTalk;
+	}
+	
+	public void setLanguageToTalk(LanguageToTalkJPA langToTalk){
+		this.languageToTalk = langToTalk;
+	}
+	
+	public String getUserLanguageToTalk() {
+		return userLanguageToTalk;
+	}
+
+	public void setUserLanguageToTalk(String user) {
+		this.userLanguageToTalk = user;
+	}
+	
 }
