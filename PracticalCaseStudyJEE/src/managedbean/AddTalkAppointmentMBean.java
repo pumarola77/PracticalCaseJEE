@@ -7,6 +7,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Properties;
@@ -39,29 +40,30 @@ public class AddTalkAppointmentMBean implements Serializable{
 	
 	
 	@EJB
-	private TalkAppointmentAdminFacadeRemote addTalkAppoinmentRemote;
+	private TalkAppointmentAdminFacadeRemote addTalkAppointmentRemote;
 	
 	@EJB
 	private UserFacadeRemote userRemote;
 	
 	private String nif;
 	LanguageToTalkJPA languageToTalk;
+	
 	//Necessari per llista totes les llengues que parla l'usuari
 	protected String language = "";
-	private Collection<LanguageToTalkJPA> allLanguageToTalk;
+	private List<LanguageToTalkJPA> allLanguageToTalk;
 	protected Collection<SelectItem> languageList = new ArrayList<SelectItem>();
 	
 	//Constructor
 	public AddTalkAppointmentMBean() throws Exception{
-		//User Remote
+		/*//User Remote
 		Properties props = System.getProperties();
 		Context ctx = new InitialContext(props);
 		userRemote = (UserFacadeRemote) ctx.lookup("java:app/PracticalCaseStudyJEE.jar/UserFacadeBean!ejb.UserFacadeRemote");
 		//TalkAppointmentAdminRemote
 		Properties props1 = System.getProperties();
 		Context ctx1 = new InitialContext(props1);
-		addTalkAppoinmentRemote = (TalkAppointmentAdminFacadeRemote) ctx1.lookup("java:app/PracticalCaseStudyJEE.jar/TalkAppointmentAdminBean!ejb.TalkAppointmentAdminFacadeRemote");
-		
+		addTalkAppointmentRemote = (TalkAppointmentAdminFacadeRemote) ctx1.lookup("java:app/PracticalCaseStudyJEE.jar/TalkAppointmentAdminBean!ejb.TalkAppointmentAdminFacadeRemote");
+		*/
 		//Carrega el NIF del User
 		if ( FacesContext.getCurrentInstance().getExternalContext().getSessionMap().containsKey("nif") == true) {
 			this.setNif(FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("nif").toString());
@@ -94,10 +96,19 @@ public class AddTalkAppointmentMBean implements Serializable{
 	public void setLanguageToTalk(LanguageToTalkJPA languageToTalk){
 		this.languageToTalk = languageToTalk;
 	}
+	
+	public Collection<SelectItem> getLanguageList(){
+		return languageList;
+	}
 
 	public String addTalkApp() throws Exception{
 		try{
 
+			//TalkAppointmentAdminRemote
+			Properties props1 = System.getProperties();
+			Context ctx1 = new InitialContext(props1);
+			addTalkAppointmentRemote = (TalkAppointmentAdminFacadeRemote) ctx1.lookup("java:app/PracticalCaseStudyJEE.jar/TalkAppointmentAdminBean!ejb.TalkAppointmentAdminFacadeRemote");
+			
 			FacesContext context = FacesContext.getCurrentInstance();
 			HttpServletRequest request = (HttpServletRequest)context.getExternalContext().getRequest();
 			//Description
@@ -123,13 +134,34 @@ public class AddTalkAppointmentMBean implements Serializable{
 			LocationJPA location = new LocationJPA(street,num,cp,city);
 			
 			//Afegim el TalkAppointment
-			//addTalkAppoinmentRemote.addTalkAppointment(description,location,date,time,languageToTalk);
+			//addTalkAppointmentRemote.addTalkAppointment(description,location,date,time,languageToTalk);
 			
 		}catch(PersistenceException e){
 			throw e;
 		}
 		return "HomeView";
 	}
+	
+	//Carregar la llista de totes les llengues de l'usuari
+	public void getAllLanguageToTalk() throws Exception{
+		//User Remote
+		Properties props = System.getProperties();
+		Context ctx = new InitialContext(props);
+		userRemote = (UserFacadeRemote) ctx.lookup("java:app/PracticalCaseStudyJEE.jar/UserFacadeBean!ejb.UserFacadeRemote");
+		
+		allLanguageToTalk = userRemote.listAddLanguagesToTalk(nif);
+		Iterator<LanguageToTalkJPA> iter = allLanguageToTalk.iterator();
+		
+		while(iter.hasNext()){
+			SelectItem item = new SelectItem(iter.next().getLanguage());
+			getLanguageList().add(item);
+		}
+	}
+
+	//Recuperar valor de XHTML
+	public void languageValueChanged(ValueChangeEvent languageChanged) throws Exception {
+		setLanguage(languageChanged.getNewValue().toString());
+	}	
 
 	//Busquem el languageToTalk de la language seleccionada en la View
 	private void findLanguageToTalk(String nif, String language) throws Exception {
@@ -144,23 +176,4 @@ public class AddTalkAppointmentMBean implements Serializable{
 			}
 		}
 	}
-
-	//Carregar la llista de totes les llengues de l'usuari
-	public void getAllLanguageToTalk() throws Exception{
-
-		allLanguageToTalk =  userRemote.listAllLanguagesToTalk(nif);
-		
-		Iterator<LanguageToTalkJPA> iter = allLanguageToTalk.iterator();
-		
-		while(iter.hasNext()){
-			SelectItem item = new SelectItem(iter.next().getLanguage());
-			languageList.add(item);
-		}
-	}
-	
-	//Recuperar valor de XHTML
-	public void languageValueChanged(ValueChangeEvent languageChanged) throws Exception {
-		setLanguage(languageChanged.getNewValue().toString());
-	}	
-	
 }

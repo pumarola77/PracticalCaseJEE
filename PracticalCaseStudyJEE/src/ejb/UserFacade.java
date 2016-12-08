@@ -1,5 +1,6 @@
 package ejb;
 import java.util.Collection;
+import java.util.List;
 
 import javax.ejb.Local;
 
@@ -25,4 +26,5 @@ public interface UserFacade {
 	public void addLanguageToTalk(String nif, String language, String level, String description, boolean acceptPay);
 	public void deleteLanguageToTalk(String nif, String language);
 	public Collection<LanguageToTalkJPA> listAllLanguagesToTalk(String nif);
+	public List<LanguageToTalkJPA> listAddLanguagesToTalk(String nif);
 }

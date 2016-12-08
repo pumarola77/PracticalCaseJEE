@@ -218,5 +218,11 @@ public class UserFacadeBean implements UserFacadeRemote, UserFacade{
 		Collection<LanguageToTalkJPA> allLanguagesToTalk = entman.createQuery("FROM LanguageToTalkJPA a WHERE a.user.nif = :nif").setParameter("nif",nif).getResultList();
 		return allLanguagesToTalk;
 	}
+	
+	public List<LanguageToTalkJPA> listAddLanguagesToTalk(String nif){
+		@SuppressWarnings("unchecked")
+		List<LanguageToTalkJPA> allLanguagesToTalk = entman.createQuery("FROM LanguageToTalkJPA a WHERE a.user.nif = :nif").setParameter("nif",nif).getResultList();
+		return allLanguagesToTalk;
+	}
 
 }
