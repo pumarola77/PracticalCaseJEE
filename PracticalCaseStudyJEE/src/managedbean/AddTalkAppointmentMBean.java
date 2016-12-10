@@ -46,30 +46,26 @@ public class AddTalkAppointmentMBean implements Serializable{
 	private UserFacadeRemote userRemote;
 	
 	private String nif;
-	LanguageToTalkJPA languageToTalk;
+	LanguageToTalkJPA languageToTalk = null;
 	
 	//Necessari per llista totes les llengues que parla l'usuari
 	protected String language = "";
-	private List<LanguageToTalkJPA> allLanguageToTalk;
+	private Collection<LanguageToTalkJPA> allLanguageToTalk;
 	protected Collection<SelectItem> languageList = new ArrayList<SelectItem>();
 	
 	//Constructor
 	public AddTalkAppointmentMBean() throws Exception{
-		/*//User Remote
+		//User Remote
 		Properties props = System.getProperties();
 		Context ctx = new InitialContext(props);
 		userRemote = (UserFacadeRemote) ctx.lookup("java:app/PracticalCaseStudyJEE.jar/UserFacadeBean!ejb.UserFacadeRemote");
-		//TalkAppointmentAdminRemote
-		Properties props1 = System.getProperties();
-		Context ctx1 = new InitialContext(props1);
-		addTalkAppointmentRemote = (TalkAppointmentAdminFacadeRemote) ctx1.lookup("java:app/PracticalCaseStudyJEE.jar/TalkAppointmentAdminBean!ejb.TalkAppointmentAdminFacadeRemote");
-		*/
+		
 		//Carrega el NIF del User
 		if ( FacesContext.getCurrentInstance().getExternalContext().getSessionMap().containsKey("nif") == true) {
 			this.setNif(FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("nif").toString());
 		}
 		//Carrega les language que vol parlar User
-		this.getAllLanguageToTalk();
+		//this.getAllLanguageToTalk();
 	}
 	
 	// Getters / Setters
@@ -104,37 +100,43 @@ public class AddTalkAppointmentMBean implements Serializable{
 	public String addTalkApp() throws Exception{
 		try{
 
-			//TalkAppointmentAdminRemote
-			Properties props1 = System.getProperties();
-			Context ctx1 = new InitialContext(props1);
-			addTalkAppointmentRemote = (TalkAppointmentAdminFacadeRemote) ctx1.lookup("java:app/PracticalCaseStudyJEE.jar/TalkAppointmentAdminBean!ejb.TalkAppointmentAdminFacadeRemote");
-			
 			FacesContext context = FacesContext.getCurrentInstance();
 			HttpServletRequest request = (HttpServletRequest)context.getExternalContext().getRequest();
 			//Description
 			String description = request.getParameter("talkAppForm:description");
+			//System.out.println("DESCRIPTION:" +description);
 			//Date
 			String dateStr = request.getParameter("talkAppForm:date");
 			DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
 			java.util.Date dateConv = dateFormat.parse(dateStr);
 			Date date = new Date(dateConv.getTime());
+			//System.out.println("DATE:" +date);
 			//Time
 			String timeStr = request.getParameter("talkAppForm:time");
 			SimpleDateFormat timeFormat = new SimpleDateFormat("hh:mm");
 			long timeConv = timeFormat.parse(timeStr).getTime();
 			Time time = new Time(timeConv);
+			//System.out.println("TIME:" +time);
+			
 			//LanguageToTalk
-			//String language = request.getParameter("talkAppForm:language");
-			findLanguageToTalk(getNif(),getLanguage());
+			findLanguageToTalk();
+			//System.out.println("LANGUAGETOTALK:" +languageToTalk.getLanguage());
+			
 			//Location
 			String street = request.getParameter("talkAppForm:street");
 			String num = request.getParameter("talkAppForm:num");
 			String cp = request.getParameter("talkAppForm:cp");
 			String city = request.getParameter("talkAppForm:city");
 			LocationJPA location = new LocationJPA(street,num,cp,city);
+			//System.out.println("LOCATION:" +location.toString());
+			
+			//TalkAppointmentAdminFacadeRemote
+			Properties props = System.getProperties();
+			Context ctx = new InitialContext(props);
+			addTalkAppointmentRemote = (TalkAppointmentAdminFacadeRemote) ctx.lookup("java:app/PracticalCaseStudyJEE.jar/TalkAppointmentAdminBean!ejb.TalkAppointmentAdminFacadeRemote");
 			
 			//Afegim el TalkAppointment
-			//addTalkAppointmentRemote.addTalkAppointment(description,location,date,time,languageToTalk);
+			addTalkAppointmentRemote.addTalkAppointment(description,location,date,time,languageToTalk);
 			
 		}catch(PersistenceException e){
 			throw e;
@@ -144,12 +146,10 @@ public class AddTalkAppointmentMBean implements Serializable{
 	
 	//Carregar la llista de totes les llengues de l'usuari
 	public void getAllLanguageToTalk() throws Exception{
-		//User Remote
-		Properties props = System.getProperties();
-		Context ctx = new InitialContext(props);
-		userRemote = (UserFacadeRemote) ctx.lookup("java:app/PracticalCaseStudyJEE.jar/UserFacadeBean!ejb.UserFacadeRemote");
+		//netejem la llista
+		getLanguageList().clear();
 		
-		allLanguageToTalk = userRemote.listAddLanguagesToTalk(nif);
+		allLanguageToTalk = userRemote.listAllLanguagesToTalk(nif);
 		Iterator<LanguageToTalkJPA> iter = allLanguageToTalk.iterator();
 		
 		while(iter.hasNext()){
@@ -164,14 +164,15 @@ public class AddTalkAppointmentMBean implements Serializable{
 	}	
 
 	//Busquem el languageToTalk de la language seleccionada en la View
-	private void findLanguageToTalk(String nif, String language) throws Exception {
+	private void findLanguageToTalk() throws Exception {
 		
-		Collection<LanguageToTalkJPA> languageToTalkFullList = userRemote.listAllLanguagesToTalk(nif);
+		Collection<LanguageToTalkJPA> languageToTalkFullList;
+		languageToTalkFullList = userRemote.listAllLanguagesToTalk(getNif());
 		Iterator<LanguageToTalkJPA> iter = languageToTalkFullList.iterator();
 			
 		while(iter.hasNext()){
-			LanguageToTalkJPA aux = (LanguageToTalkJPA) iter.next();
-			if(language == aux.getLanguage()){
+			LanguageToTalkJPA aux = iter.next();
+			if(aux.getLanguage().compareTo(getLanguage()) == 0){
 					setLanguageToTalk(aux);
 			}
 		}

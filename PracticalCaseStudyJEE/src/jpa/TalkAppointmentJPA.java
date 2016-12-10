@@ -7,7 +7,6 @@ import java.sql.Time;
 import javax.persistence.*;
 
 
-
 /**
  * Classe JPA LanguageToTalk
  */
@@ -17,9 +16,8 @@ import javax.persistence.*;
 public class TalkAppointmentJPA implements Serializable{
 
 	private static final long serialVersionUID = 1L;
-
+	
 	@Column(name = "id")
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
 	
 	@Column(name = "descrption")

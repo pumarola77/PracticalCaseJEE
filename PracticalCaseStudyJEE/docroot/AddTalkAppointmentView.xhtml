@@ -5,7 +5,9 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html">
-
+<h:head>
+   #{talkappointmentadd.getAllLanguageToTalk()}
+</h:head>
 <h:body>
 	<h:form>
   		<h:link	value="HomeView ( Principal)" outcome="HomeView">
@@ -49,8 +51,8 @@
 					</td>
 				 	<td>
 						<h:panelGrid columns="2">
-  							<h:selectOneMenu valueChangeListener="#{addtalkappointment.languageValueChanged}" value="#{addtalkappointment.language}" immediate="true">
-  								<f:selectItems value="#{addtalkappointment.languageList}" />
+  							<h:selectOneMenu valueChangeListener="#{talkappointmentadd.languageValueChanged}" value="#{talkappointmentadd.language}" immediate="true">
+  								<f:selectItems value="#{talkappointmentadd.languageList}" />
   							</h:selectOneMenu>
   						</h:panelGrid>
 					</td>

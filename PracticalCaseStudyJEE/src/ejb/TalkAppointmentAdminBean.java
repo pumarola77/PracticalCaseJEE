@@ -31,12 +31,15 @@ public class TalkAppointmentAdminBean implements TalkAppointmentAdminFacadeRemot
 	public void addTalkAppointment(String description, LocationJPA location, Date date, Time time, LanguageToTalkJPA languageToTalk){
 		
 		try{
+			LocationJPA locat = new LocationJPA(location.getStreet(),location.getNum(),location.getCp(),location.getCity());
+			entman.persist(locat);
 			TalkAppointmentJPA talkApp = new TalkAppointmentJPA(description,date,time,TalkStatus.OPEN);
+			talkApp.setLocation(locat);
 			talkApp.setUserPublish(languageToTalk.getUser());
-			talkApp.setLocation(location);
-			talkApp.setUserLanguageToTalk(languageToTalk.getUser().getNif());
-			talkApp.setLanguageToTalk(languageToTalk);
+			talkApp.setUserLanguageToTalk(languageToTalk.getLanguage());
+			talkApp.setLanguageToTalk(languageToTalk); // No esta guardant res? El id es (language,nif)...
 			entman.persist(talkApp);
+			
 		} catch(PersistenceException e){
 			throw e;
 		}

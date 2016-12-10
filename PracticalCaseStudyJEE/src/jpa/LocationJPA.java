@@ -18,8 +18,8 @@ public class LocationJPA implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
 	
+	//@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name = "id")
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
 	
 	@Column(name = "street")
