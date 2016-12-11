@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html">
+
+<h:body>
+	<h:form id="userForm">
+		<div align="center">
+			<table border="1" width="50%" id="table1">
+				<tr>
+					<td>
+						<p align="right" /> <i><b><font size="4" face="Century">NIF:</font></b></i>
+					</td>
+					<td>
+						<p align="left" />&nbsp;<h:inputText id="nif"
+							value="#{rejectrequest.nif}" />
+					</td>
+					<td></td>
+				</tr>
+				<tr>
+					<td>
+						<p align="right" /> <i><b><font size="4" face="Century">Motiu:</font></b></i>
+					</td>
+					<td>
+						<p align="left" />&nbsp;<h:inputText id="motiu" label="Motiu"
+							required="true" requiredMessage="Camp Obligatori" value="">
+							<f:validator validatorId="ControlValorValidator"></f:validator>
+						</h:inputText>
+					</td>
+					<td><h:message for="motiu" style="color:red"></h:message></td>
+				</tr>
+				<tr>
+					<td colspan="2">
+						<p align="center">
+							<h:outputText value="#{rejectrequest.errorFormulari}"
+								style="color:red" />
+						</p>
+					</td>
+				</tr>
+				<tr>
+					<td colspan="2">
+						<p align="center">
+							<h:commandButton value="Actualitzar dades" immediate="true"
+								action="#{rejectrequest.rejectRequest}" />
+							&nbsp;&nbsp;
+							<h:commandButton value="Tornar a la llista" immediate="true"
+								action="MyTalkAppointmentsListView" />
+						</p>
+					</td>
+				</tr>
+			</table>
+		</div>
+	</h:form>
+</h:body>
+</html>

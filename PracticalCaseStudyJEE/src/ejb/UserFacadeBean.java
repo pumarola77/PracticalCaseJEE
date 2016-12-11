@@ -119,26 +119,26 @@ public class UserFacadeBean implements UserFacadeRemote, UserFacade{
 		Collection<TalkedLanguageJPA> allLanguages = entman.createQuery("FROM TalkedLanguageJPA a WHERE a.user.nif = :nif").setParameter("nif",nif).getResultList();
 		return allLanguages;
 	}
-	
+
 	/**
 	 * Metode que afegeix les dades d'un idioma per a un determinat nif
 	 */
 	@Override
-	public void addTalkedLanguage(String nif, String language, String level, String description) throws PersistenceException {
+	public int addTalkedLanguage(String nif, String language, String level, String description) throws PersistenceException {
 		try
 		{
 			Query queryNifLang= entman.createQuery("FROM TalkedLanguageJPA t WHERE t.user.nif = :nif AND t.language = :language").setParameter("nif", nif).setParameter("language", language);
 
 			if (!queryNifLang.getResultList().isEmpty())
 			{
-				// Mirem que no es repeteixi un idioma que ja estigui previament introduit.
-				throw new PersistenceException("L'idioma <" + language + "> ja estava introduit amb anterioritat.");			
+				return 1;				
 			}
 			else
 			{
 				TalkedLanguageJPA talkedLanguage = new TalkedLanguageJPA(language, level, description); 
 				talkedLanguage.setUser(entman.find(UserJPA.class, nif));
 				entman.persist(talkedLanguage);
+				return 0;
 			}
 
 		}catch (PersistenceException e) {
@@ -163,26 +163,26 @@ public class UserFacadeBean implements UserFacadeRemote, UserFacade{
 			throw e;
 		} 
 	}
-	
+
 	/**
 	 * Metode que afegeix les dades d'un idioma d'interes per a un determinat nif
 	 */
 	@Override
-	public void addLanguageToTalk(String nif, String language, String level, String description, boolean acceptPay) throws PersistenceException {
+	public int addLanguageToTalk(String nif, String language, String level, String description, boolean acceptPay) throws PersistenceException {
 		try
 		{
 			Query queryNifLang= entman.createQuery("FROM LanguageToTalkJPA l WHERE l.user.nif = :nif AND l.language = :language").setParameter("nif", nif).setParameter("language", language);
 
 			if (!queryNifLang.getResultList().isEmpty())
 			{
-				// Mirem que no es repeteixi un idioma que ja estigui previament introduit.
-				throw new PersistenceException("L'idioma <" + language + "> ja estava introduit amb anterioritat.");			
+				return 1;				
 			}
 			else
 			{
 				LanguageToTalkJPA languageToTalk = new LanguageToTalkJPA(language, level, description, acceptPay); 
 				languageToTalk.setUser(entman.find(UserJPA.class, nif));
 				entman.persist(languageToTalk);
+				return 0;
 			}
 
 		}catch (PersistenceException e) {
@@ -218,5 +218,5 @@ public class UserFacadeBean implements UserFacadeRemote, UserFacade{
 		Collection<LanguageToTalkJPA> allLanguagesToTalk = entman.createQuery("FROM LanguageToTalkJPA a WHERE a.user.nif = :nif").setParameter("nif",nif).getResultList();
 		return allLanguagesToTalk;
 	}
-	
+
 }

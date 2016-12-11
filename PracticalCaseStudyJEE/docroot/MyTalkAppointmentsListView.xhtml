@@ -11,12 +11,15 @@
 <h:body>
 	<h:form id="talkAppointmentForm" align="left">
 		<h:link value="HomeView ( Principal)" outcome="HomeView" />
+		&nbsp;&nbsp;
+		<h:commandButton value="Crear Petició de Conversa" action="AddTalkAppointmentView.xhtml" />
 		<p align="right" />
 		<h:commandLink action="#{mytalkappointment.previousPublishScreen}"
 			value="Anterior" />&nbsp;
 		<h:commandLink action="#{mytalkappointment.nextPublishScreen}"
 			value="Següent" />
-		<h:dataTable value="#{mytalkappointment.myTalkAppointmentsPublishListView}"
+		<h:dataTable
+			value="#{mytalkappointment.myTalkAppointmentsPublishListView}"
 			var="item" bgcolor="#F1F1F1" border="10" first="0" width="100%"
 			frame="hsides" rules="all">
 			<f:facet name="header">
@@ -44,7 +47,8 @@
 					<h:outputText value="localització" />
 				</f:facet>
 				<p align="center">
-					<h:outputText value="#{item.location.city}, #{item.location.street} #{item.location.num}" />
+					<h:outputText
+						value="#{item.location.city}, #{item.location.street} #{item.location.num}" />
 				</p>
 			</h:column>
 			<h:column>
@@ -62,7 +66,8 @@
 			value="Anterior" />&nbsp;
 		<h:commandLink action="#{mytalkappointment.nextSignScreen}"
 			value="Següent" />
-		<h:dataTable value="#{mytalkappointment.myTalkAppointmentsSignListView}"
+		<h:dataTable
+			value="#{mytalkappointment.myTalkAppointmentsSignListView}"
 			var="item" bgcolor="#F1F1F1" border="10" first="0" width="100%"
 			frame="hsides" rules="all">
 			<f:facet name="header">
@@ -90,7 +95,8 @@
 					<h:outputText value="localització" />
 				</f:facet>
 				<p align="center">
-					<h:outputText value="#{item.location.city}, #{item.location.street} #{item.location.num}" />
+					<h:outputText
+						value="#{item.location.city}, #{item.location.street} #{item.location.num}" />
 				</p>
 			</h:column>
 			<h:column>
@@ -99,6 +105,12 @@
 				</f:facet>
 				<p align="center">
 					<h:outputText value="#{item.status}" />
+				</p>
+			</h:column>
+			<h:column>
+				<p align="center">
+					<h:commandButton value="Desapuntar"
+						action="#{RemoveFromTalkAppointment.removeFromTalkAppointment(mytalkappointment.nif, item.id)}" />
 				</p>
 			</h:column>
 		</h:dataTable>

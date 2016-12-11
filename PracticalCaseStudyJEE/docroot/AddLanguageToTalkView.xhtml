@@ -18,14 +18,20 @@
 						<p align="left" />&nbsp;<h:inputText id="nif"
 							value="#{ListLangToTalk.nif}" />
 					</td>
+					<td></td>
 				</tr>
 				<tr>
 					<td>
 						<p align="right" /> <i><b><font size="4" face="Century">Idioma:</font></b></i>
 					</td>
 					<td>
-						<p align="left" />&nbsp;<h:inputText id="language" value="" />
+						<p align="left" />&nbsp;<h:inputText id="language"
+							label="Language" required="true"
+							requiredMessage="Camp Obligatori" value="">
+							<f:validator validatorId="ControlValorValidator"></f:validator>
+						</h:inputText>
 					</td>
+					<td><h:message for="language" style="color:red"></h:message></td>
 				</tr>
 				<tr>
 					<td>
@@ -38,14 +44,20 @@
 							<f:selectItem itemValue="Baix" itemLabel="Baix" />
 						</h:selectOneMenu>
 					</td>
+					<td></td>
 				</tr>
 				<tr>
 					<td>
 						<p align="right" /> <i><b><font size="4" face="Century">Descripció:</font></b></i>
 					</td>
 					<td>
-						<p align="left" />&nbsp;<h:inputText id="description" value="" />
+						<p align="left" />&nbsp;<h:inputText id="description"
+							label="Description" required="true"
+							requiredMessage="Camp Obligatori" value="">
+							<f:validator validatorId="ControlValorValidator"></f:validator>
+						</h:inputText>
 					</td>
+					<td><h:message for="description" style="color:red"></h:message></td>
 				</tr>
 				<tr>
 					<td>
@@ -54,7 +66,17 @@
 					</td>
 					<td>
 						<p align="left" />&nbsp;<h:selectBooleanCheckbox id="acceptPay"
-							value="acceptPay" />
+							value="acceptPay">
+						</h:selectBooleanCheckbox>
+					</td>
+					<td></td>
+				</tr>
+				<tr>
+					<td colspan="2">
+						<p align="center">
+							<h:outputText value="#{languagetotalkadd.errorFormulari}"
+								style="color:red" />
+						</p>
 					</td>
 				</tr>
 				<tr>

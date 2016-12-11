@@ -15,4 +15,6 @@ public interface TalkAppointmentAdminFacadeRemote {
 	 Metodes invocats remotament
 	 */
 	public void addTalkAppointment(String description, LocationJPA location, Date date, Time time, LanguageToTalkJPA languageToTalk);
+	public void acceptRequest(int talkid, String nif);
+	public void rejectRequest(int talkid, String nif, String reason);
 }
