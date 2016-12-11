@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core" xmlns:h="http://java.sun.com/jsf/html">
+
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"></meta>
+	<title>FindTalkAppointment - LangForAll</title>
+</h:head>
+
+<h:body>
+
+<div id="layout">
+	<div id="top" class="top">
+		<ui:insert name="top">
+			<f:view>
+				<h:form>
+					<p align="right">
+						<h:panelGrid columns="6">
+							<h:outputText value="Select Filter" />
+							<h:selectOneMenu valueChangeListener="#{findtalkappointments.ciutatValueChanged}" value="#{findtalkappointments.ciutat}" onchange="submit()" immediate="true">
+								<f:selectItems value="#{findtalkappointments.ciutatsList}" />
+							</h:selectOneMenu>
+							
+							<h:selectOneMenu valueChangeListener="#{findtalkappointments.languagesValueChanged}" value="#{findtalkappointments.languages}" onchange="submit()" immediate="true">
+								<f:selectItems value="#{findtalkappointments.languagesList}" />
+							</h:selectOneMenu>
+							
+							<h:selectOneMenu valueChangeListener="#{findtalkappointments.datesValueChanged}" value="#{findtalkappointments.dates}" onchange="submit()" immediate="true">
+								<f:selectItems value="#{findtalkappointments.datesList}" />
+							</h:selectOneMenu>		
+												
+							<h:selectOneMenu valueChangeListener="#{findtalkappointments.horesValueChanged}" value="#{findtalkappointments.hores}" onchange="submit()" immediate="true">
+								<f:selectItems value="#{findtalkappointments.horesList}" />
+							</h:selectOneMenu>		
+																			
+							<h:commandButton value="Confirm" immediate="true" action="#{findtalkappointments.listTalkAppointments}" />							                                                                                 							                                                            
+						</h:panelGrid>						
+					</p>
+				</h:form>
+			</f:view>
+		</ui:insert>
+	</div>
+	<div id="content">
+		<ui:insert name="content">Content</ui:insert>
+	</div>
+</div>
+</h:body>
+
+</html>

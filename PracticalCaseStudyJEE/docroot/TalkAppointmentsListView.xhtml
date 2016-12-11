@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core" xmlns:h="http://java.sun.com/jsf/html">
+
+<ui:composition template="./FindTalkAppointmentsView.xhtml">
+	<ui:define name="content">
+	  	<h:form>	
+			<h:commandLink action="#{findtalkappointments.previousScreen}" value="Anterior" />
+			<h:outputText value="   " />
+			<h:commandLink action="#{findtalkappointments.nextScreen}" value="Següent" />	
+			<h:outputText value="   " />
+			<h:link	value="HomeView ( Principal)" outcome="HomeView"></h:link>	
+		</h:form>
+		<h:form align="left">
+			<h:dataTable value="#{findtalkappointments.talkAppointmentsListView}" var="item" bgcolor="#F1F1F1" border="10" first="0" width="100%" frame="hsides" rules="all">				                                     
+				<f:facet name="header">
+					<h:outputText align="center" value="List TalkAppointments" />
+				</f:facet>
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="id"/>
+					</f:facet>
+					<p align="right"><h:outputText value="#{item.id}" /></p>
+				</h:column>
+
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="City"/>
+					</f:facet>
+					<p align="right"><h:outputText value="#{item.location.city}" /></p>
+				</h:column>
+
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="Language"/>
+					</f:facet>
+					<p align="right"><h:outputText value="#{item.languageToTalk.language}" /></p>
+				</h:column>
+
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="date"/>
+					</f:facet>
+					<p align="right"><h:outputText value="#{item.date}" /></p>
+				</h:column>
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="time"/>
+					</f:facet>
+					<p align="right"><h:outputText value="#{item.time}" /></p>
+				</h:column>
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="description"/>
+					</f:facet>
+					<p align="right"><h:outputText value="#{item.description}" /></p>
+				</h:column>				
+			</h:dataTable>
+		</h:form>
+	</ui:define>			
+</ui:composition>
+</html>
