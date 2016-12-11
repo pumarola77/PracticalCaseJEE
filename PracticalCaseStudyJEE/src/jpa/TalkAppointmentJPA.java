@@ -29,7 +29,6 @@ public class TalkAppointmentJPA implements Serializable{
 	@Column(name = "time")
 	private Time time;
 	
-	@Enumerated(EnumType.STRING)
 	@Column(name = "status")
 	private TalkStatus status;
 	
@@ -86,6 +85,7 @@ public class TalkAppointmentJPA implements Serializable{
 		this.time = time;
 	}
 
+	@Enumerated(EnumType.STRING)
 	public TalkStatus getStatus() {
 		return status;
 	}
