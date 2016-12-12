@@ -29,8 +29,8 @@ public class TalkAppointmentJPA implements Serializable{
 	@Column(name = "time")
 	private Time time;
 	
-	@Column(name = "status")
-	private TalkStatus status;
+	@Column(name = "talkstatus")
+	private TalkStatus talkstatus;
 	
 	private UserJPA userPublish;
 	private UserJPA userSign;
@@ -46,7 +46,7 @@ public class TalkAppointmentJPA implements Serializable{
 		this.description = description;
 		this.date = date;
 		this.time = time;
-		this.status = status;
+		this.talkstatus = status;
 	}
 
 	/**
@@ -87,11 +87,11 @@ public class TalkAppointmentJPA implements Serializable{
 
 	@Enumerated(EnumType.STRING)
 	public TalkStatus getStatus() {
-		return status;
+		return talkstatus;
 	}
 
 	public void setStatus(TalkStatus status) {
-		this.status = status;
+		this.talkstatus = status;
 	}
 
 	/*

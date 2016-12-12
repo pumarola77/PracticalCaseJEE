@@ -33,7 +33,8 @@ public class FindTalkAppointmentsMBean implements Serializable {
 	private TalkAppointmentFacadeRemote findTalkAppointmentsRemote;
 	
 	/* Variable per controlar els registres que esta veient un usuari */
-	private int screen;
+	private int screen = 0;
+	protected int numberTalkAppointments = 0;
 	
 	/*
 	 * Serveixen per guardar els valors dels desplegables
@@ -44,10 +45,10 @@ public class FindTalkAppointmentsMBean implements Serializable {
 	protected Collection<SelectItem> languagesList = new ArrayList<SelectItem>();
 		
 	//stores the name of the category of pets to be displayed
-	private String ciutat;
-	private String dates;
-	private String hores;
-	private String languages;
+	private String ciutat = "ALL CITIES";
+	private String dates = "ALL DATES";
+	private String hores = "ALL HOURS";
+	private String languages = "ALL LANGUAGES";
 	
 	//store all the instances of TalkAppointments
 	private Collection<TalkAppointmentJPA> talkAppointmentsList;
@@ -65,18 +66,12 @@ public class FindTalkAppointmentsMBean implements Serializable {
 	
 	public FindTalkAppointmentsMBean() throws Exception 
 	{		
-		screen = 0;
+		this.talkAppointmentsList();
 		
-		this.setCiutat("ALL CITIES");
-		this.setDates("ALL DATES");
-		this.setHores("ALL HOURS");
-		this.setLanguages("ALL LANGUAGES");
-						
 		this.ciutatsList();
 		this.datesList();
 		this.horesList();
 		this.languagesList();
-		
 	}
 	
 	public Collection<SelectItem> getCiutatsList() {
@@ -190,10 +185,7 @@ public class FindTalkAppointmentsMBean implements Serializable {
 	
 	public Collection<TalkAppointmentJPA> getTalkAppointmentsListView() throws Exception 
 	{		
-				
-		int n=0;
-		talkAppointmentsList();
-		
+		int n=0;		
 		talkAppointmentsListView = new ArrayList<TalkAppointmentJPA>();
 		for (Iterator<TalkAppointmentJPA> iter2 = talkAppointmentsList.iterator(); iter2.hasNext();)
 		{
@@ -206,6 +198,7 @@ public class FindTalkAppointmentsMBean implements Serializable {
 		}
 				
 		// anteriorment nomes havia return talkAppointmentsList;
+		this.numberTalkAppointments = n;
 		return talkAppointmentsListView;
 	}
 	
@@ -336,7 +329,8 @@ public class FindTalkAppointmentsMBean implements Serializable {
 	private void talkAppointmentsList() throws Exception {		
 		Properties props = System.getProperties();
 		Context ctx = new InitialContext(props);	
-						
+					
+		screen = 0;
 		findTalkAppointmentsRemote = (TalkAppointmentFacadeRemote) ctx.lookup("java:app/PracticalCaseStudyJEE.jar/TalkAppointmentBean!ejb.TalkAppointmentFacadeRemote");
 		talkAppointmentsList = (Collection<TalkAppointmentJPA>) findTalkAppointmentsRemote.findTalkAppointments(this.getCiutat(),this.getDates(),this.getHores(),this.getLanguages());		
 	}
