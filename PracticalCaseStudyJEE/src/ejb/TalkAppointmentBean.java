@@ -62,8 +62,8 @@ public class TalkAppointmentBean implements TalkAppointmentFacadeRemote, TalkApp
 
 	@Override
 	public void removeFromTalkAppointment(String nif, Integer talkid) {
-		// TODO Auto-generated method stub
-		try {
+
+		/*try {
 
 			int deleteCount = entman.createQuery("DELETE FROM TalkAppointmentJPA b WHERE b.userSign.nif = :nif and b.id = :talkid").setParameter("nif", nif).setParameter("id", talkid).executeUpdate();
 
@@ -73,7 +73,22 @@ public class TalkAppointmentBean implements TalkAppointmentFacadeRemote, TalkApp
 
 		} catch (PersistenceException ex) {
 			throw ex;
-		}
+		}*/
+		
+		
+		TalkAppointmentJPA aux = entman.find(TalkAppointmentJPA.class, talkid);
+		
+		/*Si el TalkAppointment ja te el camp UserSign com a null no cal seguir executant aquest metode*/
+		if(aux.getUserSign()!=null)
+		{
+			//Comprovem que l'usuari logejat al sistema domes es pugui desapuntar a les peticions a les quals ell mateix esta apuntat.
+			if(nif.equals(aux.getUserSign().getNif()))
+			{
+				aux.setUserSign(null);
+				entman.persist(aux);
+			}
+		}	
+
 	}
 
 	@Override

@@ -56,7 +56,15 @@
 						<h:outputText value="description"/>
 					</f:facet>
 					<p align="right"><h:outputText value="#{item.description}" /></p>
-				</h:column>				
+				</h:column>
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="Accions"/>
+					</f:facet>
+					<h:commandButton value="Apuntar-se" type="submit" action="#{RegisterInTalkAppointment.registerInTalkedAppointment(item.id)}" />
+					<h:commandButton value="Desapuntar-se" type="submit" action="#{RemoveFromTalkAppointment.removeFromTalkAppointment(item.id)}" />
+					<h:commandButton value="Veure detalls" type="submit" action="#{ShowTalkAppointment.showView(item.id)}" /> 						
+				</h:column>					
 			</h:dataTable>
 		</h:form>
 	</ui:define>			

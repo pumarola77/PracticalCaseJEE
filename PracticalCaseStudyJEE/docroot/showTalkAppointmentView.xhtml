@@ -3,10 +3,6 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:f="http://java.sun.com/jsf/core" xmlns:h="http://java.sun.com/jsf/html">
-   <h:head>
-   		<ui:param name="n" value="#{id}"  />
-   		#{ShowTalkAppointment.setTalkAppointment(n)}
-   </h:head>
 	<h:body>
  		<h:form>
  			<div align="center">
@@ -61,7 +57,7 @@
 				</table> 	
 			</div> 
 			<p align="center">
-				<h:commandLink value="Return" action="TalkAppointmentListView" />
+				<h:commandLink value="Return" action="TalkAppointmentsListView" />
 			</p>
  		</h:form>
  	</h:body>

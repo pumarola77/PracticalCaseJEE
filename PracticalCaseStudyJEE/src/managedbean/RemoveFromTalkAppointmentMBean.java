@@ -6,6 +6,7 @@ import java.util.Properties;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
 import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
@@ -24,7 +25,14 @@ public class RemoveFromTalkAppointmentMBean implements Serializable {
 	@EJB
 	private TalkAppointmentFacadeRemote removeFromTalkedAppointmentRemote;
 	
-	public String removeFromTalkAppointment(String nif, Integer talkid) throws Exception {
+	public String removeFromTalkAppointment(/*String nif,*/ Integer talkid) throws Exception {
+
+		String nif ="";
+		
+		if ( FacesContext.getCurrentInstance().getExternalContext().getSessionMap().containsKey("nif") == true) 
+		{
+			nif = FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("nif").toString();
+		}	
 		
 		Properties props = System.getProperties();
 		Context ctx = new InitialContext(props);
@@ -33,7 +41,7 @@ public class RemoveFromTalkAppointmentMBean implements Serializable {
 		removeFromTalkedAppointmentRemote.removeFromTalkAppointment(nif, talkid);
 
 		
-		return "vista";
+		return "TalkAppointmentsListView";
 	}
 	
 }

@@ -6,6 +6,7 @@ import java.util.Properties;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
 import javax.naming.Context;
 import javax.naming.InitialContext;
 
@@ -24,16 +25,22 @@ public class RegisterInTalkAppointmentMBean implements Serializable {
 	@EJB
 	private TalkAppointmentFacadeRemote registerInTalkedAppointmentRemote;
 	
-	public String registerInTalkedAppointment(String nif, Integer talkid) throws Exception {
+	public String registerInTalkedAppointment(/*String nif,*/ Integer talkid) throws Exception {
 		
+		String nif ="";
+		
+		if ( FacesContext.getCurrentInstance().getExternalContext().getSessionMap().containsKey("nif") == true) 
+		{
+			nif = FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("nif").toString();
+		}	
 		Properties props = System.getProperties();
 		Context ctx = new InitialContext(props);
 
 		registerInTalkedAppointmentRemote = (TalkAppointmentFacadeRemote) ctx.lookup("java:app/PracticalCaseStudyJEE.jar/TalkAppointmentBean!ejb.TalkAppointmentFacadeRemote");
 		registerInTalkedAppointmentRemote.registerInTalkAppointment(nif, talkid);
 		
-		// Falta indicar el nom de la vista del llistat
-		return "vista";
+		
+		return "TalkAppointmentsListView";
 	}
 	
 }
