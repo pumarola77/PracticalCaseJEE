@@ -5,6 +5,7 @@ import java.sql.Date;
 import java.sql.Time;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 
 
 /**
@@ -13,11 +14,12 @@ import javax.persistence.*;
 
 @Entity
 @Table(name="practicalcase.talkappointment")
+@SequenceGenerator( name = "practicalcase.talkappointment_id_seq" , sequenceName="practicalcase.TALKAPP_SEQ" , allocationSize = 1)
 public class TalkAppointmentJPA implements Serializable{
 
 	private static final long serialVersionUID = 1L;
-	
-	@Column(name = "id")
+
+	//@Column(name = "id")	
 	private int id;
 	
 	@Column(name = "descrption")
@@ -53,6 +55,8 @@ public class TalkAppointmentJPA implements Serializable{
 	 * Getters i setters
 	 */
 	@Id
+	@Column(name="id", unique=true, nullable=false)
+	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="practicalcase.talkappointment_id_seq")
 	public int getId() {
 		return id;
 	}
