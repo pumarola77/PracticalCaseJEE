@@ -58,7 +58,7 @@ public class ShowTalkAppointmentMBean implements Serializable{
 	}
 	
 	public void setTalkAppointment(int id)  throws Exception{
-		talkAppointment = (TalkAppointmentJPA) showTalkAppointmentRemote.showTalkAppointment(id);
+		talkAppointment = (TalkAppointmentJPA) showTalkAppointmentRemote.showTalkAppointment(id);		
 	}
 	
 	public String showView(int id) throws Exception{

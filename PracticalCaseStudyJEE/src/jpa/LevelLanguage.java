@@ -1,5 +1,5 @@
 package jpa;
 
 public enum LevelLanguage {
-	HIGH, MEDIUM, LEVEL
+	HIGH, MEDIUM, LOW
 }

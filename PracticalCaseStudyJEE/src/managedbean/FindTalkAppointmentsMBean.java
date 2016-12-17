@@ -36,18 +36,45 @@ public class FindTalkAppointmentsMBean implements Serializable {
 	private int screen = 0;
 	protected int numberTalkAppointments = 0;
 	
-	/*
-	 * Serveixen per guardar els valors dels desplegables
+	/**
+	 * Mostra les ciutats de les cites actives
 	 */
 	protected Collection<SelectItem> ciutatsList = new ArrayList<SelectItem>();
+	
+	/**
+	 * Mostra les dates de les cites actives
+	 */
 	protected Collection<SelectItem> datesList = new ArrayList<SelectItem>();
+	
+	/**
+	 * Mostra les hores de les cites actives
+	 */
 	protected Collection<SelectItem> horesList = new ArrayList<SelectItem>();
+	
+	/**
+	 * Mostra els llenguatges de les cites actives
+	 */
 	protected Collection<SelectItem> languagesList = new ArrayList<SelectItem>();
 		
-	//stores the name of the category of pets to be displayed
+	/**
+	 * Mostra la ciutat activa al desplegable
+	 */
 	private String ciutat = "ALL CITIES";
+
+	/**
+	 * Mostra la data activa al desplegable
+	 */
 	private String dates = "ALL DATES";
+	
+	/**
+	 * 	Mostra la hora activa del desplegable
+	 */
 	private String hores = "ALL HOURS";
+	
+	
+	/**
+	 * Nostra els llenguatga actiu del desplegable
+	 */
 	private String languages = "ALL LANGUAGES";
 	
 	//store all the instances of TalkAppointments
@@ -332,7 +359,15 @@ public class FindTalkAppointmentsMBean implements Serializable {
 					
 		screen = 0;
 		findTalkAppointmentsRemote = (TalkAppointmentFacadeRemote) ctx.lookup("java:app/PracticalCaseStudyJEE.jar/TalkAppointmentBean!ejb.TalkAppointmentFacadeRemote");
-		talkAppointmentsList = (Collection<TalkAppointmentJPA>) findTalkAppointmentsRemote.findTalkAppointments(this.getCiutat(),this.getDates(),this.getHores(),this.getLanguages());		
+		talkAppointmentsList = (Collection<TalkAppointmentJPA>) findTalkAppointmentsRemote.findTalkAppointments(this.getCiutat(),this.getDates(),this.getHores(),this.getLanguages());
+		
+		/*
+		for (Iterator<TalkAppointmentJPA> iter2 = talkAppointmentsList.iterator(); iter2.hasNext();) {
+			TalkAppointmentJPA talkapp = (TalkAppointmentJPA) iter2.next();
+			
+			System.out.println(talkapp.getUserPublish().getTalkedLanguageByUser().size());
+		}
+		*/
 	}
 	
 }

@@ -15,7 +15,23 @@
 							<p align="left"/><h:outputText value="#{ShowTalkAppointment.getTalkAppointment().getId()}" />
 						</td>
 					</tr>
-	 			<tr>
+					<tr>
+						<td width="155">
+							<p align="left"><i><b><font size="4" face="Century">Name:</font></b></i></p>
+						</td>
+						<td>
+							<p align="left"/><h:outputText value="#{ShowTalkAppointment.getTalkAppointment().getLanguageToTalk().getUser().getName()}" />
+						</td>
+					</tr>
+					<tr>
+						<td width="155">
+							<p align="left"><i><b><font size="4" face="Century">Idiomes Parla:</font></b></i></p>
+						</td>
+						<td>
+							<p align="left"/><h:outputText value="#{ShowTalkAppointment.getTalkAppointment().getUserPublish().getTalkedLanguageByUser().size()}" />
+						</td>
+					</tr>
+	 				<tr>
 						<td width="155">
 							<p align="left"/><i><b><font size="4" face="Century">Description:</font></b></i></td>
 						<td>

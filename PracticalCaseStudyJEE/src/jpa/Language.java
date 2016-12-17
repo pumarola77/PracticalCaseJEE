@@ -1,5 +1,5 @@
 package jpa;
 
 public enum Language {
-	ENGLISH, SPANISH , CATALAN
+	ENGLISH, SPANISH , CATALAN, FRENCH
 }
