@@ -25,11 +25,10 @@
 						<p align="right" /> <i><b><font size="4" face="Century">Idioma:</font></b></i>
 					</td>
 					<td>
-						<p align="left" />&nbsp;<h:inputText id="language"
-							label="Language" required="true"
-							requiredMessage="Camp Obligatori" value="">
-							<f:validator validatorId="ControlValorValidator"></f:validator>
-						</h:inputText>
+						<p align="left" />&nbsp;
+						<h:selectOneMenu id="language" valueChangeListener="#{languagetotalkadd.languageValueChanged}" value="#{languagetotalkadd.language}">
+							<f:selectItems value="#{languagetotalkadd.languagesList}" />
+						</h:selectOneMenu>
 					</td>
 					<td><h:message for="language" style="color:red"></h:message></td>
 				</tr>
@@ -38,10 +37,9 @@
 						<p align="right" /> <i><b><font size="4" face="Century">Nivell:</font></b></i>
 					</td>
 					<td>
-						<p align="left" />&nbsp;<h:selectOneMenu id="level" value="Mitjà">
-							<f:selectItem itemValue="Alt" itemLabel="Alt" />
-							<f:selectItem itemValue="Mitjà" itemLabel="Mitjà" />
-							<f:selectItem itemValue="Baix" itemLabel="Baix" />
+						<p align="left" />&nbsp;
+						<h:selectOneMenu id="level" valueChangeListener="#{languagetotalkadd.nivellValueChanged}" value="#{languagetotalkadd.nivell}">
+							<f:selectItems value="#{languagetotalkadd.nivellsList}" />
 						</h:selectOneMenu>
 					</td>
 					<td></td>

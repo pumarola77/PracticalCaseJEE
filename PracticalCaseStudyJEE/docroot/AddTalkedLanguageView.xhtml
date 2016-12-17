@@ -24,7 +24,10 @@
 						<p align="right" /> <i><b><font size="4" face="Century">Idioma:</font></b></i>
 					</td>
 					<td>
-						<p align="left" />&nbsp;<h:inputText id="language" value="" />
+						<p align="left" />&nbsp;
+						<h:selectOneMenu id="language" valueChangeListener="#{talkedlanguageadd.languageValueChanged}" value="#{talkedlanguageadd.language}">
+							<f:selectItems value="#{talkedlanguageadd.languagesList}" />
+						</h:selectOneMenu>
 					</td>
 				</tr>
 				<tr>
@@ -32,10 +35,9 @@
 						<p align="right" /> <i><b><font size="4" face="Century">Nivell:</font></b></i>
 					</td>
 					<td>
-						<p align="left" />&nbsp;<h:selectOneMenu id="level" value="Mitjà">
-							<f:selectItem itemValue="Alt" itemLabel="Alt" />
-							<f:selectItem itemValue="Mitjà" itemLabel="Mitjà" />
-							<f:selectItem itemValue="Baix" itemLabel="Baix" />
+						<p align="left" />&nbsp;
+						<h:selectOneMenu id="level" valueChangeListener="#{talkedlanguageadd.nivellValueChanged}" value="#{talkedlanguageadd.nivell}">
+							<f:selectItems value="#{talkedlanguageadd.nivellsList}" />
 						</h:selectOneMenu>
 					</td>
 				</tr>

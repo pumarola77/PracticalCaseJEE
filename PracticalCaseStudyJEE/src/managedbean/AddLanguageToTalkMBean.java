@@ -5,12 +5,16 @@ import java.util.*;
 import javax.ejb.EJB;
 import javax.faces.bean.*;
 import javax.faces.context.FacesContext;
+import javax.faces.event.ValueChangeEvent;
+import javax.faces.model.SelectItem;
 import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.persistence.PersistenceException;
 import javax.servlet.http.HttpServletRequest;
 
 import ejb.UserFacadeRemote;
+import jpa.Language;
+import jpa.LevelLanguage;
 
 /**
  * Managed Bean AddLanguageToTalkMBean
@@ -24,9 +28,48 @@ public class AddLanguageToTalkMBean implements Serializable{
 	private int success; //Aquest parametre serveix per controlar si el formulari de registre conte errors en les dades introduides
 	protected String errorFormulari; //Aquest parametre serveix per mostrar un error a la propia pàgina del formulari
 
+	private String language;
+	private String nivell;
+	
+	// Desplegable llista de llenguatges
+	protected Collection<SelectItem> languagesList = new ArrayList<SelectItem>();
+	protected Collection<SelectItem> nivellsList = new ArrayList<SelectItem>();
+	
 	@EJB
 	private UserFacadeRemote addLanguageToTalkRemote;
 
+	
+	/**
+	 * Constructor 
+	 * Carrega valors
+	 * @throws Exception 
+	 */
+	public AddLanguageToTalkMBean() throws Exception {
+		this.languagesList();
+		this.nivellsList();
+	}
+	
+	/**
+	 * Retorna els valors del desplegable a la vista
+	 * @return desplegable idioma
+	 */
+	public Collection<SelectItem> getLanguagesList() {		
+		return languagesList;
+	}
+	
+	public Collection<SelectItem> getNivellsList() {
+		return nivellsList;
+	}
+	
+	public void languageValueChanged(ValueChangeEvent languageChanged) 
+	{		
+		this.setLanguage(languageChanged.getNewValue().toString());
+	}
+		
+	public void nivellValueChanged(ValueChangeEvent nivellChanged) {
+		this.setNivell(nivellChanged.getNewValue().toString());
+	}
+	
 	public String getErrorFormulari(){
 		return errorFormulari;
 	}
@@ -34,6 +77,30 @@ public class AddLanguageToTalkMBean implements Serializable{
 		this.errorFormulari = errorFormulari;
 	}
 
+	/**
+	 * Carrega els valors que mostrara el desplegable
+	 */
+	public void languagesList() throws Exception {
+		languagesList.clear();
+		
+		
+		// Recorre Classe Enum
+		for(Language d: Language.values() ) {	
+			
+			SelectItem item = new SelectItem(d.name());			
+			this.languagesList.add(item);
+		}
+	}
+	
+	public void nivellsList() throws Exception {
+		nivellsList.clear();
+		
+		for(LevelLanguage d: LevelLanguage.values()) {
+			SelectItem item = new SelectItem(d.name());
+			this.nivellsList.add(item);
+		}
+	}
+	
 	/**
 	 * Metode que es fa servir per afegir un 'Language To Talk'
 	 * @return Nom del Facelet
@@ -71,4 +138,21 @@ public class AddLanguageToTalkMBean implements Serializable{
 			throw e;
 		} 
 	}
+	
+	public String getLanguage() {		
+		return this.language;
+	}
+	
+	public void setLanguage(String language) {		
+		this.language = language;
+	}
+
+	public String getNivell() {
+		return nivell;
+	}
+
+	public void setNivell(String nivell) {
+		this.nivell = nivell;
+	}
+	
 }
