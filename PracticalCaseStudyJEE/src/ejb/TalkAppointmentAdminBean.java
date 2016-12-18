@@ -2,6 +2,7 @@ package ejb;
 
 import java.sql.Date;
 import java.sql.Time;
+import java.util.Collection;
 
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
@@ -112,5 +113,25 @@ public class TalkAppointmentAdminBean implements TalkAppointmentAdminFacadeRemot
 		}catch (PersistenceException e) {
 			throw e;
 		} 
+	}
+
+	/**
+	 * Retorna les peticions publicades per un usuari
+	 * 
+	 */
+	@Override
+	public Collection<?> findMyTalkAppointmentsAsProposal(String nif) {
+		// TODO Auto-generated method stub
+		Query query = null;
+		
+
+		query = entman.createQuery("FROM TalkAppointmentJPA t WHERE t.userPublish.nif = :nif");
+		query.setParameter("nif", nif);
+
+		@SuppressWarnings("unchecked")
+		Collection<TalkAppointmentJPA> talkAppointments = query.getResultList();
+		
+		
+		return talkAppointments;
 	}
 }

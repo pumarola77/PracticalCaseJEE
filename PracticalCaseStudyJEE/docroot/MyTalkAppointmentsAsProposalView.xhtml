@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core" xmlns:h="http://java.sun.com/jsf/html">
+	
+
+<h:head>
+#{authorized.authorized()}
+</h:head>
+
+<h:body>
+	<h:form>	
+		<h:commandLink action="#{findmytalkappasproposal.previousScreen}" value="Anterior" />
+		<h:outputText value="   " />
+		<h:commandLink action="#{findmytalkappasproposal.nextScreen}" value="Següent" />	
+		<h:outputText value="   " />
+		<h:link	value="HomeView ( Principal)" outcome="HomeView"></h:link>	
+	</h:form>
+	<h:form align="left">
+		<h:dataTable value="#{findmytalkappasproposal.talkAppointmentsListView}" var="item" bgcolor="#F1F1F1" border="10" first="0" width="100%" frame="hsides" rules="all">
+			<f:facet name="header">
+				<h:outputText align="center" value="List My Publish Appointments" />
+			</f:facet>
+			<h:column>
+				<f:facet name="header">
+					<h:outputText value="id"/>
+				</f:facet>
+				<p align="right"><h:outputText value="#{item.id}" /></p>
+			</h:column>
+			
+			<h:column>
+				<f:facet name="header">
+					<h:outputText value="City"/>
+				</f:facet>
+				<p align="right"><h:outputText value="#{item.location.city}" /></p>
+			</h:column>
+			
+			<h:column>
+				<f:facet name="header">
+					<h:outputText value="Language"/>
+				</f:facet>
+				<p align="right"><h:outputText value="#{item.languageToTalk.language}" /></p>
+			</h:column>
+
+			<h:column>
+				<f:facet name="header">
+					<h:outputText value="date"/>
+				</f:facet>
+				<p align="right"><h:outputText value="#{item.date}" /></p>
+			</h:column>
+			<h:column>
+				<f:facet name="header">
+					<h:outputText value="time"/>
+				</f:facet>
+				<p align="right"><h:outputText value="#{item.time}" /></p>
+			</h:column>
+
+			<h:column>
+				<f:facet name="header">
+					<h:outputText value="Name"></h:outputText>
+				</f:facet>
+				<p align="right"><h:outputText value="#{item.userSign.name}" /></p>
+			</h:column>
+
+
+			<h:column>
+				<f:facet name="header">
+					<h:outputText value="Level"></h:outputText>
+				</f:facet>
+				<p align="right"><h:outputText value="#{item.languageToTalk.level}" /></p>
+			</h:column>
+
+			<h:column>
+				<f:facet name="header">
+					<h:outputText value="Status"></h:outputText>
+				</f:facet>
+				<p align="right"><h:outputText value="#{item.status}" /></p>
+			</h:column>
+			<h:column>
+				<f:facet name="header">
+					<h:outputText value="Accions"/>
+				</f:facet>
+				<h:commandButton value="Acceptar" type="submit" action="#{acceptrequest.AcceptRequest(item.id,item.userPublish.nif)}" />
+				<h:commandButton value="Rebutjar" type="submit" action="RejectRequestView" /> 						
+			</h:column>
+			
+		</h:dataTable>
+	</h:form>
+</h:body>
+</html>
