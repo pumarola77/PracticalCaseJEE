@@ -34,7 +34,7 @@ public class AcceptRequestMBean implements Serializable{
 			Properties props = System.getProperties();
 			Context ctx = new InitialContext(props);
 
-			AcceptRequestRemote = (TalkAppointmentAdminFacadeRemote) ctx.lookup("java:app/PracticalCaseStudyJEE.jar/TalkAppointmentAdminFacadeBean!ejb.TalkAppointmentAdminFacadeRemote");
+			AcceptRequestRemote = (TalkAppointmentAdminFacadeRemote) ctx.lookup("java:app/PracticalCaseStudyJEE.jar/TalkAppointmentAdminBean!ejb.TalkAppointmentAdminFacadeRemote");
 			AcceptRequestRemote.acceptRequest(talkid, nif);
 
 			return "MyTalkAppointmentsAsProposalView";

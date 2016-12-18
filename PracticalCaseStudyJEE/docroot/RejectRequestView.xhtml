@@ -9,7 +9,7 @@
 	#{authorized.authorized()}
 </h:head>
 <h:body>
-	<h:form id="userForm">
+	<h:form id="rejectRequestForm">
 		<div align="center">
 			<table border="1" width="50%" id="table1">
 				<tr>
@@ -27,10 +27,10 @@
 						<p align="right" /> <i><b><font size="4" face="Century">Motiu:</font></b></i>
 					</td>
 					<td>
-						<p align="left" />&nbsp;<h:inputText id="motiu" label="Motiu"
+						<p align="left" />&nbsp;<h:inputTextarea id="motiu" label="Motiu"
 							required="true" requiredMessage="Camp Obligatori" value="">
 							<f:validator validatorId="ControlValorValidator"></f:validator>
-						</h:inputText>
+						</h:inputTextarea>
 					</td>
 					<td><h:message for="motiu" style="color:red"></h:message></td>
 				</tr>
@@ -46,7 +46,7 @@
 					<td colspan="2">
 						<p align="center">
 							<h:commandButton value="Actualitzar dades" immediate="true"
-								action="#{rejectrequest.rejectRequest}" />
+								action="#{rejectrequest.rejectRequest(rejectrequest.talkId, rejectrequest.nif)}" />
 							&nbsp;&nbsp;
 							<h:commandButton value="Tornar a la llista" immediate="true"
 								action="MyTalkAppointmentsListView" />

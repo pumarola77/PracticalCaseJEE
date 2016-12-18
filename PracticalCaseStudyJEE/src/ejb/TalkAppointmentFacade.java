@@ -16,8 +16,8 @@ public interface TalkAppointmentFacade {
 	public TalkAppointmentJPA showTalkAppointment(int id);
 	public void registerInTalkAppointment(String nif, Integer talkid);
 	public void removeFromTalkAppointment(String nif, Integer talkid);
-	public Collection<TalkAppointmentJPA> findMyTalkAppointments(String nif, boolean isPublisher);
-	
+	public Collection<TalkAppointmentJPA> findMyTalkAppointments(String nif, String data, String tipus);
+
 	public Collection<?> citiesTalkAppointments();
 	public Collection<?> languagesfromTalkAppointments(String city);
 	public Collection<?> datefromTalkAppointmments(String city, String language);

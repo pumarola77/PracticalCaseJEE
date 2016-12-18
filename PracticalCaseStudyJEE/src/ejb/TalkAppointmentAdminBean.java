@@ -64,6 +64,7 @@ public class TalkAppointmentAdminBean implements TalkAppointmentAdminFacadeRemot
 			{				
 				TalkAppointmentJPA talkAppointment = entman.find(TalkAppointmentJPA.class, talkid); 
 				talkAppointment.setUserSign(entman.find(UserJPA.class, nif));
+				talkAppointment.setStatus(TalkStatus.CONFIRMED);
 				entman.persist(talkAppointment);
 			}
 
@@ -76,7 +77,7 @@ public class TalkAppointmentAdminBean implements TalkAppointmentAdminFacadeRemot
 	 * Metode per rebutjar una petició de conversa, on s'ha d'especificar la rao
 	 */
 	@Override
-	public void rejectRequest(int talkid, String nif, String reason) throws PersistenceException {
+	public int rejectRequest(int talkid, String nif, String reason) throws PersistenceException {
 		try
 		{
 			Query queryTalkId= entman.createQuery("FROM TalkAppointmentJPA t WHERE t.id = :talkid").setParameter("talkid", talkid);
@@ -84,7 +85,7 @@ public class TalkAppointmentAdminBean implements TalkAppointmentAdminFacadeRemot
 			if (queryTalkId.getResultList().isEmpty())
 			{
 				// Mirem que existeixi el TalkAppointment.
-				throw new PersistenceException("La petició de conversa no existeix.");			
+				return 1;
 			}
 			else
 			{
@@ -93,17 +94,21 @@ public class TalkAppointmentAdminBean implements TalkAppointmentAdminFacadeRemot
 				if (queryNif.getResultList().isEmpty())
 				{
 					// Mirem que existeixi l'usuari.
-					throw new PersistenceException("L'usuari no existeix.");			
+					return 2;
 				}
 				else
 				{
+					TalkAppointmentJPA talkApp = entman.find(TalkAppointmentJPA.class, talkid);
 					DeniedRequestJPA deniedRequest = new DeniedRequestJPA(reason); 
 					deniedRequest.setUser(entman.find(UserJPA.class, nif));
-					deniedRequest.setTalkApp(entman.find(TalkAppointmentJPA.class, talkid));
+					deniedRequest.setTalkApp(talkApp);
 					entman.persist(deniedRequest);
+					talkApp.setUserSign(null);
+					entman.persist(talkApp);
+					return 0;
 				}
 			}
-
+			
 		}catch (PersistenceException e) {
 			throw e;
 		} 
