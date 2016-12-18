@@ -36,7 +36,7 @@ public class TalkAppointmentBean implements TalkAppointmentFacadeRemote, TalkApp
 		return talkApp;
 	}
 
-
+	
 	@Override
 	public void registerInTalkAppointment(String nif, Integer talkid) {
 		// TODO Auto-generated method stub
@@ -118,9 +118,9 @@ public class TalkAppointmentBean implements TalkAppointmentFacadeRemote, TalkApp
 		try {
 
 			if ( location.compareTo("ALL CITIES") == 0 ) {
-				select = "FROM TalkAppointmentJPA b WHERE b.status = 'OPEN'";
+				select = "FROM TalkAppointmentJPA b WHERE b.status = 'OPEN' and b.userSign.nif is null";
 			} else {
-				select = "FROM TalkAppointmentJPA b WHERE b.status = 'OPEN' and b.location.city = :ciutat";
+				select = "FROM TalkAppointmentJPA b WHERE b.status = 'OPEN' and b.userSign.nif is null and b.location.city = :ciutat";
 				
 				if ( language.compareTo("ALL LANGUAGES") != 0 ) {
 					select = select + " AND b.languageToTalk.language = :language";
@@ -188,7 +188,7 @@ public class TalkAppointmentBean implements TalkAppointmentFacadeRemote, TalkApp
 		try {
 
 			@SuppressWarnings("unchecked")
-			Collection<String> talkappointments = entman.createQuery("SELECT a.location.city FROM TalkAppointmentJPA a WHERE a.status = 'OPEN' GROUP BY a.location.city").getResultList();
+			Collection<String> talkappointments = entman.createQuery("SELECT a.location.city FROM TalkAppointmentJPA a WHERE a.status = 'OPEN' and a.userSign.nif is null GROUP BY a.location.city").getResultList();
 			
 			if ( !talkappointments.isEmpty() ) {
 				return talkappointments;
@@ -208,7 +208,7 @@ public class TalkAppointmentBean implements TalkAppointmentFacadeRemote, TalkApp
 		try {
 			
 			@SuppressWarnings("unchecked")
-			Collection<String> talkappointments = entman.createQuery("SELECT a.languageToTalk.language  FROM TalkAppointmentJPA a WHERE a.status = 'OPEN' and a.location.city = :ciutat GROUP BY a.languageToTalk.language").setParameter("ciutat", city).getResultList();
+			Collection<String> talkappointments = entman.createQuery("SELECT a.languageToTalk.language  FROM TalkAppointmentJPA a WHERE a.status = 'OPEN' and a.userSign.nif is null and a.location.city = :ciutat GROUP BY a.languageToTalk.language").setParameter("ciutat", city).getResultList();
 			
 			if ( !talkappointments.isEmpty()) {
 				return talkappointments;
@@ -229,7 +229,7 @@ public class TalkAppointmentBean implements TalkAppointmentFacadeRemote, TalkApp
 		try {
 			
 			@SuppressWarnings("unchecked")
-			Collection<Date> talkappointments = entman.createQuery("SELECT a.date FROM TalkAppointmentJPA a where a.status = 'OPEN' and a.location.city = :ciutat AND a.languageToTalk.language = :language GROUP BY a.date").setParameter("ciutat", city).setParameter("language",language).getResultList();
+			Collection<Date> talkappointments = entman.createQuery("SELECT a.date FROM TalkAppointmentJPA a where a.status = 'OPEN' and a.userSign.nif is null and a.location.city = :ciutat AND a.languageToTalk.language = :language GROUP BY a.date").setParameter("ciutat", city).setParameter("language",language).getResultList();
 			
 			if ( !talkappointments.isEmpty() ) {
 				return talkappointments;
@@ -251,7 +251,7 @@ public class TalkAppointmentBean implements TalkAppointmentFacadeRemote, TalkApp
 		try {
 			
 			@SuppressWarnings("unchecked")
-			Collection<Time> talkappointments = entman.createQuery("SELECT a.time FROM TalkAppointmentJPA a WHERE a.status = 'OPEN' and a.location.city = :ciutat and a.languageToTalk.language = :language and a.date = :date GROUP BY a.time").setParameter("ciutat", city).setParameter("language",language).setParameter("date",date).getResultList();
+			Collection<Time> talkappointments = entman.createQuery("SELECT a.time FROM TalkAppointmentJPA a WHERE a.status = 'OPEN' and a.userSign.nif is null and a.location.city = :ciutat and a.languageToTalk.language = :language and a.date = :date GROUP BY a.time").setParameter("ciutat", city).setParameter("language",language).setParameter("date",date).getResultList();
 			
 			if ( !talkappointments.isEmpty()) {
 				return talkappointments;

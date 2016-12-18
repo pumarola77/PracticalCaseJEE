@@ -68,8 +68,9 @@
 					<f:facet name="header">
 						<h:outputText value="Accions"/>
 					</f:facet>
-					<h:commandButton value="Apuntar-se" type="submit" action="#{RegisterInTalkAppointment.registerInTalkedAppointment(item.id)}" />
+					<!--<h:commandButton value="Apuntar-se" type="submit" action="#{RegisterInTalkAppointment.registerInTalkedAppointment(item.id)}" />-->
 					<!--<h:commandButton value="Desapuntar-se" type="submit" action="#{RemoveFromTalkAppointment.removeFromTalkAppointment(item.id)}" />-->
+					<h:commandButton value="Apuntar-se" type="submit" action="#{RegisterInTalkAppointment.showRegister(item.id)}" />
 					<h:commandButton value="Veure detalls" type="submit" action="#{ShowTalkAppointment.showView(item.id)}" /> 						
 				</h:column>					
 			</h:dataTable>

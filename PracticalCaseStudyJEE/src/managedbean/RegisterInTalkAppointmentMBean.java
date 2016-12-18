@@ -11,6 +11,7 @@ import javax.naming.Context;
 import javax.naming.InitialContext;
 
 import ejb.TalkAppointmentFacadeRemote;
+import jpa.TalkAppointmentJPA;
 
 
 @ManagedBean(name = "RegisterInTalkAppointment")
@@ -25,8 +26,15 @@ public class RegisterInTalkAppointmentMBean implements Serializable {
 	@EJB
 	private TalkAppointmentFacadeRemote registerInTalkedAppointmentRemote;
 	
-	public String registerInTalkedAppointment(/*String nif,*/ Integer talkid) throws Exception {
+	private TalkAppointmentJPA talkAppointment;
+	private int id;
+	
+	public RegisterInTalkAppointmentMBean() {
 		
+	}
+	
+	public String registerInTalkedAppointment(Integer talkid) throws Exception {
+						
 		String nif ="";
 		
 		if ( FacesContext.getCurrentInstance().getExternalContext().getSessionMap().containsKey("nif") == true) 
@@ -40,7 +48,29 @@ public class RegisterInTalkAppointmentMBean implements Serializable {
 		registerInTalkedAppointmentRemote.registerInTalkAppointment(nif, talkid);
 		
 		
-		return "TalkAppointmentsListView";
+		//return "TalkAppointmentsListView";
+		return null;
+	}
+	
+	public int getId(){
+		return id;
+	}
+	
+	public void setId(int id){
+		this.id = id;
+	}
+	
+	public TalkAppointmentJPA getTalkAppointment(){
+		return talkAppointment;
+	}
+	
+	public void setTalkAppointment(int id)  throws Exception{
+		talkAppointment = (TalkAppointmentJPA) registerInTalkedAppointmentRemote.showTalkAppointment(id);		
+	}
+	
+	public String showRegister(int id) throws Exception {
+		this.setTalkAppointment(id);
+		return "RegisterInTalkAppointmentView";
 	}
 	
 }

@@ -92,7 +92,7 @@ public class FindTalkAppointmentsMBean implements Serializable {
 	private Collection<String> languageList;
 	
 	public FindTalkAppointmentsMBean() throws Exception 
-	{		
+	{			
 		this.talkAppointmentsList();
 		
 		this.ciutatsList();
@@ -205,8 +205,8 @@ public class FindTalkAppointmentsMBean implements Serializable {
 		this.setHores(horesChanged.getNewValue().toString());
 	}
 	
-	public String listTalkAppointments() throws Exception {		
-		talkAppointmentsList();		
+	public String listTalkAppointments() throws Exception {				
+		talkAppointmentsList();				
 		return "TalkAppointmentsListView";
 	}
 	
@@ -356,18 +356,10 @@ public class FindTalkAppointmentsMBean implements Serializable {
 	private void talkAppointmentsList() throws Exception {		
 		Properties props = System.getProperties();
 		Context ctx = new InitialContext(props);	
-					
+							
 		screen = 0;
 		findTalkAppointmentsRemote = (TalkAppointmentFacadeRemote) ctx.lookup("java:app/PracticalCaseStudyJEE.jar/TalkAppointmentBean!ejb.TalkAppointmentFacadeRemote");
 		talkAppointmentsList = (Collection<TalkAppointmentJPA>) findTalkAppointmentsRemote.findTalkAppointments(this.getCiutat(),this.getDates(),this.getHores(),this.getLanguages());
-		
-		/*
-		for (Iterator<TalkAppointmentJPA> iter2 = talkAppointmentsList.iterator(); iter2.hasNext();) {
-			TalkAppointmentJPA talkapp = (TalkAppointmentJPA) iter2.next();
-			
-			System.out.println(talkapp.getUserPublish().getTalkedLanguageByUser().size());
-		}
-		*/
 	}
 	
 }
