@@ -48,8 +48,15 @@ public class AddTalkAppointmentMBean implements Serializable{
 	private String nif;
 	LanguageToTalkJPA languageToTalk = null;
 	
-	//Necessari per llista totes les llengues que parla l'usuari
+	protected String description = "";
+	protected String dateStr = "";
+	protected String timeStr = "";
 	protected String language = "";
+	protected String street = "";
+	protected String num = "";
+	protected String cp = "";
+	protected String city = "";
+	
 	private Collection<LanguageToTalkJPA> allLanguageToTalk;
 	protected Collection<SelectItem> languageList = new ArrayList<SelectItem>();
 	
@@ -85,6 +92,62 @@ public class AddTalkAppointmentMBean implements Serializable{
 		this.language = language;
 	}
 	
+	public String getStreet(){
+		return street;
+	}
+	
+	public void setStreet(String street){
+		this.street = street;
+	}
+	
+	public String getNum(){
+		return num;
+	}
+	
+	public void setNum(String num){
+		this.num = num;
+	}
+	
+	public String getCp(){
+		return cp;
+	}
+	
+	public void setCp(String cp){
+		this.cp = cp;
+	}
+	
+	public String getCity(){
+		return city;
+	}
+	
+	public void setCity(String city){
+		this.city = city;
+	}
+	
+	public String getDescription(){
+		return description;
+	}
+	
+	public void setDescription(String description){
+		this.description = description;
+	}
+	
+	public String getDateStr(){
+		return dateStr;
+	}
+	
+	public void setDateStr(String dateStr){
+		this.dateStr = dateStr;
+	}
+	
+	public String getTimeStr(){
+		return timeStr;
+	}
+	
+	public void setTimeStr(String timeStr){
+		this.timeStr = timeStr;
+	}
+	
 	public LanguageToTalkJPA getLanguageToTalk(){
 		return languageToTalk;
 	}
@@ -100,35 +163,21 @@ public class AddTalkAppointmentMBean implements Serializable{
 	public String addTalkApp() throws Exception{
 		try{
 
-			FacesContext context = FacesContext.getCurrentInstance();
-			HttpServletRequest request = (HttpServletRequest)context.getExternalContext().getRequest();
-			//Description
-			String description = request.getParameter("talkAppForm:description");
-			//System.out.println("DESCRIPTION:" +description);
 			//Date
-			String dateStr = request.getParameter("talkAppForm:date");
-			DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
+			DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
 			java.util.Date dateConv = dateFormat.parse(dateStr);
 			Date date = new Date(dateConv.getTime());
-			//System.out.println("DATE:" +date);
+			
 			//Time
-			String timeStr = request.getParameter("talkAppForm:time");
 			SimpleDateFormat timeFormat = new SimpleDateFormat("hh:mm");
 			long timeConv = timeFormat.parse(timeStr).getTime();
 			Time time = new Time(timeConv);
-			//System.out.println("TIME:" +time);
 			
 			//LanguageToTalk
 			findLanguageToTalk();
-			//System.out.println("LANGUAGETOTALK:" +languageToTalk.getLanguage());
 			
 			//Location
-			String street = request.getParameter("talkAppForm:street");
-			String num = request.getParameter("talkAppForm:num");
-			String cp = request.getParameter("talkAppForm:cp");
-			String city = request.getParameter("talkAppForm:city");
 			LocationJPA location = new LocationJPA(street,num,cp,city);
-			//System.out.println("LOCATION:" +location.toString());
 			
 			//TalkAppointmentAdminFacadeRemote
 			Properties props = System.getProperties();

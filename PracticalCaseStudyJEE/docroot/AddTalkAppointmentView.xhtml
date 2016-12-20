@@ -10,13 +10,13 @@
    #{talkappointmentadd.getAllLanguageToTalk()}
 </h:head>
 <h:body>
+	<div align="center">
 	<h:form>
   		<h:link	value="HomeView ( Principal)" outcome="HomeView">
   		</h:link>
   	</h:form>
 	<h:form id="talkAppForm">
-		<div align="center">
-			<table border="1" width="50%" id="table1">
+			<table  border="1" width= "50%" id="table1">
 				<tr>
 					<td>
 						<p align="center" /> <i><b><font size="4" face="Century">Afegir TalkAppointment a l'usuari #{talkappointmentadd.nif}</font></b></i>
@@ -27,15 +27,25 @@
 						<p align="right" /> <i><b><font size="4" face="Century">Descripcio:</font></b></i>
 					</td>
 					<td>
-						<p align="left" />&nbsp;<h:inputText id="description" value="" />
+						<h:inputText id="description" label="Description" required="true" requiredMessage="Camp Obligatori" value="#{talkappointmentadd.description}">
+							<f:validator validatorId="ControlValorValidator"></f:validator>
+						</h:inputText>
+					</td>
+					<td>
+							<h:message for="description" style="color:red"></h:message>
 					</td>
 				</tr>
 				<tr>
 					<td>
-						<p align="right" /> <i><b><font size="4" face="Century">Data(yyyy/MM/dd):</font></b></i>
+						<p align="right" /> <i><b><font size="4" face="Century">Data(dd/MM/yyyy):</font></b></i>
 					</td>
 					<td>
-						<p align="left" />&nbsp;<h:inputText id="date" value="" />
+						<h:inputText id="date" label="Date" required="true" requiredMessage="Camp obligatori" value="#{talkappointmentadd.dateStr}">
+							<f:validator validatorId="DateValidator"></f:validator>
+						</h:inputText>
+					</td>
+					<td>
+							<h:message for="date" style="color:red"></h:message>
 					</td>
 				</tr>
 				<tr>
@@ -43,7 +53,12 @@
 						<p align="right" /> <i><b><font size="4" face="Century">Time(HH:mm):</font></b></i>
 					</td>
 					<td>
-						<p align="left" />&nbsp;<h:inputText id="time" value="" />
+						<h:inputText id="time" label="Time" required="true" requiredMessage="Camp obligatori" value="#{talkappointmentadd.timeStr}">
+							<f:validator validatorId="TimeValidator"></f:validator>
+						</h:inputText>
+					</td>
+					<td>
+							<h:message for="time" style="color:red"></h:message>
 					</td>
 				</tr>
 				<tr>
@@ -62,8 +77,15 @@
 					<td>
 						<p align="right" /> <i><b><font size="4" face="Century">Carrer:</font></b></i>
 					</td>
+		
 					<td>
-						<p align="left" />&nbsp;<h:inputText id="street" value="" />
+						<h:inputText id="street" label="street" required="true" requiredMessage="Camp obligatori" value="#{talkappointmentadd.street}">
+							<f:validator validatorId="ControlValorValidator"></f:validator>
+						</h:inputText>
+						
+					</td>
+					<td>
+							<h:message for="street" style="color:red"></h:message>
 					</td>
 				</tr>
 				<tr>
@@ -71,7 +93,12 @@
 						<p align="right" /> <i><b><font size="4" face="Century">Numero:</font></b></i>
 					</td>
 					<td>
-						<p align="left" />&nbsp;<h:inputText id="num" value="" />
+						<h:inputText id="num" label="num" required="true" requiredMessage="Camp obligatori" value="#{talkappointmentadd.num}" >
+							<f:validator validatorId="ControlValorValidator"></f:validator>
+						</h:inputText>
+					</td>
+					<td>
+							<h:message for="num" style="color:red"></h:message>
 					</td>
 				</tr>
 				<tr>
@@ -79,27 +106,36 @@
 						<p align="right" /> <i><b><font size="4" face="Century">Codi postal:</font></b></i>
 					</td>
 					<td>
-						<p align="left" />&nbsp;<h:inputText id="cp" value="" />
+						<h:inputText id="cp" label="cp" required="true" requiredMessage="Camp obligatori" value="#{talkappointmentadd.cp}" >
+							<f:validator validatorId="ControlValorValidator"></f:validator>
+						</h:inputText>
+					</td>
+					<td>
+							<h:message for="cp" style="color:red"></h:message>
 					</td>
 				</tr>
 				<tr>
 					<td>
-						<p align="right" /> <i><b><font size="4" face="Century">Ciutat:</font></b></i>
+						<p align="right" /> <i><b><font size="4" face="Century">Ciutat: </font></b></i>
 					</td>
 					<td>
-						<p align="left" />&nbsp;<h:inputText id="city" value="" />
+						<h:inputText id="city" label="city" required="true" requiredMessage="Camp Obligatori" value="#{talkappointmentadd.city}">
+							<f:validator validatorId="ControlValorValidator"></f:validator>
+						</h:inputText>
+					</td>
+					<td>
+						<h:message for="city" style="color:red"></h:message>
 					</td>
 				</tr>
 				<tr>
 					<td colspan="2">
 						<p align="center">
-							<h:commandButton value="Afegir TalkAppointment" immediate="true"
-								action="#{talkappointmentadd.addTalkApp}" />
+							<h:commandButton id="botoAdd" value="Afegir TalkAppointment" action="#{talkappointmentadd.addTalkApp}" />
 						</p>
 					</td>
 				</tr>
 			</table>
-		</div>
 	</h:form>
+	</div>
 </h:body>
 </html>
