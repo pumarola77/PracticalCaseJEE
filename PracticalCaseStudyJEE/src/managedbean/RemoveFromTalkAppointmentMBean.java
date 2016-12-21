@@ -25,7 +25,7 @@ public class RemoveFromTalkAppointmentMBean implements Serializable {
 	@EJB
 	private TalkAppointmentFacadeRemote removeFromTalkedAppointmentRemote;
 	
-	public String removeFromTalkAppointment(/*String nif,*/ Integer talkid) throws Exception {
+	public String removeFromTalkAppointment(Integer talkid) throws Exception {
 
 		String nif ="";
 		
@@ -41,7 +41,7 @@ public class RemoveFromTalkAppointmentMBean implements Serializable {
 		removeFromTalkedAppointmentRemote.removeFromTalkAppointment(nif, talkid);
 
 		
-		return "TalkAppointmentsListView";
+		return "MyTalkAppointmentsListView";
 	}
 	
 }

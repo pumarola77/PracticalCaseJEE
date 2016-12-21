@@ -24,7 +24,7 @@
 				frame="hsides" rules="all">
 				<f:facet name="header">
 					<h:outputText align="center"
-						value="List MyTalkAppointments #{item.nif}" />
+						value="List MyTalkAppointments #{findmytalkappointments.nif}" />
 				</f:facet>
 				<h:column>
 					<f:facet name="header">
@@ -88,10 +88,18 @@
 				</h:column>
 				<h:column>
 					<f:facet name="header">
+						<h:outputText value="publisher" />
+					</f:facet>
+					<p align="right">
+						<h:outputText value="#{item.userPublish.name}" />
+					</p>
+				</h:column>
+				<h:column>
+					<f:facet name="header">
 						<h:outputText value="Accions" />
 					</f:facet>
 					<h:commandButton value="Desapuntar-se" type="submit"
-						action="#{RemoveFromTalkAppointment.removeFromTalkAppointment(item.nif, item.id)}" />
+						action="#{RemoveFromTalkAppointment.removeFromTalkAppointment(item.id)}" />
 					<h:commandButton value="Veure detalls" type="submit"
 						action="#{ShowTalkAppointment.showView(item.id)}" />
 				</h:column>
