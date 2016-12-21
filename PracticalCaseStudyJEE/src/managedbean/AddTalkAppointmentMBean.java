@@ -7,9 +7,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Collections;
 import java.util.Iterator;
-import java.util.List;
 import java.util.Properties;
 
 import javax.ejb.EJB;
@@ -20,13 +18,15 @@ import javax.faces.event.ValueChangeEvent;
 import javax.faces.model.SelectItem;
 import javax.naming.Context;
 import javax.naming.InitialContext;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import javax.persistence.PersistenceException;
-import javax.servlet.http.HttpServletRequest;
 
 import ejb.TalkAppointmentAdminFacadeRemote;
 import ejb.UserFacadeRemote;
 import jpa.LanguageToTalkJPA;
 import jpa.LocationJPA;
+import jpa.UserJPA;
 
 
 /**
@@ -38,6 +38,9 @@ public class AddTalkAppointmentMBean implements Serializable{
 	
 	private static final long serialVersionUID = 1L;
 	
+	@PersistenceContext(unitName="PracticalCase") 
+	private EntityManager entman;
+
 	
 	@EJB
 	private TalkAppointmentAdminFacadeRemote addTalkAppointmentRemote;
@@ -45,17 +48,25 @@ public class AddTalkAppointmentMBean implements Serializable{
 	@EJB
 	private UserFacadeRemote userRemote;
 	
+	/**
+	 * Nif usuari que s'ha logat
+	 */
 	private String nif;
-	LanguageToTalkJPA languageToTalk = null;
+	
+	/**
+	 * Llengua seleccionada per el 
+	 */
+	private String language;
 	
 	protected String description = "";
 	protected String dateStr = "";
 	protected String timeStr = "";
-	protected String language = "";
+	//protected String language = "";
 	protected String street = "";
 	protected String num = "";
 	protected String cp = "";
 	protected String city = "";
+	
 	
 	private Collection<LanguageToTalkJPA> allLanguageToTalk;
 	protected Collection<SelectItem> languageList = new ArrayList<SelectItem>();
@@ -92,6 +103,7 @@ public class AddTalkAppointmentMBean implements Serializable{
 		this.language = language;
 	}
 	
+
 	public String getStreet(){
 		return street;
 	}
@@ -148,21 +160,16 @@ public class AddTalkAppointmentMBean implements Serializable{
 		this.timeStr = timeStr;
 	}
 	
-	public LanguageToTalkJPA getLanguageToTalk(){
-		return languageToTalk;
-	}
-	
-	public void setLanguageToTalk(LanguageToTalkJPA languageToTalk){
-		this.languageToTalk = languageToTalk;
-	}
 	
 	public Collection<SelectItem> getLanguageList(){
 		return languageList;
 	}
+	
 
 	public String addTalkApp() throws Exception{
 		try{
 
+			
 			//Date
 			DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
 			java.util.Date dateConv = dateFormat.parse(dateStr);
@@ -173,20 +180,32 @@ public class AddTalkAppointmentMBean implements Serializable{
 			long timeConv = timeFormat.parse(timeStr).getTime();
 			Time time = new Time(timeConv);
 			
-			//LanguageToTalk
-			findLanguageToTalk();
 			
+			//LanguageToTalk
+			//findLanguageToTalk();
+			
+			LanguageToTalkJPA findlanguageToTalk;
+								
 			//Location
 			LocationJPA location = new LocationJPA(street,num,cp,city);
+			
+			// UTILITZA per buscar la clau composta corresponent al nif i llenguatge entrat.
+			UserJPA user = entman.find(UserJPA.class, this.getNif());
+			LanguageToTalkJPA pk = new LanguageToTalkJPA(user,this.getLanguage());
+			findlanguageToTalk = entman.find(LanguageToTalkJPA.class, pk);
+			LanguageToTalkJPA languageToTalk = new LanguageToTalkJPA(findlanguageToTalk.getLanguage(),findlanguageToTalk.getLevel(),
+					findlanguageToTalk.getDescription(),findlanguageToTalk.isAcceptPay());
+			
+			//Assigna valors al constructor
+			languageToTalk.setUser(user);
+			languageToTalk.setLanguage(this.getLanguage());
 			
 			//TalkAppointmentAdminFacadeRemote
 			Properties props = System.getProperties();
 			Context ctx = new InitialContext(props);
 			addTalkAppointmentRemote = (TalkAppointmentAdminFacadeRemote) ctx.lookup("java:app/PracticalCaseStudyJEE.jar/TalkAppointmentAdminBean!ejb.TalkAppointmentAdminFacadeRemote");
-			
-			//Afegim el TalkAppointment
 			addTalkAppointmentRemote.addTalkAppointment(description,location,date,time,languageToTalk);
-			
+	
 		}catch(PersistenceException e){
 			throw e;
 		}
@@ -212,6 +231,7 @@ public class AddTalkAppointmentMBean implements Serializable{
 		setLanguage(languageChanged.getNewValue().toString());
 	}	
 
+	/*
 	//Busquem el languageToTalk de la language seleccionada en la View
 	private void findLanguageToTalk() throws Exception {
 		
@@ -226,4 +246,5 @@ public class AddTalkAppointmentMBean implements Serializable{
 			}
 		}
 	}
+	*/
 }
