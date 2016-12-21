@@ -91,7 +91,7 @@ public class TalkAppointmentBean implements TalkAppointmentFacadeRemote, TalkApp
 
 	}
 
-	@Override
+	/*@Override
 	public Collection<TalkAppointmentJPA> findMyTalkAppointments(String nif, String data, String tipus){
 		Query query = null;
 		String select = "";
@@ -104,15 +104,19 @@ public class TalkAppointmentBean implements TalkAppointmentFacadeRemote, TalkApp
 
 		if (data != null && data.trim().length() > 0) {
 			select += " AND t.date = :data";
-			//query.setParameter("date", data);
 		}
-		query = entman.createQuery(select).setParameter("nif", nif);
+		else
+		{
+			data = "2000/01/01";
+			select += " AND t.date > :data";
+		}
+		query = entman.createQuery(select).setParameter("nif", nif).setParameter("date", data);;
 
 		@SuppressWarnings("unchecked")
 		Collection<TalkAppointmentJPA> myTalkAppointments = query.getResultList();
 
 		return myTalkAppointments;
-	}
+	}*/
 
 
 	@Override
@@ -271,6 +275,159 @@ public class TalkAppointmentBean implements TalkAppointmentFacadeRemote, TalkApp
 	}
 
 
+	@Override
+	public Collection<?> findMyTalkAppointments(String nif, String location,String fecha,String hora,String language) throws PersistenceException {
+		// TODO Auto-generated method stub
+		String select=null;
+		Query query=null;
 
+		try {
+
+			if ( location.compareTo("ALL CITIES") == 0 ) {
+				select = "FROM TalkAppointmentJPA b WHERE b.status = 'OPEN' and b.userSign.nif = :nif";
+			} else {
+				select = "FROM TalkAppointmentJPA b WHERE b.status = 'OPEN' and b.userSign.nif = :nif and b.location.city = :ciutat";
+
+				if ( language.compareTo("ALL LANGUAGES") != 0 ) {
+					select = select + " AND b.languageToTalk.language = :language";
+				}
+
+				if ( fecha.compareTo("ALL DATES") != 0 ) {
+					select = select + " AND b.date = :date";
+				}
+
+				if ( hora.compareTo("ALL HOURS") != 0 ) {
+					select = select + " AND b.time = :time";
+				}
+
+			}
+
+			//Order By
+			select = select + " ORDER BY b.location.city , b.languageToTalk.language , b.date , b.time";
+
+			query = entman.createQuery(select).setParameter("nif", nif);
+
+			if ( location.compareTo("ALL CITIES") != 0 ) {
+				query.setParameter("ciutat", location);
+			}
+
+			if ( language.compareTo("ALL LANGUAGES") != 0 ) {
+				query.setParameter("language", language);
+			}
+
+			if ( fecha.compareTo("ALL DATES") != 0 ) {
+
+				SimpleDateFormat formatDate = new SimpleDateFormat("yyyy-MM-dd");
+				Date date = (Date) formatDate.parse(fecha);
+
+				query.setParameter("date", date);
+			}
+
+			if ( hora.compareTo("ALL HOURS") != 0 ) {
+
+				DateFormat formatter = new SimpleDateFormat("HH:mm:ss");
+				java.sql.Time timeValue = new java.sql.Time(formatter.parse(hora).getTime());
+
+				query.setParameter("time", timeValue);
+			}
+
+			@SuppressWarnings("unchecked")
+			Collection<TalkAppointmentJPA> mytalkappointments = query.getResultList();
+
+			return mytalkappointments;
+
+		} catch (PersistenceException e) {
+			System.out.println(e);
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		return null;
+	}
+
+
+	@Override
+	public Collection<?> citiesMyTalkAppointments(String nif) {
+		// TODO Auto-generated method stub
+
+		try {
+
+			@SuppressWarnings("unchecked")
+			Collection<String> mytalkappointments = entman.createQuery("SELECT a.location.city FROM TalkAppointmentJPA a WHERE a.status = 'OPEN' and a.userSign.nif = :nif GROUP BY a.location.city").setParameter("nif", nif).getResultList();
+
+			if ( !mytalkappointments.isEmpty() ) {
+				return mytalkappointments;
+			}
+
+		} catch(PersistenceException e) {
+			System.out.println(e);
+		}
+
+		return null;
+	}
+
+	@Override
+	public Collection<?> languagesfromMyTalkAppointments(String nif, String city) {
+		// TODO Auto-generated method stub
+
+		try {
+
+			@SuppressWarnings("unchecked")
+			Collection<String> mytalkappointments = entman.createQuery("SELECT a.languageToTalk.language  FROM TalkAppointmentJPA a WHERE a.status = 'OPEN' and a.userSign.nif = :nif and a.location.city = :ciutat GROUP BY a.languageToTalk.language").setParameter("nif", nif).setParameter("ciutat", city).getResultList();
+
+			if ( !mytalkappointments.isEmpty()) {
+				return mytalkappointments;
+			}
+
+
+		} catch(PersistenceException e) {
+			System.out.println(e);
+		}
+
+		return null;
+	}
+
+	@Override
+	public Collection<?> datefromMyTalkAppointmments(String nif, String city, String language) {
+		// TODO Auto-generated method stub	
+
+		try {
+
+			@SuppressWarnings("unchecked")
+			Collection<Date> mytalkappointments = entman.createQuery("SELECT a.date FROM TalkAppointmentJPA a where a.status = 'OPEN' and a.userSign.nif = :nif and a.location.city = :ciutat AND a.languageToTalk.language = :language GROUP BY a.date").setParameter("nif", nif).setParameter("ciutat", city).setParameter("language",language).getResultList();
+
+			if ( !mytalkappointments.isEmpty() ) {
+				return mytalkappointments;
+			}
+
+		} catch(PersistenceException e) {
+			System.out.println(e);
+		}
+
+		return null;
+
+	}
+
+
+	@Override
+	public Collection<?> timefromMyTalkAppointments(String nif, String city,String language,Date date) {
+		// TODO Auto-generated method stub
+
+		try {
+
+			@SuppressWarnings("unchecked")
+			Collection<Time> mytalkappointments = entman.createQuery("SELECT a.time FROM TalkAppointmentJPA a WHERE a.status = 'OPEN' and a.userSign.nif = :nif and a.location.city = :ciutat and a.languageToTalk.language = :language and a.date = :date GROUP BY a.time").setParameter("nif", nif).setParameter("ciutat", city).setParameter("language",language).setParameter("date",date).getResultList();
+
+			if ( !mytalkappointments.isEmpty()) {
+				return mytalkappointments;
+			}
+
+		} catch(PersistenceException e) {
+			System.out.println(e);
+		}
+
+		return null;
+	}
 
 }

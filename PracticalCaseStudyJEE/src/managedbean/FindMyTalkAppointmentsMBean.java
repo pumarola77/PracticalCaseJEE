@@ -2,68 +2,141 @@ package managedbean;
 
 import java.io.Serializable;
 import java.sql.Time;
-import java.util.*;
+import java.util.Date;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Iterator;
+import java.util.Properties;
+
 import javax.ejb.EJB;
-import javax.faces.bean.*;
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ValueChangeEvent;
 import javax.faces.model.SelectItem;
 import javax.naming.Context;
 import javax.naming.InitialContext;
-import javax.persistence.PersistenceException;
-import javax.servlet.http.HttpServletRequest;
 
 import ejb.TalkAppointmentFacadeRemote;
 import jpa.TalkAppointmentJPA;
 
-/**
- * Managed Bean FindMyTalkAppointments
- */
-@ManagedBean(name = "mytalkappointment")
+@ManagedBean(name = "findmytalkappointments")
 @SessionScoped
-public class FindMyTalkAppointmentsMBean implements Serializable{
+public class FindMyTalkAppointmentsMBean implements Serializable {
 
+	/**
+	 * 
+	 */
 	private static final long serialVersionUID = 1L;
-
-	private String nif;
-
-	/* Llistat complert de cites (publicades/apuntades) de l'usuari*/
-	private Collection<TalkAppointmentJPA> myTalkAppointmentsFullList;
-	/* Les 10 cites (publicades/apuntades) o menys que s'hagin de mostrar per pantalla*/
-	protected Collection<TalkAppointmentJPA> myTalkAppointmentsListView;
-	/* Aquestes variables fan de contador per saber quin punt de la llista de cites (publicades/apuntades) esta veient l'usuari*/
-	private int screen;
-
-	/*
-	 * Serveixen per guardar els valors dels desplegables
-	 */
-	//protected Collection<SelectItem> datesList = new ArrayList<SelectItem>();
-	//protected Collection<SelectItem> tipusList = new ArrayList<SelectItem>();
-
-	//private String dates = "ALL DATES";
-	//private String tipus = "PUBLICADES";
-
-	/*
-	 * Retornen els valors del ejb que es mostrarant al desplegable
-	 */
-	//private Collection<Date> fechasList;
-	//private Collection<String> tiposList;
 
 	@EJB
 	private TalkAppointmentFacadeRemote findMyTalkAppointmentsRemote;
 
-	public FindMyTalkAppointmentsMBean() throws Exception 
-	{		
-		this.myTalkAppointmentsFullList();
-	}
+	/* Variable per controlar els registres que esta veient un usuari */
+	private int screen = 0;
+	private String nif = "";
+	protected int numberTalkAppointments = 0;
+
+	/**
+	 * Mostra les ciutats de les cites actives
+	 */
+	protected Collection<SelectItem> ciutatsList = new ArrayList<SelectItem>();
+
+	/**
+	 * Mostra les dates de les cites actives
+	 */
+	protected Collection<SelectItem> datesList = new ArrayList<SelectItem>();
+
+	/**
+	 * Mostra les hores de les cites actives
+	 */
+	protected Collection<SelectItem> horesList = new ArrayList<SelectItem>();
+
+	/**
+	 * Mostra els llenguatges de les cites actives
+	 */
+	protected Collection<SelectItem> languagesList = new ArrayList<SelectItem>();
+
+	/**
+	 * Mostra la ciutat activa al desplegable
+	 */
+	private String ciutat = "ALL CITIES";
+
+	/**
+	 * Mostra la data activa al desplegable
+	 */
+	private String dates = "ALL DATES";
+
+	/**
+	 * 	Mostra la hora activa del desplegable
+	 */
+	private String hores = "ALL HOURS";
+
+
+	/**
+	 * Nostra els llenguatga actiu del desplegable
+	 */
+	private String languages = "ALL LANGUAGES";
+
+	//store all the instances of TalkAppointments
+	private Collection<TalkAppointmentJPA> myTalkAppointmentsList;
+
+	/*Aquesta variable contindra els 10 idiomes o menys que es mostren actualment per pantalla*/
+	protected Collection<TalkAppointmentJPA> myTalkAppointmentsListView;
 
 	/*
+	 * Retornen els valors del ejb que es mostrarant al desplegable
+	 */
+	private Collection<String> citiesList;
+	private Collection<Date> fechasList;
+	private Collection<Time> timeList;
+	private Collection<String> languageList;
+
+	public FindMyTalkAppointmentsMBean() throws Exception 
+	{			
+		this.myTalkAppointmentsList();
+
+		this.ciutatsList();
+		this.datesList();
+		this.horesList();
+		this.languagesList();
+	}
+
+	public Collection<SelectItem> getCiutatsList() {
+		return ciutatsList;
+	}
+
 	public Collection<SelectItem> getDatesList() {
 		return datesList;
 	}
 
-	public Collection<SelectItem> getTipusList() {
-		return tipusList;
+	public Collection<SelectItem> getHoresList() {
+		return horesList;
+	}
+
+	public Collection<SelectItem> getLanguagesList() {		
+		return languagesList;
+	}
+
+	/**
+	 * Get/Set the City name
+	 * @return City name
+	 */
+	public String getCiutat() {
+		return this.ciutat;
+	}
+
+	public void setCiutat(String ciutat) {
+		this.ciutat = ciutat;
+	}
+
+	public String getNif() {
+		return this.nif;
+	}
+
+	public void setNif(String nif) {
+		this.nif = nif;
 	}
 
 	public String getDates() {
@@ -74,37 +147,105 @@ public class FindMyTalkAppointmentsMBean implements Serializable{
 		this.dates = dates;
 	}
 
-	public String getTipus() {
-		return this.tipus;
+	public String getHores() {
+		return this.hores;
 	}
 
-	public void setTipus(String tipus) {
-		this.tipus = tipus;
-	}
-	*/
-
-	public String getNif(){
-		return nif;
-	}
-	public void setNif(String nif){
-		this.nif= nif;
+	public void setHores(String hores) {
+		this.hores = hores;
 	}
 
-	/*
+	public String getLanguages() {
+		return this.languages;
+	}
+
+	public void setLanguages(String languages) {
+		this.languages = languages;
+	}
+
+	public void ciutatValueChanged(ValueChangeEvent ciutatChanged) {
+		this.setCiutat(ciutatChanged.getNewValue().toString());
+
+		try {
+			this.setLanguages("ALL LANGUAGES");
+			this.setDates("ALL DATES");
+			this.setHores("ALL HOURS");
+
+			this.languagesList();		
+			this.datesList();			
+			this.horesList();
+
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+	}
+
+	public void languagesValueChanged(ValueChangeEvent languagesChanged) {		
+		this.setLanguages(languagesChanged.getNewValue().toString());
+
+		try {
+
+			this.setDates("ALL DATES");
+			this.setHores("ALL HOURS");
+
+			this.datesList();
+			this.horesList();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+	}
+
 	public void datesValueChanged(ValueChangeEvent datesChanged) {				
 		this.setDates(datesChanged.getNewValue().toString());
+
+		try {
+
+			this.setHores("ALL HOURS");
+
+			this.horesList();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
-	public void tipussValueChanged(ValueChangeEvent tipusChanged) {				
-		this.setTipus(tipusChanged.getNewValue().toString());
+	public void horesValueChanged(ValueChangeEvent horesChanged) {
+		this.setHores(horesChanged.getNewValue().toString());
 	}
-	*/
-	
-	public String listMyTalkAppointments() throws Exception {		
-		myTalkAppointmentsFullList();		
+
+	public String listMyTalkAppointments() throws Exception {				
+		myTalkAppointmentsList();				
 		return "MyTalkAppointmentsListView";
 	}
 
+	public Collection<TalkAppointmentJPA> getMyTalkAppointmentsListView() throws Exception 
+	{		
+		int n=0;		
+		myTalkAppointmentsListView = new ArrayList<TalkAppointmentJPA>();
+		for (Iterator<TalkAppointmentJPA> iter2 = myTalkAppointmentsList.iterator(); iter2.hasNext();)
+		{
+			TalkAppointmentJPA aux = (TalkAppointmentJPA) iter2.next();
+			if (n >= screen*10 && n< (screen*10+10))
+			{				
+				this.myTalkAppointmentsListView.add(aux);
+			}
+			n +=1;
+		}
+
+		// anteriorment nomes havia return myTalkAppointmentsList;
+		this.numberTalkAppointments = n;
+		return myTalkAppointmentsListView;
+	}
+
+	public void nextScreen()
+	{
+		if (((screen+1)*10 < myTalkAppointmentsList.size()))
+		{
+			screen +=1;
+		}
+	}
 	public void previousScreen()
 	{
 		if ((screen > 0))
@@ -113,59 +254,123 @@ public class FindMyTalkAppointmentsMBean implements Serializable{
 		}
 	}
 
-	public void nextScreen()
+	@SuppressWarnings("unchecked")
+	public void ciutatsList() throws Exception
 	{
-		if (((screen+1)*10 < myTalkAppointmentsFullList.size()))
-		{
-			screen +=1;
-		}
-	}
+		ciutatsList.clear();
 
-	/**
-	 * Metode que es fa servir per obtenir els TalkAppointments publicats per un usuari
-	 * @return col·leccio de cites
-	 * @throws Exception
-	 */
-	public Collection<TalkAppointmentJPA> getMyTalkAppointmentsListView() throws Exception{
+		this.ciutatsList.add(new SelectItem("ALL CITIES"));	
 
-		int n=0;
-
-		// S'utilitza per carregar el llistat complert de cites de l'usuari	
-		this.setNif(FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("nif").toString());	
 		Properties props = System.getProperties();
 		Context ctx = new InitialContext(props);
-		findMyTalkAppointmentsRemote = (TalkAppointmentFacadeRemote) ctx.lookup("java:app/PracticalCaseStudyJEE.jar/TalkAppointmentBean!ejb.TalkAppointmentFacadeRemote");
-		myTalkAppointmentsFullList = findMyTalkAppointmentsRemote.findMyTalkAppointments(this.getNif(), "", "PUBLICADES");//(this.getNif(),this.getDates(), this.getTipus());
+		findMyTalkAppointmentsRemote = (TalkAppointmentFacadeRemote) ctx.lookup("java:app/PracticalCaseStudyJEE.jar/TalkAppointmentBean!ejb.TalkAppointmentFacadeRemote");		
 
-		// Carrega el llistat de cites reduit que s'ha de mostrar
-		myTalkAppointmentsListView = new ArrayList<TalkAppointmentJPA>();
+		citiesList = (Collection<String>) findMyTalkAppointmentsRemote.citiesMyTalkAppointments(this.getNif());
 
-		Iterator<TalkAppointmentJPA> iter = myTalkAppointmentsFullList.iterator();
-		while(iter.hasNext())
-		{
-			TalkAppointmentJPA aux = (TalkAppointmentJPA) iter.next();
-			if (n>= screen*10 && n< (screen*10+10))
-			{
-				this.myTalkAppointmentsListView.add(aux);
+
+		if ( !(citiesList == null))
+		{					
+			for(Iterator<String> iter2 = citiesList.iterator(); iter2.hasNext();) {
+				String ciutat = (String) iter2.next();
+				SelectItem item = new SelectItem(ciutat);
+				this.ciutatsList.add(item);
 			}
-			n=n+1;
+
 		}
-		return myTalkAppointmentsListView;
+
+	}
+
+	@SuppressWarnings("unchecked")
+	public void languagesList() throws Exception
+	{
+		languagesList.clear();
+
+		this.languagesList.add(new SelectItem("ALL LANGUAGES"));
+
+		if ( this.getCiutat().compareTo("ALL CITIES") != 0 ) {
+			Properties props = System.getProperties();
+			Context ctx = new InitialContext(props);
+			findMyTalkAppointmentsRemote = (TalkAppointmentFacadeRemote) ctx.lookup("java:app/PracticalCaseStudyJEE.jar/TalkAppointmentBean!ejb.TalkAppointmentFacadeRemote");
+
+			languageList = (Collection<String>) findMyTalkAppointmentsRemote.languagesfromMyTalkAppointments(this.getNif(), this.getCiutat());
+
+			if ( !languageList.isEmpty()) {
+				for(Iterator<String> iter2 = languageList.iterator(); iter2.hasNext();) {
+					String language = (String) iter2.next();
+					SelectItem item = new SelectItem(language);
+					this.languagesList.add(item);
+				}
+			}
+		}
+
+	}
+
+	@SuppressWarnings("unchecked")
+	public void datesList() throws Exception 
+	{		
+		datesList.clear();
+		this.datesList.add(new SelectItem("ALL DATES"));
+
+		if ( this.getLanguages().compareTo("ALL LANGUAGES") != 0 ) {
+
+			Properties props = System.getProperties();
+			Context ctx = new InitialContext(props);
+			findMyTalkAppointmentsRemote = (TalkAppointmentFacadeRemote) ctx.lookup("java:app/PracticalCaseStudyJEE.jar/TalkAppointmentBean!ejb.TalkAppointmentFacadeRemote");
+
+			fechasList = (Collection<Date>) findMyTalkAppointmentsRemote.datefromMyTalkAppointmments(this.getNif(), this.getCiutat(),this.getLanguages());
+
+			if ( !fechasList.isEmpty() ) {
+				for(Iterator<Date> iter2 = fechasList.iterator(); iter2.hasNext();) {
+					Date dates = (Date) iter2.next();
+					SelectItem item = new SelectItem(dates);
+					this.datesList.add(item);
+				}
+			} 
+		}
+
+	}
+
+	@SuppressWarnings("unchecked")
+	public void horesList() throws Exception
+	{
+		horesList.clear();
+		this.horesList.add(new SelectItem("ALL HOURS"));
+
+		SimpleDateFormat formatDate = new SimpleDateFormat("yyyy-MM-dd");
+
+		if ( this.getDates().compareTo("ALL DATES") != 0 ) {
+			Properties props = System.getProperties();
+			Context ctx = new InitialContext(props);
+			findMyTalkAppointmentsRemote = (TalkAppointmentFacadeRemote) ctx.lookup("java:app/PracticalCaseStudyJEE.jar/TalkAppointmentBean!ejb.TalkAppointmentFacadeRemote");
+
+			Date fecha = (Date) formatDate.parse(this.getDates());		
+			timeList = (Collection<Time>) findMyTalkAppointmentsRemote.timefromMyTalkAppointments(this.getNif(), this.getCiutat(),this.getLanguages(),fecha);
+
+			if ( !timeList.isEmpty() ) {
+				for(Iterator<Time> iter2 = timeList.iterator(); iter2.hasNext();) {
+					Time time = (Time) iter2.next();
+					SelectItem item = new SelectItem(time);
+					this.horesList.add(item);
+				}
+			}			
+		}
+
 	}
 
 	/*
 	 * Metode que es crida en el boto "confirm" dins de la vista
-	 * FindMyTalkAppointmentsView.
-	 * S'haura de passar la data, i el tipus de petició de cita
+	 * FindTalkAppointmentsView.
+	 * S'haura de passar la data, hora , i el llenguatge
 	 */
 	@SuppressWarnings("unchecked")
-	private void myTalkAppointmentsFullList() throws Exception {		
-		Properties props = System.getProperties();
-		Context ctx = new InitialContext(props);	
+	private void myTalkAppointmentsList() throws Exception {	
+		this.setNif(FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("nif").toString());
 
+		Properties props = System.getProperties();
+		Context ctx = new InitialContext(props);					
 		screen = 0;
 		findMyTalkAppointmentsRemote = (TalkAppointmentFacadeRemote) ctx.lookup("java:app/PracticalCaseStudyJEE.jar/TalkAppointmentBean!ejb.TalkAppointmentFacadeRemote");
-		myTalkAppointmentsFullList = (Collection<TalkAppointmentJPA>) findMyTalkAppointmentsRemote.findMyTalkAppointments(this.getNif(), "", "PUBLICADES");//(this.getNif(),this.getDates(), this.getTipus());		
+		myTalkAppointmentsList = (Collection<TalkAppointmentJPA>) findMyTalkAppointmentsRemote.findMyTalkAppointments(this.getNif(), this.getCiutat(),this.getDates(),this.getHores(),this.getLanguages());
 	}
 
 }
