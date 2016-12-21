@@ -32,19 +32,35 @@ public class TalkAppointmentAdminBean implements TalkAppointmentAdminFacadeRemot
 
 	public void addTalkAppointment(String description, LocationJPA location, Date date, Time time, LanguageToTalkJPA languageToTalk){
 
-		try{
-			LocationJPA locat = new LocationJPA(location.getStreet(),location.getNum(),location.getCp(),location.getCity());
-			entman.persist(locat);
+
+		try{							
+			entman.persist(location);
+			
+			
 			TalkAppointmentJPA talkApp = new TalkAppointmentJPA(description,date,time,TalkStatus.OPEN);
-			talkApp.setLocation(locat);
+						
+			// Recupero el nif i inserta un registre a la base de dades.
+						
+			talkApp.setLocation(location);
 			talkApp.setUserPublish(languageToTalk.getUser());
-			talkApp.setUserLanguageToTalk(languageToTalk.getLanguage());
-			talkApp.setLanguageToTalk(languageToTalk); // No esta guardant res? El id es (language,nif)...
+			talkApp.setUserLanguageToTalk(languageToTalk.getUser().getNif());			
+			talkApp.setLanguageToTalk(languageToTalk); 
+			
+			talkApp.setDate(date);
+			talkApp.setTime(time);
+			talkApp.setDescription(description);
+			talkApp.setStatus(TalkStatus.OPEN);
+			
+			//Identificador s'ha de treure nomes serveix ara per verificar que es doni alta.
+			talkApp.setId(1);			
+			
 			entman.persist(talkApp);
+			
 
 		} catch(PersistenceException e){
 			throw e;
 		}
+		
 	}
 
 	/**
