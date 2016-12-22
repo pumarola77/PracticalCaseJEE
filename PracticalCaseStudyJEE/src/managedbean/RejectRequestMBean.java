@@ -88,7 +88,7 @@ public class RejectRequestMBean implements Serializable{
 			}
 			else // Si success es diferent de 1 vol dir que la operació s'ha dut a terme correctament
 			{
-				return "MyTalkAppointmentsListView"; //Si la introducció de l'usuari es correcta es retorna la vista LanguagesToTalkListView.xhtml per a que automaticament es redireccioni cap alla
+				return "MyTalkAppointmentsAsProposalView"; //Si la introducció de l'usuari es correcta es retorna la vista LanguagesToTalkListView.xhtml per a que automaticament es redireccioni cap alla
 			}
 
 		}catch (PersistenceException e) {
