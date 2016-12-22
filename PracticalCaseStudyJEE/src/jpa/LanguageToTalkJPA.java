@@ -8,11 +8,13 @@ import javax.persistence.*;
  */
 
 @Entity
-@Table(name="practicalcase.languagetotalk",  uniqueConstraints={@UniqueConstraint(columnNames = {"nif", "language"})})
+//@Table(name="practicalcase.languagetotalk",  uniqueConstraints={@UniqueConstraint(columnNames = {"nif", "language"})})
+@Table(name="practicalcase.languagetotalk")
 public class LanguageToTalkJPA implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
 
+	@Id
 	@Column(name = "language")
 	private String language;
 
@@ -25,6 +27,9 @@ public class LanguageToTalkJPA implements Serializable {
 	@Column(name = "acceptPay")
 	private boolean acceptPay;
 	
+	@Id
+	@ManyToOne
+	@JoinColumn (name="nif")
 	private UserJPA user;
 
 	public LanguageToTalkJPA() {
@@ -53,7 +58,6 @@ public class LanguageToTalkJPA implements Serializable {
 	/**
 	 * Getters i setters
 	 */
-	@Id
 	public String getLanguage() {
 		return language;
 	}
@@ -90,9 +94,6 @@ public class LanguageToTalkJPA implements Serializable {
 	 * Methods get/set persistent relationships
 	 * JoinColumn fa referencia a la columna amb la qual realitzem el join.
 	 */
-	@Id
-	@ManyToOne
-	@JoinColumn (name="nif")
 	public UserJPA getUser() {
 		return user;
 	}

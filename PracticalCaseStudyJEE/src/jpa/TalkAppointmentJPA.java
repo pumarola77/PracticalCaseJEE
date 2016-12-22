@@ -16,7 +16,13 @@ public class TalkAppointmentJPA implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 
-	//@Column(name = "id")	
+	@Id
+	//@SequenceGenerator(name="practicalcase.talkappointment_idtalkapp_seq",
+	//				   sequenceName="practicalcase.talkappointment_idtalkapp_seq",
+	//				   allocationSize=1)
+	//@GeneratedValue(strategy = GenerationType.SEQUENCE,
+	//				generator="practicalcase.talkappointment_idtalkapp_seq")
+	//@Column(name = "idtalkapp", updatable=false)
 	private int id;
 	
 	@Column(name = "descrption")
@@ -29,13 +35,29 @@ public class TalkAppointmentJPA implements Serializable{
 	private Time time;
 	
 	@Column(name = "talkstatus")
+	@Enumerated(EnumType.STRING)
 	private TalkStatus talkstatus;
 	
+	@ManyToOne
+	@JoinColumn (name="nifpublish")
 	private UserJPA userPublish;
+	
+	@ManyToOne
+	@JoinColumn (name="nifsign")	
 	private UserJPA userSign;
+	
+	@ManyToOne
+	@JoinColumn (name="location")
 	private LocationJPA location;
+	
+	@ManyToOne
+	@JoinColumns({
+		@JoinColumn(name="nif",  referencedColumnName="nif"),
+		@JoinColumn(name="language", referencedColumnName="language")
+	})	
 	private LanguageToTalkJPA languageToTalk;
-	private String userLanguageToTalk;
+	
+	//private String userLanguageToTalk;
 	
 	public TalkAppointmentJPA() {
 		super();
@@ -51,7 +73,6 @@ public class TalkAppointmentJPA implements Serializable{
 	/**
 	 * Getters i setters
 	 */
-	@Id
 	public int getId() {
 		return id;
 	}
@@ -84,7 +105,6 @@ public class TalkAppointmentJPA implements Serializable{
 		this.time = time;
 	}
 
-	@Enumerated(EnumType.STRING)
 	public TalkStatus getStatus() {
 		return talkstatus;
 	}
@@ -97,8 +117,6 @@ public class TalkAppointmentJPA implements Serializable{
 	 * Methods get/set persistent relationships
 	 * JoinColumn fa referencia a la columna amb la qual realitzem el join.
 	 */
-	@ManyToOne
-	@JoinColumn (name="nifpublish")
 	public UserJPA getUserPublish() {
 		return userPublish;
 	}
@@ -107,8 +125,6 @@ public class TalkAppointmentJPA implements Serializable{
 		this.userPublish = userPublish;
 	}
 	
-	@ManyToOne
-	@JoinColumn (name="nifsign")
 	public UserJPA getUserSign() {
 		return userSign;
 	}
@@ -117,8 +133,6 @@ public class TalkAppointmentJPA implements Serializable{
 		this.userSign = userSign;
 	}
 	
-	@ManyToOne
-	@JoinColumn (name="location")
 	public LocationJPA getLocation() {
 		return location;
 	}
@@ -131,11 +145,6 @@ public class TalkAppointmentJPA implements Serializable{
 		return getLocation().toString();
 	}
 	
-	@ManyToOne
-	@JoinColumns({
-		@JoinColumn(name="userLanguageToTalk", insertable=false, updatable=false),
-		@JoinColumn(name="languageToTalk", insertable=false, updatable=false)
-	})
 	public LanguageToTalkJPA getLanguageToTalk() {
 		return languageToTalk;
 	}
@@ -144,6 +153,7 @@ public class TalkAppointmentJPA implements Serializable{
 		this.languageToTalk = langToTalk;
 	}
 	
+	/*
 	public String getUserLanguageToTalk() {
 		return userLanguageToTalk;
 	}
@@ -151,5 +161,6 @@ public class TalkAppointmentJPA implements Serializable{
 	public void setUserLanguageToTalk(String user) {
 		this.userLanguageToTalk = user;
 	}
+	*/
 	
 }

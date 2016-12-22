@@ -43,7 +43,7 @@ public class TalkAppointmentAdminBean implements TalkAppointmentAdminFacadeRemot
 						
 			talkApp.setLocation(location);
 			talkApp.setUserPublish(languageToTalk.getUser());
-			talkApp.setUserLanguageToTalk(languageToTalk.getUser().getNif());			
+			//talkApp.setUserLanguageToTalk(languageToTalk.getUser().getNif());			
 			talkApp.setLanguageToTalk(languageToTalk); 
 			
 			talkApp.setDate(date);
