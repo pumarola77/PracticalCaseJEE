@@ -52,7 +52,7 @@ public class TalkAppointmentAdminBean implements TalkAppointmentAdminFacadeRemot
 			talkApp.setStatus(TalkStatus.OPEN);
 			
 			//Identificador s'ha de treure nomes serveix ara per verificar que es doni alta.
-			talkApp.setId(1);			
+			//talkApp.setId(1);			
 			
 			entman.persist(talkApp);
 			

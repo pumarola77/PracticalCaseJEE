@@ -17,13 +17,13 @@ public class TalkAppointmentJPA implements Serializable{
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	//@SequenceGenerator(name="practicalcase.talkappointment_idtalkapp_seq",
-	//				   sequenceName="practicalcase.talkappointment_idtalkapp_seq",
-	//				   allocationSize=1)
-	//@GeneratedValue(strategy = GenerationType.SEQUENCE,
-	//				generator="practicalcase.talkappointment_idtalkapp_seq")
-	//@Column(name = "idtalkapp", updatable=false)
-	private int id;
+	@SequenceGenerator(name="practicalcase.talkappointment_idtalkapp_seq",
+					   sequenceName="practicalcase.talkappointment_idtalkapp_seq",
+					   allocationSize=1)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE,
+					generator="practicalcase.talkappointment_idtalkapp_seq")
+	@Column(name = "idtalkapp", updatable=false, columnDefinition = "serial")
+	private Integer id;
 	
 	@Column(name = "descrption")
 	private String description;
@@ -34,9 +34,9 @@ public class TalkAppointmentJPA implements Serializable{
 	@Column(name = "time")
 	private Time time;
 	
-	@Column(name = "talkstatus")
+	@Column(name = "status")
 	@Enumerated(EnumType.STRING)
-	private TalkStatus talkstatus;
+	private TalkStatus status;
 	
 	@ManyToOne
 	@JoinColumn (name="nifpublish")
@@ -67,17 +67,17 @@ public class TalkAppointmentJPA implements Serializable{
 		this.description = description;
 		this.date = date;
 		this.time = time;
-		this.talkstatus = status;
+		this.status = status;
 	}
 
 	/**
 	 * Getters i setters
 	 */
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 
@@ -106,11 +106,11 @@ public class TalkAppointmentJPA implements Serializable{
 	}
 
 	public TalkStatus getStatus() {
-		return talkstatus;
+		return status;
 	}
 
 	public void setStatus(TalkStatus status) {
-		this.talkstatus = status;
+		this.status = status;
 	}
 
 	/*
