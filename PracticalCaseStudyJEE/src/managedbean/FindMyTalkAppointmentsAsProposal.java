@@ -25,19 +25,21 @@ public class FindMyTalkAppointmentsAsProposal implements Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 
+	protected String errorFormulari; //Aquest parametre serveix per mostrar un error a la propia pàgina del formulari
+
 	/**
 	 * Correspont al nif del usuari registrat
 	 */
 	private String nif;
-	
+
 	@EJB
 	private TalkAppointmentAdminFacadeRemote findTalkAppointmentsAdminRemote;
-	
-	
+
+
 	/* Variable per controlar els registres que esta veient un usuari */
 	private int screen = 0;
 	protected int numberTalkAppointments = 0;
-	
+
 	/**
 	 * store all the instances of TalkAppointments
 	 */
@@ -47,7 +49,7 @@ public class FindMyTalkAppointmentsAsProposal implements Serializable {
 	 * store 10 instances of TalkAppointments 
 	 */
 	protected Collection<TalkAppointmentJPA> talkAppointmentsListView;
-	
+
 	/**
 	 * Obten el nif de l'usuari registrat
 	 * @return nif
@@ -64,6 +66,13 @@ public class FindMyTalkAppointmentsAsProposal implements Serializable {
 		this.nif = nif;
 	}
 	
+	public String getErrorFormulari(){
+		return errorFormulari;
+	}
+	public void setErrorFormulari (String errorFormulari){
+		this.errorFormulari = errorFormulari;
+	}
+
 	/**
 	 * Constructor de la classe
 	 * @throws Exception
@@ -72,7 +81,7 @@ public class FindMyTalkAppointmentsAsProposal implements Serializable {
 	{
 		this.talkAppointmentsList();
 	}
-	
+
 	/**
 	 * Carrega la llista de cites propossades per l'usuari
 	 * @return la vista de la pantalla del llistat
@@ -82,10 +91,10 @@ public class FindMyTalkAppointmentsAsProposal implements Serializable {
 		talkAppointmentsList();				
 		return "MyTalkAppointmentsAsProposalView";
 	}
-	
-	
-	
-	
+
+
+
+
 	/**
 	 * Carrega les propostes creades per l'usuari registrat
 	 * @throws Exception
@@ -94,15 +103,15 @@ public class FindMyTalkAppointmentsAsProposal implements Serializable {
 	private void talkAppointmentsList() throws Exception {		
 		Properties props = System.getProperties();
 		Context ctx = new InitialContext(props);	
-					
+
 		//Carregar el nif
 		this.setNif(FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("nif").toString());	
-		
+
 		screen = 0;
 		findTalkAppointmentsAdminRemote = (TalkAppointmentAdminFacadeRemote) ctx.lookup("java:app/PracticalCaseStudyJEE.jar/TalkAppointmentAdminBean!ejb.TalkAppointmentAdminFacadeRemote");
 		talkAppointmentsList = (Collection<TalkAppointmentJPA>) findTalkAppointmentsAdminRemote.findMyTalkAppointmentsAsProposal(this.getNif());		
 	}
-	
+
 	/**
 	 * Metode que retorna una llista amb les cites publicades per un usuari.
 	 * @return Retorna la llista 10 anteriors / 10 seguents
@@ -121,13 +130,13 @@ public class FindMyTalkAppointmentsAsProposal implements Serializable {
 			}
 			n +=1;
 		}
-				
+
 		// anteriorment nomes havia return talkAppointmentsList;
 		this.numberTalkAppointments = n;
 		return talkAppointmentsListView;
 	}
 
-	
+
 	/**
 	 * Avança 10 posicions els registres de la llista
 	 */
@@ -138,7 +147,7 @@ public class FindMyTalkAppointmentsAsProposal implements Serializable {
 			screen +=1;
 		}
 	}
-	
+
 	/**
 	 * Retrocedeix 10 posicions el registre de la llista
 	 */
@@ -149,11 +158,11 @@ public class FindMyTalkAppointmentsAsProposal implements Serializable {
 			screen -=1;
 		}
 	}
-	
+
 	/**
 	 * 
 	 */
-	
+
 
 
 }

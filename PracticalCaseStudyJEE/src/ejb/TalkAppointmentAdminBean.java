@@ -108,7 +108,7 @@ public class TalkAppointmentAdminBean implements TalkAppointmentAdminFacadeRemot
 			{
 				Query queryNif= entman.createQuery("FROM UserJPA u WHERE u.nif = :nif").setParameter("nif", nif);
 
-				if (queryNif.getResultList().isEmpty())
+				if (nif == "" || queryNif.getResultList().isEmpty())
 				{
 					// Mirem que existeixi l'usuari.
 					return 2;

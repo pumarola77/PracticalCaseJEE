@@ -99,6 +99,12 @@ public class RejectRequestMBean implements Serializable{
 	public String rejectRequestView(int talkid, String nif) throws Exception{
 		this.setTalkId(talkid);
 		this.setNif(nif);
-		return "RejectRequestView";
+		if (nif == ""){
+			errorFormulari = "ERROR: No hi ha cap usuari apuntat a la petició de conversa..";
+			return "MyTalkAppointmentsAsProposalView";
+		}
+		else{
+			return "RejectRequestView";	
+		}
 	}
 }
