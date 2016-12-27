@@ -61,9 +61,10 @@ public class ShowTalkAppointmentMBean implements Serializable{
 		talkAppointment = (TalkAppointmentJPA) showTalkAppointmentRemote.showTalkAppointment(id);		
 	}
 	
-	public String showView(int id) throws Exception{
-		this.setTalkAppointment(id);
-		return "showTalkAppointmentView";
+	public void showView() throws Exception{
+		
+		this.setTalkAppointment(this.getId());
+
 	}
 	
 }

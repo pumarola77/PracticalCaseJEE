@@ -71,7 +71,10 @@
 					<!--<h:commandButton value="Apuntar-se" type="submit" action="#{RegisterInTalkAppointment.registerInTalkedAppointment(item.id)}" />-->
 					<!--<h:commandButton value="Desapuntar-se" type="submit" action="#{RemoveFromTalkAppointment.removeFromTalkAppointment(item.id)}" />-->
 					<h:commandButton value="Apuntar-se" type="submit" action="#{RegisterInTalkAppointment.showRegister(item.id)}" />
-					<h:commandButton value="Veure detalls" type="submit" action="#{ShowTalkAppointment.showView(item.id)}" /> 						
+					<h:link value="Veure detalls" outcome="showTalkAppointmentView">
+                    	<f:param name="id" value="#{item.id}" />
+               		</h:link>
+					
 				</h:column>					
 			</h:dataTable>
 		</h:form>

@@ -215,8 +215,16 @@ public class FindMyTalkAppointmentsMBean implements Serializable {
 		this.setHores(horesChanged.getNewValue().toString());
 	}
 
-	public String listMyTalkAppointments() throws Exception {				
-		myTalkAppointmentsList();				
+	public String listMyTalkAppointments() throws Exception {		
+		
+		myTalkAppointmentsList();
+		
+		/*Si hi ha unicament un registre a mostrar redirigim a la vista de showTalkAppointment, passant per parametre GET el id del talkAppointment*/
+		if (myTalkAppointmentsList.size()==1)
+		{
+		    return "showTalkAppointmentView?faces-redirect=true&id="+myTalkAppointmentsList.iterator().next().getId();		
+		}
+			
 		return "MyTalkAppointmentsListView";
 	}
 

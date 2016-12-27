@@ -11,7 +11,9 @@ import java.util.Properties;
 
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
 import javax.faces.event.ValueChangeEvent;
 import javax.faces.model.SelectItem;
 import javax.naming.Context;
@@ -152,7 +154,7 @@ public class FindTalkAppointmentsMBean implements Serializable {
 	public void setLanguages(String languages) {
 		this.languages = languages;
 	}
-	
+
 	public void ciutatValueChanged(ValueChangeEvent ciutatChanged) {
 		this.setCiutat(ciutatChanged.getNewValue().toString());
 				
@@ -206,7 +208,13 @@ public class FindTalkAppointmentsMBean implements Serializable {
 	}
 	
 	public String listTalkAppointments() throws Exception {				
-		talkAppointmentsList();				
+		talkAppointmentsList();
+		
+		/*Si hi ha unicament un registre a mostrar redirigim a la vista de showTalkAppointment, passant per parametre GET el id del talkAppointment*/
+		if (talkAppointmentsList.size()==1)
+		{
+		    return "showTalkAppointmentView?faces-redirect=true&id="+talkAppointmentsList.iterator().next().getId();		
+		}
 		return "TalkAppointmentsListView";
 	}
 	
@@ -225,7 +233,8 @@ public class FindTalkAppointmentsMBean implements Serializable {
 		}
 				
 		// anteriorment nomes havia return talkAppointmentsList;
-		this.numberTalkAppointments = n;
+		this.numberTalkAppointments = n;		
+		
 		return talkAppointmentsListView;
 	}
 	
@@ -361,5 +370,8 @@ public class FindTalkAppointmentsMBean implements Serializable {
 		findTalkAppointmentsRemote = (TalkAppointmentFacadeRemote) ctx.lookup("java:app/PracticalCaseStudyJEE.jar/TalkAppointmentBean!ejb.TalkAppointmentFacadeRemote");
 		talkAppointmentsList = (Collection<TalkAppointmentJPA>) findTalkAppointmentsRemote.findTalkAppointments(this.getCiutat(),this.getDates(),this.getHores(),this.getLanguages());
 	}
+	
+	
+
 	
 }
