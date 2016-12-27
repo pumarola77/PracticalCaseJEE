@@ -5,6 +5,7 @@
 	xmlns:f="http://java.sun.com/jsf/core" xmlns:h="http://java.sun.com/jsf/html">
 <f:metadata>
 	<f:viewParam name="id" value="#{ShowTalkAppointment.id}" />
+	<f:viewParam name="returnView" value="#{ShowTalkAppointment.returnView}" />
 	<f:viewAction action="#{ShowTalkAppointment.showView()}" />
 </f:metadata>
 <h:head>
@@ -81,7 +82,7 @@
 				</table> 	
 			</div> 
 			<p align="center">
-				<h:commandLink value="Return" action="TalkAppointmentsListView" />
+				<h:commandLink value="Return" action="#{ShowTalkAppointment.returnView(ShowTalkAppointment.returnView)}" />
 			</p>
  		</h:form>
  	</h:body>

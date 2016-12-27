@@ -5,7 +5,7 @@ import java.util.Properties;
 
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.SessionScoped;
+import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.naming.Context;
 import javax.naming.InitialContext;
@@ -17,9 +17,9 @@ import jpa.LocationJPA;
 import jpa.TalkAppointmentJPA;
 
 @ManagedBean(name = "ShowTalkAppointment")
-@SessionScoped
+@ViewScoped
 public class ShowTalkAppointmentMBean implements Serializable{
-	
+
 	private static final long serialVersionUID = 1L;
 
 	@EJB
@@ -27,16 +27,17 @@ public class ShowTalkAppointmentMBean implements Serializable{
 	/*
 	@EJB
 	private TalkAppointmentFacade showTalkAppointmentLocal;
-	*/
+	 */
 	private TalkAppointmentJPA talkAppointment;
 	private int id;
-	
+	private String returnView;
+
 	public ShowTalkAppointmentMBean() throws Exception{
 		/*int auxId;
 		Properties props = System.getProperties();
 		Context ctx = new InitialContext(props);
 		showTalkAppointmentRemote = (TalkAppointmentFacadeRemote) ctx.lookup("java:app/PracticalCaseStudyJEE.jar/TalkAppointmentBean!ejb.TalkAppointmentFacadeRemote");
-		
+
 		if ( FacesContext.getCurrentInstance().getExternalContext().getSessionMap().containsKey("id") == true) {
 			auxId = Integer.parseInt(FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("id").toString().replaceAll(" ",""));
 			this.setId(auxId);
@@ -44,27 +45,37 @@ public class ShowTalkAppointmentMBean implements Serializable{
 			setTalkAppointment(getId());
 		}*/
 	}
-	
+
 	public int getId(){
 		return id;
 	}
-	
+
 	public void setId(int id){
 		this.id = id;
 	}
-	
+
+	public String getReturnView(){
+		return returnView;
+	}
+
+	public void setReturnView(String returnView){
+		this.returnView = returnView;
+	}
+
 	public TalkAppointmentJPA getTalkAppointment(){
 		return talkAppointment;
 	}
-	
+
 	public void setTalkAppointment(int id)  throws Exception{
 		talkAppointment = (TalkAppointmentJPA) showTalkAppointmentRemote.showTalkAppointment(id);		
 	}
-	
-	public void showView() throws Exception{
-		
-		this.setTalkAppointment(this.getId());
 
+	public void showView() throws Exception{
+		this.setTalkAppointment(this.getId());
 	}
-	
+
+	public String returnView(String returnView) throws Exception{
+		return returnView + "?faces-redirect=true";
+	}
+
 }

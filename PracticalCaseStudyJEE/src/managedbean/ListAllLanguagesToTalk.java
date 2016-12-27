@@ -14,7 +14,7 @@ import jpa.LanguageToTalkJPA;
 import jpa.TalkedLanguageJPA;
 
 @ManagedBean(name = "ListLangToTalk")
-@SessionScoped
+@ViewScoped
 public class ListAllLanguagesToTalk implements Serializable{
 
 	private static final long serialVersionUID = 1L;

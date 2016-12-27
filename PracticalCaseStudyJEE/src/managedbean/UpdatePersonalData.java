@@ -5,7 +5,7 @@ import java.util.Properties;
 
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.SessionScoped;
+import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.naming.Context;
 import javax.naming.InitialContext;
@@ -16,7 +16,7 @@ import jpa.PetJPA;
 import jpa.UserJPA;
 import javax.annotation.PostConstruct;
 @ManagedBean(name = "UpdateUser")
-@SessionScoped
+@ViewScoped
 public class UpdatePersonalData implements Serializable {
 
 private static final long serialVersionUID = 1L;

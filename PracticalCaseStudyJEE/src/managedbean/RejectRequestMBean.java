@@ -18,7 +18,7 @@ import jpa.TalkAppointmentJPA;
  * Managed Bean RejectRequestMBean
  */
 @ManagedBean(name = "rejectrequest")
-@SessionScoped
+@ViewScoped
 public class RejectRequestMBean implements Serializable{
 
 	private static final long serialVersionUID = 1L;

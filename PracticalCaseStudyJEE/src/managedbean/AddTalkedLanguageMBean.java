@@ -20,7 +20,7 @@ import jpa.LevelLanguage;
  * Managed Bean AddTalkedLanguageMBean
  */
 @ManagedBean(name = "talkedlanguageadd")
-@SessionScoped
+@ViewScoped
 public class AddTalkedLanguageMBean implements Serializable{
 
 	private static final long serialVersionUID = 1L;

@@ -13,7 +13,7 @@ import ejb.UserFacadeRemote;
  * Managed Bean DeleteTalkedLanguageMBean
  */
 @ManagedBean(name = "talkedlanguagedelete")
-@SessionScoped
+@ViewScoped
 public class DeleteTalkedLanguageMBean implements Serializable{
 
 	private static final long serialVersionUID = 1L;

@@ -5,7 +5,7 @@ import java.util.Properties;
 
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.SessionScoped;
+import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.naming.Context;
 import javax.naming.InitialContext;
@@ -14,7 +14,7 @@ import javax.naming.NamingException;
 import ejb.TalkAppointmentFacadeRemote;
 
 @ManagedBean(name = "RemoveFromTalkAppointment")
-@SessionScoped
+@ViewScoped
 public class RemoveFromTalkAppointmentMBean implements Serializable {
 
 	/**

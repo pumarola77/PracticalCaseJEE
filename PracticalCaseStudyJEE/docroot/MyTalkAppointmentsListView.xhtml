@@ -102,6 +102,7 @@
 						action="#{RemoveFromTalkAppointment.removeFromTalkAppointment(item.id)}" />
 					<h:link value="Veure detalls" outcome="showTalkAppointmentView">
                     	<f:param name="id" value="#{item.id}" />
+                    	<f:param name="returnView" value="MyTalkAppointmentsListView" />
                		</h:link>	
 					
 				</h:column>

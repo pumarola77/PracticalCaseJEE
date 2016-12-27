@@ -12,7 +12,7 @@ import java.util.Properties;
 
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.SessionScoped;
+import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ValueChangeEvent;
 import javax.faces.model.SelectItem;
@@ -33,7 +33,7 @@ import jpa.UserJPA;
  * Managed Bean AddTalkedLanguageMBean
  */
 @ManagedBean(name = "talkappointmentadd")
-@SessionScoped
+@ViewScoped
 public class AddTalkAppointmentMBean implements Serializable{
 	
 	private static final long serialVersionUID = 1L;

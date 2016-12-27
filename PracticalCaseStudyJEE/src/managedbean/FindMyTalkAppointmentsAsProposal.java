@@ -8,7 +8,7 @@ import java.util.Properties;
 
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.SessionScoped;
+import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.naming.Context;
 import javax.naming.InitialContext;
@@ -17,7 +17,7 @@ import ejb.TalkAppointmentAdminFacadeRemote;
 import jpa.TalkAppointmentJPA;
 
 @ManagedBean(name = "findmytalkappasproposal")
-@SessionScoped
+@ViewScoped
 public class FindMyTalkAppointmentsAsProposal implements Serializable {
 
 	/**

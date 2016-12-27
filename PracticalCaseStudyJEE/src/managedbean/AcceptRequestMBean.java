@@ -14,7 +14,7 @@ import ejb.TalkAppointmentAdminFacadeRemote;
  * Managed Bean AcceptRequestMBean
  */
 @ManagedBean(name = "acceptrequest")
-@SessionScoped
+@ViewScoped
 public class AcceptRequestMBean implements Serializable{
 
 	private static final long serialVersionUID = 1L;

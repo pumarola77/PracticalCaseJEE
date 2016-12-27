@@ -18,7 +18,7 @@ import ejb.CatalogFacadeRemote;
  * Managed Bean ShowPetMBean
  */
 @ManagedBean(name = "petshow")
-@SessionScoped
+@ViewScoped
 public class ShowtPetMBean implements Serializable{
 	
 	private static final long serialVersionUID = 1L;
