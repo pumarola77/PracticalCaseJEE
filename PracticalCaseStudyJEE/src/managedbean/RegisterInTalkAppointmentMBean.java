@@ -27,37 +27,43 @@ public class RegisterInTalkAppointmentMBean implements Serializable {
 	private TalkAppointmentFacadeRemote registerInTalkedAppointmentRemote;
 	
 	private TalkAppointmentJPA talkAppointment;
-	private int id;
+	private Long id;
+	private String nif;
 	
 	public RegisterInTalkAppointmentMBean() {
-		
+		if ( FacesContext.getCurrentInstance().getExternalContext().getSessionMap().containsKey("nif") == true) 
+		{
+			this.setNif(FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("nif").toString());
+		}		
 	}
 	
 	public String registerInTalkedAppointment(Long talkid) throws Exception {
 						
-		String nif ="";
-		
-		if ( FacesContext.getCurrentInstance().getExternalContext().getSessionMap().containsKey("nif") == true) 
-		{
-			nif = FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("nif").toString();
-		}	
 		Properties props = System.getProperties();
 		Context ctx = new InitialContext(props);
 		
 		registerInTalkedAppointmentRemote = (TalkAppointmentFacadeRemote) ctx.lookup("java:app/PracticalCaseStudyJEE.jar/TalkAppointmentBean!ejb.TalkAppointmentFacadeRemote");
-		registerInTalkedAppointmentRemote.registerInTalkAppointment(nif, talkid);
+		registerInTalkedAppointmentRemote.registerInTalkAppointment(this.getNif(), talkid);
 		
 		
 		//return "TalkAppointmentsListView";
 		return null;
 	}
 	
-	public int getId(){
+	public Long getId(){
 		return id;
 	}
 	
-	public void setId(int id){
+	public void setId(Long id){
 		this.id = id;
+	}
+	
+	public String getNif() {
+		return nif;
+	}
+	
+	public void setNif(String nif) {
+		this.nif = nif;
 	}
 	
 	public TalkAppointmentJPA getTalkAppointment(){
@@ -68,9 +74,8 @@ public class RegisterInTalkAppointmentMBean implements Serializable {
 		talkAppointment = (TalkAppointmentJPA) registerInTalkedAppointmentRemote.showTalkAppointment(id);		
 	}
 	
-	public String showRegister(Long id) throws Exception {		
-		this.setTalkAppointment(id);
-		return "RegisterInTalkAppointmentView";
+	public void showRegister() throws Exception {		
+		this.setTalkAppointment(this.getId());
 	}
 	
 }

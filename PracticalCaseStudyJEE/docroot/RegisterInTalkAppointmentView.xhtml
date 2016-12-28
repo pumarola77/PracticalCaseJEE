@@ -4,6 +4,11 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:f="http://java.sun.com/jsf/core" xmlns:h="http://java.sun.com/jsf/html">
 
+<f:metadata>
+	<f:viewParam name="id" value="#{RegisterInTalkAppointment.id}" />
+	<f:viewAction action="#{RegisterInTalkAppointment.showRegister()}" />
+</f:metadata>
+
 <h:head>
 	#{authorized.authorized()}
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"></meta>
