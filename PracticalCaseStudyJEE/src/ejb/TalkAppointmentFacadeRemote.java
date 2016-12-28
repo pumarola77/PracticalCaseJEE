@@ -12,9 +12,9 @@ public interface TalkAppointmentFacadeRemote {
 	/*
 	 Metodes invocats remotament
 	 */
-	public TalkAppointmentJPA showTalkAppointment(int id);
-	public void registerInTalkAppointment(String nif, Integer talkid);
-	public void removeFromTalkAppointment(String nif, Integer talkid);
+	public TalkAppointmentJPA showTalkAppointment(Long id);
+	public void registerInTalkAppointment(String nif, Long talkid);
+	public void removeFromTalkAppointment(String nif, Long talkid);
 	//public Collection<TalkAppointmentJPA> findMyTalkAppointments(String nif, String data, String tipus);
 
 	public Collection<?> citiesTalkAppointments();

@@ -13,6 +13,7 @@ public class UserJPA implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
+	@Id
 	@Column(name="nif")
 	private String nif;
 	
@@ -31,6 +32,8 @@ public class UserJPA implements Serializable {
 	@Column(name="email")
 	private String email;
 	
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER )
+	@JoinColumn(name = "nif")
 	private Collection<TalkedLanguageJPA> talkedLanguages;
 	
 	/**
@@ -52,7 +55,7 @@ public class UserJPA implements Serializable {
 	/**
 	 *  Mètodes get/set dels camps de la base de dades
 	 */
-	@Id
+
 	public String getNif() {
 		return nif;
 	}
@@ -93,8 +96,7 @@ public class UserJPA implements Serializable {
 	/* 
 	 * Metodes get/set persistence relationships 
 	 * */
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER )
-	@JoinColumn(name = "nif")
+
 	public Collection<TalkedLanguageJPA> getTalkedLanguageByUser() {
 		return talkedLanguages;
 	}

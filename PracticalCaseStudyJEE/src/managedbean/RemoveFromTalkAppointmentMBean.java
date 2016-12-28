@@ -2,15 +2,12 @@ package managedbean;
 
 import java.io.Serializable;
 import java.util.Properties;
-
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.naming.Context;
 import javax.naming.InitialContext;
-import javax.naming.NamingException;
-
 import ejb.TalkAppointmentFacadeRemote;
 
 @ManagedBean(name = "RemoveFromTalkAppointment")
@@ -25,7 +22,7 @@ public class RemoveFromTalkAppointmentMBean implements Serializable {
 	@EJB
 	private TalkAppointmentFacadeRemote removeFromTalkedAppointmentRemote;
 	
-	public String removeFromTalkAppointment(Integer talkid) throws Exception {
+	public String removeFromTalkAppointment(Long talkid) throws Exception {
 
 		String nif ="";
 		

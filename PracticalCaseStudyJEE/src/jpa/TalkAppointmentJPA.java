@@ -17,13 +17,8 @@ public class TalkAppointmentJPA implements Serializable{
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@SequenceGenerator(name="practicalcase.talkappointment_idtalkapp_seq",
-					   sequenceName="practicalcase.talkappointment_idtalkapp_seq",
-					   allocationSize=1)
-	@GeneratedValue(strategy = GenerationType.SEQUENCE,
-					generator="practicalcase.talkappointment_idtalkapp_seq")
-	@Column(name = "idtalkapp", updatable=false, columnDefinition = "serial")
-	private Integer id;
+	@Column(name = "idtalkapp", nullable=false, columnDefinition="serial")	
+	private Long id;
 	
 	@Column(name = "descrption")
 	private String description;
@@ -73,11 +68,13 @@ public class TalkAppointmentJPA implements Serializable{
 	/**
 	 * Getters i setters
 	 */
-	public Integer getId() {
+	
+	
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(Integer id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
@@ -153,14 +150,5 @@ public class TalkAppointmentJPA implements Serializable{
 		this.languageToTalk = langToTalk;
 	}
 	
-	/*
-	public String getUserLanguageToTalk() {
-		return userLanguageToTalk;
-	}
-
-	public void setUserLanguageToTalk(String user) {
-		this.userLanguageToTalk = user;
-	}
-	*/
 	
 }

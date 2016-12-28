@@ -18,9 +18,9 @@ public class LocationJPA implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
 	
-	//@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(name = "id")
-	private int id;
+	@Id
+	@Column(name = "idlocation", nullable=false, columnDefinition="serial")	
+	private Long id;
 	
 	@Column(name = "street")
 	private String street;
@@ -48,12 +48,12 @@ public class LocationJPA implements Serializable {
 	/**
 	 * Getters i setters
 	 */
-	@Id
-	public int getId() {
+	
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 

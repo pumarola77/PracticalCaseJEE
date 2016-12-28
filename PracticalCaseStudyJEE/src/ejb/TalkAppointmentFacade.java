@@ -2,10 +2,7 @@ package ejb;
 
 import java.util.Collection;
 import java.util.Date;
-
 import javax.ejb.Local;
-import javax.persistence.PersistenceException;
-
 import jpa.TalkAppointmentJPA;
 
 @Local
@@ -13,9 +10,9 @@ public interface TalkAppointmentFacade {
 	/*
 	 Metodes invocats localment
 	 */
-	public TalkAppointmentJPA showTalkAppointment(int id);
-	public void registerInTalkAppointment(String nif, Integer talkid);
-	public void removeFromTalkAppointment(String nif, Integer talkid);
+	public TalkAppointmentJPA showTalkAppointment(Long id);
+	public void registerInTalkAppointment(String nif, Long talkid);
+	public void removeFromTalkAppointment(String nif, Long talkid);
 	//public Collection<TalkAppointmentJPA> findMyTalkAppointments(String nif, String data, String tipus);
 
 	public Collection<?> citiesTalkAppointments();

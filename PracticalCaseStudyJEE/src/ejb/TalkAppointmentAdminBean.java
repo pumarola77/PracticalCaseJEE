@@ -1,11 +1,14 @@
 package ejb;
 
+import java.math.BigInteger;
 import java.sql.Date;
 import java.sql.Time;
 import java.util.Collection;
 
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
+import javax.ejb.TransactionAttribute;
+import javax.ejb.TransactionAttributeType;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.PersistenceException;
@@ -16,7 +19,6 @@ import jpa.LanguageToTalkJPA;
 import jpa.LocationJPA;
 import jpa.TalkAppointmentJPA;
 import jpa.TalkStatus;
-import jpa.TalkedLanguageJPA;
 import jpa.UserJPA;
 
 //@Stateless: Indiquem que es tracta de un EJB Session sense estat.
@@ -32,10 +34,15 @@ public class TalkAppointmentAdminBean implements TalkAppointmentAdminFacadeRemot
 
 	public void addTalkAppointment(String description, LocationJPA location, Date date, Time time, LanguageToTalkJPA languageToTalk){
 
-
-		try{							
-			entman.persist(location);
+		try{		
 			
+			try {
+				location.setId(this.getLocationSequence());
+			} catch (Exception e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+			entman.persist(location);
 			
 			TalkAppointmentJPA talkApp = new TalkAppointmentJPA(description,date,time,TalkStatus.OPEN);
 						
@@ -51,23 +58,29 @@ public class TalkAppointmentAdminBean implements TalkAppointmentAdminFacadeRemot
 			talkApp.setDescription(description);
 			talkApp.setStatus(TalkStatus.OPEN);
 			
-			//Identificador s'ha de treure nomes serveix ara per verificar que es doni alta.
-			//talkApp.setId(1);			
 			
+			try {				
+				talkApp.setId(this.getTalkAppointmentSequence());
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+					
 			entman.persist(talkApp);
-			
+						
 
 		} catch(PersistenceException e){
 			throw e;
 		}
-		
+
 	}
 
 	/**
 	 * Metode per acceptar una petició de conversa
 	 */
 	@Override
-	public void acceptRequest(int talkid, String nif) throws PersistenceException {
+	public void acceptRequest(Long talkid, String nif) throws PersistenceException {
 		try
 		{
 			Query queryTalkId= entman.createQuery("FROM TalkAppointmentJPA t WHERE t.id = :talkid").setParameter("talkid", talkid);
@@ -94,7 +107,7 @@ public class TalkAppointmentAdminBean implements TalkAppointmentAdminFacadeRemot
 	 * Metode per rebutjar una petició de conversa, on s'ha d'especificar la rao
 	 */
 	@Override
-	public int rejectRequest(int talkid, String nif, String reason) throws PersistenceException {
+	public int rejectRequest(Long talkid, String nif, String reason) throws PersistenceException {
 		try
 		{
 			Query queryTalkId= entman.createQuery("FROM TalkAppointmentJPA t WHERE t.id = :talkid").setParameter("talkid", talkid);
@@ -149,5 +162,31 @@ public class TalkAppointmentAdminBean implements TalkAppointmentAdminFacadeRemot
 		
 		
 		return talkAppointments;
+	}
+	
+	/**
+	 * Genera el id per a la taula location
+	 * @return identificador
+	 * @throws Exception
+	 */
+	@TransactionAttribute(TransactionAttributeType.REQUIRED)
+	public Long getTalkAppointmentSequence() throws Exception {
+		Query query = null;
+		
+		query = entman.createNativeQuery("SELECT nextval('practicalcase.talkappointment_idtalkapp_seq')");
+		return ((BigInteger) query.getResultList().get(0)).longValue();		
+	}
+	
+	/**
+	 * Genera el id per a a taula location
+	 * @return
+	 * @throws Exception
+	 */
+	@TransactionAttribute(TransactionAttributeType.REQUIRED)
+	public Long getLocationSequence() throws Exception {
+		Query query = null;
+		
+		query = entman.createNativeQuery("SELECT nextval('practicalcase.location_idlocation_seq')");
+		return ((BigInteger) query.getResultList().get(0)).longValue();		
 	}
 }

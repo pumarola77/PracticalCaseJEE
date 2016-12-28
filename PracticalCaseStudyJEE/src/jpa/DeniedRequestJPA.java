@@ -17,12 +17,20 @@ public class DeniedRequestJPA implements Serializable {
 	@Column(name = "reason")
 	private String reason;
 	
+	@Id
+	@ManyToOne
+	@JoinColumn (name="nif")
 	private UserJPA user;
+	
+	@Id
+	@ManyToOne
+	@JoinColumn (name="talkapp")
 	private TalkAppointmentJPA talkApp;
 
 	/**
 	 * Constructor
 	 */
+	
 	public DeniedRequestJPA() {
 		super();
 	}
@@ -46,9 +54,7 @@ public class DeniedRequestJPA implements Serializable {
 	 * Methods get/set persistent relationships
 	 * JoinColumn fa referencia a la columna amb la qual realitzem el join.
 	 */
-	@Id
-	@ManyToOne
-	@JoinColumn (name="nif")
+
 	public UserJPA getUser() {
 		return user;
 	}
@@ -57,9 +63,7 @@ public class DeniedRequestJPA implements Serializable {
 		this.user = user;
 	}
 	
-	@Id
-	@ManyToOne
-	@JoinColumn (name="talkapp")
+
 	public TalkAppointmentJPA getTalkApp(){
 		return talkApp;
 	}

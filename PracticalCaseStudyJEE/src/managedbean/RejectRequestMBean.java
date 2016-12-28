@@ -11,8 +11,7 @@ import javax.persistence.PersistenceException;
 import javax.servlet.http.HttpServletRequest;
 
 import ejb.TalkAppointmentAdminFacadeRemote;
-import ejb.TalkAppointmentFacadeRemote;
-import jpa.TalkAppointmentJPA;
+
 
 /**
  * Managed Bean RejectRequestMBean
@@ -26,17 +25,17 @@ public class RejectRequestMBean implements Serializable{
 	private int success; //Aquest parametre serveix per controlar si el formulari de registre conte errors en les dades introduides
 	protected String errorFormulari; //Aquest parametre serveix per mostrar un error a la propia pàgina del formulari
 
-	private int talkId;
+	private Long talkId;
 	private String nif;
 
 	@EJB
 	private TalkAppointmentAdminFacadeRemote RejectRequestRemote;
 
-	public int getTalkId(){
+	public Long getTalkId(){
 		return talkId;
 	}
 
-	public void setTalkId(int talkId){
+	public void setTalkId(Long talkId){
 		this.talkId = talkId;
 	}
 
@@ -60,7 +59,7 @@ public class RejectRequestMBean implements Serializable{
 	 * @return Nom del Facelet
 	 * @throws Exception
 	 */
-	public String rejectRequest(int talkid, String nif) throws Exception
+	public String rejectRequest(Long talkid, String nif) throws Exception
 	{
 		try
 		{
@@ -96,7 +95,7 @@ public class RejectRequestMBean implements Serializable{
 		} 
 	}
 
-	public String rejectRequestView(int talkid, String nif) throws Exception{
+	public String rejectRequestView(Long talkid, String nif) throws Exception{
 		this.setTalkId(talkid);
 		this.setNif(nif);
 		if (nif == ""){

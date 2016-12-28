@@ -35,6 +35,12 @@ public class ListAllLanguagesToTalk implements Serializable{
 	
 	public ListAllLanguagesToTalk()
 	{
+		
+		//Carrega el NIF del User
+		if ( FacesContext.getCurrentInstance().getExternalContext().getSessionMap().containsKey("nif") == true) {
+			this.setNif(FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("nif").toString());
+		}
+		
 		screen=0;
 	}
 	

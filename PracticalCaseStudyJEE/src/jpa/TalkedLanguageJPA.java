@@ -13,6 +13,7 @@ public class TalkedLanguageJPA implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 
+	@Id
 	@Column(name = "language")
 	private String language;
 
@@ -22,6 +23,9 @@ public class TalkedLanguageJPA implements Serializable{
 	@Column(name = "description")
 	private String description;
 
+	@Id
+	@ManyToOne
+	@JoinColumn (name="nif")
 	private UserJPA user;
 
 	/**
@@ -41,7 +45,6 @@ public class TalkedLanguageJPA implements Serializable{
 	 * Getters i setters dels camps de la base de dades
 	 */
 
-	@Id
 	public String getLanguage() {
 		return language;
 	}
@@ -70,9 +73,7 @@ public class TalkedLanguageJPA implements Serializable{
 	 * Methods get/set persistent relationships
 	 * JoinColumn fa referencia a la columna amb la qual realitzem el join.
 	 */
-	@Id
-	@ManyToOne
-	@JoinColumn (name="nif")
+
 	public UserJPA getUser() {
 		return user;
 	}

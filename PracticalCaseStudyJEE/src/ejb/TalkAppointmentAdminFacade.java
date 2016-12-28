@@ -16,7 +16,7 @@ public interface TalkAppointmentAdminFacade {
 	 Metodes invocats localment
 	 */
 	public void addTalkAppointment(String description, LocationJPA location, Date date, Time time, LanguageToTalkJPA languageToTalk);
-	public void acceptRequest(int talkid, String nif);
-	public int rejectRequest(int talkid, String nif, String reason);
+	public void acceptRequest(Long talkid, String nif);
+	public int rejectRequest(Long talkid, String nif, String reason);
 	public Collection<?> findMyTalkAppointmentsAsProposal(String nif);
 }

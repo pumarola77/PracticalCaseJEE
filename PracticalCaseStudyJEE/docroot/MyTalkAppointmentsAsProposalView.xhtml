@@ -105,7 +105,8 @@
 					<h:outputText value="Accions" />
 				</f:facet>
 				<h:commandButton value="Acceptar" type="submit"
-					action="#{acceptrequest.AcceptRequest(item.id,item.userPublish.nif)}" />
+					actionListener="#{acceptrequest.AcceptRequest(item.id,item.userPublish.nif)}" 
+					action="#{findmytalkappasproposal.listTalkAppointments()}" />
 				<h:commandButton value="Rebutjar" type="submit"
 					action="#{rejectrequest.rejectRequestView(item.id,item.userSign.nif)}" />
 			</h:column>

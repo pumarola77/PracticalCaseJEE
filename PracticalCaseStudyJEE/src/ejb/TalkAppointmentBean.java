@@ -30,7 +30,7 @@ public class TalkAppointmentBean implements TalkAppointmentFacadeRemote, TalkApp
 	@EJB
 	private UserFacade userFacade;
 
-	public TalkAppointmentJPA showTalkAppointment(int id) throws PersistenceException{
+	public TalkAppointmentJPA showTalkAppointment(Long id) throws PersistenceException{
 
 		TalkAppointmentJPA talkApp = entman.find(TalkAppointmentJPA.class, id);
 		return talkApp;
@@ -38,7 +38,7 @@ public class TalkAppointmentBean implements TalkAppointmentFacadeRemote, TalkApp
 
 
 	@Override
-	public void registerInTalkAppointment(String nif, Integer talkid) {
+	public void registerInTalkAppointment(String nif, Long talkid) {
 		// TODO Auto-generated method stub
 
 		Query query = entman.createQuery("FROM TalkAppointmentJPA b WHERE b.id = :id");
@@ -61,7 +61,7 @@ public class TalkAppointmentBean implements TalkAppointmentFacadeRemote, TalkApp
 	}
 
 	@Override
-	public void removeFromTalkAppointment(String nif, Integer talkid) {
+	public void removeFromTalkAppointment(String nif, Long talkid) {
 
 		/*try {
 

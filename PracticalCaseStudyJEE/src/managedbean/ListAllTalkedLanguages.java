@@ -2,15 +2,12 @@ package managedbean;
 import java.io.Serializable;
 import java.util.*;
 
-import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.bean.*;
 import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.faces.context.FacesContext;
 import ejb.UserFacadeRemote;
-import jpa.PetJPA;
-//import ejb.UserFacade;
 import jpa.TalkedLanguageJPA;
 
 @ManagedBean(name = "ListTalkedLang")
@@ -33,8 +30,18 @@ public class ListAllTalkedLanguages implements Serializable{
 	@EJB
 	private UserFacadeRemote userRemote;
 	
+	
+	/**
+	 * Constructor
+	 */	
 	public ListAllTalkedLanguages() 
 	{
+		
+		//Carrega el NIF del User
+		if ( FacesContext.getCurrentInstance().getExternalContext().getSessionMap().containsKey("nif") == true) {
+			this.setNif(FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("nif").toString());
+		}
+		
 		screen=0;
 	}
 	

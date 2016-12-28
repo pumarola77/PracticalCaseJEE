@@ -33,7 +33,7 @@ public class RegisterInTalkAppointmentMBean implements Serializable {
 		
 	}
 	
-	public String registerInTalkedAppointment(Integer talkid) throws Exception {
+	public String registerInTalkedAppointment(Long talkid) throws Exception {
 						
 		String nif ="";
 		
@@ -64,11 +64,11 @@ public class RegisterInTalkAppointmentMBean implements Serializable {
 		return talkAppointment;
 	}
 	
-	public void setTalkAppointment(int id)  throws Exception{
+	public void setTalkAppointment(Long id)  throws Exception{
 		talkAppointment = (TalkAppointmentJPA) registerInTalkedAppointmentRemote.showTalkAppointment(id);		
 	}
 	
-	public String showRegister(int id) throws Exception {
+	public String showRegister(Long id) throws Exception {
 		this.setTalkAppointment(id);
 		return "RegisterInTalkAppointmentView";
 	}

@@ -27,7 +27,7 @@ public class AcceptRequestMBean implements Serializable{
 	 * @return Nom del Facelet
 	 * @throws Exception
 	 */
-	public String AcceptRequest(int talkid, String nif) throws Exception
+	public String AcceptRequest(Long talkid, String nif) throws Exception
 	{
 		try
 		{

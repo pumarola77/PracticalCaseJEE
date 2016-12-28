@@ -29,7 +29,7 @@ public class ShowTalkAppointmentMBean implements Serializable{
 	private TalkAppointmentFacade showTalkAppointmentLocal;
 	 */
 	private TalkAppointmentJPA talkAppointment;
-	private int id;
+	private Long id;
 	private String returnView;
 
 	public ShowTalkAppointmentMBean() throws Exception{
@@ -46,11 +46,11 @@ public class ShowTalkAppointmentMBean implements Serializable{
 		}*/
 	}
 
-	public int getId(){
+	public Long getId(){
 		return id;
 	}
 
-	public void setId(int id){
+	public void setId(Long id){
 		this.id = id;
 	}
 
@@ -66,7 +66,7 @@ public class ShowTalkAppointmentMBean implements Serializable{
 		return talkAppointment;
 	}
 
-	public void setTalkAppointment(int id)  throws Exception{
+	public void setTalkAppointment(Long id)  throws Exception{
 		talkAppointment = (TalkAppointmentJPA) showTalkAppointmentRemote.showTalkAppointment(id);		
 	}
 
