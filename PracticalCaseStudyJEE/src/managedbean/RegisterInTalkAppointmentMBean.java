@@ -43,7 +43,7 @@ public class RegisterInTalkAppointmentMBean implements Serializable {
 		}	
 		Properties props = System.getProperties();
 		Context ctx = new InitialContext(props);
-
+		
 		registerInTalkedAppointmentRemote = (TalkAppointmentFacadeRemote) ctx.lookup("java:app/PracticalCaseStudyJEE.jar/TalkAppointmentBean!ejb.TalkAppointmentFacadeRemote");
 		registerInTalkedAppointmentRemote.registerInTalkAppointment(nif, talkid);
 		
@@ -68,7 +68,7 @@ public class RegisterInTalkAppointmentMBean implements Serializable {
 		talkAppointment = (TalkAppointmentJPA) registerInTalkedAppointmentRemote.showTalkAppointment(id);		
 	}
 	
-	public String showRegister(Long id) throws Exception {
+	public String showRegister(Long id) throws Exception {		
 		this.setTalkAppointment(id);
 		return "RegisterInTalkAppointmentView";
 	}

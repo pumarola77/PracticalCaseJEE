@@ -53,6 +53,16 @@ public class RejectRequestMBean implements Serializable{
 	public void setErrorFormulari (String errorFormulari){
 		this.errorFormulari = errorFormulari;
 	}
+	
+	/**
+	 * Constructor : 
+	 */
+	public RejectRequestMBean() throws Exception {
+		//Carrega el NIF del User
+		if ( FacesContext.getCurrentInstance().getExternalContext().getSessionMap().containsKey("nif") == true) {
+			this.setNif(FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("nif").toString());
+		}
+	}
 
 	/**
 	 * Metode que es fa servir per rebutjar una petició de conversa
