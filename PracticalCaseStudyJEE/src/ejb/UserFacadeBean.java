@@ -219,4 +219,18 @@ public class UserFacadeBean implements UserFacadeRemote, UserFacade{
 		return allLanguagesToTalk;
 	}
 
+	@Override
+	public boolean findLanguageToTalkAppointment(String nif, String language) {
+		// TODO Auto-generated method stub
+
+		Collection<?> findtalkappointment = entman.createQuery("FROM TalkAppointmentJPA a WHERE a.languageToTalk.user.nif = :usernif and a.languageToTalk.language = :language").setParameter("usernif", nif).setParameter("language", language).getResultList();
+		
+		if ( findtalkappointment.size() > 0) {
+			return true;
+		} else {
+			return false;
+		}
+	
+	}
+
 }

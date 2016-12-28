@@ -1,9 +1,7 @@
 package ejb;
+
 import java.util.Collection;
-import java.util.List;
-
 import javax.ejb.Remote;
-
 import jpa.LanguageToTalkJPA;
 import jpa.TalkedLanguageJPA;
 
@@ -25,4 +23,5 @@ public interface UserFacadeRemote{
 	public int addLanguageToTalk(String nif, String language, String level, String description, boolean acceptPay);
 	public void deleteLanguageToTalk(String nif, String language);
 	public Collection<LanguageToTalkJPA> listAllLanguagesToTalk(String nif);
+	public boolean findLanguageToTalkAppointment(String nif, String language);
 }

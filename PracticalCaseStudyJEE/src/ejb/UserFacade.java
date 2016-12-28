@@ -1,13 +1,9 @@
 package ejb;
+
 import java.util.Collection;
-import java.util.List;
-
 import javax.ejb.Local;
-
 import jpa.TalkedLanguageJPA;
-
 import jpa.UserJPA;
-
 import jpa.LanguageToTalkJPA;
 
 @Local
@@ -26,4 +22,5 @@ public interface UserFacade {
 	public int addLanguageToTalk(String nif, String language, String level, String description, boolean acceptPay);
 	public void deleteLanguageToTalk(String nif, String language);
 	public Collection<LanguageToTalkJPA> listAllLanguagesToTalk(String nif);
+	public boolean findLanguageToTalkAppointment(String nif, String language);
 }
