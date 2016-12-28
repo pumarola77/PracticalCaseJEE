@@ -18,8 +18,12 @@ import javax.persistence.Query;
 import jpa.TalkAppointmentJPA;
 import jpa.UserJPA;
 
+/**
+ * 
+ * @author Grup6
+ *
+ */
 
-//@Stateless: Indiquem que es tracta de un EJB Session sense estat.
 @Stateless
 public class TalkAppointmentBean implements TalkAppointmentFacadeRemote, TalkAppointmentFacade {
 
@@ -63,19 +67,6 @@ public class TalkAppointmentBean implements TalkAppointmentFacadeRemote, TalkApp
 	@Override
 	public void removeFromTalkAppointment(String nif, Long talkid) {
 
-		/*try {
-
-			int deleteCount = entman.createQuery("DELETE FROM TalkAppointmentJPA b WHERE b.userSign.nif = :nif and b.id = :talkid").setParameter("nif", nif).setParameter("id", talkid).executeUpdate();
-
-			if (deleteCount <= 0 ) {
-				throw new PersistenceException("No s'ha pogut eliminar.");
-			}
-
-		} catch (PersistenceException ex) {
-			throw ex;
-		}*/
-
-
 		TalkAppointmentJPA aux = entman.find(TalkAppointmentJPA.class, talkid);
 
 		/*Si el TalkAppointment ja te el camp UserSign com a null no cal seguir executant aquest metode*/
@@ -91,46 +82,19 @@ public class TalkAppointmentBean implements TalkAppointmentFacadeRemote, TalkApp
 
 	}
 
-	/*@Override
-	public Collection<TalkAppointmentJPA> findMyTalkAppointments(String nif, String data, String tipus){
-		Query query = null;
-		String select = "";
-
-		if (tipus == "PUBLICADES") {
-			select = "FROM TalkAppointmentJPA t WHERE t.userPublish.nif = :nif";
-		} else {
-			select = "FROM TalkAppointmentJPA t WHERE t.userSign.nif = :nif";
-		}
-
-		if (data != null && data.trim().length() > 0) {
-			select += " AND t.date = :data";
-		}
-		else
-		{
-			data = "2000/01/01";
-			select += " AND t.date > :data";
-		}
-		query = entman.createQuery(select).setParameter("nif", nif).setParameter("date", data);;
-
-		@SuppressWarnings("unchecked")
-		Collection<TalkAppointmentJPA> myTalkAppointments = query.getResultList();
-
-		return myTalkAppointments;
-	}*/
-
 
 	@Override
-	public Collection<?> findTalkAppointments(String location,String fecha,String hora,String language) throws PersistenceException {
+	public Collection<?> findTalkAppointments(String nif, String location,String fecha,String hora,String language) throws PersistenceException {
 		// TODO Auto-generated method stub
 		String select=null;
 		Query query=null;
-
+		
 		try {
 
 			if ( location.compareTo("ALL CITIES") == 0 ) {
-				select = "FROM TalkAppointmentJPA b WHERE b.status = 'OPEN' and b.userSign.nif is null";
+				select = "FROM TalkAppointmentJPA b WHERE b.status = 'OPEN' and b.userPublish.nif <> :nifuser and b.userSign.nif is null";
 			} else {
-				select = "FROM TalkAppointmentJPA b WHERE b.status = 'OPEN' and b.userSign.nif is null and b.location.city = :ciutat";
+				select = "FROM TalkAppointmentJPA b WHERE b.status = 'OPEN' and b.userPublish.nif <> :nifuser and b.userSign.nif is null and b.location.city = :ciutat";
 
 				if ( language.compareTo("ALL LANGUAGES") != 0 ) {
 					select = select + " AND b.languageToTalk.language = :language";
@@ -150,6 +114,8 @@ public class TalkAppointmentBean implements TalkAppointmentFacadeRemote, TalkApp
 			select = select + " ORDER BY b.location.city , b.languageToTalk.language , b.date , b.time";
 
 			query = entman.createQuery(select);
+			
+			query.setParameter("nifuser", nif);
 
 			if ( location.compareTo("ALL CITIES") != 0 ) {
 				query.setParameter("ciutat", location);
@@ -192,13 +158,13 @@ public class TalkAppointmentBean implements TalkAppointmentFacadeRemote, TalkApp
 
 
 	@Override
-	public Collection<?> citiesTalkAppointments() {
+	public Collection<?> citiesTalkAppointments(String nif) {
 		// TODO Auto-generated method stub
 
 		try {
 
 			@SuppressWarnings("unchecked")
-			Collection<String> talkappointments = entman.createQuery("SELECT a.location.city FROM TalkAppointmentJPA a WHERE a.status = 'OPEN' and a.userSign.nif is null GROUP BY a.location.city").getResultList();
+			Collection<String> talkappointments = entman.createQuery("SELECT a.location.city FROM TalkAppointmentJPA a WHERE a.status = 'OPEN' and a.userPublish.nif <> :nifuser and a.userSign.nif is null GROUP BY a.location.city").setParameter("nifuser", nif).getResultList();
 
 			if ( !talkappointments.isEmpty() ) {
 				return talkappointments;
@@ -212,13 +178,13 @@ public class TalkAppointmentBean implements TalkAppointmentFacadeRemote, TalkApp
 	}
 
 	@Override
-	public Collection<?> languagesfromTalkAppointments(String city) {
+	public Collection<?> languagesfromTalkAppointments(String nif, String city) {
 		// TODO Auto-generated method stub
 
 		try {
 
 			@SuppressWarnings("unchecked")
-			Collection<String> talkappointments = entman.createQuery("SELECT a.languageToTalk.language  FROM TalkAppointmentJPA a WHERE a.status = 'OPEN' and a.userSign.nif is null and a.location.city = :ciutat GROUP BY a.languageToTalk.language").setParameter("ciutat", city).getResultList();
+			Collection<String> talkappointments = entman.createQuery("SELECT a.languageToTalk.language  FROM TalkAppointmentJPA a WHERE a.status = 'OPEN' and a.userPublish.nif <> :nifuser and a.userSign.nif is null and a.location.city = :ciutat GROUP BY a.languageToTalk.language").setParameter("nifuser",nif).setParameter("ciutat", city).getResultList();
 
 			if ( !talkappointments.isEmpty()) {
 				return talkappointments;
@@ -233,13 +199,13 @@ public class TalkAppointmentBean implements TalkAppointmentFacadeRemote, TalkApp
 	}
 
 	@Override
-	public Collection<?> datefromTalkAppointmments(String city, String language) {
+	public Collection<?> datefromTalkAppointmments(String nif, String city, String language) {
 		// TODO Auto-generated method stub	
 
 		try {
 
 			@SuppressWarnings("unchecked")
-			Collection<Date> talkappointments = entman.createQuery("SELECT a.date FROM TalkAppointmentJPA a where a.status = 'OPEN' and a.userSign.nif is null and a.location.city = :ciutat AND a.languageToTalk.language = :language GROUP BY a.date").setParameter("ciutat", city).setParameter("language",language).getResultList();
+			Collection<Date> talkappointments = entman.createQuery("SELECT a.date FROM TalkAppointmentJPA a where a.status = 'OPEN' and a.userPublish.nif <> :nifuser and a.userSign.nif is null and a.location.city = :ciutat AND a.languageToTalk.language = :language GROUP BY a.date").setParameter("nifuser",nif).setParameter("ciutat", city).setParameter("language",language).getResultList();
 
 			if ( !talkappointments.isEmpty() ) {
 				return talkappointments;
@@ -255,13 +221,13 @@ public class TalkAppointmentBean implements TalkAppointmentFacadeRemote, TalkApp
 
 
 	@Override
-	public Collection<?> timefromTalkAppointments(String city,String language,Date date) {
+	public Collection<?> timefromTalkAppointments(String nif, String city,String language,Date date) {
 		// TODO Auto-generated method stub
 
 		try {
 
 			@SuppressWarnings("unchecked")
-			Collection<Time> talkappointments = entman.createQuery("SELECT a.time FROM TalkAppointmentJPA a WHERE a.status = 'OPEN' and a.userSign.nif is null and a.location.city = :ciutat and a.languageToTalk.language = :language and a.date = :date GROUP BY a.time").setParameter("ciutat", city).setParameter("language",language).setParameter("date",date).getResultList();
+			Collection<Time> talkappointments = entman.createQuery("SELECT a.time FROM TalkAppointmentJPA a WHERE a.status = 'OPEN' and a.userPublish.nif <> :nifuser and a.userSign.nif is null and a.location.city = :ciutat and a.languageToTalk.language = :language and a.date = :date GROUP BY a.time").setParameter("nifuser",nif).setParameter("ciutat", city).setParameter("language",language).setParameter("date",date).getResultList();
 
 			if ( !talkappointments.isEmpty()) {
 				return talkappointments;

@@ -11,7 +11,6 @@ import java.util.Properties;
 
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ValueChangeEvent;
@@ -37,6 +36,7 @@ public class FindTalkAppointmentsMBean implements Serializable {
 	/* Variable per controlar els registres que esta veient un usuari */
 	private int screen = 0;
 	protected int numberTalkAppointments = 0;
+	private String nif;
 	
 	/**
 	 * Mostra les ciutats de les cites actives
@@ -95,6 +95,8 @@ public class FindTalkAppointmentsMBean implements Serializable {
 	
 	public FindTalkAppointmentsMBean() throws Exception 
 	{			
+		this.setNif(FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("nif").toString());
+		
 		this.talkAppointmentsList();
 		
 		this.ciutatsList();
@@ -153,6 +155,14 @@ public class FindTalkAppointmentsMBean implements Serializable {
 	
 	public void setLanguages(String languages) {
 		this.languages = languages;
+	}
+	
+	public String getNif() {
+		return this.nif;
+	}
+	
+	public void setNif(String nif) {
+		this.nif = nif;
 	}
 
 	public void ciutatValueChanged(ValueChangeEvent ciutatChanged) {
@@ -264,7 +274,7 @@ public class FindTalkAppointmentsMBean implements Serializable {
 		Context ctx = new InitialContext(props);
 		findTalkAppointmentsRemote = (TalkAppointmentFacadeRemote) ctx.lookup("java:app/PracticalCaseStudyJEE.jar/TalkAppointmentBean!ejb.TalkAppointmentFacadeRemote");		
 
-		citiesList = (Collection<String>) findTalkAppointmentsRemote.citiesTalkAppointments();
+		citiesList = (Collection<String>) findTalkAppointmentsRemote.citiesTalkAppointments(this.getNif());
 		
 				
 		if ( !(citiesList == null))
@@ -291,7 +301,7 @@ public class FindTalkAppointmentsMBean implements Serializable {
 			Context ctx = new InitialContext(props);
 			findTalkAppointmentsRemote = (TalkAppointmentFacadeRemote) ctx.lookup("java:app/PracticalCaseStudyJEE.jar/TalkAppointmentBean!ejb.TalkAppointmentFacadeRemote");
 											
-			languageList = (Collection<String>) findTalkAppointmentsRemote.languagesfromTalkAppointments(this.getCiutat());
+			languageList = (Collection<String>) findTalkAppointmentsRemote.languagesfromTalkAppointments(this.getNif(),this.getCiutat());
 			
 			if ( !languageList.isEmpty()) {
 				for(Iterator<String> iter2 = languageList.iterator(); iter2.hasNext();) {
@@ -316,7 +326,7 @@ public class FindTalkAppointmentsMBean implements Serializable {
 			Context ctx = new InitialContext(props);
 			findTalkAppointmentsRemote = (TalkAppointmentFacadeRemote) ctx.lookup("java:app/PracticalCaseStudyJEE.jar/TalkAppointmentBean!ejb.TalkAppointmentFacadeRemote");
 			
-			fechasList = (Collection<Date>) findTalkAppointmentsRemote.datefromTalkAppointmments(this.getCiutat(),this.getLanguages());
+			fechasList = (Collection<Date>) findTalkAppointmentsRemote.datefromTalkAppointmments(this.getNif(),this.getCiutat(),this.getLanguages());
 					
 			if ( !fechasList.isEmpty() ) {
 				for(Iterator<Date> iter2 = fechasList.iterator(); iter2.hasNext();) {
@@ -343,7 +353,7 @@ public class FindTalkAppointmentsMBean implements Serializable {
 			findTalkAppointmentsRemote = (TalkAppointmentFacadeRemote) ctx.lookup("java:app/PracticalCaseStudyJEE.jar/TalkAppointmentBean!ejb.TalkAppointmentFacadeRemote");
 			
 			Date fecha = (Date) formatDate.parse(this.getDates());		
-			timeList = (Collection<Time>) findTalkAppointmentsRemote.timefromTalkAppointments(this.getCiutat(),this.getLanguages(),fecha);
+			timeList = (Collection<Time>) findTalkAppointmentsRemote.timefromTalkAppointments(this.getNif(),this.getCiutat(),this.getLanguages(),fecha);
 						
 			if ( !timeList.isEmpty() ) {
 				for(Iterator<Time> iter2 = timeList.iterator(); iter2.hasNext();) {
@@ -362,13 +372,13 @@ public class FindTalkAppointmentsMBean implements Serializable {
 	 * S'haura de passar la data, hora , i el llenguatge
 	 */
 	@SuppressWarnings("unchecked")
-	private void talkAppointmentsList() throws Exception {		
+	private void talkAppointmentsList() throws Exception {
 		Properties props = System.getProperties();
 		Context ctx = new InitialContext(props);	
-							
+		
 		screen = 0;
 		findTalkAppointmentsRemote = (TalkAppointmentFacadeRemote) ctx.lookup("java:app/PracticalCaseStudyJEE.jar/TalkAppointmentBean!ejb.TalkAppointmentFacadeRemote");
-		talkAppointmentsList = (Collection<TalkAppointmentJPA>) findTalkAppointmentsRemote.findTalkAppointments(this.getCiutat(),this.getDates(),this.getHores(),this.getLanguages());
+		talkAppointmentsList = (Collection<TalkAppointmentJPA>) findTalkAppointmentsRemote.findTalkAppointments(this.getNif(),this.getCiutat(),this.getDates(),this.getHores(),this.getLanguages());
 	}
 	
 	
