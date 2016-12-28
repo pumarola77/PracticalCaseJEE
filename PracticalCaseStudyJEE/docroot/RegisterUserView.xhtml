@@ -165,9 +165,9 @@
 						Password:
 					</td>
 					<td>
-						<h:inputText id="password" label="Password" required="true" requiredMessage="Camp Obligatori" redisplay="true" value="#{UpdateUser.password}">
+						<h:inputSecret id="password" label="Password" required="true" requiredMessage="Camp Obligatori" redisplay="true" value="#{UpdateUser.password}">
 							<f:validator validatorId="PasswordValidator"></f:validator>
-						</h:inputText>
+						</h:inputSecret>
 					</td>
 					<td>
 						<h:message for="password" style="color:red"></h:message>

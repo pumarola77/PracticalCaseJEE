@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.*;
 import javax.ejb.EJB;
 import javax.faces.bean.*;
+import javax.faces.context.FacesContext;
 import javax.naming.Context;
 import javax.naming.InitialContext;
 
@@ -42,6 +43,10 @@ public class RegisterUser implements Serializable{
 		password = "";
 		email = "";
 		errorFormulari="";
+		
+		if ( FacesContext.getCurrentInstance().getExternalContext().getSessionMap().containsKey("nif") == true) {
+			this.setNif(FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("nif").toString());
+		}
 	}
 	
 	/*Definim els getters i setters per a que desde les pagines JSP es pugui accedir als atributs idioma i nivell*/
