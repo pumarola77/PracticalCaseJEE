@@ -16,16 +16,26 @@ import javax.naming.InitialContext;
 import ejb.TalkAppointmentAdminFacadeRemote;
 import jpa.TalkAppointmentJPA;
 
+/**
+ * Relacionat amb les cites que un usuari te publicades pendents
+ * acceptar o rebutjar
+ * 
+ * @author Grup6
+ *
+ */
 @ManagedBean(name = "findmytalkappasproposal")
 @ViewScoped
 public class FindMyTalkAppointmentsAsProposal implements Serializable {
 
 	/**
-	 * 
+	 * Obligatori implementar per el tipus Serializable
 	 */
 	private static final long serialVersionUID = 1L;
 
-	protected String errorFormulari; //Aquest parametre serveix per mostrar un error a la propia pàgina del formulari
+	/**
+	 * Serveix per mostrar per pantalla errorFormulari 
+	 */
+	protected String errorFormulari; 
 
 	/**
 	 * Correspont al nif del usuari registrat
@@ -91,8 +101,6 @@ public class FindMyTalkAppointmentsAsProposal implements Serializable {
 		talkAppointmentsList();				
 		return "MyTalkAppointmentsAsProposalView";
 	}
-
-
 
 
 	/**
