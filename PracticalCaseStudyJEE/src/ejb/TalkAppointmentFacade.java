@@ -11,7 +11,7 @@ public interface TalkAppointmentFacade {
 	 Metodes invocats localment
 	 */
 	public TalkAppointmentJPA showTalkAppointment(Long id);
-	public void registerInTalkAppointment(String nif, Long talkid);
+	public Boolean registerInTalkAppointment(String nif, Long talkid);
 	public void removeFromTalkAppointment(String nif, Long talkid);
 	//public Collection<TalkAppointmentJPA> findMyTalkAppointments(String nif, String data, String tipus);
 

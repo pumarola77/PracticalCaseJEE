@@ -16,6 +16,7 @@ import javax.persistence.PersistenceException;
 import javax.persistence.Query;
 
 import jpa.TalkAppointmentJPA;
+import jpa.TalkedLanguageJPA;
 import jpa.UserJPA;
 
 /**
@@ -59,9 +60,28 @@ public class TalkAppointmentBean implements TalkAppointmentFacadeRemote, TalkApp
 	 * @param talkid identificador de la cita
 	 */
 	@Override
-	public void registerInTalkAppointment(String nif, Long talkid) {
-		// TODO Auto-generated method stub
-
+	public Boolean registerInTalkAppointment(String nif, Long talkid) {
+		
+		TalkAppointmentJPA talkApp = entman.find(TalkAppointmentJPA.class, talkid); 
+		UserJPA userSign = userFacade.findUser(nif);								
+		
+		Collection<TalkedLanguageJPA> userSignTalkedLanguages = userSign.getTalkedLanguageByUser();
+		Iterator<TalkedLanguageJPA> iter = userSignTalkedLanguages.iterator();
+				
+		while(iter.hasNext())
+		{	
+			if (iter.next().getLanguage().equals(talkApp.getLanguageToTalk().getLanguage()))
+			{
+				talkApp.setUserSign(userSign);
+				entman.persist(talkApp);
+				return true;				
+			}
+		}
+		
+		return false;
+		
+		/*
+		
 		Query query = entman.createQuery("FROM TalkAppointmentJPA b WHERE b.id = :id");
 		query.setParameter("id", talkid);
 
@@ -78,7 +98,7 @@ public class TalkAppointmentBean implements TalkAppointmentFacadeRemote, TalkApp
 
 			entman.persist(element);
 		}
-
+	*/
 	}
 
 	/**

@@ -76,10 +76,13 @@
 			</table>
 		</div>
 		<p align="center">
-		   	<h:commandLink value="Registrar" 
+		   	<!--  <h:commandLink value="Registrar" 
 		    	actionListener="#{RegisterInTalkAppointment.registerInTalkedAppointment(RegisterInTalkAppointment.getTalkAppointment().getId())}" 
 		    	action="#{findtalkappointments.listTalkAppointments}" immediate="true" >
 				    	<f:actionListener action="TalkAppointmentsListView" />
+			</h:commandLink>-->
+			<h:commandLink value="Registrar" action="#{RegisterInTalkAppointment.register()}">
+			
 			</h:commandLink>
 		    <h:outputText value="   " />
 			<h:commandLink value="Return" action="TalkAppointmentsListView" />

@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.Properties;
 
 import javax.ejb.EJB;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
@@ -37,17 +38,27 @@ public class RegisterInTalkAppointmentMBean implements Serializable {
 		}		
 	}
 	
-	public String registerInTalkedAppointment(Long talkid) throws Exception {
-						
+	/*public String registerInTalkedAppointment(/*Long talkid) throws Exception {*/
+	public String register() throws Exception {					
+		
 		Properties props = System.getProperties();
 		Context ctx = new InitialContext(props);
 		
 		registerInTalkedAppointmentRemote = (TalkAppointmentFacadeRemote) ctx.lookup("java:app/PracticalCaseStudyJEE.jar/TalkAppointmentBean!ejb.TalkAppointmentFacadeRemote");
-		registerInTalkedAppointmentRemote.registerInTalkAppointment(this.getNif(), talkid);
+		Boolean registerValid = registerInTalkedAppointmentRemote.registerInTalkAppointment(this.getNif(), this.getId());
 		
+		if (registerValid==true)
+			{
+				return "TalkAppointmentsListView";
+			}
+		else
+			{
+				FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Error! No pots apuntar-te a aquesta cita perquè no parles aquest llenguatge!"));
+				return null;
+			}
 		
 		//return "TalkAppointmentsListView";
-		return null;
+		//return null;
 	}
 	
 	public Long getId(){
