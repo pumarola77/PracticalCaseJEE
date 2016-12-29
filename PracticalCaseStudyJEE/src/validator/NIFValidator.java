@@ -49,8 +49,8 @@ public class NIFValidator implements Validator{
         //Comproba que els 8 primers digits siguin numeros
         for (int i=0; i<8; i++) {
         	
-        	if ( Character.isLetter(nif.charAt(i)) ) {
-    			FacesMessage msg = 	new FacesMessage("NIF validation failed.", "The field contains letter.");
+        	if ( !Character.isDigit(nif.charAt(i)) ) {
+    			FacesMessage msg = 	new FacesMessage("NIF validation failed.", "The field contains letter or character.");
     			msg.setSeverity(FacesMessage.SEVERITY_ERROR);
     			throw new ValidatorException(msg);
         	}

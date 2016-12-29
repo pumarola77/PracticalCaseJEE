@@ -25,7 +25,9 @@ private static final long serialVersionUID = 1L;
 	protected String phone;
 	protected String password;
 	protected String email;
-		
+	protected String emailUser;
+	
+	private boolean success;
 	protected String errorFormulari; //Aquest parametre serveix per mostrar un error a la propia pàgina del formulari
 	private UserJPA findUser; //Ens serveix per trobar l'user de la sessio
 	@EJB
@@ -114,6 +116,14 @@ private static final long serialVersionUID = 1L;
 		this.email = email;
 	}
 	
+	public String getEmailUser(){
+		return emailUser;
+	}
+	
+	public void setEmailUser(String emailUser){
+		this.emailUser = emailUser;
+	}
+	
 	public String getErrorFormulari(){
 		
 		return errorFormulari;
@@ -133,20 +143,21 @@ private static final long serialVersionUID = 1L;
 		this.setPhone(findUser.getPhone());
 		this.setPassword(findUser.getPassword());
 		this.setEmail(findUser.getEmail());
+		this.setEmailUser(findUser.getEmail());
 	}
 	
 	public String updateUsr(String nif, String name , String surname, String phone, String password , String email) throws Exception
 	{
-		try {
-			
-			userRemote.updatePersonalData(nif, name, surname, phone, password, email);
-			
-		} catch (Exception e) {
-			return "ErrorView";
-		}
-		
-		return "HomeView";
-		
+			success = userRemote.updatePersonalData(nif, name, surname, phone, password, email);
+	
+			if(success == false && email.compareTo(this.getEmailUser()) != 0)
+			{
+				errorFormulari = "ERROR: L'usuari amb correu "+getEmail()+" ja existeix al sistema";
+				return "RegisterUserView";
+			}
+			else{
+				return "HomeView";
+			}
 	}
 	
 }

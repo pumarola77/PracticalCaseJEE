@@ -52,22 +52,32 @@ public class UserFacadeBean implements UserFacadeRemote, UserFacade{
 
 	/*
 	 * retorna true: A trobat l'usuari i li ha actualitzat les dades
-	 * retorna false: No a trobat l'usuari
+	 * retorna false: Si email ja existeix
 	 */
 	@Override
 	public boolean updatePersonalData(String nif, String name, String surname, String phone, String password, String email) 
 	{
 
-		UserJPA user = entman.find(UserJPA.class, nif);
-		user.setNif(nif);
-		user.setName(name);
-		user.setSurname(surname);
-		user.setPhone(phone);
-		user.setPassword(password);
-		user.setEmail(email);
+		Query queryEmail = entman.createQuery("FROM UserJPA b WHERE b.email = :email").setParameter("email", email);
+		
+		if(!queryEmail.getResultList().isEmpty())
+		{
+			return false;
+		}
+		else
+		{
+			UserJPA user = entman.find(UserJPA.class, nif);
+			user.setNif(nif);
+			user.setName(name);
+			user.setSurname(surname);
+			user.setPhone(phone);
+			user.setPassword(password);
+			user.setEmail(email);
 
-		entman.persist(user);
-		return true;
+			entman.persist(user);
+			return true;
+		}
+
 	}	
 
 	/*
