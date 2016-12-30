@@ -12,9 +12,13 @@ import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.naming.Context;
 import javax.naming.InitialContext;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 
 import ejb.TalkAppointmentAdminFacadeRemote;
 import jpa.TalkAppointmentJPA;
+import jpa.TalkedLanguageJPA;
+import jpa.UserJPA;
 
 /**
  * Relacionat amb les cites que un usuari te publicades pendents
@@ -32,6 +36,12 @@ public class FindMyTalkAppointmentsAsProposal implements Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 
+	/**
+	 * Access JPA
+	 */
+	@PersistenceContext(unitName="PracticalCase") 
+	private EntityManager entman;
+	
 	/**
 	 * Serveix per mostrar per pantalla errorFormulari 
 	 */
@@ -76,12 +86,71 @@ public class FindMyTalkAppointmentsAsProposal implements Serializable {
 		this.nif = nif;
 	}
 	
+	/**
+	 * Retorna missatge Incidencia
+	 * @return
+	 */
 	public String getErrorFormulari(){
 		return errorFormulari;
 	}
+	
+	
+	/**
+	 * Assigna missatge Incidencia
+	 * @param errorFormulari Missatge Incidencia
+	 */
 	public void setErrorFormulari (String errorFormulari){
 		this.errorFormulari = errorFormulari;
 	}
+	
+	/**
+	 * Busca el nivell del usuari assignat a una cita
+	 * 
+	 * @param user identificador usuari
+	 * @param language llenguatge
+	 * @return nivell de parla del llenguatge
+	 */
+	public String getLevelUserSign(String user, String language) {
+		
+		String level="";
+		String valid=null;
+		Boolean troba=false;
+				
+		if ( user == null ) {
+			valid="NOVALID";
+		} 
+		else if ( user.isEmpty()) {
+			valid="NOVALID";
+		} else {
+			valid="VALID";
+		}
+		
+		if ( valid.equals("VALID") ) {
+			
+			/**
+			 * Carrega usuari per nif
+			 */
+			UserJPA usersign = entman.find(UserJPA.class, user);
+			
+			Collection<TalkedLanguageJPA> talkedlanguage = usersign.getTalkedLanguageByUser();
+			
+			Iterator<TalkedLanguageJPA> itr = talkedlanguage.iterator();
+			
+			while ( !troba || itr.hasNext()  ) {
+				
+				TalkedLanguageJPA element = itr.next();
+				
+				if ( element.getLanguage().compareTo(language) == 0 ) {
+					level = element.getLevel();
+					troba = true;
+				}
+								
+			}			
+		}
+				
+		return level;
+	}
+
 
 	/**
 	 * Constructor de la classe
