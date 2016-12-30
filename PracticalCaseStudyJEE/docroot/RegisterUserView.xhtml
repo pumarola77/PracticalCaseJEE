@@ -66,10 +66,22 @@
 					<td>
 						<h:inputSecret id="password" label="Password" redisplay="true" required="true" requiredMessage="Camp Obligatori" value="#{AddUser.password}">
 							<f:validator validatorId="PasswordValidator"></f:validator>
+							<f:attribute name="confirmaPassword" value="#{confirmaPassword}" />
 						</h:inputSecret>
 					</td>
 					<td>
 						<h:message for="password" style="color:red"></h:message>
+					</td>					
+				</tr>
+				 <tr>
+					<td>
+						Torna a introduir el password:
+					</td>
+					<td>
+						<h:inputSecret id="confirmaPassword" label="Password" redisplay="true" required="true" requiredMessage="Camp Obligatori" binding="#{confirmaPassword}"/>
+					</td>
+					<td>
+						<h:message for="confirmaPassword" style="color:red"></h:message>
 					</td>					
 				</tr>
 				<tr>
@@ -113,7 +125,7 @@
 						Nif (Update):
 					</td>
 					<td>
-						<h:inputText id="nif" label="Nif" required="true" requiredMessage="Camp Obligatori" readonly="true" value="#{UpdateUser.nif}"/>
+						<h:inputText id="nif" label="Nif" required="true" requiredMessage="Camp Obligatori" readonly="true" value="#{UpdateUser.nif}" disabled="true"/>
 					</td>
 					<td>
 						<h:message for="nif" style="color:red"></h:message>
@@ -167,12 +179,23 @@
 					<td>
 						<h:inputSecret id="password" label="Password" required="true" requiredMessage="Camp Obligatori" redisplay="true" value="#{UpdateUser.password}">
 							<f:validator validatorId="PasswordValidator"></f:validator>
+							<f:attribute name="confirmaPassword" value="#{confirmaPassword}" />
 						</h:inputSecret>
 					</td>
 					<td>
 						<h:message for="password" style="color:red"></h:message>
+					</td>					
+				</tr>
+				<tr>
+					<td>
+						Torna a introduir el password:
 					</td>
-					
+					<td>
+						<h:inputSecret id="confirmaPassword" label="Password" redisplay="true" required="true" requiredMessage="Camp Obligatori" binding="#{confirmaPassword}"/>
+					</td>
+					<td>
+						<h:message for="confirmaPassword" style="color:red"></h:message>
+					</td>					
 				</tr>
 				<tr>
 					<td>

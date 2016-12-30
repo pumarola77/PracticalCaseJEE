@@ -148,6 +148,7 @@ private static final long serialVersionUID = 1L;
 	
 	public String updateUsr(String nif, String name , String surname, String phone, String password , String email) throws Exception
 	{
+
 			success = userRemote.updatePersonalData(nif, name, surname, phone, password, email);
 	
 			if(success == false && email.compareTo(this.getEmailUser()) != 0)

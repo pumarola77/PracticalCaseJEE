@@ -50,34 +50,59 @@ public class UserFacadeBean implements UserFacadeRemote, UserFacade{
 		}
 	}
 
-	/*
-	 * retorna true: A trobat l'usuari i li ha actualitzat les dades
-	 * retorna false: Si email ja existeix
+	/**
+	 * Mètode que s'utilitza per a modificar les dades personals d'un usuari.
+	 * @param nif Nif de l'usuari logejat al sistema.
+	 * @param name Nom de l'usuari logejat al sistema.
+	 * @param surname Cognom de l'usuari logejat al sistema.
+	 * @param phone Telefon de l'usuari logejat al sistema.
+	 * @param password Contrasenya de l'usuari logejat al sistema.
+	 * @param email Email de l'usuari logejat al sistema.
+	 * 
+	 * @return true Les dades s'han actualitzat correctament,
+	 * @return false Les dades no s'han actualitzat correctament, s'ha intentat actualitzar el email ocupant el mateix nom que l'email d'un altre usuari ja existent
 	 */
 	@Override
 	public boolean updatePersonalData(String nif, String name, String surname, String phone, String password, String email) 
 	{
 
-		Query queryEmail = entman.createQuery("FROM UserJPA b WHERE b.email = :email").setParameter("email", email);
+		UserJPA userLogejat = entman.find(UserJPA.class, nif);
+			
+		@SuppressWarnings("unchecked")
+		List<UserJPA> userEmail = entman.createQuery("FROM UserJPA b WHERE b.email = :email").setParameter("email", email).getResultList();
 		
-		if(!queryEmail.getResultList().isEmpty())
+		
+		if(userEmail.isEmpty())//El email no existeix al sistema, per tant es pot actualitzar les dades sense problema.
 		{
-			return false;
-		}
-		else
-		{
-			UserJPA user = entman.find(UserJPA.class, nif);
-			user.setNif(nif);
-			user.setName(name);
-			user.setSurname(surname);
-			user.setPhone(phone);
-			user.setPassword(password);
-			user.setEmail(email);
+			userLogejat.setNif(nif);
+			userLogejat.setName(name);
+			userLogejat.setSurname(surname);
+			userLogejat.setPhone(phone);
+			userLogejat.setPassword(password);
+			userLogejat.setEmail(email);
 
-			entman.persist(user);
+			entman.persist(userLogejat);
 			return true;
+			
 		}
+		
+	
+		if(userEmail.get(0).getEmail().equals(userLogejat.getEmail()))/*Si no es modifica el email, desde el usuari correcte, tambe es poden actualitzar les dades sense problema*/
+		{
+			userLogejat.setNif(nif);
+			userLogejat.setName(name);
+			userLogejat.setSurname(surname);
+			userLogejat.setPhone(phone);
+			userLogejat.setPassword(password);
+			userLogejat.setEmail(email);
 
+			entman.persist(userLogejat);
+			return true;
+			
+		}
+		
+		/*Si no es compleixen els casos anteriors vol dir que que s'esta canviant el email per el d'algun usuari que ja existeix per tant no actualitzem les dades*/
+		return false;
 	}	
 
 	/*
