@@ -179,7 +179,7 @@
 					<td>
 						<h:inputSecret id="password" label="Password" required="true" requiredMessage="Camp Obligatori" redisplay="true" value="#{UpdateUser.password}">
 							<f:validator validatorId="PasswordValidator"></f:validator>
-							<f:attribute name="confirmaPassword" value="#{confirmaPassword}" />
+							<f:attribute name="confirmaPassword" value="#{confirmaPassword2}" />
 						</h:inputSecret>
 					</td>
 					<td>
@@ -191,10 +191,10 @@
 						Torna a introduir el password:
 					</td>
 					<td>
-						<h:inputSecret id="confirmaPassword" label="Password" redisplay="true" required="true" requiredMessage="Camp Obligatori" binding="#{confirmaPassword}"/>
+						<h:inputSecret id="confirmaPassword2" label="Password" redisplay="true" required="true" requiredMessage="Camp Obligatori" binding="#{confirmaPassword2}"/>
 					</td>
 					<td>
-						<h:message for="confirmaPassword" style="color:red"></h:message>
+						<h:message for="confirmaPassword2" style="color:red"></h:message>
 					</td>					
 				</tr>
 				<tr>
