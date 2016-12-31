@@ -17,6 +17,7 @@ public interface TalkAppointmentAdminFacadeRemote {
 	 */
 	public void addTalkAppointment(String description, LocationJPA location, Date date, Time time, LanguageToTalkJPA languageToTalk);
 	public void acceptRequest(Long talkid, String nif);
-	public int rejectRequest(Long talkid, String nif, String reason);
+	//public int rejectRequest(Long talkid, String nif, String reason);
+	public void rejectRequest(Long talkid, String nif, String reason);
 	public Collection<?> findMyTalkAppointmentsAsProposal(String nif);
 }

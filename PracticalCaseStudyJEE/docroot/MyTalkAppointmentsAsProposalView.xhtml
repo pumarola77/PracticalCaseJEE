@@ -104,11 +104,13 @@
 				<f:facet name="header">
 					<h:outputText value="Accions" />
 				</f:facet>
-				<h:commandButton value="Acceptar" type="submit" disabled="#{empty item.userSign.nif}"
+				<h:commandLink value="Acceptar" type="submit" disabled="#{empty item.userSign.nif or item.status == 'CONFIRMED'}"
 					actionListener="#{acceptrequest.AcceptRequest(item.id,item.userPublish.nif)}" 
 					action="#{findmytalkappasproposal.listTalkAppointments()}" />
-				<h:commandButton value="Rebutjar" type="submit" disabled="#{empty item.userSign.nif}"
-					action="#{rejectrequest.rejectRequestView(item.id,item.userSign.nif)}" />
+				<h:outputText value=" "></h:outputText>
+				<h:link value="Rebutjar" disabled="#{empty item.userSign.nif}" outcome="RejectRequestView">
+					<f:param name="id" value="#{item.id}"></f:param>
+				</h:link>
 			</h:column>
 
 		</h:dataTable>

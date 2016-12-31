@@ -5,6 +5,10 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html">
+<f:metadata>
+	<f:viewParam name="id" value="#{rejectrequest.talkId}" />
+	<!-- <f:viewAction action="#{ShowTalkAppointment.showView()}" />-->
+</f:metadata>	
 <h:head>
 	#{authorized.authorized()}
 </h:head>
@@ -46,8 +50,9 @@
 					<td colspan="2">
 						<p align="center">
 							<h:commandButton value="Actualitzar dades" immediate="true"
-								action="#{rejectrequest.rejectRequest(rejectrequest.talkId, rejectrequest.nif)}" />
-							&nbsp;&nbsp;
+								action="#{rejectrequest.rejectRequest(rejectrequest.talkId, rejectrequest.nif)}" /> 
+							<h:outputText value=""></h:outputText>
+							<h:outputText value=""></h:outputText>
 							<h:commandButton value="Tornar a la llista" immediate="true"
 								action="MyTalkAppointmentsAsProposalView" />
 						</p>

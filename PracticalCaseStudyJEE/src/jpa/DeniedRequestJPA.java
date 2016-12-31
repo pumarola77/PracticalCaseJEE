@@ -14,7 +14,8 @@ import javax.persistence.*;
  *
  */
 @Entity
-@Table(name="practicalcase.deniedrequest", uniqueConstraints={@UniqueConstraint(columnNames = {"nif", "talkapp"})})
+//@Table(name="practicalcase.deniedrequest", uniqueConstraints={@UniqueConstraint(columnNames = {"nif", "talkapp"})})
+@Table(name="practicalcase.deniedrequest")
 public class DeniedRequestJPA implements Serializable {
 
 	/**
@@ -22,6 +23,13 @@ public class DeniedRequestJPA implements Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 
+	/**
+	 * Identificador taula
+	 */
+	@Id
+	@Column(name = "idDeniedRequest", nullable=false, columnDefinition="serial")
+	private Long id;
+	
 	/**
 	 * Descriu la rao per cancel.lar la cita
 	 */
@@ -31,7 +39,7 @@ public class DeniedRequestJPA implements Serializable {
 	/**
 	 * Identificador usuari
 	 */
-	@Id
+	//@Id
 	@ManyToOne
 	@JoinColumn (name="nif")
 	private UserJPA user;
@@ -39,7 +47,7 @@ public class DeniedRequestJPA implements Serializable {
 	/**
 	 * Identificador cita
 	 */
-	@Id
+	//@Id
 	@ManyToOne
 	@JoinColumn (name="talkapp")
 	private TalkAppointmentJPA talkApp;
@@ -62,6 +70,22 @@ public class DeniedRequestJPA implements Serializable {
 	/**
 	 * Getters/Setters
 	 */
+	
+	/**
+	 * Getter Identificador
+	 * @return identificador deniedRequest
+	 */
+	public Long getId() {
+		return id;
+	}
+	
+	/**
+	 * Setter Identificador
+	 * @param id Identificador DeniedRequest
+	 */
+	public void setId(Long id) {
+		this.id = id;
+	}
 	
 	/**
 	 * Getter motiu cancel.lació cita
