@@ -77,7 +77,11 @@ public class TalkAppointmentAdminBean implements TalkAppointmentAdminFacadeRemot
 	}
 
 	/**
-	 * Metode per acceptar una petició de conversa
+	 * Metode per Acceptar una peticio de conversa
+	 * 
+	 * @param talkid identificador de cita
+	 * @param nif identificador del usuari
+	 *
 	 */
 	@Override
 	public void acceptRequest(Long talkid, String nif) throws PersistenceException {
@@ -93,8 +97,11 @@ public class TalkAppointmentAdminBean implements TalkAppointmentAdminFacadeRemot
 			else
 			{				
 				TalkAppointmentJPA talkAppointment = entman.find(TalkAppointmentJPA.class, talkid); 
-				talkAppointment.setUserSign(entman.find(UserJPA.class, nif));
-				talkAppointment.setStatus(TalkStatus.CONFIRMED);
+								
+				if ( talkAppointment.getUserPublish().getNif().compareTo(nif) == 0 ) {
+					talkAppointment.setStatus(TalkStatus.CONFIRMED);
+				}
+				
 				entman.persist(talkAppointment);
 			}
 
@@ -104,8 +111,42 @@ public class TalkAppointmentAdminBean implements TalkAppointmentAdminFacadeRemot
 	}
 
 	/**
-	 * Metode per rebutjar una petició de conversa, on s'ha d'especificar la rao
+	 * Metode Per Rebutjar la peticio de conversa
+	 * 
+	 * @param talkid identificador de conversa
+	 * @param nif identificador usuari
+	 * @param reason Motiu per rebutjar la cita 
 	 */
+	@Override
+	public void rejectRequest(Long talkid, String nif, String reason) {
+		// TODO Auto-generated method stub
+		
+		TalkAppointmentJPA talkApp = entman.find(TalkAppointmentJPA.class, talkid);
+				
+		if ( talkApp.getUserPublish().getNif().compareTo(nif) == 0 ) {
+			
+		   DeniedRequestJPA deniedRequest = new DeniedRequestJPA(reason); 
+		   deniedRequest.setUser(entman.find(UserJPA.class, nif));
+		   deniedRequest.setTalkApp(talkApp);
+		   
+		   try {
+			deniedRequest.setId(this.getDeniedRequestSequence());
+		   } catch (Exception e) {
+			   // TODO Auto-generated catch block
+			   e.printStackTrace();
+		   }
+		   
+		   entman.persist(deniedRequest);
+		   		   		   
+		   talkApp.setUserSign(null);
+		   talkApp.setStatus(TalkStatus.OPEN);
+		   entman.persist(talkApp);			
+		}
+		
+	}
+
+	
+	/*
 	@Override
 	public int rejectRequest(Long talkid, String nif, String reason) throws PersistenceException {
 		try
@@ -134,6 +175,7 @@ public class TalkAppointmentAdminBean implements TalkAppointmentAdminFacadeRemot
 					deniedRequest.setTalkApp(talkApp);
 					entman.persist(deniedRequest);
 					talkApp.setUserSign(null);
+					talkApp.setStatus(TalkStatus.OPEN);
 					entman.persist(talkApp);
 					return 0;
 				}
@@ -143,6 +185,7 @@ public class TalkAppointmentAdminBean implements TalkAppointmentAdminFacadeRemot
 			throw e;
 		} 
 	}
+	*/
 
 	/**
 	 * Retorna les peticions publicades per un usuari
@@ -154,7 +197,7 @@ public class TalkAppointmentAdminBean implements TalkAppointmentAdminFacadeRemot
 		Query query = null;
 		
 
-		query = entman.createQuery("FROM TalkAppointmentJPA t WHERE t.userPublish.nif = :nif");
+		query = entman.createQuery("FROM TalkAppointmentJPA t WHERE t.userPublish.nif = :nif order by t.date , t.time");
 		query.setParameter("nif", nif);
 
 		@SuppressWarnings("unchecked")
@@ -189,4 +232,18 @@ public class TalkAppointmentAdminBean implements TalkAppointmentAdminFacadeRemot
 		query = entman.createNativeQuery("SELECT nextval('practicalcase.location_idlocation_seq')");
 		return ((BigInteger) query.getResultList().get(0)).longValue();		
 	}
+	
+	/**
+	 * Genera el id per a a taula DeniedRequest
+	 * @return
+	 * @throws Exception
+	 */
+	@TransactionAttribute(TransactionAttributeType.REQUIRED)
+	public Long getDeniedRequestSequence() throws Exception {
+		Query query = null;
+		
+		query = entman.createNativeQuery("SELECT nextval('practicalcase.deniedrequest_iddeniedrequest_seq')");
+		return ((BigInteger) query.getResultList().get(0)).longValue();		
+	}
+	
 }

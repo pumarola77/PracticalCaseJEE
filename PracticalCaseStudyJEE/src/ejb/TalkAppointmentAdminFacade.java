@@ -3,10 +3,7 @@ package ejb;
 import java.sql.Date;
 import java.sql.Time;
 import java.util.Collection;
-
 import javax.ejb.Local;
-import javax.persistence.PersistenceException;
-
 import jpa.LanguageToTalkJPA;
 import jpa.LocationJPA;
 
@@ -17,6 +14,7 @@ public interface TalkAppointmentAdminFacade {
 	 */
 	public void addTalkAppointment(String description, LocationJPA location, Date date, Time time, LanguageToTalkJPA languageToTalk);
 	public void acceptRequest(Long talkid, String nif);
-	public int rejectRequest(Long talkid, String nif, String reason);
+	//public int rejectRequest(Long talkid, String nif, String reason);
+	public void rejectRequest(Long talkid, String nif, String reason);
 	public Collection<?> findMyTalkAppointmentsAsProposal(String nif);
 }

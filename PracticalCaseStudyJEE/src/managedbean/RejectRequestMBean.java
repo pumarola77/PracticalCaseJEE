@@ -7,7 +7,6 @@ import javax.faces.bean.*;
 import javax.faces.context.FacesContext;
 import javax.naming.Context;
 import javax.naming.InitialContext;
-import javax.persistence.PersistenceException;
 import javax.servlet.http.HttpServletRequest;
 
 import ejb.TalkAppointmentAdminFacadeRemote;
@@ -20,39 +19,80 @@ import ejb.TalkAppointmentAdminFacadeRemote;
 @ViewScoped
 public class RejectRequestMBean implements Serializable{
 
+	/**
+	 * Obligatori perque la classe implementa Serializable
+	 */
 	private static final long serialVersionUID = 1L;
 
-	private int success; //Aquest parametre serveix per controlar si el formulari de registre conte errors en les dades introduides
+	/**
+	 * Variable per mostrar missatge Error
+	 */
 	protected String errorFormulari; //Aquest parametre serveix per mostrar un error a la propia pàgina del formulari
 
+	/**
+	 * Identificador cita
+	 */
 	private Long talkId;
+	
+	/**
+	 * Identificador nif
+	 */
 	private String nif;
 
+	/**
+	 * EJB Per la crida als metodes 
+	 */
 	@EJB
 	private TalkAppointmentAdminFacadeRemote RejectRequestRemote;
 
+	/**
+	 * Getter Identificador cita
+	 * @return identificador de la cita
+	 */
 	public Long getTalkId(){
 		return talkId;
 	}
 
+	/**
+	 * Setter Identificador de la cita
+	 * @param talkId
+	 */
 	public void setTalkId(Long talkId){
 		this.talkId = talkId;
 	}
 
+	/**
+	 * Getter Identificador usuari nif
+	 * @return
+	 */
 	public String getNif(){
 		return nif;
 	}
 
+	/**
+	 * Setter Identificador usuari
+	 * @param nif identificador usuari
+	 */
 	public void setNif(String nif){
 		this.nif = nif;
 	}
 
+	/**
+	 * Getter Indicencia Formulari
+	 * @return incidencia formulari
+	 */
 	public String getErrorFormulari(){
 		return errorFormulari;
 	}
+	
+	/**
+	 * Setter Indicencia Formulari
+	 * @param errorFormulari Incidencia Formulari
+	 */
 	public void setErrorFormulari (String errorFormulari){
 		this.errorFormulari = errorFormulari;
 	}
+	
 	
 	/**
 	 * Constructor : 
@@ -64,11 +104,37 @@ public class RejectRequestMBean implements Serializable{
 		}
 	}
 
+	
 	/**
 	 * Metode que es fa servir per rebutjar una petició de conversa
+	 * 
+	 * @param talkid identificador cita
+	 * @param nif identificador usuari
 	 * @return Nom del Facelet
-	 * @throws Exception
+	 * @throws Exception Indicencia al actualitzar registre.
 	 */
+	public String rejectRequest(Long talkid, String nif) throws Exception
+	{
+
+		FacesContext context = FacesContext.getCurrentInstance();
+		HttpServletRequest request = (HttpServletRequest)context.getExternalContext().getRequest();
+
+		String reason = request.getParameter("rejectRequestForm:motiu");
+
+		Properties props = System.getProperties();
+		Context ctx = new InitialContext(props);
+		
+		// Els controls del talkid i el nif es realitzen en el bean. Com ve del llistat
+		// Aquests valors en principi han de ser correctes.
+				
+		RejectRequestRemote = (TalkAppointmentAdminFacadeRemote) ctx.lookup("java:app/PracticalCaseStudyJEE.jar/TalkAppointmentAdminBean!ejb.TalkAppointmentAdminFacadeRemote");
+		RejectRequestRemote.rejectRequest(this.getTalkId(), this.getNif(), reason);
+		
+		return "MyTalkAppointmentsAsProposalView";
+
+	}
+	
+	/*
 	public String rejectRequest(Long talkid, String nif) throws Exception
 	{
 		try
@@ -104,10 +170,12 @@ public class RejectRequestMBean implements Serializable{
 			throw e;
 		} 
 	}
+	
 
 	public String rejectRequestView(Long talkid, String nif) throws Exception{
 		this.setTalkId(talkid);
 		this.setNif(nif);
+				
 		if (nif == ""){
 			errorFormulari = "ERROR: No hi ha cap usuari apuntat a la petició de conversa..";
 			return "MyTalkAppointmentsAsProposalView";
@@ -116,4 +184,5 @@ public class RejectRequestMBean implements Serializable{
 			return "RejectRequestView";	
 		}
 	}
+	*/
 }
