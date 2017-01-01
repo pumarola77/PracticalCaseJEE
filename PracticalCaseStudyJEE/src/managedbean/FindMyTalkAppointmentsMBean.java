@@ -163,6 +163,10 @@ public class FindMyTalkAppointmentsMBean implements Serializable {
 		this.languages = languages;
 	}
 
+	/**
+	 * Al triar una ciutat es carrega el desplegable de idiomes, dates i hores
+	 * @param ciutatChanged
+	 */
 	public void ciutatValueChanged(ValueChangeEvent ciutatChanged) {
 		this.setCiutat(ciutatChanged.getNewValue().toString());
 
@@ -182,6 +186,10 @@ public class FindMyTalkAppointmentsMBean implements Serializable {
 
 	}
 
+	/**
+	 * Al triar un idioma es carrega el desplegable de dates i hores
+	 * @param languagesChanged
+	 */
 	public void languagesValueChanged(ValueChangeEvent languagesChanged) {		
 		this.setLanguages(languagesChanged.getNewValue().toString());
 
@@ -197,7 +205,11 @@ public class FindMyTalkAppointmentsMBean implements Serializable {
 		}
 
 	}
-
+	
+	/**
+	 * Al triar una data es carrega el desplegable de hores
+	 * @param datesChanged
+	 */
 	public void datesValueChanged(ValueChangeEvent datesChanged) {				
 		this.setDates(datesChanged.getNewValue().toString());
 
@@ -214,7 +226,12 @@ public class FindMyTalkAppointmentsMBean implements Serializable {
 	public void horesValueChanged(ValueChangeEvent horesChanged) {
 		this.setHores(horesChanged.getNewValue().toString());
 	}
-
+	
+	/**
+	 * Fa la cerca dels TalkAppointments a mostrar
+	 * @return Nom de la vista a carregar
+	 * @throws Exception
+	 */
 	public String listMyTalkAppointments() throws Exception {		
 		
 		myTalkAppointmentsList();
@@ -222,7 +239,7 @@ public class FindMyTalkAppointmentsMBean implements Serializable {
 		/*Si hi ha unicament un registre a mostrar redirigim a la vista de showTalkAppointment, passant per parametre GET el id del talkAppointment*/
 		if (myTalkAppointmentsList.size()==1)
 		{
-		    return "showTalkAppointmentView?faces-redirect=true&id="+myTalkAppointmentsList.iterator().next().getId();		
+		    return "showTalkAppointmentView?faces-redirect=true&id=" + myTalkAppointmentsList.iterator().next().getId() + "&returnView=MyTalkAppointmentsListView";		
 		}
 			
 		return "MyTalkAppointmentsListView";
