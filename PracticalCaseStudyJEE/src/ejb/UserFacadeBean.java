@@ -14,20 +14,36 @@ import jpa.LanguageToTalkJPA;
 import jpa.TalkedLanguageJPA;
 import jpa.UserJPA;
 
-//@Stateless: Indiquem que es tracta de un EJB Session sense estat.
+/**
+ * 
+ * Implementacio dels metodes locals/remots corresponents al component usuari
+ * 
+ * @author Grup 6
+ * @version 1.0
+ *
+ */
 @Stateless
 public class UserFacadeBean implements UserFacadeRemote, UserFacade{
 
 	//@PersistenceContext: Indiquem quin context per la persistencia utilitzara el EntityManager
+	
+	/**
+	 * Indica en quin context s'utilitza la persistencia de la Base Dades
+	 */
 	@PersistenceContext(unitName="PracticalCase") 
 	private EntityManager entman;
 
-
-	/*
-	 *Retorn: 
-	 *	0 - Usuari creat correctament
-	 *  1 - Error: Ja existeix un usuari amb el DNI indicat
-	 *  2 - Error: Ja existeix un usuari amb el email indicat
+	
+	/**
+	 * Registra un usuari
+	 * 
+	 * @param nif
+	 * @param name
+	 * @param surname
+	 * @param phone
+	 * @paramm password
+	 * @param email
+	 * @return 0 - Usuari Creat correctament 1 - Error DNI 2 - Error NIF
 	 */
 	@Override
 	public int registerUser(String nif, String name, String surname, String phone, String password, String email) 
@@ -52,6 +68,7 @@ public class UserFacadeBean implements UserFacadeRemote, UserFacade{
 
 	/**
 	 * Mètode que s'utilitza per a modificar les dades personals d'un usuari.
+	 * 
 	 * @param nif Nif de l'usuari logejat al sistema.
 	 * @param name Nom de l'usuari logejat al sistema.
 	 * @param surname Cognom de l'usuari logejat al sistema.
@@ -104,9 +121,12 @@ public class UserFacadeBean implements UserFacadeRemote, UserFacade{
 		/*Si no es compleixen els casos anteriors vol dir que que s'esta canviant el email per el d'algun usuari que ja existeix per tant no actualitzem les dades*/
 		return false;
 	}	
-
-	/*
-	 * Retorna l'user trobat en la bbdd. El busca a partir del nif
+	
+	/**
+	 * Verifica que un usuari existeixi
+	 * 
+	 * @param nif identificador usuari
+	 * @return usuari
 	 */
 	@Override
 	public UserJPA findUser(String nif) {
@@ -114,6 +134,13 @@ public class UserFacadeBean implements UserFacadeRemote, UserFacade{
 	}	
 
 
+	/**
+	 * Verifica login
+	 * 
+	 * @param email email
+	 * @param pwd password
+	 * @return si es un identificador valid
+	 */
 	@Override
 	public String login(String email, String pwd) {						
 		try {
@@ -143,11 +170,22 @@ public class UserFacadeBean implements UserFacadeRemote, UserFacade{
 		return "NOVALID";
 	}
 
+	/**
+	 * Logout
+	 * 
+	 * @return boolean false
+	 */
 	@Override
 	public boolean logout() {
 		return false;
 	}
 
+	/**
+	 * Llenguatges que parla un usuari
+	 * 
+	 * @param nif identificador usuari
+	 * @return llista de llenguatges que parla
+	 */
 	@Override
 	public Collection<TalkedLanguageJPA> listAllTalkedLanguages(String nif) {
 		@SuppressWarnings("unchecked")
@@ -155,8 +193,15 @@ public class UserFacadeBean implements UserFacadeRemote, UserFacade{
 		return allLanguages;
 	}
 
+	
 	/**
-	 * Metode que afegeix les dades d'un idioma per a un determinat nif
+	 * dona alta un idioma que parlar un usuari determinat
+	 * 
+	 * @param nif identificador usuari
+	 * @param language llenguatge 
+	 * @param level nivell
+	 * @param description descripcio
+	 * @return 0 - Correcte 1 - Llenguatge ja existeix
 	 */
 	@Override
 	public int addTalkedLanguage(String nif, String language, String level, String description) throws PersistenceException {
@@ -181,8 +226,13 @@ public class UserFacadeBean implements UserFacadeRemote, UserFacade{
 		} 
 	}
 
+	
 	/**
-	 * Metode que elimina un idioma donat per a un nif
+	 * Esborra un llenguatge que parla un usuari
+	 * 
+	 * @param nif identificador usuari 
+	 * @param language llenguatge
+	 * 
 	 */
 	@Override
 	public void deleteTalkedLanguage(String nif, String language) throws PersistenceException {
@@ -199,8 +249,16 @@ public class UserFacadeBean implements UserFacadeRemote, UserFacade{
 		} 
 	}
 
+	
 	/**
-	 * Metode que afegeix les dades d'un idioma d'interes per a un determinat nif
+	 * Dona alta un llenguatge que vol parlar un usuari
+	 * 
+	 * @param nif identificador usuari
+	 * @param language llenguatge
+	 * @param level nivell
+	 * @param description descripcio
+	 * @param acceptPay acceptar pagar per mantenir la conversa
+	 * @return 0 - Correcte   1- no es dona alta
 	 */
 	@Override
 	public int addLanguageToTalk(String nif, String language, String level, String description, boolean acceptPay) throws PersistenceException {
@@ -224,9 +282,12 @@ public class UserFacadeBean implements UserFacadeRemote, UserFacade{
 			throw e;
 		} 
 	}
-
+	
 	/**
-	 * Metode que elimina un idioma d'interes donat per a un nif
+	 * Esborra un llenguatge que vol parlar un usuari
+	 * 
+	 * @param nif identificador usuari
+	 * @param language llenguatge
 	 */
 	@Override
 	public void deleteLanguageToTalk(String nif, String language) throws PersistenceException {
@@ -243,9 +304,12 @@ public class UserFacadeBean implements UserFacadeRemote, UserFacade{
 		} 
 	}
 
-	/*
-	 * Metode que llista els llenguatges que vol parlar un usuari en concret
-	 * */
+
+	/**
+	 * Llista de llenguatges que vol parlar un usuari
+	 * @param nif identificador
+	 * @return llista de llenguatges 
+	 */
 	@Override
 	public Collection<LanguageToTalkJPA> listAllLanguagesToTalk(String nif) 
 	{
@@ -254,6 +318,13 @@ public class UserFacadeBean implements UserFacadeRemote, UserFacade{
 		return allLanguagesToTalk;
 	}
 
+	/**
+	 * Verifica que un llenguatge existeixi en una cita
+	 * 
+	 * @param nif identificador usuari
+	 * @param language llenguatge
+	 * @return true existeix false no existeix
+	 */
 	@Override
 	public boolean findLanguageToTalkAppointment(String nif, String language) {
 		// TODO Auto-generated method stub

@@ -21,17 +21,39 @@ import jpa.TalkAppointmentJPA;
 import jpa.TalkStatus;
 import jpa.UserJPA;
 
+/**
+ * EJB Implementa els metodes accès a la base de dades de les cites
+ * 
+ * @author Grup 6
+ * @version 1.0
+ *
+ */
 //@Stateless: Indiquem que es tracta de un EJB Session sense estat.
 @Stateless
 public class TalkAppointmentAdminBean implements TalkAppointmentAdminFacadeRemote, TalkAppointmentAdminFacade {
 
-	//@PersistenceContext: Indiquem quin context per la persistencia utilitzara el EntityManager
+	
+	/**
+	 * Indica el context per la persistencia en la Base Dades JPA
+	 */
 	@PersistenceContext(unitName="PracticalCase") 
 	private EntityManager entman;
 
+	/**
+	 * EJB Facade
+	 */
 	@EJB
 	private UserFacade userFacade;
 
+	/**
+	 * Dona alta una cita
+	 * 
+	 * @param description comentari de la cita
+	 * @param Location Objecte localitzacio
+	 * @param date data de la cita
+	 * @param time hora de la cita
+	 * @param languageToTalk llenguatge de la cita
+	 */
 	public void addTalkAppointment(String description, LocationJPA location, Date date, Time time, LanguageToTalkJPA languageToTalk){
 
 		try{		
@@ -189,6 +211,9 @@ public class TalkAppointmentAdminBean implements TalkAppointmentAdminFacadeRemot
 
 	/**
 	 * Retorna les peticions publicades per un usuari
+	 * 
+	 * @param nif identificador usuari
+	 * @return talkAppointments retorna la llista de cita d'un usuari
 	 * 
 	 */
 	@Override

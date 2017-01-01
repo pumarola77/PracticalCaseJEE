@@ -31,7 +31,9 @@ import jpa.UserJPA;
 @Stateless
 public class TalkAppointmentBean implements TalkAppointmentFacadeRemote, TalkAppointmentFacade {
 
-	//@PersistenceContext: Indiquem quin context per la persistencia utilitzara el EntityManager
+	/**
+	 * Indica el context per la persistencia de la Base Dades JPA
+	 */
 	@PersistenceContext(unitName="PracticalCase") 
 	private EntityManager entman;
 
@@ -327,7 +329,18 @@ public class TalkAppointmentBean implements TalkAppointmentFacadeRemote, TalkApp
 		return null;
 	}
 
-
+	/**
+	 * 
+	 * Llista de cites publicades per un usuari
+	 * 
+	 * @param nif identificador usuari
+	 * @param location adreça
+	 * @param fecha data
+	 * @param hora hora
+	 * @param language idioma
+	 * @return llista de cites publicades segons el filtre de les dades
+	 * 
+	 */
 	@Override
 	public Collection<?> findMyTalkAppointments(String nif, String location,String fecha,String hora,String language) throws PersistenceException {
 		// TODO Auto-generated method stub
@@ -400,6 +413,12 @@ public class TalkAppointmentBean implements TalkAppointmentFacadeRemote, TalkApp
 	}
 
 
+	/**
+	 * Ciutats disponbiles de les cites ( desplegable )
+	 * 
+	 * @param nif identificador usuari
+	 * @return llista de les ciutats disponibles de les cites
+	 */
 	@Override
 	public Collection<?> citiesMyTalkAppointments(String nif) {
 		// TODO Auto-generated method stub
@@ -420,6 +439,13 @@ public class TalkAppointmentBean implements TalkAppointmentFacadeRemote, TalkApp
 		return null;
 	}
 
+	/**
+	 * Llenguatges disponibles de les cites ( desplegables )
+	 * 
+	 * @param nif identificador usuari
+	 * @param city identificador ciutat
+	 * @return llista de llenguatges de les cites
+	 */
 	@Override
 	public Collection<?> languagesfromMyTalkAppointments(String nif, String city) {
 		// TODO Auto-generated method stub
@@ -441,6 +467,16 @@ public class TalkAppointmentBean implements TalkAppointmentFacadeRemote, TalkApp
 		return null;
 	}
 
+	/**
+	 * 
+	 * Llista de dates de les cites publicades per un usuari
+	 * 
+	 * @param nif identificador usuari
+	 * @param city ciutat
+	 * @param language  llenguatge
+	 * @return llista de dates disponibles en les cites
+	 * 
+	 */
 	@Override
 	public Collection<?> datefromMyTalkAppointmments(String nif, String city, String language) {
 		// TODO Auto-generated method stub	
@@ -462,7 +498,16 @@ public class TalkAppointmentBean implements TalkAppointmentFacadeRemote, TalkApp
 
 	}
 
-
+	/**
+	 * Llista de les hores de les cites publicades per un usuari
+	 * 
+	 * @param nif identificador uusair
+	 * @param city ciutat
+	 * @param language llenguatge
+	 * @param date date
+	 * @return llista de les hores de les cites publicades
+	 * 
+	 */
 	@Override
 	public Collection<?> timefromMyTalkAppointments(String nif, String city,String language,Date date) {
 		// TODO Auto-generated method stub
