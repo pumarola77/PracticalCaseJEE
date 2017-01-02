@@ -54,7 +54,15 @@
 				<tr>
 					<td colspan="2">
 						<p align="center">
-							<h:commandButton value="Actualitzar dades" immediate="true"
+							<h:outputText value="#{talkedlanguageadd.errorFormulari}"
+								style="color:red" />
+						</p>
+					</td>
+				</tr>
+				<tr>
+					<td colspan="2">
+						<p align="center">
+							<h:commandButton value="Afegir" immediate="true"
 								action="#{talkedlanguageadd.addTalkedLanguage}" />&nbsp;&nbsp;
 								<h:commandButton value="Tornar a la llista" immediate="true"
 								action="TalkedLanguagesListView" />
