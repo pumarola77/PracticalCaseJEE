@@ -170,7 +170,7 @@ public class Login {
 			} else {
 				context.getExternalContext().invalidateSession();
 				FacesContext.getCurrentInstance().getExternalContext().getInitParameterMap();
-				errorPassword = "Usuari No existeix o passowrd incorrecte";
+				errorPassword = "Usuari no existeix o password incorrecte";
 				return "Login"; 				
 			}
 			
