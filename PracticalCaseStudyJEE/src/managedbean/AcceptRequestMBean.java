@@ -12,13 +12,23 @@ import ejb.TalkAppointmentAdminFacadeRemote;
 
 /**
  * Managed Bean AcceptRequestMBean
+ * 
+ * @author Grup 6
+ * @version 1.0
+ *
  */
 @ManagedBean(name = "acceptrequest")
 @ViewScoped
 public class AcceptRequestMBean implements Serializable{
 
+	/**
+	 * Obligatori perque la classe implementa serializable
+	 */
 	private static final long serialVersionUID = 1L;
 
+	/**
+	 * EJB AcceptRequestRemote
+	 */
 	@EJB
 	private TalkAppointmentAdminFacadeRemote AcceptRequestRemote;
 

@@ -52,12 +52,20 @@ public class FindMyTalkAppointmentsAsProposal implements Serializable {
 	 */
 	private String nif;
 
+	/**
+	 * EJB TalkAppointmentAdminFacadeRemote
+	 */
 	@EJB
 	private TalkAppointmentAdminFacadeRemote findTalkAppointmentsAdminRemote;
 
-
-	/* Variable per controlar els registres que esta veient un usuari */
+	/**
+	 * Controla els registres que visualitza pantalla
+	 */
 	private int screen = 0;
+	
+	/**
+	 * Numero total de cites
+	 */
 	protected int numberTalkAppointments = 0;
 
 	/**

@@ -16,22 +16,47 @@ import ejb.UserFacadeRemote;
 import jpa.LocationJPA;
 import jpa.TalkAppointmentJPA;
 
+/**
+ * ManagedBean ShowTalkAppointment
+ * 
+ * @author Bazinga
+ * @version 1.0
+ *
+ */
 @ManagedBean(name = "ShowTalkAppointment")
 @ViewScoped
 public class ShowTalkAppointmentMBean implements Serializable{
 
+	/**
+	 * Obligatori perque la classe implementa serializable
+	 */
 	private static final long serialVersionUID = 1L;
 
+	/**
+	 * EJB TalkAppointmentFacadeRemote
+	 */
 	@EJB
 	private TalkAppointmentFacadeRemote showTalkAppointmentRemote;
-	/*
-	@EJB
-	private TalkAppointmentFacade showTalkAppointmentLocal;
+
+	/**
+	 * talkappointment
 	 */
 	private TalkAppointmentJPA talkAppointment;
+	
+	/**
+	 * identificador
+	 */
 	private Long id;
+	
+	/**
+	 * vista
+	 */
 	private String returnView;
 
+	/**
+	 * Constructor
+	 * @throws Exception
+	 */
 	public ShowTalkAppointmentMBean() throws Exception{
 		/*int auxId;
 		Properties props = System.getProperties();
@@ -46,34 +71,69 @@ public class ShowTalkAppointmentMBean implements Serializable{
 		}*/
 	}
 
+	/**
+	 * Getter Id
+	 * @return id
+	 */
 	public Long getId(){
 		return id;
 	}
 
+	/**
+	 * Setter id
+	 * @param id
+	 */
 	public void setId(Long id){
 		this.id = id;
 	}
 
+	/**
+	 * Getter returnView
+	 * @return returnView
+	 */
 	public String getReturnView(){
 		return returnView;
 	}
 
+	/**
+	 * Setter returnView
+	 * @param returnView
+	 */
 	public void setReturnView(String returnView){
 		this.returnView = returnView;
 	}
 
+	/**
+	 * Getter TalkAppointment
+	 * @return talkappointment
+	 */
 	public TalkAppointmentJPA getTalkAppointment(){
 		return talkAppointment;
 	}
 
+	/**
+	 * Setter TalkAppointment
+	 * @param id identificador
+	 * @throws Exception
+	 */
 	public void setTalkAppointment(Long id)  throws Exception{
 		talkAppointment = (TalkAppointmentJPA) showTalkAppointmentRemote.showTalkAppointment(id);		
 	}
 
+	/**
+	 * ShowView
+	 * @throws Exception
+	 */
 	public void showView() throws Exception{
 		this.setTalkAppointment(this.getId());
 	}
 
+	/**
+	 * Retorna vista
+	 * @param returnView identificador vista
+	 * @return vista
+	 * @throws Exception
+	 */
 	public String returnView(String returnView) throws Exception{
 		return returnView + "?faces-redirect=true";
 	}

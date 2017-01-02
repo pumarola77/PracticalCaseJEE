@@ -10,18 +10,35 @@ import javax.naming.Context;
 import javax.naming.InitialContext;
 import ejb.TalkAppointmentFacadeRemote;
 
+/**
+ * ManagedBean RemoveFromTalkAppointment
+ * 
+ * @author Grup 6
+ * @version 1.0
+ *
+ */
 @ManagedBean(name = "RemoveFromTalkAppointment")
 @ViewScoped
 public class RemoveFromTalkAppointmentMBean implements Serializable {
 
 	/**
-	 * 
+	 * Obligatori perque la classe implementa serializable
 	 */
 	private static final long serialVersionUID = 1L;
 
+	/**
+	 * EJB TalkAppointmentFacadeRemote
+	 */
 	@EJB
 	private TalkAppointmentFacadeRemote removeFromTalkedAppointmentRemote;
 	
+	/**
+	 * Desapunta una cita
+	 * 
+	 * @param talkid identificador cita
+	 * @return vista
+	 * @throws Exception
+	 */
 	public String removeFromTalkAppointment(Long talkid) throws Exception {
 
 		String nif ="";

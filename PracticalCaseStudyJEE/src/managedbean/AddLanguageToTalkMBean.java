@@ -18,23 +18,52 @@ import jpa.LevelLanguage;
 
 /**
  * Managed Bean AddLanguageToTalkMBean
+ * 
+ * @author Grup 6
+ *
  */
 @ManagedBean(name = "languagetotalkadd")
 @ViewScoped
 public class AddLanguageToTalkMBean implements Serializable{
 
+	/**
+	 * Obligatori perque la classe implementa Serializable
+	 */
 	private static final long serialVersionUID = 1L;
 
-	private int success; //Aquest parametre serveix per controlar si el formulari de registre conte errors en les dades introduides
-	protected String errorFormulari; //Aquest parametre serveix per mostrar un error a la propia pàgina del formulari
+	/**
+	 * Aquest parametre serveix per controlar si el formulari de registre conte errors en les dades introduides
+	 */
+	private int success; 
+	
+	/**
+	 * Aquest parametre serveix per mostrar un error a la propia pàgina del formulari
+	 */
+	protected String errorFormulari; 
 
+	/**
+	 * Llenguatge
+	 */
 	private String language;
+	
+	/**
+	 * Nivell
+	 */
 	private String nivell;
 	
-	// Desplegable llista de llenguatges
+	/**
+	 * Despegable Llista llenguatges
+	 */
 	protected Collection<SelectItem> languagesList = new ArrayList<SelectItem>();
+	
+	/**
+	 * Desplegable Llista nivells 
+	 */
 	protected Collection<SelectItem> nivellsList = new ArrayList<SelectItem>();
 	
+	/**
+	 * EJB addLanguageToTalkRemote
+	 */
 	@EJB
 	private UserFacadeRemote addLanguageToTalkRemote;
 
@@ -50,35 +79,57 @@ public class AddLanguageToTalkMBean implements Serializable{
 	}
 	
 	/**
-	 * Retorna els valors del desplegable a la vista
+	 * Getter valors del desplegable idiomes de la vista
 	 * @return desplegable idioma
 	 */
 	public Collection<SelectItem> getLanguagesList() {		
 		return languagesList;
 	}
 	
+	/**
+	 * Getter Valors del desplegable dels nivells de la vista
+	 * @return
+	 */
 	public Collection<SelectItem> getNivellsList() {
 		return nivellsList;
 	}
 	
+	/**
+	 * Assigna el valor del despegable Idioma
+	 * @param languageChanged
+	 */
 	public void languageValueChanged(ValueChangeEvent languageChanged) 
 	{		
 		this.setLanguage(languageChanged.getNewValue().toString());
 	}
 		
+	/**
+	 * Assigna el valor del desplegable nivell
+	 * @param nivellChanged
+	 */
 	public void nivellValueChanged(ValueChangeEvent nivellChanged) {
 		this.setNivell(nivellChanged.getNewValue().toString());
 	}
 	
+	/**
+	 * Obte formulari
+	 * @return
+	 */
 	public String getErrorFormulari(){
 		return errorFormulari;
 	}
+	
+	/**
+	 * Assigna valor formulari
+	 * @param errorFormulari
+	 */
 	public void setErrorFormulari (String errorFormulari){
 		this.errorFormulari = errorFormulari;
 	}
 
 	/**
-	 * Carrega els valors que mostrara el desplegable
+	 * Carrega els valors que mostra el desplegable llenguatge
+	 * @throws Exception
 	 */
 	public void languagesList() throws Exception {
 		languagesList.clear();
@@ -91,7 +142,11 @@ public class AddLanguageToTalkMBean implements Serializable{
 			this.languagesList.add(item);
 		}
 	}
-	
+
+	/**
+	 * Carrega els valors que mostra el desplegable nivell
+	 * @throws Exception
+	 */
 	public void nivellsList() throws Exception {
 		nivellsList.clear();
 		
@@ -139,18 +194,34 @@ public class AddLanguageToTalkMBean implements Serializable{
 		} 
 	}
 	
+	/**
+	 * Getter Llenguatge
+	 * @return llenguatge
+	 */
 	public String getLanguage() {		
 		return this.language;
 	}
 	
+	/**
+	 * Setter llenguatge
+	 * @param language
+	 */
 	public void setLanguage(String language) {		
 		this.language = language;
 	}
 
+	/**
+	 * Getter nivell
+	 * @return nivell
+	 */
 	public String getNivell() {
 		return nivell;
 	}
 
+	/**
+	 * Setter nivell
+	 * @param nivell
+	 */
 	public void setNivell(String nivell) {
 		this.nivell = nivell;
 	}

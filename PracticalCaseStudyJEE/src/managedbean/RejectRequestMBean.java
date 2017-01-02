@@ -14,6 +14,8 @@ import ejb.TalkAppointmentAdminFacadeRemote;
 
 /**
  * Managed Bean RejectRequestMBean
+ * @author Grup 6
+ * @version 1.0
  */
 @ManagedBean(name = "rejectrequest")
 @ViewScoped

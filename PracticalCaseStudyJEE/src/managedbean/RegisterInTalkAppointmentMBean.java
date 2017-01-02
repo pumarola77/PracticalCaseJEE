@@ -14,23 +14,45 @@ import javax.naming.InitialContext;
 import ejb.TalkAppointmentFacadeRemote;
 import jpa.TalkAppointmentJPA;
 
-
+/**
+ * ManagedBean RegisterInTalkAppointment
+ * 
+ * @author Bazinga
+ * @version 1.0
+ */
 @ManagedBean(name = "RegisterInTalkAppointment")
 @ViewScoped
 public class RegisterInTalkAppointmentMBean implements Serializable {
 
 	/**
-	 * 
+	 * Obligatori perque la classe implementa serializable
 	 */
 	private static final long serialVersionUID = 1L;
 
+	/**
+	 * EJB TalkAppointmentFacadeRemote
+	 */
 	@EJB
 	private TalkAppointmentFacadeRemote registerInTalkedAppointmentRemote;
 	
+	/**
+	 * Talkappointment
+	 */
 	private TalkAppointmentJPA talkAppointment;
+	
+	/**
+	 * Identificador
+	 */
 	private Long id;
+	
+	/**
+	 * Identificador usuari
+	 */
 	private String nif;
 	
+	/**
+	 * Constructor
+	 */
 	public RegisterInTalkAppointmentMBean() {
 		if ( FacesContext.getCurrentInstance().getExternalContext().getSessionMap().containsKey("nif") == true) 
 		{
@@ -39,6 +61,11 @@ public class RegisterInTalkAppointmentMBean implements Serializable {
 	}
 	
 	/*public String registerInTalkedAppointment(/*Long talkid) throws Exception {*/
+	/**
+	 * Registrar usuari
+	 * @return vista
+	 * @throws Exception
+	 */
 	public String register() throws Exception {					
 		
 		Properties props = System.getProperties();
@@ -61,30 +88,59 @@ public class RegisterInTalkAppointmentMBean implements Serializable {
 		//return null;
 	}
 	
+	/**
+	 * Getter id
+	 * @return id
+	 */
 	public Long getId(){
 		return id;
 	}
 	
+	/**
+	 * Setter id
+	 * @param id
+	 */
 	public void setId(Long id){
 		this.id = id;
 	}
 	
+	/**
+	 * Getter nif
+	 * @return nif
+	 */
 	public String getNif() {
 		return nif;
 	}
 	
+	/**
+	 * Setter nif
+	 * @param nif
+	 */
 	public void setNif(String nif) {
 		this.nif = nif;
 	}
 	
+	/**
+	 * Getter TalkAppointment
+	 * @return talkappointment
+	 */
 	public TalkAppointmentJPA getTalkAppointment(){
 		return talkAppointment;
 	}
 	
+	/**
+	 * Setter TalkAppointment
+	 * @param id
+	 * @throws Exception
+	 */
 	public void setTalkAppointment(Long id)  throws Exception{
 		talkAppointment = (TalkAppointmentJPA) registerInTalkedAppointmentRemote.showTalkAppointment(id);		
 	}
 	
+	/**
+	 * showRegister
+	 * @throws Exception
+	 */
 	public void showRegister() throws Exception {		
 		this.setTalkAppointment(this.getId());
 	}

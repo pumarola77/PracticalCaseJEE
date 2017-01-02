@@ -30,21 +30,34 @@ import jpa.UserJPA;
 
 
 /**
- * Managed Bean AddTalkedLanguageMBean
+ * Managed Bean AddTalkedLanguagedMBean
+ * @author Bazinga
+ * @version 1.0
  */
 @ManagedBean(name = "talkappointmentadd")
 @ViewScoped
 public class AddTalkAppointmentMBean implements Serializable{
 	
+	/**
+	 * Obligatori perque la classe es serializable
+	 */
 	private static final long serialVersionUID = 1L;
 	
+	/**
+	 * Persistencia 
+	 */
 	@PersistenceContext(unitName="PracticalCase") 
 	private EntityManager entman;
 
-	
+	/**
+	 * EJB TalkAppointmentAdminFacadeRemote
+	 */
 	@EJB
 	private TalkAppointmentAdminFacadeRemote addTalkAppointmentRemote;
 	
+	/**
+	 * EJB userRemote
+	 */
 	@EJB
 	private UserFacadeRemote userRemote;
 	
@@ -58,20 +71,55 @@ public class AddTalkAppointmentMBean implements Serializable{
 	 */
 	private String language;
 	
+	/**
+	 * Variable description
+	 */
 	protected String description = "";
+	
+	/**
+	 * Variable date
+	 */
 	protected String dateStr = "";
+	
+	/**
+	 * Variable TimeStr
+	 */
 	protected String timeStr = "";
-	//protected String language = "";
+	
+	/**
+	 * Variable street
+	 */
 	protected String street = "";
+	
+	/**
+	 * Variable num
+	 */
 	protected String num = "";
+	
+	/**
+	 * Variable cp
+	 */
 	protected String cp = "";
+	
+	/**
+	 * Variable city
+	 */
 	protected String city = "";
 	
-	
+	/**
+	 * Llista dels llenguatges Parlats
+	 */
 	private Collection<LanguageToTalkJPA> allLanguageToTalk;
+	
+	/**
+	 * Desplegable dels llenguatges
+	 */
 	protected Collection<SelectItem> languageList = new ArrayList<SelectItem>();
 	
-	//Constructor
+	/**
+	 * Constructor classe
+	 * @throws Exception
+	 */
 	public AddTalkAppointmentMBean() throws Exception{
 		//User Remote
 		Properties props = System.getProperties();
@@ -87,85 +135,167 @@ public class AddTalkAppointmentMBean implements Serializable{
 	}
 	
 	// Getters / Setters
+	
+	/**
+	 * Getter nif
+	 * @return nif
+	 */
 	public String getNif(){
 		return nif;
 	}
 	
+	/**
+	 * Setter nif
+	 * @param nif
+	 */
 	public void setNif(String nif){
 		this.nif = nif;
 	}
 	
+	/**
+	 * Getter language
+	 * @return language
+	 */
 	public String getLanguage(){
 		return language;
 	}
 	
+	/**
+	 * Setter language
+	 * @param language
+	 */
 	public void setLanguage(String language){
 		this.language = language;
 	}
 	
 
+	/**
+	 * Getter street
+	 * @return street
+	 */
 	public String getStreet(){
 		return street;
 	}
 	
+	/**
+	 * Setter street
+	 * @param street
+	 */
 	public void setStreet(String street){
 		this.street = street;
 	}
 	
+	/**
+	 * Getter num
+	 * @return num
+	 */
 	public String getNum(){
 		return num;
 	}
 	
+	/**
+	 * Setter num
+	 * @param num
+	 */
 	public void setNum(String num){
 		this.num = num;
 	}
 	
+	/**
+	 * Getter cp
+	 * @return cp
+	 */
 	public String getCp(){
 		return cp;
 	}
 	
+	/**
+	 * Setter cp
+	 * @param cp
+	 */
 	public void setCp(String cp){
 		this.cp = cp;
 	}
 	
+	/**
+	 * Getter city
+	 * @return city
+	 */
 	public String getCity(){
 		return city;
 	}
 	
+	/**
+	 * Setter city
+	 * @param city
+	 */
 	public void setCity(String city){
 		this.city = city;
 	}
 	
+	/**
+	 * Getter description
+	 * @return description
+	 */
 	public String getDescription(){
 		return description;
 	}
 	
+	/**
+	 * Setter description
+	 * @param description
+	 */
 	public void setDescription(String description){
 		this.description = description;
 	}
 	
+	/**
+	 * Getter DateStr
+	 * @return date
+	 */
 	public String getDateStr(){
 		return dateStr;
 	}
 	
+	/**
+	 * Setter date
+	 * @param dateStr date
+	 */
 	public void setDateStr(String dateStr){
 		this.dateStr = dateStr;
 	}
 	
+	/**
+	 * Getter Time
+	 * @return time
+	 */
 	public String getTimeStr(){
 		return timeStr;
 	}
 	
+	/**
+	 * Setter time
+	 * @param timeStr time
+	 */
 	public void setTimeStr(String timeStr){
 		this.timeStr = timeStr;
 	}
 	
 	
+	/**
+	 * Getter Language list
+	 * @return language list
+	 */
 	public Collection<SelectItem> getLanguageList(){
 		return languageList;
 	}
 	
 
+	/**
+	 * Alta llenguatge
+	 * @return vista principal
+	 * @throws Exception
+	 */
 	public String addTalkApp() throws Exception{
 		try{
 
@@ -212,7 +342,10 @@ public class AddTalkAppointmentMBean implements Serializable{
 		return "HomeView";
 	}
 	
-	//Carregar la llista de totes les llengues de l'usuari
+	/**
+	 * Carrega la llista de tots els llenguatges de l'usuari
+	 * @throws Exception
+	 */
 	public void getAllLanguageToTalk() throws Exception{
 		//netejem la llista
 		getLanguageList().clear();
@@ -226,7 +359,11 @@ public class AddTalkAppointmentMBean implements Serializable{
 		}
 	}
 
-	//Recuperar valor de XHTML
+	/**
+	 * Desplegable llenguatge
+	 * @param languageChanged
+	 * @throws Exception
+	 */
 	public void languageValueChanged(ValueChangeEvent languageChanged) throws Exception {
 		setLanguage(languageChanged.getNewValue().toString());
 	}	

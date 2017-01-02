@@ -9,15 +9,26 @@ import javax.naming.InitialContext;
 
 import ejb.UserFacadeRemote;
 
+
 /**
- * Managed Bean DeleteTalkedLanguageMBean
+ * Managed Bean DeleteTalkedlanguageMBean
+ * 
+ * @author Bazinga
+ * @version 1.0
+ *
  */
 @ManagedBean(name = "talkedlanguagedelete")
 @ViewScoped
 public class DeleteTalkedLanguageMBean implements Serializable{
 
+	/**
+	 * Obligatori perque la classe implementa serializable
+	 */
 	private static final long serialVersionUID = 1L;
 
+	/**
+	 * EJB UserFacadeRemote
+	 */
 	@EJB
 	private UserFacadeRemote deleteTalkedLanguageRemote;
 

@@ -11,22 +11,64 @@ import javax.naming.InitialContext;
 import ejb.UserFacadeRemote;
 //import ejb.UserFacade;
 
+/**
+ * ManagedBean adduser
+ * 
+ * @author Bazinga
+ * @since 1.0
+ */
 @ManagedBean(name = "AddUser")
 @ViewScoped
 public class RegisterUser implements Serializable{
 
+	/**
+	 * Obligatori perque la classe es serializable
+	 */
 	private static final long serialVersionUID = 1L;
 	
+	/**
+	 * identificador nif
+	 */
 	protected String nif;
+	
+	/**
+	 * nom
+	 */
 	protected String name;
+	
+	/**
+	 * surname
+	 */
 	protected String surname;
+	
+	/**
+	 * phone
+	 */
 	protected String phone;
+	
+	/**
+	 * password
+	 */
 	protected String password;
+	
+	/**
+	 * email
+	 */
 	protected String email;
 	
-	private int success; //Aquest parametre serveix per controlar si el formulari de registre conte errors en les dades introduides
-	protected String errorFormulari; //Aquest parametre serveix per mostrar un error a la propia pàgina del formulari
+	/**
+	 * Aquest parametre serveix per controlar si el formulari de registre conte errors en les dades introduides
+	 */
+	private int success; 
 	
+	/**
+	 * Aquest parametre serveix per mostrar un error a la propia pàgina del formulari
+	 */
+	protected String errorFormulari; 
+	
+	/**
+	 * EJB UserFacadeRemote
+	 */
 	@EJB
 	private UserFacadeRemote userRemote;
 	/*
@@ -34,6 +76,9 @@ public class RegisterUser implements Serializable{
 	private UserFacade userLocalFacade;
 	*/
 	
+	/**
+	 * Constructor
+	 */
 	public RegisterUser()
 	{
 		nif = "";
@@ -51,82 +96,154 @@ public class RegisterUser implements Serializable{
 	
 	/*Definim els getters i setters per a que desde les pagines JSP es pugui accedir als atributs idioma i nivell*/
 
+	/**
+	 * Getter nif
+	 * @return nif
+	 */
 	public String getNif()
 	{
 		return nif;
 	}
 	
+	/**
+	 * Settere nif
+	 * @param nif
+	 */
 	public void setNif(String nif)
 	{
 		this.nif=nif;		
 	}
 	
+	/**
+	 * Getter name
+	 * @return name
+	 */
 	public String getName()
 	{
 		return name;
 	}
-	
+
+	/**
+	 * Setter name
+	 * @param name
+	 */
 	public void setName(String name)
 	{
 		this.name=name;
 	}
 	
+	/**
+	 * Getter surname
+	 * @return surname
+	 */
 	public String getSurname()
 	{
 		return surname;
 	}
 	
+	/**
+	 * Setter surname
+	 * @param surname
+	 */
 	public void setSurname(String surname)
 	{
 		this.surname=surname;
 	}
 	
+	/**
+	 * Getter phone
+	 * @return phone
+	 */
 	public String getPhone()
 	{
 		return phone;
 	}
 	
+	/**
+	 * Setter phone
+	 * @param phone
+	 */
 	public void setPhone(String phone)
 	{
 		this.phone=phone;
 	}
 	
+	/**
+	 * Getter password
+	 * @return password
+	 */
 	public String getPassword()
 	{
 		return password;
 	}
 	
+	/**
+	 * Setter passowrd
+	 * @param password
+	 */
 	public void setPassword(String password)
 	{
 		this.password=password;
 	}
 	
+	/**
+	 * Getter email
+	 * @return email
+	 */
 	public String getEmail()
 	{
 		return email;
 	}
 	
+	/**
+	 * Setter email
+	 * @param email
+	 */
 	public void setEmail(String email)
 	{
 		this.email = email;
 	}
 	
+	/**
+	 * Getter missatge formulari
+	 * @return missatge formulari
+	 */
 	public String getErrorFormulari(){
 		
 		return errorFormulari;
 	}
 	
+	/**
+	 * Setter missatge Formulari
+	 * @param errorFormulari
+	 */
 	public void setErrorFormulari (String errorFormulari){
 		
 		this.errorFormulari = errorFormulari;
 	}
 	
 	//Retorna la vista principal
+	/**
+	 * Retorna vista principal
+	 * @return
+	 */
 	public String mainWindow() {
 		return "RegisterUserView";
 	}
 	
 	/*Metode per registrar un usuari al sistema*/
+	/**
+	 * Alta usuari
+	 * 
+	 * @param nif identificador usuari
+	 * @param name nom
+	 * @param surname surname
+	 * @param phone phone
+	 * @param password password
+	 * @param email email
+	 * @return vista 
+	 * @throws Exception
+	 */
 	public String addUsr(String nif, String name, String surname, String phone, String password, String email) throws Exception	
 	{		
 		/* DESACTIVAT ELS VALORS ES PASSEN DES DEL FACELET -> VISTA

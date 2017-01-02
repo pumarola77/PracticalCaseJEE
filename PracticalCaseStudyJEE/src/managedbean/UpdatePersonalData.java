@@ -13,23 +13,75 @@ import javax.naming.InitialContext;
 import ejb.UserFacadeRemote;
 import jpa.UserJPA;
 
+/**
+ * ManagedBean updateuser
+ * 
+ * @author Bazinga
+ * @version 1.0
+ *
+ */
 @ManagedBean(name = "UpdateUser")
 @ViewScoped
 public class UpdatePersonalData implements Serializable {
 
-private static final long serialVersionUID = 1L;
+	/**
+	 * Obligatori perque implementa serializable
+	 */
+	private static final long serialVersionUID = 1L;
 
+	/**
+	 * nif
+	 */
 	protected String nif;
+	
+	/**
+	 * name
+	 */
 	protected String name;
+	
+	/**
+	 * surname
+	 */
 	protected String surname;
+	
+	/**
+	 * phone
+	 */
 	protected String phone;
+	
+	/**
+	 * password
+	 */
 	protected String password;
+	
+	/**
+	 * email
+	 */
 	protected String email;
+	
+	/**
+	 * emailUser
+	 */
 	protected String emailUser;
 	
+	/**
+	 * success
+	 */
 	private boolean success;
-	protected String errorFormulari; //Aquest parametre serveix per mostrar un error a la propia pàgina del formulari
-	private UserJPA findUser; //Ens serveix per trobar l'user de la sessio
+	
+	/**
+	 * Aquest parametre serveix per mostrar un error a la propia pàgina del formulari
+	 */
+	protected String errorFormulari; 
+	
+	/**
+	 * Ens serveix per trobar l'user de la sessio
+	 */
+	private UserJPA findUser; 
+	
+	/**
+	 * EJB UserFacadeRemote
+	 */
 	@EJB
 	private UserFacadeRemote userRemote;
 	/*
@@ -37,6 +89,10 @@ private static final long serialVersionUID = 1L;
 	private UserFacade userLocalFacade;
 	*/
 	
+	/**
+	 * Constructor
+	 * @throws Exception
+	 */
 	public UpdatePersonalData() throws Exception { 
 
 		Properties props = System.getProperties();
@@ -51,89 +107,162 @@ private static final long serialVersionUID = 1L;
 		}
 	}
 	
+	/**
+	 * retorna vista principal
+	 * @return
+	 */
 	public String Home() {
 		return "HomeView";
 	}
 	
 	/*Definim els getters i setters per a que desde les pagines JSP es pugui accedir als atributs idioma i nivell*/
+	
+	/**
+	 * Getter nif
+	 * @return nif
+	 */
 	public String getNif()
 	{
 		return nif;
 	}
 	
+	/**
+	 * Setter nif
+	 * @param nif
+	 */
 	public void setNif(String nif)
 	{
 		this.nif=nif;		
 	}
 	
+	/**
+	 * Getter name
+	 * @return name
+	 */
 	public String getName()
 	{
 		return name;
 	}
 	
+	/**
+	 * Setter name
+	 * @param name
+	 */
 	public void setName(String name)
 	{
 		this.name=name;
 	}
 	
+	/**
+	 * Getter surname
+	 * @return surname
+	 */
 	public String getSurname()
 	{
 		return surname;
 	}
 	
+	/**
+	 * Seter Surname
+	 * @param surname
+	 */
 	public void setSurname(String surname)
 	{
 		this.surname=surname;
 	}
 	
+	/**
+	 * Getter Phone
+	 * @return phone
+	 */
 	public String getPhone()
 	{
 		return phone;
 	}
 	
+	/**
+	 * Setter phone
+	 * @param phone
+	 */
 	public void setPhone(String phone)
 	{
 		this.phone=phone;
 	}
 	
+	/**
+	 * Getter Password
+	 * @return password
+	 */
 	public String getPassword()
 	{
 		return password;
 	}
 	
+	/**
+	 * Setter password
+	 * @param password
+	 */
 	public void setPassword(String password)
 	{
 		this.password=password;
 	}
 	
+	/**
+	 * Getter Email
+	 * @return email
+	 */
 	public String getEmail()
 	{
 		return email;
 	}
 	
+	/**
+	 * Setter email
+	 * @param email
+	 */
 	public void setEmail(String email)
 	{
 		this.email = email;
 	}
 	
+	/**
+	 * Getter emailUser
+	 * @return emailUser
+	 */
 	public String getEmailUser(){
 		return emailUser;
 	}
 	
+	/**
+	 * Setter emailUser
+	 * @param emailUser
+	 */
 	public void setEmailUser(String emailUser){
 		this.emailUser = emailUser;
 	}
 	
+	/**
+	 * Getter ErrorFormulari
+	 * @return errorFormulari
+	 */
 	public String getErrorFormulari(){
 		
 		return errorFormulari;
 	}
 	
+	/**
+	 * Setter Errorformulari
+	 * @param errorFormulari
+	 */
 	public void setErrorFormulari (String errorFormulari){
 		
 		this.errorFormulari = errorFormulari;
 	}
 	
+	/**
+	 * cerca usuari
+	 * @throws Exception
+	 */
 	public void setFindUser() throws Exception {
 		
 		findUser = (UserJPA) userRemote.findUser(this.nif);
@@ -146,6 +275,18 @@ private static final long serialVersionUID = 1L;
 		this.setEmailUser(findUser.getEmail());
 	}
 	
+	/**
+	 * Actualitza usuari
+	 * 
+	 * @param nif nif
+	 * @param name name
+	 * @param surname surname
+	 * @param phone phone
+	 * @param password password
+	 * @param email email
+	 * @return vista
+	 * @throws Exception
+	 */
 	public String updateUsr(String nif, String name , String surname, String phone, String password , String email) throws Exception
 	{
 

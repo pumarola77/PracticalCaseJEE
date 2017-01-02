@@ -10,23 +10,45 @@ import javax.faces.context.FacesContext;
 import ejb.UserFacadeRemote;
 import jpa.TalkedLanguageJPA;
 
+/**
+ * ManagedBean listtalkedlang
+ * 
+ * @author Bazinga
+ * @since 1.0
+ *
+ */
 @ManagedBean(name = "ListTalkedLang")
 @ViewScoped
 public class ListAllTalkedLanguages implements Serializable{
 
+	/**
+	 * Obligatori perque la classe implementa serializable
+	 */
 	private static final long serialVersionUID = 1L;
 
+	/**
+	 * Identificador usuari
+	 */
 	private String nif; // Havia protected
 	
-	/*Aquesta variable contindra el llistat complert de llenguatges de l'usuari*/
+	/**
+	 * Aquesta variable contindra el llistat complert de llenguatges de l'usuari
+	 */
 	private Collection<TalkedLanguageJPA> languageFullList;
 	
-	/*Aquesta variable contindra els 10 idiomes o menys que es mostren actualment per pantalla*/
+	/**
+	 * Aquesta variable contindra els 10 idiomes o menys que es mostren actualment per pantalla
+	 */
 	protected Collection<TalkedLanguageJPA> languageListView;
 	
-	/*Aquesta variable fa de contador per saber quin punt de la llista d'idiomes esta veient l'usuari*/
+	/**
+	 * Aquesta variable fa de contador per saber quin punt de la llista d'idiomes esta veient l'usuari
+	 */
 	private int screen;
 	
+	/**
+	 * EJB UserFacadeRemote
+	 */
 	@EJB
 	private UserFacadeRemote userRemote;
 	
@@ -45,7 +67,10 @@ public class ListAllTalkedLanguages implements Serializable{
 		screen=0;
 	}
 	
-	/*Aquest metode s'utilitza per carregar el llistat complert d'idiomes de l'usuari*/
+	/**
+	 * Aquest metode s'utilitza per carregar el llistat complert d'idiomes de l'usuari
+	 * @throws Exception
+	 */
 	private void loadLanguageList() throws Exception
 	{
 		
@@ -60,7 +85,11 @@ public class ListAllTalkedLanguages implements Serializable{
 		
 	}
 	
-	/*Aquest metode es el que s'accedeix desde la vista i s'utilitza per carregar el llistat d'idiomes reduit que s'ha de mostrar*/
+	/**
+	 * Aquest metode es el que s'accedeix desde la vista i s'utilitza per carregar el llistat d'idiomes reduit que s'ha de mostrar
+	 * @return llista de llengautges
+	 * @throws Exception
+	 */
 	public Collection<TalkedLanguageJPA> getLanguageListView() throws Exception{
 		
 		int n=0;
@@ -83,6 +112,9 @@ public class ListAllTalkedLanguages implements Serializable{
 		return languageListView;
 	}
 	
+	/**
+	 * nextScreen
+	 */
 	public void nextScreen()
 	{
 		if (((screen+1)*10 < languageFullList.size()))
@@ -90,6 +122,10 @@ public class ListAllTalkedLanguages implements Serializable{
 			screen +=1;
 		}
 	}
+	
+	/**
+	 * previousScreen
+	 */
 	public void previousScreen()
 	{
 		if ((screen > 0))
@@ -98,10 +134,18 @@ public class ListAllTalkedLanguages implements Serializable{
 		}
 	}
 	
+	/**
+	 * Setter nif
+	 * @param nif
+	 */
 	public void setNif(String nif){
 		this.nif= nif;
 	}
 	
+	/**
+	 * Getter nif
+	 * @return nif
+	 */
 	public String getNif(){
 		return nif;
 	}

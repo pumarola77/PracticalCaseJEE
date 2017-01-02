@@ -12,21 +12,47 @@ import javax.naming.InitialContext;
 
 import ejb.UserFacadeRemote;
 
+/**
+ * ManagedBean LoginBean
+ * @author Bazinga
+ * @since 1.0
+ *
+ */
 @ManagedBean(name = "LoginBean")
 @RequestScoped
 public class Login {
 	
+	/**
+	 * email
+	 */
 	protected String email;
+	
+	/**
+	 * Password
+	 */
 	protected String password;
 	
 	//Serveix per controlar si l'usuari el password son correctes.
+	/**
+	 * Identificador nif
+	 */
 	private String nif;
+	
+	/**
+	 * Missatge error
+	 */
 	protected String errorPassword; //Serveix per mostrar error en pantalla
 	
+	/**
+	 * EJB UserFacadeRemote
+	 */
 	@EJB
 	private UserFacadeRemote userRemote;
 	
-	//Constructor MBean
+
+	/**
+	 * Constructor
+	 */
 	public Login() {	
 		//Refresca les variables de Sessio
 		FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
@@ -35,40 +61,78 @@ public class Login {
 	
 	
 	/* Definicio dels getter i Setters */
+	/**
+	 * Getter Email
+	 * @return email
+	 */
 	public String getEmail() {
 		return email;
 	}
 
+	/**
+	 * Setter email
+	 * @param email
+	 */
 	public void setEmail(String email) {
 		this.email = email;
 	}
 
+	/**
+	 * Getter Password
+	 * @return password
+	 */
 	public String getPassword() {
 		return password;
 	}
 
+	/**
+	 * Setter password
+	 * @param password
+	 */
 	public void setPassword(String password) {
 		this.password = password;
 	}
 	
+	/**
+	 * Getter errorPassword
+	 * @return errorPassword
+	 */
 	public String getErrorPassword() {
 		return errorPassword;
 	}
 	
+	/**
+	 * Setter errorPassword
+	 * @param errorPassword
+	 */
 	public void setErrorPassword(String errorPassword) {
 		this.errorPassword = errorPassword;
 	}
 	
 	// Get / Setter del Nif
+	/**
+	 * Getter nif
+	 * @return nif
+	 */
 	public String getNif() {
 		return nif;
 	}
 	
+	/**
+	 * Setter nif
+	 * @param nif
+	 */
 	public void setNif(String nif) {
 		this.nif = nif;
 	}	
 	
 	/* Metode per Verificar el Login Usuari */
+	/**
+	 * Validar usuari
+	 * @param email email
+	 * @param pwd password
+	 * @return vista 
+	 */
 	public String validarUsuari(String email, String pwd) {
 		try {
 			Properties props = System.getProperties();
@@ -116,6 +180,10 @@ public class Login {
 
 	}
 	
+	/**
+	 * Sortida aplicacio
+	 * @return vista
+	 */
 	public String logout() {
 		FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
 		FacesContext.getCurrentInstance().getExternalContext().getInitParameterMap();

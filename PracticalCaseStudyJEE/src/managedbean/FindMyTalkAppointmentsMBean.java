@@ -21,21 +21,42 @@ import javax.naming.InitialContext;
 import ejb.TalkAppointmentFacadeRemote;
 import jpa.TalkAppointmentJPA;
 
+/**
+ * MangedBean findMytalkAppointmnts
+ * 
+ * @author Grup 6
+ * @version 1.0
+ *
+ */
 @ManagedBean(name = "findmytalkappointments")
 @ViewScoped
 public class FindMyTalkAppointmentsMBean implements Serializable {
 
 	/**
-	 * 
+	 * Obligatori perque la classe implementa serializable
 	 */
 	private static final long serialVersionUID = 1L;
 
+	/**
+	 * EJB TalkAppointmentFacadeRemote
+	 */
 	@EJB
 	private TalkAppointmentFacadeRemote findMyTalkAppointmentsRemote;
 
-	/* Variable per controlar els registres que esta veient un usuari */
+
+	/**
+	 * Controla els regisres que es visualitzen per pantalla
+	 */
 	private int screen = 0;
+	
+	/**
+	 * Identificador usuari
+	 */
 	private String nif = "";
+	
+	/**
+	 * nunero de cites
+	 */
 	protected int numberTalkAppointments = 0;
 
 	/**
@@ -79,20 +100,40 @@ public class FindMyTalkAppointmentsMBean implements Serializable {
 	 */
 	private String languages = "ALL LANGUAGES";
 
-	//store all the instances of TalkAppointments
+	/**
+	 * store all the instances of TalkAppointments
+	 */
 	private Collection<TalkAppointmentJPA> myTalkAppointmentsList;
 
-	/*Aquesta variable contindra els 10 idiomes o menys que es mostren actualment per pantalla*/
+	/**
+	 *  Aquesta variable contindra els 10 idiomes o menys que es mostren actualment per pantalla
+	 */
 	protected Collection<TalkAppointmentJPA> myTalkAppointmentsListView;
-
-	/*
-	 * Retornen els valors del ejb que es mostrarant al desplegable
+	
+	/**
+	 * Desplegables ciutats
 	 */
 	private Collection<String> citiesList;
+
+	/**
+	 * Desplegables dates
+	 */
 	private Collection<Date> fechasList;
+	
+	/**
+	 * Desplegables hores
+	 */
 	private Collection<Time> timeList;
+	
+	/**
+	 * Desplegables llenguatges
+	 */
 	private Collection<String> languageList;
 
+	/**
+	 * Constructor
+	 * @throws Exception
+	 */
 	public FindMyTalkAppointmentsMBean() throws Exception 
 	{			
 		this.myTalkAppointmentsList();
@@ -103,62 +144,114 @@ public class FindMyTalkAppointmentsMBean implements Serializable {
 		this.languagesList();
 	}
 
+	/**
+	 * Llista de ciutats per el desplegable
+	 * @return llista de ciutats
+	 */
 	public Collection<SelectItem> getCiutatsList() {
 		return ciutatsList;
 	}
 
+	/**
+	 * Llista de dates per el desplegable
+	 * @return llista de dates
+	 */
 	public Collection<SelectItem> getDatesList() {
 		return datesList;
 	}
 
+	/**
+	 * Llista de hores per el desplegable
+	 * @return llista hores
+	 */
 	public Collection<SelectItem> getHoresList() {
 		return horesList;
 	}
 
+	/**
+	 * Llista de llenguatges desplegable
+	 * @return llista de llenguatges
+	 */
 	public Collection<SelectItem> getLanguagesList() {		
 		return languagesList;
 	}
 
 	/**
-	 * Get/Set the City name
+	 * Getter the City name
 	 * @return City name
 	 */
 	public String getCiutat() {
 		return this.ciutat;
 	}
 
+	/**
+	 * Setter ciutat
+	 * @param ciutat
+	 */
 	public void setCiutat(String ciutat) {
 		this.ciutat = ciutat;
 	}
 
+	/**
+	 * Getter nif
+	 * @return nif
+	 */
 	public String getNif() {
 		return this.nif;
 	}
 
+	/**
+	 * Setter nif
+	 * @param nif
+	 */
 	public void setNif(String nif) {
 		this.nif = nif;
 	}
 
+	/**
+	 * Getter Dates
+	 * @return dates
+	 */
 	public String getDates() {
 		return this.dates;
 	}
 
+	/**
+	 * Setter dates
+	 * @param dates
+	 */
 	public void setDates(String dates) {
 		this.dates = dates;
 	}
 
+	/**
+	 * Getter hores
+	 * @return hores
+	 */
 	public String getHores() {
 		return this.hores;
 	}
 
+	/**
+	 * Setter hores
+	 * @param hores
+	 */
 	public void setHores(String hores) {
 		this.hores = hores;
 	}
 
+	/**
+	 * Getter Languages
+	 * @return languages
+	 */
 	public String getLanguages() {
 		return this.languages;
 	}
 
+	/**
+	 * Setter languages
+	 * @param languages
+	 */
 	public void setLanguages(String languages) {
 		this.languages = languages;
 	}
@@ -223,6 +316,10 @@ public class FindMyTalkAppointmentsMBean implements Serializable {
 		}
 	}
 
+	/**
+	 * Setter hores desplegable
+	 * @param horesChanged
+	 */
 	public void horesValueChanged(ValueChangeEvent horesChanged) {
 		this.setHores(horesChanged.getNewValue().toString());
 	}
@@ -245,6 +342,11 @@ public class FindMyTalkAppointmentsMBean implements Serializable {
 		return "MyTalkAppointmentsListView";
 	}
 
+	/**
+	 * Llista de les cites publicades per un usuari
+	 * @return llista de cites
+	 * @throws Exception
+	 */
 	public Collection<TalkAppointmentJPA> getMyTalkAppointmentsListView() throws Exception 
 	{		
 		int n=0;		
@@ -264,6 +366,9 @@ public class FindMyTalkAppointmentsMBean implements Serializable {
 		return myTalkAppointmentsListView;
 	}
 
+	/**
+	 * nextScreen
+	 */
 	public void nextScreen()
 	{
 		if (((screen+1)*10 < myTalkAppointmentsList.size()))
@@ -271,6 +376,10 @@ public class FindMyTalkAppointmentsMBean implements Serializable {
 			screen +=1;
 		}
 	}
+	
+	/**
+	 * Previous Screen
+	 */
 	public void previousScreen()
 	{
 		if ((screen > 0))
@@ -279,6 +388,10 @@ public class FindMyTalkAppointmentsMBean implements Serializable {
 		}
 	}
 
+	/**
+	 * Carrega desplegable ciutats
+	 * @throws Exception
+	 */
 	@SuppressWarnings("unchecked")
 	public void ciutatsList() throws Exception
 	{
@@ -305,6 +418,10 @@ public class FindMyTalkAppointmentsMBean implements Serializable {
 
 	}
 
+	/**
+	 * Carrega desplegable llenguatges
+	 * @throws Exception
+	 */
 	@SuppressWarnings("unchecked")
 	public void languagesList() throws Exception
 	{
@@ -330,6 +447,10 @@ public class FindMyTalkAppointmentsMBean implements Serializable {
 
 	}
 
+	/**
+	 * Carrega desplegable de dates
+	 * @throws Exception
+	 */
 	@SuppressWarnings("unchecked")
 	public void datesList() throws Exception 
 	{		
@@ -355,6 +476,10 @@ public class FindMyTalkAppointmentsMBean implements Serializable {
 
 	}
 
+	
+	/**
+	 * desplegable hores
+	 */
 	@SuppressWarnings("unchecked")
 	public void horesList() throws Exception
 	{
@@ -382,10 +507,11 @@ public class FindMyTalkAppointmentsMBean implements Serializable {
 
 	}
 
-	/*
-	 * Metode que es crida en el boto "confirm" dins de la vista
-	 * FindTalkAppointmentsView.
-	 * S'haura de passar la data, hora , i el llenguatge
+	
+	/**
+	 * Retorna el llistat de cites publicades per un usuari segons
+	 * les dades del filtre
+	 * @throws Exception
 	 */
 	@SuppressWarnings("unchecked")
 	private void myTalkAppointmentsList() throws Exception {	
