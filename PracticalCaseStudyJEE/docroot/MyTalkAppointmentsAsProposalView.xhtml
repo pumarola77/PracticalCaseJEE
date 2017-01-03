@@ -27,7 +27,7 @@
 			var="item" bgcolor="#F1F1F1" border="10" first="0" width="100%"
 			frame="hsides" rules="all">
 			<f:facet name="header">
-				<h:outputText align="center" value="List My Publish Appointments" />
+				<h:outputText align="center" value="Lista de les meves cites publicades" />
 			</f:facet>
 			<h:column>
 				<f:facet name="header">
@@ -40,7 +40,7 @@
 
 			<h:column>
 				<f:facet name="header">
-					<h:outputText value="City" />
+					<h:outputText value="Ciutat" />
 				</f:facet>
 				<p align="right">
 					<h:outputText value="#{item.location.city}" />
@@ -49,7 +49,7 @@
 
 			<h:column>
 				<f:facet name="header">
-					<h:outputText value="Language" />
+					<h:outputText value="Idioma" />
 				</f:facet>
 				<p align="right">
 					<h:outputText value="#{item.languageToTalk.language}" />
@@ -58,7 +58,7 @@
 
 			<h:column>
 				<f:facet name="header">
-					<h:outputText value="date" />
+					<h:outputText value="Data" />
 				</f:facet>
 				<p align="right">
 					<h:outputText value="#{item.date}" />
@@ -66,7 +66,7 @@
 			</h:column>
 			<h:column>
 				<f:facet name="header">
-					<h:outputText value="time" />
+					<h:outputText value="Hora" />
 				</f:facet>
 				<p align="right">
 					<h:outputText value="#{item.time}" />
@@ -75,7 +75,7 @@
 
 			<h:column>
 				<f:facet name="header">
-					<h:outputText value="Name"></h:outputText>
+					<h:outputText value="Nom"></h:outputText>
 				</f:facet>
 				<p align="right">
 					<h:outputText value="#{item.userSign.name}" />
@@ -85,7 +85,7 @@
 
 			<h:column>
 				<f:facet name="header">
-					<h:outputText value="Level"></h:outputText>
+					<h:outputText value="Nivell"></h:outputText>
 				</f:facet>
 				<p align="right">
 					<h:outputText value="#{findmytalkappasproposal.getLevelUserSign(item.userSign.nif,item.languageToTalk.language)}" />
@@ -94,7 +94,7 @@
 
 			<h:column>
 				<f:facet name="header">
-					<h:outputText value="Status"></h:outputText>
+					<h:outputText value="Estat"></h:outputText>
 				</f:facet>
 				<p align="right">
 					<h:outputText value="#{item.status}" />
