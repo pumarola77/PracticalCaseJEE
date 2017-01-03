@@ -33,7 +33,7 @@ public class NIFValidator implements Validator{
                 
         // Longitud minima 9 caracters
         if ( nif.trim().length() != 9 ) {
-			FacesMessage msg = 	new FacesMessage("NIF validation failed.", "Invalid NIF format. Longitud Incorrecte");
+			FacesMessage msg = 	new FacesMessage("Validació errònia", "Format del DNI incorrecte. Longitud errònia");
 			msg.setSeverity(FacesMessage.SEVERITY_ERROR);
 			throw new ValidatorException(msg);        	
         }
@@ -41,7 +41,7 @@ public class NIFValidator implements Validator{
         
         //Comproba que el 9 digit  sigui una lletra
         if ( !Character.isLetter(nif.charAt(8))) {        	
-			FacesMessage msg = 	new FacesMessage("NIF validation failed.", "The last character isn't a Letter.");
+			FacesMessage msg = 	new FacesMessage("Validació errònia", "L'ultim caràcter no es una lletra");
 				msg.setSeverity(FacesMessage.SEVERITY_ERROR);
 				throw new ValidatorException(msg);
         }
@@ -50,7 +50,7 @@ public class NIFValidator implements Validator{
         for (int i=0; i<8; i++) {
         	
         	if ( !Character.isDigit(nif.charAt(i)) ) {
-    			FacesMessage msg = 	new FacesMessage("NIF validation failed.", "The field contains letter or character.");
+    			FacesMessage msg = 	new FacesMessage("Validació errònia", "El camp conté lletres o caràcters");
     			msg.setSeverity(FacesMessage.SEVERITY_ERROR);
     			throw new ValidatorException(msg);
         	}
@@ -66,7 +66,7 @@ public class NIFValidator implements Validator{
                 
         //Verificacioo que la lletra del dni correspongui amb l'array
         if ((Character.toUpperCase(nif.charAt(8))) != lletraDni[ind]){
-			FacesMessage msg = 	new FacesMessage("NIF validation failed.", "Invalid Letter NIF format.");
+			FacesMessage msg = 	new FacesMessage("Validació errònia", "La lletra del DNI no es valida");
 			msg.setSeverity(FacesMessage.SEVERITY_ERROR);
 			throw new ValidatorException(msg);
         }  

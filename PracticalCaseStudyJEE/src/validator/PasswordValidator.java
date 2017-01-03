@@ -42,7 +42,7 @@ public class PasswordValidator implements Validator {
 		/*Es comprova que el password tingui més de 8 caracters*/
 		if ( passwd.trim().length() < 8 )	 	
 		{
-			FacesMessage msg =	new FacesMessage("Password validation failed.", "Mínim 8 Caracters");
+			FacesMessage msg =	new FacesMessage("Validació errònia", "Mínim 8 Caracters");
 			msg.setSeverity(FacesMessage.SEVERITY_ERROR);
 			throw new ValidatorException(msg);
 		}

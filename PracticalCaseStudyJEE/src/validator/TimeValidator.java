@@ -26,12 +26,12 @@ public class TimeValidator implements Validator {
 		String timeStr = value.toString();
 		
 		if(timeStr.isEmpty()){
-			FacesMessage msg = 	new FacesMessage("Value failed.", "This Field is Empty.");
+			FacesMessage msg = 	new FacesMessage("Validació errònia", "El camp està buit");
 			msg.setSeverity(FacesMessage.SEVERITY_ERROR);
 			throw new ValidatorException(msg);
 		}
 		else if(!timeStr.matches("^([0-9]|0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$")){
-			FacesMessage msg = 	new FacesMessage("Value failed.", "Format erroni");
+			FacesMessage msg = 	new FacesMessage("Validació errònia", "Format erroni");
 			msg.setSeverity(FacesMessage.SEVERITY_ERROR);
 			throw new ValidatorException(msg);
 		}

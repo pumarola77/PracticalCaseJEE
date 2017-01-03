@@ -26,12 +26,12 @@ public class DateValidator implements Validator {
 		String dateStr = value.toString();
 		
 		if(dateStr.isEmpty()){
-			FacesMessage msg = 	new FacesMessage("Value failed.", "This Field is Empty.");
+			FacesMessage msg = 	new FacesMessage("Validació errònia", "El camp està buit");
 			msg.setSeverity(FacesMessage.SEVERITY_ERROR);
 			throw new ValidatorException(msg);
 		}
 		else if(!dateStr.matches("(0?[1-9]|[12][0-9]|3[01])/(0?[1-9]|1[012])/((19|20)\\d\\d)")){
-			FacesMessage msg = 	new FacesMessage("Value failed.", "Format erroni");
+			FacesMessage msg = 	new FacesMessage("Validació errònia", "Format erroni");
 			msg.setSeverity(FacesMessage.SEVERITY_ERROR);
 			throw new ValidatorException(msg);
 		}

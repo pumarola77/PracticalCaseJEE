@@ -32,8 +32,8 @@ public class EmailValidator implements Validator {
 		if(!matcher.matches()){
 
 			FacesMessage msg =
-				new FacesMessage("E-mail validation failed.",
-						"Invalid E-mail format.");
+				new FacesMessage("Validació errònia",
+						"Email amb format incorrecte");
 			msg.setSeverity(FacesMessage.SEVERITY_ERROR);
 			throw new ValidatorException(msg);
 		}
