@@ -39,7 +39,7 @@ public class NotAuthorizedMbean implements Serializable{
 	
 	/**
 	 * Si no s'ha idenficat usuari no autoritza acces pàgina
-	 * @throws IOException
+	 * @throws IOException incidencia usuari autoritzat
 	 */
 	public void authorized() throws IOException
 	{

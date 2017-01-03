@@ -34,8 +34,10 @@ public class DeleteTalkedLanguageMBean implements Serializable{
 
 	/**
 	 * Metode que es fa servir per eliminar un 'talked Language'
+	 * @param nif identificador usuari
+	 * @param language idioma
 	 * @return Nom del Facelet
-	 * @throws Exception
+	 * @throws Exception incidencia al esborrar llenguatge
 	 */
 	public String deleteTalkedLanguage(String nif, String language) throws Exception
 	{

@@ -88,7 +88,7 @@ public class FindMyTalkAppointmentsAsProposal implements Serializable {
 
 	/**
 	 * Setter del nif del usuari registrat
-	 * @param nif
+	 * @param nif identificador usuari
 	 */
 	public void setNif(String nif) {
 		this.nif = nif;
@@ -96,7 +96,7 @@ public class FindMyTalkAppointmentsAsProposal implements Serializable {
 	
 	/**
 	 * Retorna missatge Incidencia
-	 * @return
+	 * @return missatge formulari
 	 */
 	public String getErrorFormulari(){
 		return errorFormulari;
@@ -162,7 +162,7 @@ public class FindMyTalkAppointmentsAsProposal implements Serializable {
 
 	/**
 	 * Constructor de la classe
-	 * @throws Exception
+	 * @throws Exception incidencia al carregar registres
 	 */
 	public FindMyTalkAppointmentsAsProposal() throws Exception
 	{
@@ -172,7 +172,7 @@ public class FindMyTalkAppointmentsAsProposal implements Serializable {
 	/**
 	 * Carrega la llista de cites propossades per l'usuari
 	 * @return la vista de la pantalla del llistat
-	 * @throws Exception
+	 * @throws Exception incidencia al carregar registres
 	 */
 	public String listTalkAppointments() throws Exception {				
 		talkAppointmentsList();				
@@ -182,7 +182,7 @@ public class FindMyTalkAppointmentsAsProposal implements Serializable {
 
 	/**
 	 * Carrega les propostes creades per l'usuari registrat
-	 * @throws Exception
+	 * @throws Exception incidencies al carregar registres
 	 */
 	@SuppressWarnings("unchecked")
 	private void talkAppointmentsList() throws Exception {		
@@ -200,7 +200,7 @@ public class FindMyTalkAppointmentsAsProposal implements Serializable {
 	/**
 	 * Metode que retorna una llista amb les cites publicades per un usuari.
 	 * @return Retorna la llista 10 anteriors / 10 seguents
-	 * @throws Exception
+	 * @throws Exception incidencia al obtenir llenguatges
 	 */
 	public Collection<TalkAppointmentJPA> getTalkAppointmentsListView() throws Exception 
 	{		

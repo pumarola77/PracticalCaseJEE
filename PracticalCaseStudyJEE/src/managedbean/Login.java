@@ -71,7 +71,7 @@ public class Login {
 
 	/**
 	 * Setter email
-	 * @param email
+	 * @param email email
 	 */
 	public void setEmail(String email) {
 		this.email = email;
@@ -87,7 +87,7 @@ public class Login {
 
 	/**
 	 * Setter password
-	 * @param password
+	 * @param password password
 	 */
 	public void setPassword(String password) {
 		this.password = password;
@@ -95,7 +95,7 @@ public class Login {
 	
 	/**
 	 * Getter errorPassword
-	 * @return errorPassword
+	 * @return errorPassword 
 	 */
 	public String getErrorPassword() {
 		return errorPassword;
@@ -103,7 +103,7 @@ public class Login {
 	
 	/**
 	 * Setter errorPassword
-	 * @param errorPassword
+	 * @param errorPassword errorPassword
 	 */
 	public void setErrorPassword(String errorPassword) {
 		this.errorPassword = errorPassword;
@@ -112,7 +112,7 @@ public class Login {
 	// Get / Setter del Nif
 	/**
 	 * Getter nif
-	 * @return nif
+	 * @return nif 
 	 */
 	public String getNif() {
 		return nif;
@@ -120,7 +120,7 @@ public class Login {
 	
 	/**
 	 * Setter nif
-	 * @param nif
+	 * @param nif nif
 	 */
 	public void setNif(String nif) {
 		this.nif = nif;

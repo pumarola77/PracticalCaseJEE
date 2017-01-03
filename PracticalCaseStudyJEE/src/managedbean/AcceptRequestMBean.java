@@ -34,8 +34,10 @@ public class AcceptRequestMBean implements Serializable{
 
 	/**
 	 * Metode que es fa servir per acceptar una petició de conversa
+	 * @param talkid identificador cita
+	 * @param nif identificador usuari
 	 * @return Nom del Facelet
-	 * @throws Exception
+	 * @throws Exception En el cas que no es realitzi actualització correctament
 	 */
 	public String AcceptRequest(Long talkid, String nif) throws Exception
 	{

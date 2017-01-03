@@ -37,12 +37,12 @@ public class UserFacadeBean implements UserFacadeRemote, UserFacade{
 	/**
 	 * Registra un usuari
 	 * 
-	 * @param nif
-	 * @param name
-	 * @param surname
-	 * @param phone
-	 * @paramm password
-	 * @param email
+	 * @param nif nif
+	 * @param name name
+	 * @param surname surname
+	 * @param phone phone
+	 * @param password password
+	 * @param email email
 	 * @return 0 - Usuari Creat correctament 1 - Error DNI 2 - Error NIF
 	 */
 	@Override

@@ -71,7 +71,7 @@ public class ListAllLanguagesToTalk implements Serializable{
 	
 	/**
 	 * Carrega llenguatges que parla
-	 * @throws Exception
+	 * @throws Exception carregar idiomes que parla
 	 */
 	private void loadLanguageToTalkList() throws Exception
 	{
@@ -90,7 +90,7 @@ public class ListAllLanguagesToTalk implements Serializable{
 	/**
 	 * Aquest metode es el que s'accedeix desde la vista i s'utilitza per carregar el llistat d'idiomes reduit que s'ha de mostrar
 	 * @return llista de llenguatges Parlats
-	 * @throws Exception
+	 * @throws Exception obtenir llista idiomes que parla
 	 */
 	public Collection<LanguageToTalkJPA> getLanguageToTalkListView() throws Exception{
 		
@@ -138,7 +138,7 @@ public class ListAllLanguagesToTalk implements Serializable{
 	
 	/**
 	 * Setter nif
-	 * @param nif
+	 * @param nif nif
 	 */
 	public void setNif(String nif){
 		this.nif= nif;
@@ -146,7 +146,7 @@ public class ListAllLanguagesToTalk implements Serializable{
 	
 	/**
 	 * Getter nif
-	 * @return
+	 * @return nif
 	 */
 	public String getNif(){
 		return nif;

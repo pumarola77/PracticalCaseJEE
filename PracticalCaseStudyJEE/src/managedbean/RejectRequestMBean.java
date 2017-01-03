@@ -57,7 +57,7 @@ public class RejectRequestMBean implements Serializable{
 
 	/**
 	 * Setter Identificador de la cita
-	 * @param talkId
+	 * @param talkId identificador cita
 	 */
 	public void setTalkId(Long talkId){
 		this.talkId = talkId;
@@ -65,7 +65,7 @@ public class RejectRequestMBean implements Serializable{
 
 	/**
 	 * Getter Identificador usuari nif
-	 * @return
+	 * @return nif
 	 */
 	public String getNif(){
 		return nif;
@@ -98,6 +98,7 @@ public class RejectRequestMBean implements Serializable{
 	
 	/**
 	 * Constructor : 
+	 * @throws Exception incidencia al constructor
 	 */
 	public RejectRequestMBean() throws Exception {
 		//Carrega el NIF del User

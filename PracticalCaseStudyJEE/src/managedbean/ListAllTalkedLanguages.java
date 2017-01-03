@@ -69,7 +69,7 @@ public class ListAllTalkedLanguages implements Serializable{
 	
 	/**
 	 * Aquest metode s'utilitza per carregar el llistat complert d'idiomes de l'usuari
-	 * @throws Exception
+	 * @throws Exception carregar idiomes
 	 */
 	private void loadLanguageList() throws Exception
 	{
@@ -88,7 +88,7 @@ public class ListAllTalkedLanguages implements Serializable{
 	/**
 	 * Aquest metode es el que s'accedeix desde la vista i s'utilitza per carregar el llistat d'idiomes reduit que s'ha de mostrar
 	 * @return llista de llengautges
-	 * @throws Exception
+	 * @throws Exception obtenir llista idiomes
 	 */
 	public Collection<TalkedLanguageJPA> getLanguageListView() throws Exception{
 		
@@ -136,7 +136,7 @@ public class ListAllTalkedLanguages implements Serializable{
 	
 	/**
 	 * Setter nif
-	 * @param nif
+	 * @param nif identificador usuari
 	 */
 	public void setNif(String nif){
 		this.nif= nif;

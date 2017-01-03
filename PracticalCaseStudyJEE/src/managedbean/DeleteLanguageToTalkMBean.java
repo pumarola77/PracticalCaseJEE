@@ -41,7 +41,7 @@ public class DeleteLanguageToTalkMBean implements Serializable{
 	 * @param nif identificador del usuari registrat
 	 * @param language identificador del llenguatge
 	 * @return Vista
-	 * @throws Exception
+	 * @throws Exception incidencia al esborrar llenguatge
 	 */
 	public String deleteLanguageToTalk(String nif, String language) throws Exception
 	{

@@ -49,7 +49,7 @@ public class TalkAppointmentAdminBean implements TalkAppointmentAdminFacadeRemot
 	 * Dona alta una cita
 	 * 
 	 * @param description comentari de la cita
-	 * @param Location Objecte localitzacio
+	 * @param location Objecte localitzacio
 	 * @param date data de la cita
 	 * @param time hora de la cita
 	 * @param languageToTalk llenguatge de la cita
@@ -235,7 +235,7 @@ public class TalkAppointmentAdminBean implements TalkAppointmentAdminFacadeRemot
 	/**
 	 * Genera el id per a la taula location
 	 * @return identificador
-	 * @throws Exception
+	 * @throws Exception incidencia al obtenir identificador
 	 */
 	@TransactionAttribute(TransactionAttributeType.REQUIRED)
 	public Long getTalkAppointmentSequence() throws Exception {
@@ -247,8 +247,8 @@ public class TalkAppointmentAdminBean implements TalkAppointmentAdminFacadeRemot
 	
 	/**
 	 * Genera el id per a a taula location
-	 * @return
-	 * @throws Exception
+	 * @return identificador
+	 * @throws Exception incidencia al obtenir identificador
 	 */
 	@TransactionAttribute(TransactionAttributeType.REQUIRED)
 	public Long getLocationSequence() throws Exception {
@@ -260,8 +260,8 @@ public class TalkAppointmentAdminBean implements TalkAppointmentAdminFacadeRemot
 	
 	/**
 	 * Genera el id per a a taula DeniedRequest
-	 * @return
-	 * @throws Exception
+	 * @return identificador
+	 * @throws Exception incidencia al obtenir identificador
 	 */
 	@TransactionAttribute(TransactionAttributeType.REQUIRED)
 	public Long getDeniedRequestSequence() throws Exception {

@@ -64,7 +64,7 @@ public class RegisterInTalkAppointmentMBean implements Serializable {
 	/**
 	 * Registrar usuari
 	 * @return vista
-	 * @throws Exception
+	 * @throws Exception incidencia al registrar usuari
 	 */
 	public String register() throws Exception {					
 		
@@ -98,7 +98,7 @@ public class RegisterInTalkAppointmentMBean implements Serializable {
 	
 	/**
 	 * Setter id
-	 * @param id
+	 * @param id identificador
 	 */
 	public void setId(Long id){
 		this.id = id;
@@ -114,7 +114,7 @@ public class RegisterInTalkAppointmentMBean implements Serializable {
 	
 	/**
 	 * Setter nif
-	 * @param nif
+	 * @param nif identificador nif
 	 */
 	public void setNif(String nif) {
 		this.nif = nif;
@@ -130,8 +130,8 @@ public class RegisterInTalkAppointmentMBean implements Serializable {
 	
 	/**
 	 * Setter TalkAppointment
-	 * @param id
-	 * @throws Exception
+	 * @param id identificador
+	 * @throws Exception Registrar cita
 	 */
 	public void setTalkAppointment(Long id)  throws Exception{
 		talkAppointment = (TalkAppointmentJPA) registerInTalkedAppointmentRemote.showTalkAppointment(id);		
@@ -139,7 +139,7 @@ public class RegisterInTalkAppointmentMBean implements Serializable {
 	
 	/**
 	 * showRegister
-	 * @throws Exception
+	 * @throws Exception mostrar cita
 	 */
 	public void showRegister() throws Exception {		
 		this.setTalkAppointment(this.getId());

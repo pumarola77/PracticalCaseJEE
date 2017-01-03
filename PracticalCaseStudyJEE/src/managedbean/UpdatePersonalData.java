@@ -91,7 +91,7 @@ public class UpdatePersonalData implements Serializable {
 	
 	/**
 	 * Constructor
-	 * @throws Exception
+	 * @throws Exception actualitzar dades
 	 */
 	public UpdatePersonalData() throws Exception { 
 
@@ -109,7 +109,7 @@ public class UpdatePersonalData implements Serializable {
 	
 	/**
 	 * retorna vista principal
-	 * @return
+	 * @return vista
 	 */
 	public String Home() {
 		return "HomeView";
@@ -128,7 +128,7 @@ public class UpdatePersonalData implements Serializable {
 	
 	/**
 	 * Setter nif
-	 * @param nif
+	 * @param nif identificador usuari
 	 */
 	public void setNif(String nif)
 	{
@@ -146,7 +146,7 @@ public class UpdatePersonalData implements Serializable {
 	
 	/**
 	 * Setter name
-	 * @param name
+	 * @param name identificador nom
 	 */
 	public void setName(String name)
 	{
@@ -164,7 +164,7 @@ public class UpdatePersonalData implements Serializable {
 	
 	/**
 	 * Seter Surname
-	 * @param surname
+	 * @param surname cognom
 	 */
 	public void setSurname(String surname)
 	{
@@ -182,7 +182,7 @@ public class UpdatePersonalData implements Serializable {
 	
 	/**
 	 * Setter phone
-	 * @param phone
+	 * @param phone telefon
 	 */
 	public void setPhone(String phone)
 	{
@@ -200,7 +200,7 @@ public class UpdatePersonalData implements Serializable {
 	
 	/**
 	 * Setter password
-	 * @param password
+	 * @param password password
 	 */
 	public void setPassword(String password)
 	{
@@ -218,7 +218,7 @@ public class UpdatePersonalData implements Serializable {
 	
 	/**
 	 * Setter email
-	 * @param email
+	 * @param email email
 	 */
 	public void setEmail(String email)
 	{
@@ -235,7 +235,7 @@ public class UpdatePersonalData implements Serializable {
 	
 	/**
 	 * Setter emailUser
-	 * @param emailUser
+	 * @param emailUser emailusuari
 	 */
 	public void setEmailUser(String emailUser){
 		this.emailUser = emailUser;
@@ -252,7 +252,7 @@ public class UpdatePersonalData implements Serializable {
 	
 	/**
 	 * Setter Errorformulari
-	 * @param errorFormulari
+	 * @param errorFormulari errorFormulari
 	 */
 	public void setErrorFormulari (String errorFormulari){
 		
@@ -261,7 +261,7 @@ public class UpdatePersonalData implements Serializable {
 	
 	/**
 	 * cerca usuari
-	 * @throws Exception
+	 * @throws Exception incidencia al buscar usuari
 	 */
 	public void setFindUser() throws Exception {
 		
@@ -285,7 +285,7 @@ public class UpdatePersonalData implements Serializable {
 	 * @param password password
 	 * @param email email
 	 * @return vista
-	 * @throws Exception
+	 * @throws Exception actualitzar dades usuari
 	 */
 	public String updateUsr(String nif, String name , String surname, String phone, String password , String email) throws Exception
 	{

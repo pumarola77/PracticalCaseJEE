@@ -107,7 +107,7 @@ public class RegisterUser implements Serializable{
 	
 	/**
 	 * Settere nif
-	 * @param nif
+	 * @param nif identificador usuari
 	 */
 	public void setNif(String nif)
 	{
@@ -125,7 +125,7 @@ public class RegisterUser implements Serializable{
 
 	/**
 	 * Setter name
-	 * @param name
+	 * @param name identificador nom
 	 */
 	public void setName(String name)
 	{
@@ -143,7 +143,7 @@ public class RegisterUser implements Serializable{
 	
 	/**
 	 * Setter surname
-	 * @param surname
+	 * @param surname identificador cognom
 	 */
 	public void setSurname(String surname)
 	{
@@ -161,7 +161,7 @@ public class RegisterUser implements Serializable{
 	
 	/**
 	 * Setter phone
-	 * @param phone
+	 * @param phone telefon
 	 */
 	public void setPhone(String phone)
 	{
@@ -179,7 +179,7 @@ public class RegisterUser implements Serializable{
 	
 	/**
 	 * Setter passowrd
-	 * @param password
+	 * @param password password
 	 */
 	public void setPassword(String password)
 	{
@@ -197,7 +197,7 @@ public class RegisterUser implements Serializable{
 	
 	/**
 	 * Setter email
-	 * @param email
+	 * @param email email
 	 */
 	public void setEmail(String email)
 	{
@@ -215,7 +215,7 @@ public class RegisterUser implements Serializable{
 	
 	/**
 	 * Setter missatge Formulari
-	 * @param errorFormulari
+	 * @param errorFormulari errorforumulari
 	 */
 	public void setErrorFormulari (String errorFormulari){
 		
@@ -225,7 +225,7 @@ public class RegisterUser implements Serializable{
 	//Retorna la vista principal
 	/**
 	 * Retorna vista principal
-	 * @return
+	 * @return vista
 	 */
 	public String mainWindow() {
 		return "RegisterUserView";
@@ -242,7 +242,7 @@ public class RegisterUser implements Serializable{
 	 * @param password password
 	 * @param email email
 	 * @return vista 
-	 * @throws Exception
+	 * @throws Exception alta usuari
 	 */
 	public String addUsr(String nif, String name, String surname, String phone, String password, String email) throws Exception	
 	{		

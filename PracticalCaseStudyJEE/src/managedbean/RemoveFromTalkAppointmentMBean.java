@@ -37,7 +37,7 @@ public class RemoveFromTalkAppointmentMBean implements Serializable {
 	 * 
 	 * @param talkid identificador cita
 	 * @return vista
-	 * @throws Exception
+	 * @throws Exception incidencia al esborrar cita
 	 */
 	public String removeFromTalkAppointment(Long talkid) throws Exception {
 

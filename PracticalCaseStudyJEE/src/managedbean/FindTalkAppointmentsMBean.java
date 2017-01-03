@@ -131,7 +131,7 @@ public class FindTalkAppointmentsMBean implements Serializable {
 
 	/**
 	 * Constructor
-	 * @throws Exception
+	 * @throws Exception indicencia al constructor
 	 */
 	public FindTalkAppointmentsMBean() throws Exception 
 	{			
@@ -187,7 +187,7 @@ public class FindTalkAppointmentsMBean implements Serializable {
 
 	/**
 	 * Setter ciutat
-	 * @param ciutat
+	 * @param ciutat ciutat
 	 */
 	public void setCiutat(String ciutat) {
 		this.ciutat = ciutat;
@@ -195,7 +195,7 @@ public class FindTalkAppointmentsMBean implements Serializable {
 
 	/**
 	 * Getter dates
-	 * @return dates
+	 * @return dates 
 	 */
 	public String getDates() {
 		return this.dates;
@@ -203,7 +203,7 @@ public class FindTalkAppointmentsMBean implements Serializable {
 
 	/**
 	 * Setter dates
-	 * @param dates
+	 * @param dates dates
 	 */
 	public void setDates(String dates) {
 		this.dates = dates;
@@ -219,7 +219,7 @@ public class FindTalkAppointmentsMBean implements Serializable {
 
 	/**
 	 * Setter hores
-	 * @param hores
+	 * @param hores hores
 	 */
 	public void setHores(String hores) {
 		this.hores = hores;
@@ -235,7 +235,7 @@ public class FindTalkAppointmentsMBean implements Serializable {
 
 	/**
 	 * Setter languages
-	 * @param languages
+	 * @param languages idioma
 	 */
 	public void setLanguages(String languages) {
 		this.languages = languages;
@@ -243,7 +243,7 @@ public class FindTalkAppointmentsMBean implements Serializable {
 
 	/**
 	 * Getter nif
-	 * @return
+	 * @return nif
 	 */
 	public String getNif() {
 		return this.nif;
@@ -251,7 +251,7 @@ public class FindTalkAppointmentsMBean implements Serializable {
 
 	/**
 	 * Setter nif
-	 * @param nif
+	 * @param nif nif
 	 */
 	public void setNif(String nif) {
 		this.nif = nif;
@@ -259,7 +259,7 @@ public class FindTalkAppointmentsMBean implements Serializable {
 
 	/**
 	 * Al triar una ciutat es carrega el desplegable de idiomes, dates i hores
-	 * @param ciutatChanged
+	 * @param ciutatChanged ciutat
 	 */
 	public void ciutatValueChanged(ValueChangeEvent ciutatChanged) {
 		this.setCiutat(ciutatChanged.getNewValue().toString());
@@ -281,7 +281,7 @@ public class FindTalkAppointmentsMBean implements Serializable {
 
 	/**
 	 * Al triar un idioma es carrega el desplegable de dates i hores
-	 * @param languagesChanged
+	 * @param languagesChanged idioma
 	 */
 	public void languagesValueChanged(ValueChangeEvent languagesChanged) {		
 		this.setLanguages(languagesChanged.getNewValue().toString());
@@ -301,7 +301,7 @@ public class FindTalkAppointmentsMBean implements Serializable {
 
 	/**
 	 * Al triar una data es carrega el desplegable de hores
-	 * @param datesChanged
+	 * @param datesChanged data
 	 */
 	public void datesValueChanged(ValueChangeEvent datesChanged) {				
 		this.setDates(datesChanged.getNewValue().toString());
@@ -318,7 +318,7 @@ public class FindTalkAppointmentsMBean implements Serializable {
 
 	/**
 	 * Assigna les hores del desplegable a la variable
-	 * @param horesChanged
+	 * @param horesChanged hora
 	 */
 	public void horesValueChanged(ValueChangeEvent horesChanged) {
 		this.setHores(horesChanged.getNewValue().toString());
@@ -327,7 +327,7 @@ public class FindTalkAppointmentsMBean implements Serializable {
 	/**
 	 * Fa la cerca dels TalkAppointments a mostrar
 	 * @return Nom de la vista a carregar
-	 * @throws Exception
+	 * @throws Exception llista cites
 	 */
 	public String listTalkAppointments() throws Exception {				
 		talkAppointmentsList();
@@ -343,7 +343,7 @@ public class FindTalkAppointmentsMBean implements Serializable {
 	/**
 	 * Obte els 10 registres seguents de la llista
 	 * @return llista de cites
-	 * @throws Exception
+	 * @throws Exception obte llista de cites
 	 */
 	public Collection<TalkAppointmentJPA> getTalkAppointmentsListView() throws Exception 
 	{		
@@ -390,7 +390,7 @@ public class FindTalkAppointmentsMBean implements Serializable {
 
 	/**
 	 * Despegable ciutats
-	 * @throws Exception
+	 * @throws Exception incidencia al carregar desplegable ciutats
 	 */
 	@SuppressWarnings("unchecked")
 	public void ciutatsList() throws Exception
@@ -420,7 +420,7 @@ public class FindTalkAppointmentsMBean implements Serializable {
 
 	/**
 	 * Desplegable llenguatges
-	 * @throws Exception
+	 * @throws Exception incidencia al carregar desplegable idioma
 	 */
 	@SuppressWarnings("unchecked")
 	public void languagesList() throws Exception
@@ -449,7 +449,7 @@ public class FindTalkAppointmentsMBean implements Serializable {
 
 	/**
 	 * Desplegable dates
-	 * @throws Exception
+	 * @throws Exception incidencia al carregar desplegable data
 	 */
 	@SuppressWarnings("unchecked")
 	public void datesList() throws Exception 
@@ -478,7 +478,7 @@ public class FindTalkAppointmentsMBean implements Serializable {
 
 	/**
 	 * Desplegable hores
-	 * @throws Exception
+	 * @throws Exception incidencia al carregar desplegable hores
 	 */
 	@SuppressWarnings("unchecked")
 	public void horesList() throws Exception

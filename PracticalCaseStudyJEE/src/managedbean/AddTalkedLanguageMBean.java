@@ -71,7 +71,7 @@ public class AddTalkedLanguageMBean implements Serializable{
 	/**
 	 * Constructor 
 	 * Carrega valors
-	 * @throws Exception 
+	 * @throws Exception alta llenguatge
 	 */
 	public AddTalkedLanguageMBean() throws Exception {
 		this.languagesList();
@@ -96,7 +96,7 @@ public class AddTalkedLanguageMBean implements Serializable{
 	
 	/**
 	 * Assigna el valor del desplegable a la variable llenguatge
-	 * @param languageChanged
+	 * @param languageChanged idioma
 	 */
 	public void languageValueChanged(ValueChangeEvent languageChanged) 
 	{		
@@ -105,7 +105,7 @@ public class AddTalkedLanguageMBean implements Serializable{
 		
 	/**
 	 * Assigna el valor del desplegable a la variable nivell
-	 * @param nivellChanged
+	 * @param nivellChanged nivell
 	 */
 	public void nivellValueChanged(ValueChangeEvent nivellChanged) {
 		this.setNivell(nivellChanged.getNewValue().toString());
@@ -113,7 +113,7 @@ public class AddTalkedLanguageMBean implements Serializable{
 	
 	/**
 	 * Getter Obte missatge error del formulari
-	 * @return
+	 * @return missatge error Formulari
 	 */
 	public String getErrorFormulari(){
 		return errorFormulari;
@@ -121,7 +121,7 @@ public class AddTalkedLanguageMBean implements Serializable{
 	
 	/**
 	 * Setter Envia missatge error
-	 * @param errorFormulari
+	 * @param errorFormulari errorformulari
 	 */
 	public void setErrorFormulari (String errorFormulari){
 		this.errorFormulari = errorFormulari;
@@ -129,7 +129,7 @@ public class AddTalkedLanguageMBean implements Serializable{
 	
 	/**
 	 * Carrega els valors que mostrara el desplegable llenguatge
-	 * @throws Exception
+	 * @throws Exception incidencia al carregar desplegable
 	 */
 	public void languagesList() throws Exception {
 		languagesList.clear();
@@ -145,7 +145,7 @@ public class AddTalkedLanguageMBean implements Serializable{
 
 	/**
 	 * Carrega els valors que mostrara el desplegable nivell
-	 * @throws Exception
+	 * @throws Exception incidencia al carregar desplegable
 	 */
 	public void nivellsList() throws Exception {
 		nivellsList.clear();
@@ -159,7 +159,7 @@ public class AddTalkedLanguageMBean implements Serializable{
 	/**
 	 * Metode que es fa servir per afegir un 'talked Language'
 	 * @return Nom del Facelet
-	 * @throws Exception
+	 * @throws Exception incidencia al afegir llenguatge
 	 */
 	public String addTalkedLanguage() throws Exception
 	{
@@ -203,7 +203,7 @@ public class AddTalkedLanguageMBean implements Serializable{
 	
 	/**
 	 * Settere language
-	 * @param language
+	 * @param language llenguatge
 	 */
 	public void setLanguage(String language) {		
 		this.language = language;
@@ -219,7 +219,7 @@ public class AddTalkedLanguageMBean implements Serializable{
 
 	/**
 	 * Setter nivell
-	 * @param nivell
+	 * @param nivell nivell
 	 */
 	public void setNivell(String nivell) {
 		this.nivell = nivell;

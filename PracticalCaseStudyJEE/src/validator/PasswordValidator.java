@@ -19,7 +19,7 @@ public class PasswordValidator implements Validator {
 	/**
 	 * Metode per validar les dades d'entrada de les contrasenyes en registrar / actualitzar un usuari
 	 * @param context Contexte del component a validar.
-	 * @param UIComponent Component de la interficie a validar.
+	 * @param component Component de la interficie a validar.
 	 * @param value Objecte que conte el valor que s'ha de validar.
 	 */
 	@Override

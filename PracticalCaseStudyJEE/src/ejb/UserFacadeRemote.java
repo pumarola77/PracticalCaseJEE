@@ -56,7 +56,7 @@ public interface UserFacadeRemote{
 	 * Identificador usuari
 	 * 
 	 * @param email email
-	 * @param password password
+	 * @param pwd password
 	 * @return si esta identificat
 	 */
 	public String login(String email, String pwd);
@@ -103,7 +103,7 @@ public interface UserFacadeRemote{
 	 * @param level nivell
 	 * @param description descripcio
 	 * @param acceptPay accepta pagar
-	 * @return
+	 * @return marca incidencia al donar alta llenguatge
 	 */
 	public int addLanguageToTalk(String nif, String language, String level, String description, boolean acceptPay);
 	

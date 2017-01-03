@@ -101,7 +101,7 @@ public class UserJPA implements Serializable {
 	
 	/**
 	 * Setter nif
-	 * @return nif
+	 * @param nif nif
 	 */	
 	public  void setNif(String nif) {
 		this.nif = nif;
@@ -118,7 +118,7 @@ public class UserJPA implements Serializable {
 	
 	/**
 	 * Setter nom
-	 * @return nom
+	 * @param name nom
 	 */	
 	public void setName(String name) {
 		this.name = name;
@@ -134,7 +134,7 @@ public class UserJPA implements Serializable {
 	
 	/**
 	 * Setter cognom
-	 * @return cognom
+	 * @param surname cognom
 	 */	
 	public  void setSurname(String surname) {
 		this.surname = surname;
@@ -150,7 +150,7 @@ public class UserJPA implements Serializable {
 	
 	/**
 	 * Setter telefon
-	 * @return telefon
+	 * @param phone telefon
 	 */	
 	public  void setPhone(String phone) {
 		this.phone = phone;
@@ -166,7 +166,7 @@ public class UserJPA implements Serializable {
 	
 	/**
 	 * Setter password
-	 * @return password
+	 * @param password password
 	 */	
 	public  void setPassword(String password) {
 		this.password = password;
@@ -182,7 +182,7 @@ public class UserJPA implements Serializable {
 	
 	/**
 	 * Setter email
-	 * @return email
+	 * @param email email
 	 */	
 	public  void setEmail(String email) {
 		this.email = email;

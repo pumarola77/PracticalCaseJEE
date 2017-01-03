@@ -118,7 +118,7 @@ public class AddTalkAppointmentMBean implements Serializable{
 	
 	/**
 	 * Constructor classe
-	 * @throws Exception
+	 * @throws Exception Excepcio al constructor
 	 */
 	public AddTalkAppointmentMBean() throws Exception{
 		//User Remote
@@ -146,7 +146,7 @@ public class AddTalkAppointmentMBean implements Serializable{
 	
 	/**
 	 * Setter nif
-	 * @param nif
+	 * @param nif identificador usuari
 	 */
 	public void setNif(String nif){
 		this.nif = nif;
@@ -154,7 +154,7 @@ public class AddTalkAppointmentMBean implements Serializable{
 	
 	/**
 	 * Getter language
-	 * @return language
+	 * @return language 
 	 */
 	public String getLanguage(){
 		return language;
@@ -162,7 +162,7 @@ public class AddTalkAppointmentMBean implements Serializable{
 	
 	/**
 	 * Setter language
-	 * @param language
+	 * @param language llenguatge
 	 */
 	public void setLanguage(String language){
 		this.language = language;
@@ -179,7 +179,7 @@ public class AddTalkAppointmentMBean implements Serializable{
 	
 	/**
 	 * Setter street
-	 * @param street
+	 * @param street carrer
 	 */
 	public void setStreet(String street){
 		this.street = street;
@@ -195,7 +195,7 @@ public class AddTalkAppointmentMBean implements Serializable{
 	
 	/**
 	 * Setter num
-	 * @param num
+	 * @param num numero
 	 */
 	public void setNum(String num){
 		this.num = num;
@@ -211,7 +211,7 @@ public class AddTalkAppointmentMBean implements Serializable{
 	
 	/**
 	 * Setter cp
-	 * @param cp
+	 * @param cp codi postal
 	 */
 	public void setCp(String cp){
 		this.cp = cp;
@@ -227,7 +227,7 @@ public class AddTalkAppointmentMBean implements Serializable{
 	
 	/**
 	 * Setter city
-	 * @param city
+	 * @param city ciutat
 	 */
 	public void setCity(String city){
 		this.city = city;
@@ -243,7 +243,7 @@ public class AddTalkAppointmentMBean implements Serializable{
 	
 	/**
 	 * Setter description
-	 * @param description
+	 * @param description descripcio
 	 */
 	public void setDescription(String description){
 		this.description = description;
@@ -294,7 +294,7 @@ public class AddTalkAppointmentMBean implements Serializable{
 	/**
 	 * Alta llenguatge
 	 * @return vista principal
-	 * @throws Exception
+	 * @throws Exception al afegir llenguatge
 	 */
 	public String addTalkApp() throws Exception{
 		try{
@@ -344,7 +344,7 @@ public class AddTalkAppointmentMBean implements Serializable{
 	
 	/**
 	 * Carrega la llista de tots els llenguatges de l'usuari
-	 * @throws Exception
+	 * @throws Exception obtenir llista de llenguatges
 	 */
 	public void getAllLanguageToTalk() throws Exception{
 		//netejem la llista
@@ -361,8 +361,8 @@ public class AddTalkAppointmentMBean implements Serializable{
 
 	/**
 	 * Desplegable llenguatge
-	 * @param languageChanged
-	 * @throws Exception
+	 * @param languageChanged idioma
+	 * @throws Exception assignar valor del desplegable
 	 */
 	public void languageValueChanged(ValueChangeEvent languageChanged) throws Exception {
 		setLanguage(languageChanged.getNewValue().toString());

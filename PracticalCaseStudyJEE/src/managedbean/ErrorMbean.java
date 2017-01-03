@@ -17,7 +17,7 @@ public class ErrorMbean {
 
 	/**
 	 * Getter StatusCode
-	 * @return statuscode
+	 * @return statuscode estat
 	 */
 	public String getStatusCode(){
 		String val = String.valueOf((Integer)FacesContext.getCurrentInstance().getExternalContext().
@@ -27,7 +27,7 @@ public class ErrorMbean {
 
 	/**
 	 * Getter Message
-	 * @return message
+	 * @return message missatge
 	 */
 	public String getMessage(){
 		String val =  (String)FacesContext.getCurrentInstance().getExternalContext().
@@ -37,7 +37,7 @@ public class ErrorMbean {
 
 	/**
 	 * Getter ExceptionType
-	 * @return exceptiontype
+	 * @return exceptiontype exceptiontype
 	 */
 	public String getExceptionType(){
 		String val = FacesContext.getCurrentInstance().getExternalContext().
@@ -47,7 +47,7 @@ public class ErrorMbean {
 
 	/**
 	 * Getter Exception
-	 * @return exception
+	 * @return exception exception
 	 */
 	public String getException(){
 		String val =  (String)((Exception)FacesContext.getCurrentInstance().getExternalContext().
@@ -57,7 +57,7 @@ public class ErrorMbean {
 
 	/**
 	 * Getter RequestURI
-	 * @return requestURI
+	 * @return requestURI requestURI
 	 */
 	public String getRequestURI(){
 		return (String)FacesContext.getCurrentInstance().getExternalContext().
@@ -66,7 +66,7 @@ public class ErrorMbean {
 
 	/**
 	 * Getter ServletName
-	 * @return servletname
+	 * @return servletname servletname
 	 */
 	public String getServletName(){
 		return (String)FacesContext.getCurrentInstance().getExternalContext().

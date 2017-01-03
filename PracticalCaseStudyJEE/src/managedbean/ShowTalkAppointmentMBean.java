@@ -55,7 +55,7 @@ public class ShowTalkAppointmentMBean implements Serializable{
 
 	/**
 	 * Constructor
-	 * @throws Exception
+	 * @throws Exception incidencia al constructor
 	 */
 	public ShowTalkAppointmentMBean() throws Exception{
 		/*int auxId;
@@ -81,7 +81,7 @@ public class ShowTalkAppointmentMBean implements Serializable{
 
 	/**
 	 * Setter id
-	 * @param id
+	 * @param id identificador
 	 */
 	public void setId(Long id){
 		this.id = id;
@@ -97,7 +97,7 @@ public class ShowTalkAppointmentMBean implements Serializable{
 
 	/**
 	 * Setter returnView
-	 * @param returnView
+	 * @param returnView returnView
 	 */
 	public void setReturnView(String returnView){
 		this.returnView = returnView;
@@ -114,7 +114,7 @@ public class ShowTalkAppointmentMBean implements Serializable{
 	/**
 	 * Setter TalkAppointment
 	 * @param id identificador
-	 * @throws Exception
+	 * @throws Exception carregar cita
 	 */
 	public void setTalkAppointment(Long id)  throws Exception{
 		talkAppointment = (TalkAppointmentJPA) showTalkAppointmentRemote.showTalkAppointment(id);		
@@ -122,7 +122,7 @@ public class ShowTalkAppointmentMBean implements Serializable{
 
 	/**
 	 * ShowView
-	 * @throws Exception
+	 * @throws Exception incidencia al mostrar cita
 	 */
 	public void showView() throws Exception{
 		this.setTalkAppointment(this.getId());
@@ -132,7 +132,7 @@ public class ShowTalkAppointmentMBean implements Serializable{
 	 * Retorna vista
 	 * @param returnView identificador vista
 	 * @return vista
-	 * @throws Exception
+	 * @throws Exception incidencia en la vista
 	 */
 	public String returnView(String returnView) throws Exception{
 		return returnView + "?faces-redirect=true";

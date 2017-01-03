@@ -102,7 +102,7 @@ public interface UserFacade {
 	 * @param level nivell
 	 * @param description descripcio
 	 * @param acceptPay accepta pagar
-	 * @return
+	 * @return marca si es produeix incidencia
 	 */
 	public int addLanguageToTalk(String nif, String language, String level, String description, boolean acceptPay);
 	

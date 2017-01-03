@@ -67,8 +67,8 @@ public class LanguageToTalkJPA implements Serializable {
 	
 	/**
 	 * Constructor Clau Composta. Realitza el find per una clau composta
-	 * @param nif
-	 * @param language
+	 * @param user usuari
+	 * @param language idioma
 	 */
 	public LanguageToTalkJPA(UserJPA user, String language) {
         this.user = user;
