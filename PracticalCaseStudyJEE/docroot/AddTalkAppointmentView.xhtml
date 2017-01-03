@@ -27,7 +27,7 @@
 						<p align="right" /> <i><b><font size="4" face="Century">Descripcio:</font></b></i>
 					</td>
 					<td>
-						<h:inputText id="description" label="Description" required="true" requiredMessage="Camp Obligatori" value="#{talkappointmentadd.description}">
+						<h:inputText id="description" maxlength="255" label="Description" required="true" requiredMessage="Camp Obligatori" value="#{talkappointmentadd.description}">
 							<f:validator validatorId="ControlValorValidator"></f:validator>
 						</h:inputText>
 					</td>
