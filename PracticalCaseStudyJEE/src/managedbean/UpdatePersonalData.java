@@ -294,7 +294,7 @@ public class UpdatePersonalData implements Serializable {
 	
 			if(success == false && email.compareTo(this.getEmailUser()) != 0)
 			{
-				errorFormulari = "ERROR: L'usuari amb correu "+getEmail()+" ja existeix al sistema";
+				errorFormulari = "ERROR: L'email "+getEmail()+" ja existeix al sistema";
 				return "RegisterUserView";
 			}
 			else{
