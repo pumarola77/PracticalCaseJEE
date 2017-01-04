@@ -30,7 +30,7 @@ public class CodiPostalValidator implements Validator {
 		
 		if (!codiPostal.matches("\\d+"))
 		{
-			FacesMessage msg = 	new FacesMessage("Validació del telèfon errònia.", "El codipostal únicament ha de contenir números");
+			FacesMessage msg = 	new FacesMessage("Validació del telèfon errònia.", "Únicament ha de contenir números");
 			msg.setSeverity(FacesMessage.SEVERITY_ERROR);
 			throw new ValidatorException(msg);
 		}

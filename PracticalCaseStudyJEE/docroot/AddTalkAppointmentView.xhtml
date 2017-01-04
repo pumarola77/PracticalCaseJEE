@@ -93,6 +93,7 @@
 					</td>
 					<td>
 						<h:inputText id="num" label="num" maxlength="10" required="true" requiredMessage="Camp obligatori" value="#{talkappointmentadd.num}" >
+							<f:validator validatorId="CodiPostalValidator"></f:validator>
 						</h:inputText>
 					</td>
 					<td>
