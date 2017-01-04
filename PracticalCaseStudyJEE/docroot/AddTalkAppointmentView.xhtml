@@ -28,7 +28,6 @@
 					</td>
 					<td>
 						<h:inputText id="description" maxlength="255" label="Description" required="true" requiredMessage="Camp Obligatori" value="#{talkappointmentadd.description}">
-							<f:validator validatorId="ControlValorValidator"></f:validator>
 						</h:inputText>
 					</td>
 					<td>
@@ -79,8 +78,8 @@
 					</td>
 		
 					<td>
-						<h:inputText id="street" label="street" required="true" requiredMessage="Camp obligatori" value="#{talkappointmentadd.street}">
-							<f:validator validatorId="ControlValorValidator"></f:validator>
+						<h:inputText id="street" label="street" maxlength="255" required="true" requiredMessage="Camp obligatori" value="#{talkappointmentadd.street}">
+							<f:validator validatorId="NameSurnameValidator"></f:validator>
 						</h:inputText>
 						
 					</td>
@@ -93,8 +92,7 @@
 						<p align="right" /> <i><b><font size="4" face="Century">Numero:</font></b></i>
 					</td>
 					<td>
-						<h:inputText id="num" label="num" required="true" requiredMessage="Camp obligatori" value="#{talkappointmentadd.num}" >
-							<f:validator validatorId="ControlValorValidator"></f:validator>
+						<h:inputText id="num" label="num" maxlength="10" required="true" requiredMessage="Camp obligatori" value="#{talkappointmentadd.num}" >
 						</h:inputText>
 					</td>
 					<td>
@@ -106,8 +104,8 @@
 						<p align="right" /> <i><b><font size="4" face="Century">Codi postal:</font></b></i>
 					</td>
 					<td>
-						<h:inputText id="cp" label="cp" required="true" requiredMessage="Camp obligatori" value="#{talkappointmentadd.cp}" >
-							<f:validator validatorId="ControlValorValidator"></f:validator>
+						<h:inputText id="cp" label="cp" maxlength="10" required="true" requiredMessage="Camp obligatori" value="#{talkappointmentadd.cp}" >
+							<f:validator validatorId="CodiPostalValidator"></f:validator>
 						</h:inputText>
 					</td>
 					<td>
@@ -119,8 +117,8 @@
 						<p align="right" /> <i><b><font size="4" face="Century">Ciutat: </font></b></i>
 					</td>
 					<td>
-						<h:inputText id="city" label="city" required="true" requiredMessage="Camp Obligatori" value="#{talkappointmentadd.city}">
-							<f:validator validatorId="ControlValorValidator"></f:validator>
+						<h:inputText id="city" label="city" maxlength="255" required="true" requiredMessage="Camp Obligatori" value="#{talkappointmentadd.city}">
+							<f:validator validatorId="NameSurnameValidator"></f:validator>
 						</h:inputText>
 					</td>
 					<td>
