@@ -339,7 +339,7 @@ public class FindMyTalkAppointmentsMBean implements Serializable {
 		    return "showTalkAppointmentView?faces-redirect=true&id=" + myTalkAppointmentsList.iterator().next().getId() + "&returnView=MyTalkAppointmentsListView";		
 		}
 			
-		return "MyTalkAppointmentsListView";
+		return null;
 	}
 
 	/**

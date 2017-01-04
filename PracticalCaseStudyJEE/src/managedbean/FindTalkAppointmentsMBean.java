@@ -337,7 +337,7 @@ public class FindTalkAppointmentsMBean implements Serializable {
 		{
 			return "showTalkAppointmentView?faces-redirect=true&id=" + talkAppointmentsList.iterator().next().getId() + "&returnView=TalkAppointmentsListView";
 		}
-		return "TalkAppointmentsListView";
+		return null;
 	}
 
 	/**
