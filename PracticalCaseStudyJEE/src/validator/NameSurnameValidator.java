@@ -7,13 +7,29 @@ import javax.faces.validator.FacesValidator;
 import javax.faces.validator.Validator;
 import javax.faces.validator.ValidatorException;
 
+/**
+ * Validacio nom / cognom
+ * @author Grup 6
+ * @version 1.0
+ *
+ */
 @FacesValidator("NameSurnameValidator")
 public class NameSurnameValidator implements Validator {
 
+	/**
+	 * Constructor
+	 */
 	public NameSurnameValidator() {
 		
 	}
 	
+	/**
+	 * Valida Entrada del camp 
+	 * 
+	 * @param context FacesContext 
+	 * @param component UIComponent
+	 * @param object Object
+	 */
 	@Override
 	public void validate(FacesContext context, UIComponent component, Object object) throws ValidatorException {
 		

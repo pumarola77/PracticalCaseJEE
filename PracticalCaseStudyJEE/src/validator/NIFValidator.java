@@ -7,13 +7,29 @@ import javax.faces.validator.FacesValidator;
 import javax.faces.validator.Validator;
 import javax.faces.validator.ValidatorException;
 
+/**
+ * Validacio NIF
+ * @author Grup 6
+ * @version 1.0
+ */
 @FacesValidator("NIFValidator")
 public class NIFValidator implements Validator{
 	
+	/**
+	 * Constructor
+	 */
 	public NIFValidator() {
 		
 	}
 	
+	/**
+	 * Valida Entrada del camp 
+	 * 
+	 * @param context FacesContext 
+	 * @param component UIComponent
+	 * @param object Object
+	 */
+
 	@Override
 	public void validate(FacesContext context, UIComponent component, Object object) throws ValidatorException {
 		// TODO Auto-generated method stub

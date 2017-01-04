@@ -8,10 +8,19 @@ import javax.faces.validator.FacesValidator;
 import javax.faces.validator.Validator;
 import javax.faces.validator.ValidatorException;
 
+/**
+ * Validacio Passwords
+ * 
+ * @author Grup 6
+ * @version 1.0
+ *
+ */
 @FacesValidator("PasswordValidator")
 public class PasswordValidator implements Validator {
 
-	
+	/**
+	 * Constructor
+	 */
 	public PasswordValidator() {
 		
 	}

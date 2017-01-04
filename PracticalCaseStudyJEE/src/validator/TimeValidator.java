@@ -12,14 +12,30 @@ import javax.faces.validator.FacesValidator;
 import javax.faces.validator.Validator;
 import javax.faces.validator.ValidatorException;
 
-
+/**
+ * Validacio hores
+ * 
+ * @author Grup 6
+ * @version 1.0
+ *
+ */
 @FacesValidator("TimeValidator")
 public class TimeValidator implements Validator {
 
+	/**
+	 * Constructor
+	 */
 	public TimeValidator(){
 		
 	}
 	
+	/**
+	 * Valida Entrada del camp 
+	 * 
+	 * @param context FacesContext 
+	 * @param component UIComponent
+	 * @param value Object
+	 */
 	@Override
 	public void validate(FacesContext context, UIComponent component, Object value) throws ValidatorException {
 		// TODO Auto-generated method stub

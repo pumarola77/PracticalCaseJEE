@@ -8,13 +8,30 @@ import javax.faces.validator.FacesValidator;
 import javax.faces.validator.Validator;
 import javax.faces.validator.ValidatorException;
 
+/**
+ * Validacions del codi postal
+ * 
+ * @author Grup 6
+ * @version 1.0
+ *
+ */
 @FacesValidator("CodiPostalValidator")
 public class CodiPostalValidator implements Validator {
 
+	/**
+	 * Constructor
+	 */
 	public CodiPostalValidator() {
 		
 	}
 	
+	/**
+	 * Valida Entrada del camp 
+	 * 
+	 * @param arg0 FacesContext 
+	 * @param component UIComponent
+	 * @param object Object
+	 */
 	@Override
 	public void validate(FacesContext arg0, UIComponent component, Object object) throws ValidatorException {
 		// TODO Auto-generated method stub
